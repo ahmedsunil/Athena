@@ -1,0 +1,2374 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Admin UI Component Library</title>
+        <style>
+            :root {
+                --background: 0 0% 100%;
+                --foreground: 240 10% 3.9%;
+                --card: 0 0% 100%;
+                --primary: 240 5.9% 10%;
+                --primary-foreground: 0 0% 98%;
+                --muted: 240 4.8% 95.9%;
+                --muted-foreground: 240 3.8% 46.1%;
+                --border: 240 5.9% 90%;
+                --input: 240 5.9% 90%;
+                --ring: 240 5.9% 10%;
+                --destructive: 0 84.2% 60.2%;
+                --warning: 38 92% 50%;
+                --chart-1: 12 76% 61%;
+                --chart-2: 173 58% 39%;
+                --chart-3: 197 37% 24%;
+                --chart-4: 43 74% 66%;
+                --chart-5: 27 87% 67%;
+            }
+
+            body {
+                background: hsl(var(--muted));
+                color: hsl(var(--foreground));
+            }
+
+            .bg-white { background-color: hsl(var(--card)) !important; }
+            .bg-stone-50, .bg-stone-50\/50, .bg-stone-100, .bg-stone-200 { background-color: hsl(var(--muted)) !important; }
+            .bg-teal-50 { background-color: hsl(var(--primary) / 0.06) !important; }
+            .bg-teal-50\/30 { background-color: hsl(var(--primary) / 0.04) !important; }
+            .bg-teal-500, .bg-teal-600, .bg-teal-700 { background-color: hsl(var(--primary)) !important; }
+            .bg-amber-50 { background-color: hsl(var(--warning) / 0.12) !important; }
+            .bg-amber-500 { background-color: hsl(var(--chart-4)) !important; }
+            .bg-red-50 { background-color: hsl(var(--destructive) / 0.10) !important; }
+            .bg-red-500, .bg-red-600, .bg-red-700 { background-color: hsl(var(--destructive)) !important; }
+
+            .text-white { color: hsl(var(--primary-foreground)) !important; }
+            .text-stone-300 { color: hsl(var(--muted-foreground) / 0.35) !important; }
+            .text-stone-400 { color: hsl(var(--muted-foreground) / 0.65) !important; }
+            .text-stone-500, .text-stone-600 { color: hsl(var(--muted-foreground)) !important; }
+            .text-stone-700, .text-stone-800, .text-stone-900 { color: hsl(var(--foreground)) !important; }
+            .text-teal-500, .text-teal-600, .text-teal-700, .text-teal-800 { color: hsl(var(--primary)) !important; }
+            .text-amber-600, .text-amber-700 { color: hsl(var(--warning)) !important; }
+            .text-red-400, .text-red-600, .text-red-700 { color: hsl(var(--destructive)) !important; }
+
+            .border-stone-100, .border-stone-200, .border-stone-300 { border-color: hsl(var(--border)) !important; }
+            .border-teal-400, .border-teal-500 { border-color: hsl(var(--ring)) !important; }
+            .border-red-100 { border-color: hsl(var(--destructive) / 0.18) !important; }
+
+            .ring-teal-500 { --tw-ring-color: hsl(var(--ring)) !important; }
+            .ring-teal-600\/20 { --tw-ring-color: hsl(var(--primary) / 0.2) !important; }
+            .ring-stone-500\/20 { --tw-ring-color: hsl(var(--muted-foreground) / 0.2) !important; }
+            .ring-amber-600\/20 { --tw-ring-color: hsl(var(--warning) / 0.2) !important; }
+            .ring-red-600\/20 { --tw-ring-color: hsl(var(--destructive) / 0.2) !important; }
+
+            .hover\:bg-teal-700:hover, .hover\:bg-teal-600:hover { background-color: hsl(var(--foreground)) !important; }
+            .hover\:bg-teal-50:hover { background-color: hsl(var(--primary) / 0.06) !important; }
+            .hover\:bg-teal-50\/30:hover { background-color: hsl(var(--primary) / 0.04) !important; }
+            .hover\:bg-stone-50:hover, .hover\:bg-stone-100:hover, .hover\:bg-stone-200:hover { background-color: hsl(var(--muted)) !important; }
+            .hover\:bg-red-50:hover { background-color: hsl(var(--destructive) / 0.10) !important; }
+            .hover\:bg-red-700:hover { background-color: hsl(var(--destructive)) !important; }
+            .hover\:text-teal-700:hover, .hover\:text-teal-800:hover { color: hsl(var(--primary)) !important; }
+            .hover\:text-stone-600:hover, .hover\:text-stone-700:hover, .hover\:text-stone-900:hover { color: hsl(var(--foreground)) !important; }
+            .hover\:text-red-600:hover { color: hsl(var(--destructive)) !important; }
+            .hover\:border-teal-400:hover { border-color: hsl(var(--ring)) !important; }
+
+            .focus\:border-teal-500:focus { border-color: hsl(var(--ring)) !important; }
+            .focus\:ring-teal-500:focus { --tw-ring-color: hsl(var(--ring)) !important; }
+
+            .text-2xl { font-size: 1.125rem !important; line-height: 1.5rem !important; }
+            .text-xl, .sm\:text-xl { font-size: 1rem !important; line-height: 1.5rem !important; }
+            .text-lg { font-size: 0.9375rem !important; line-height: 1.375rem !important; }
+            .text-base { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+            .text-sm { font-size: 0.8125rem !important; line-height: 1.125rem !important; }
+            .text-xs { font-size: 0.75rem !important; line-height: 1rem !important; }
+
+            h1, h2, h3 {
+                letter-spacing: 0;
+            }
+        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/lucide@latest"></script>
+    </head>
+    <body class="bg-stone-50 text-stone-700 antialiased">
+        <div class="min-h-screen lg:flex">
+            <aside
+                class="border-b border-stone-200 bg-white lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-64 lg:flex-col lg:border-b-0 lg:border-r"
+            >
+                <div class="flex items-center gap-3 px-4 py-5">
+                    <div
+                        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-600 text-sm font-bold text-white shadow-sm"
+                    >
+                        UI
+                    </div>
+                    <div>
+                        <p class="text-base font-bold text-stone-900">
+                            Admin System
+                        </p>
+                        <p class="text-xs text-stone-400">Component library</p>
+                    </div>
+                </div>
+
+                <nav
+                    class="flex gap-6 overflow-x-auto px-4 pb-5 lg:block lg:flex-1 lg:space-y-6 lg:overflow-y-auto"
+                >
+                    <div class="min-w-56">
+                        <p
+                            class="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-stone-400"
+                        >
+                            Overview
+                        </p>
+                        <div class="space-y-1">
+                            <a
+                                href="#dashboard"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg bg-teal-50 px-3 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="gauge"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-teal-600"
+                                ></i>
+                                Dashboard
+                            </a>
+                            <a
+                                href="#layout"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="layout-dashboard"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Layout
+                            </a>
+                            <a
+                                href="#buttons"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="mouse-pointer-click"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Buttons
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="min-w-56">
+                        <p
+                            class="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-stone-400"
+                        >
+                            Components
+                        </p>
+                        <div class="space-y-1">
+                            <a
+                                href="#forms"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="text-cursor-input"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Forms
+                            </a>
+                            <a
+                                href="#tables"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="table-2"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Tables
+                            </a>
+                            <a
+                                href="#feedback"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="bell"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Feedback
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="min-w-56">
+                        <p
+                            class="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-stone-400"
+                        >
+                            Patterns
+                        </p>
+                        <div class="space-y-1">
+                            <a
+                                href="#layout"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="panel-left"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Sidebar
+                            </a>
+                            <a
+                                href="#tables"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="list-filter"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Filters
+                            </a>
+                            <a
+                                href="#feedback"
+                                data-nav-link
+                                class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
+                            >
+                                <i
+                                    data-lucide="message-square-warning"
+                                    class="h-[15px] w-[15px] shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Dialogs
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="hidden px-4 pb-4 lg:block">
+                    <div
+                        id="account-menu"
+                        class="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm"
+                    >
+                        <div class="flex items-center gap-3 px-3 py-3">
+                            <div
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-teal-50 text-sm font-semibold text-teal-700"
+                            >
+                                A
+                            </div>
+                            <div class="min-w-0">
+                                <p
+                                    class="truncate text-sm font-semibold text-stone-900"
+                                >
+                                    Admin
+                                </p>
+                                <p class="truncate text-xs text-stone-500">
+                                    admin@example.com
+                                </p>
+                            </div>
+                        </div>
+                        <div class="border-t border-stone-200 px-3 py-2">
+                            <a
+                                href="#"
+                                class="flex items-center gap-2.5 rounded-lg px-1 py-2 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-50 hover:text-stone-700"
+                            >
+                                <i
+                                    data-lucide="settings"
+                                    class="h-4 w-4 shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Settings
+                            </a>
+                            <a
+                                href="#"
+                                class="flex items-center gap-2.5 rounded-lg px-1 py-2 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-50 hover:text-stone-700"
+                            >
+                                <i
+                                    data-lucide="log-out"
+                                    class="h-4 w-4 shrink-0 stroke-[1.8] text-stone-400"
+                                ></i>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                    <button
+                        id="account-toggle"
+                        type="button"
+                        class="mt-3 flex w-full items-center justify-between rounded-lg px-2 py-2 text-left transition-colors hover:bg-stone-100"
+                        aria-expanded="true"
+                        aria-controls="account-menu"
+                    >
+                        <div class="flex items-center gap-2.5">
+                            <div
+                                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-teal-50 text-xs font-semibold text-teal-700"
+                            >
+                                A
+                            </div>
+                            <span class="text-sm font-semibold text-stone-500"
+                                >Admin</span
+                            >
+                        </div>
+                        <i
+                            data-lucide="chevrons-up-down"
+                            class="h-4 w-4 shrink-0 stroke-[2] text-stone-400"
+                        ></i>
+                    </button>
+                </div>
+            </aside>
+
+            <main class="w-full lg:pl-64">
+                <header
+                    class="sticky top-0 z-30 border-b border-stone-200 bg-white/90 px-4 py-3 backdrop-blur sm:px-6"
+                >
+                    <div
+                        class="flex flex-wrap items-center justify-between gap-3"
+                    >
+                        <div>
+                            <div
+                                class="flex items-center gap-1.5 text-xs text-stone-400"
+                            >
+                                <span>resources</span>
+                                <i
+                                    data-lucide="chevron-right"
+                                    class="h-3 w-3"
+                                ></i>
+                                <span>admin-system</span>
+                                <i
+                                    data-lucide="chevron-right"
+                                    class="h-3 w-3"
+                                ></i>
+                                <span class="font-medium text-stone-600"
+                                    >components</span
+                                >
+                            </div>
+                            <h1
+                                class="mt-1 text-lg font-bold text-stone-900 sm:text-xl"
+                            >
+                                Admin UI Component Library
+                            </h1>
+                        </div>
+                        <button
+                            type="button"
+                            class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+                        >
+                            <i data-lucide="plus" class="h-4 w-4"></i>
+                            New Record
+                        </button>
+                    </div>
+                </header>
+
+                <div
+                    class="mx-auto max-w-7xl space-y-10 px-4 py-6 sm:px-6 lg:px-8"
+                >
+                    <section id="dashboard" class="space-y-6">
+                        <div
+                            class="mb-4 flex flex-wrap items-center justify-between gap-3 sm:mb-6"
+                        >
+                            <div>
+                                <h2
+                                    class="text-lg font-bold text-stone-900 sm:text-xl"
+                                >
+                                    Dashboard
+                                </h2>
+                                <p class="text-xs text-stone-500 sm:text-sm">
+                                    Stats, KPI cards, charts, top items, and
+                                    recent users from the project dashboard
+                                    patterns.
+                                </p>
+                            </div>
+                            <button
+                                type="button"
+                                class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+                            >
+                                <i data-lucide="download" class="h-4 w-4"></i>
+                                Export
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                            <div
+                                class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <p class="text-xs font-medium text-stone-500">
+                                    Total users
+                                </p>
+                                <p
+                                    class="mt-1 text-2xl font-bold text-stone-900"
+                                >
+                                    1,284
+                                </p>
+                            </div>
+                            <div
+                                class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <p class="text-xs font-medium text-stone-500">
+                                    Active users
+                                </p>
+                                <p
+                                    class="mt-1 text-2xl font-bold text-stone-900"
+                                >
+                                    1,102
+                                </p>
+                            </div>
+                            <div
+                                class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <p class="text-xs font-medium text-stone-500">
+                                    Admins
+                                </p>
+                                <p
+                                    class="mt-1 text-2xl font-bold text-stone-900"
+                                >
+                                    18
+                                </p>
+                            </div>
+                            <div
+                                class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <p class="text-xs font-medium text-stone-500">
+                                    New this month
+                                </p>
+                                <p
+                                    class="mt-1 text-2xl font-bold text-stone-900"
+                                >
+                                    76
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 sm:grid-cols-3">
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-50"
+                                >
+                                    <i
+                                        data-lucide="check-circle-2"
+                                        class="h-4 w-4 text-teal-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Completed
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        842
+                                    </p>
+                                </div>
+                                <span class="shrink-0 text-xs text-stone-400"
+                                    >+8%</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-50"
+                                >
+                                    <i
+                                        data-lucide="clock"
+                                        class="h-4 w-4 text-amber-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Pending
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        48
+                                    </p>
+                                </div>
+                                <span class="shrink-0 text-xs text-stone-400"
+                                    >today</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-stone-100"
+                                >
+                                    <i
+                                        data-lucide="bar-chart-3"
+                                        class="h-4 w-4 text-stone-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Conversion
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        92%
+                                    </p>
+                                </div>
+                                <span class="shrink-0 text-xs text-stone-400"
+                                    >period</span
+                                >
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 lg:grid-cols-3">
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm lg:col-span-2"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+                                >
+                                    <div>
+                                        <h3
+                                            class="text-sm font-semibold text-stone-900"
+                                        >
+                                            Users by month
+                                        </h3>
+                                        <p class="text-xs text-stone-400">
+                                            Project dashboard chart pattern
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input
+                                            type="date"
+                                            value="2026-01-01"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                        <span class="text-xs text-stone-400"
+                                            >to</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="mb-4 grid grid-cols-3 divide-x divide-stone-100 rounded-lg bg-stone-50 px-1 py-2.5"
+                                >
+                                    <div class="px-3 text-center">
+                                        <p
+                                            class="text-[10px] font-medium uppercase tracking-wide text-stone-400"
+                                        >
+                                            Total
+                                        </p>
+                                        <p
+                                            class="mt-0.5 text-sm font-bold text-stone-900"
+                                        >
+                                            1,284
+                                        </p>
+                                        <p class="text-[10px] text-stone-400">
+                                            users
+                                        </p>
+                                    </div>
+                                    <div class="px-3 text-center">
+                                        <p
+                                            class="text-[10px] font-medium uppercase tracking-wide text-stone-400"
+                                        >
+                                            Active
+                                        </p>
+                                        <p
+                                            class="mt-0.5 text-sm font-bold text-teal-600"
+                                        >
+                                            1,102
+                                        </p>
+                                        <p class="text-[10px] text-stone-400">
+                                            verified
+                                        </p>
+                                    </div>
+                                    <div class="px-3 text-center">
+                                        <p
+                                            class="text-[10px] font-medium uppercase tracking-wide text-stone-400"
+                                        >
+                                            Rate
+                                        </p>
+                                        <p
+                                            class="mt-0.5 text-sm font-bold text-teal-600"
+                                        >
+                                            86%
+                                        </p>
+                                        <p class="text-[10px] text-stone-400">
+                                            active
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex h-40 items-end gap-1.5">
+                                    <div
+                                        class="group relative flex h-full flex-1 items-end"
+                                    >
+                                        <div
+                                            class="w-full rounded-t-sm bg-teal-500 transition-all group-hover:bg-teal-600"
+                                            style="height: 42%"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="group relative flex h-full flex-1 items-end"
+                                    >
+                                        <div
+                                            class="w-full rounded-t-sm bg-teal-500 transition-all group-hover:bg-teal-600"
+                                            style="height: 58%"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="group relative flex h-full flex-1 items-end"
+                                    >
+                                        <div
+                                            class="w-full rounded-t-sm bg-teal-500 transition-all group-hover:bg-teal-600"
+                                            style="height: 74%"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="group relative flex h-full flex-1 items-end"
+                                    >
+                                        <div
+                                            class="w-full rounded-t-sm bg-teal-500 transition-all group-hover:bg-teal-600"
+                                            style="height: 63%"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="group relative flex h-full flex-1 items-end"
+                                    >
+                                        <div
+                                            class="w-full rounded-t-sm bg-teal-500 transition-all group-hover:bg-teal-600"
+                                            style="height: 89%"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="group relative flex h-full flex-1 items-end"
+                                    >
+                                        <div
+                                            class="w-full rounded-t-sm bg-teal-500 transition-all group-hover:bg-teal-600"
+                                            style="height: 68%"
+                                        ></div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 flex gap-1.5">
+                                    <div
+                                        class="flex-1 truncate text-center text-[9px] text-stone-400"
+                                    >
+                                        Nov
+                                    </div>
+                                    <div
+                                        class="flex-1 truncate text-center text-[9px] text-stone-400"
+                                    >
+                                        Dec
+                                    </div>
+                                    <div
+                                        class="flex-1 truncate text-center text-[9px] text-stone-400"
+                                    >
+                                        Jan
+                                    </div>
+                                    <div
+                                        class="flex-1 truncate text-center text-[9px] text-stone-400"
+                                    >
+                                        Feb
+                                    </div>
+                                    <div
+                                        class="flex-1 truncate text-center text-[9px] text-stone-400"
+                                    >
+                                        Mar
+                                    </div>
+                                    <div
+                                        class="flex-1 truncate text-center text-[9px] text-stone-400"
+                                    >
+                                        Apr
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex items-center gap-1.5">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-sm bg-teal-500"
+                                    ></span>
+                                    <span class="text-[10px] text-stone-400"
+                                        >Total users</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+                                >
+                                    <h3
+                                        class="text-sm font-semibold text-stone-900"
+                                    >
+                                        Top roles
+                                    </h3>
+                                    <div class="flex items-center gap-2">
+                                        <input
+                                            type="date"
+                                            value="2026-01-01"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                        <span class="text-xs text-stone-400"
+                                            >to</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div
+                                            class="mb-1 flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="truncate text-xs font-medium text-stone-700"
+                                                >Members</span
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >842</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="h-1.5 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="h-full rounded-full bg-teal-500"
+                                                style="width: 82%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="mb-1 flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="truncate text-xs font-medium text-stone-700"
+                                                >Staff</span
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >324</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="h-1.5 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="h-full rounded-full bg-teal-500"
+                                                style="width: 48%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="mb-1 flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="truncate text-xs font-medium text-stone-700"
+                                                >Admins</span
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >18</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="h-1.5 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="h-full rounded-full bg-teal-500"
+                                                style="width: 12%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 lg:grid-cols-3">
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm lg:col-span-2"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+                                >
+                                    <div>
+                                        <h3
+                                            class="text-sm font-semibold text-stone-900"
+                                        >
+                                            Line Graph
+                                        </h3>
+                                        <p class="text-xs text-stone-400">
+                                            Trend over time
+                                        </p>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span
+                                            class="inline-flex items-center rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20"
+                                            >+14%</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-19"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                        <span class="text-xs text-stone-400"
+                                            >to</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="relative h-52">
+                                    <div
+                                        class="absolute inset-0 grid grid-rows-4"
+                                    >
+                                        <div
+                                            class="border-b border-stone-100"
+                                        ></div>
+                                        <div
+                                            class="border-b border-stone-100"
+                                        ></div>
+                                        <div
+                                            class="border-b border-stone-100"
+                                        ></div>
+                                        <div></div>
+                                    </div>
+                                    <svg
+                                        class="relative h-full w-full"
+                                        viewBox="0 0 640 190"
+                                        preserveAspectRatio="none"
+                                        aria-hidden="true"
+                                    >
+                                        <polyline
+                                            points="0,142 95,118 190,130 285,82 380,94 475,48 640,66"
+                                            fill="none"
+                                            stroke="hsl(var(--primary))"
+                                            stroke-width="4"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <polyline
+                                            points="0,158 95,142 190,150 285,122 380,134 475,102 640,116"
+                                            fill="none"
+                                            stroke="hsl(var(--border))"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="mt-2 flex justify-between text-[10px] text-stone-400">
+                                    <span>Mon</span>
+                                    <span>Tue</span>
+                                    <span>Wed</span>
+                                    <span>Thu</span>
+                                    <span>Fri</span>
+                                    <span>Sat</span>
+                                    <span>Sun</span>
+                                </div>
+                            </div>
+
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+                                >
+                                    <h3
+                                        class="text-sm font-semibold text-stone-900"
+                                    >
+                                        Donut Chart
+                                    </h3>
+                                    <div class="flex items-center gap-2">
+                                        <input
+                                            type="date"
+                                            value="2026-04-01"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                        <span class="text-xs text-stone-400"
+                                            >to</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center py-2">
+                                    <div
+                                        class="grid h-36 w-36 place-items-center rounded-full"
+                                        style="background: conic-gradient(hsl(var(--primary)) 0 62%, hsl(var(--chart-4)) 62% 82%, hsl(var(--destructive)) 82% 92%, hsl(var(--border)) 92% 100%)"
+                                    >
+                                        <div
+                                            class="grid h-24 w-24 place-items-center rounded-full bg-white"
+                                        >
+                                            <div class="text-center">
+                                                <p
+                                                    class="text-lg font-bold text-stone-900"
+                                                >
+                                                    86%
+                                                </p>
+                                                <p
+                                                    class="text-[10px] text-stone-400"
+                                                >
+                                                    active
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 space-y-2">
+                                    <div
+                                        class="flex items-center justify-between text-xs"
+                                    >
+                                        <span
+                                            class="flex items-center gap-1.5 text-stone-600"
+                                        >
+                                            <span
+                                                class="h-2.5 w-2.5 rounded-sm bg-teal-500"
+                                            ></span>
+                                            Active
+                                        </span>
+                                        <span class="text-stone-400">62%</span>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between text-xs"
+                                    >
+                                        <span
+                                            class="flex items-center gap-1.5 text-stone-600"
+                                        >
+                                            <span
+                                                class="h-2.5 w-2.5 rounded-sm bg-amber-500"
+                                            ></span>
+                                            Pending
+                                        </span>
+                                        <span class="text-stone-400">20%</span>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between text-xs"
+                                    >
+                                        <span
+                                            class="flex items-center gap-1.5 text-stone-600"
+                                        >
+                                            <span
+                                                class="h-2.5 w-2.5 rounded-sm bg-red-500"
+                                            ></span>
+                                            Inactive
+                                        </span>
+                                        <span class="text-stone-400">10%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+                                >
+                                    <h3
+                                        class="text-sm font-semibold text-stone-900"
+                                    >
+                                        Horizontal Bar
+                                    </h3>
+                                    <div class="flex items-center gap-2">
+                                        <input
+                                            type="date"
+                                            value="2026-04-01"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                        <span class="text-xs text-stone-400"
+                                            >to</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div
+                                            class="mb-1 flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="text-xs font-medium text-stone-700"
+                                                >Forms</span
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >92</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="h-2 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="h-full rounded-full bg-teal-500"
+                                                style="width: 92%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="mb-1 flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="text-xs font-medium text-stone-700"
+                                                >Tables</span
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >74</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="h-2 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="h-full rounded-full bg-teal-500"
+                                                style="width: 74%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="mb-1 flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="text-xs font-medium text-stone-700"
+                                                >Dialogs</span
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >48</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="h-2 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="h-full rounded-full bg-teal-500"
+                                                style="width: 48%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm lg:col-span-2"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+                                >
+                                    <h3
+                                        class="text-sm font-semibold text-stone-900"
+                                    >
+                                        Area Graph
+                                    </h3>
+                                    <div class="flex items-center gap-2">
+                                        <input
+                                            type="date"
+                                            value="2026-03-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                        <span class="text-xs text-stone-400"
+                                            >to</span
+                                        >
+                                        <input
+                                            type="date"
+                                            value="2026-04-25"
+                                            class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="relative h-44 overflow-hidden rounded-lg bg-stone-50">
+                                    <svg
+                                        class="h-full w-full"
+                                        viewBox="0 0 640 180"
+                                        preserveAspectRatio="none"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M0 138 L90 118 L180 130 L270 78 L360 96 L470 48 L640 62 L640 180 L0 180 Z"
+                                            fill="hsl(var(--primary) / 0.12)"
+                                        />
+                                        <path
+                                            d="M0 138 L90 118 L180 130 L270 78 L360 96 L470 48 L640 62"
+                                            fill="none"
+                                            stroke="hsl(var(--primary))"
+                                            stroke-width="4"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="mt-3 flex items-center gap-4">
+                                    <div class="flex items-center gap-1.5">
+                                        <span
+                                            class="h-2.5 w-2.5 rounded-sm bg-teal-500"
+                                        ></span>
+                                        <span class="text-[10px] text-stone-400"
+                                            >Completed work</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm lg:col-span-3"
+                            >
+                                <div
+                                    class="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between"
+                                >
+                                    <h3
+                                        class="text-sm font-semibold text-stone-900"
+                                    >
+                                        Stacked Bar Graph
+                                    </h3>
+                                    <div
+                                        class="flex flex-wrap items-center gap-3"
+                                    >
+                                        <div class="flex items-center gap-2">
+                                            <input
+                                                type="date"
+                                                value="2026-01-01"
+                                                class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                            >
+                                            <span class="text-xs text-stone-400"
+                                                >to</span
+                                            >
+                                            <input
+                                                type="date"
+                                                value="2026-03-31"
+                                                class="rounded-lg border border-stone-300 px-2 py-1.5 text-xs text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                            >
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <span
+                                                class="flex items-center gap-1.5 text-[10px] text-stone-400"
+                                            >
+                                                <span
+                                                    class="h-2.5 w-2.5 rounded-sm bg-teal-500"
+                                                ></span>
+                                                Active
+                                            </span>
+                                            <span
+                                                class="flex items-center gap-1.5 text-[10px] text-stone-400"
+                                            >
+                                                <span
+                                                    class="h-2.5 w-2.5 rounded-sm bg-amber-500"
+                                                ></span>
+                                                Pending
+                                            </span>
+                                            <span
+                                                class="flex items-center gap-1.5 text-[10px] text-stone-400"
+                                            >
+                                                <span
+                                                    class="h-2.5 w-2.5 rounded-sm bg-red-500"
+                                                ></span>
+                                                Inactive
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div
+                                        class="grid items-center gap-3 sm:grid-cols-[72px_1fr]"
+                                    >
+                                        <span
+                                            class="text-xs font-medium text-stone-500"
+                                            >January</span
+                                        >
+                                        <div
+                                            class="flex h-5 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="bg-teal-500"
+                                                style="width: 64%"
+                                            ></div>
+                                            <div
+                                                class="bg-amber-500"
+                                                style="width: 24%"
+                                            ></div>
+                                            <div
+                                                class="bg-red-500"
+                                                style="width: 12%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="grid items-center gap-3 sm:grid-cols-[72px_1fr]"
+                                    >
+                                        <span
+                                            class="text-xs font-medium text-stone-500"
+                                            >February</span
+                                        >
+                                        <div
+                                            class="flex h-5 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="bg-teal-500"
+                                                style="width: 72%"
+                                            ></div>
+                                            <div
+                                                class="bg-amber-500"
+                                                style="width: 18%"
+                                            ></div>
+                                            <div
+                                                class="bg-red-500"
+                                                style="width: 10%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="grid items-center gap-3 sm:grid-cols-[72px_1fr]"
+                                    >
+                                        <span
+                                            class="text-xs font-medium text-stone-500"
+                                            >March</span
+                                        >
+                                        <div
+                                            class="flex h-5 overflow-hidden rounded-full bg-stone-100"
+                                        >
+                                            <div
+                                                class="bg-teal-500"
+                                                style="width: 78%"
+                                            ></div>
+                                            <div
+                                                class="bg-amber-500"
+                                                style="width: 16%"
+                                            ></div>
+                                            <div
+                                                class="bg-red-500"
+                                                style="width: 6%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm"
+                        >
+                            <div
+                                class="flex items-center justify-between border-b border-stone-100 px-6 py-4"
+                            >
+                                <h3 class="text-sm font-semibold text-stone-900">
+                                    Recent users
+                                </h3>
+                                <a
+                                    href="#tables"
+                                    class="text-xs font-medium text-teal-600 hover:text-teal-700"
+                                    >View all</a
+                                >
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr
+                                            class="border-b border-stone-100 text-left"
+                                        >
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium text-stone-500"
+                                            >
+                                                Name
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium text-stone-500"
+                                            >
+                                                Email
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium text-stone-500"
+                                            >
+                                                Role
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium text-stone-500"
+                                            >
+                                                Status
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium text-stone-500"
+                                            >
+                                                Joined
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-stone-50">
+                                        <tr class="hover:bg-stone-50">
+                                            <td
+                                                class="px-6 py-3 font-medium text-stone-900"
+                                            >
+                                                Aisha Hassan
+                                            </td>
+                                            <td class="px-6 py-3 text-stone-500">
+                                                aisha@example.com
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <span
+                                                    class="inline-flex rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700"
+                                                    >Admin</span
+                                                >
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <span
+                                                    class="inline-flex rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700"
+                                                    >Active</span
+                                                >
+                                            </td>
+                                            <td class="px-6 py-3 text-stone-400">
+                                                Apr 25, 2026
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-stone-50">
+                                            <td
+                                                class="px-6 py-3 font-medium text-stone-900"
+                                            >
+                                                Ibrahim Ali
+                                            </td>
+                                            <td class="px-6 py-3 text-stone-500">
+                                                ibrahim@example.com
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <span
+                                                    class="inline-flex rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600"
+                                                    >User</span
+                                                >
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <span
+                                                    class="inline-flex rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700"
+                                                    >Active</span
+                                                >
+                                            </td>
+                                            <td class="px-6 py-3 text-stone-400">
+                                                Apr 24, 2026
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-stone-50">
+                                            <td
+                                                class="px-6 py-3 font-medium text-stone-900"
+                                            >
+                                                Mariyam Rasheed
+                                            </td>
+                                            <td class="px-6 py-3 text-stone-500">
+                                                mariyam@example.com
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <span
+                                                    class="inline-flex rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600"
+                                                    >User</span
+                                                >
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <span
+                                                    class="inline-flex rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700"
+                                                    >Inactive</span
+                                                >
+                                            </td>
+                                            <td class="px-6 py-3 text-stone-400">
+                                                Apr 21, 2026
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="layout" class="space-y-4">
+                        <div
+                            class="mb-4 flex flex-wrap items-center justify-between gap-3 sm:mb-6"
+                        >
+                            <div>
+                                <h2
+                                    class="text-lg font-bold text-stone-900 sm:text-xl"
+                                >
+                                    Layout Components
+                                </h2>
+                                <p class="text-xs text-stone-500 sm:text-sm">
+                                    App shell, breadcrumb, sidebar navigation,
+                                    topbar, and page header.
+                                </p>
+                            </div>
+                            <span
+                                class="inline-flex items-center rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20"
+                                >Ready</span
+                            >
+                        </div>
+
+                        <div class="grid gap-4 lg:grid-cols-4">
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-50"
+                                >
+                                    <i
+                                        data-lucide="users"
+                                        class="h-4 w-4 text-teal-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Users
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        1,284
+                                    </p>
+                                </div>
+                                <span class="shrink-0 text-xs text-stone-400"
+                                    >+12%</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-50"
+                                >
+                                    <i
+                                        data-lucide="clock"
+                                        class="h-4 w-4 text-amber-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Pending
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        48
+                                    </p>
+                                </div>
+                                <span class="shrink-0 text-xs text-stone-400"
+                                    >today</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50"
+                                >
+                                    <i
+                                        data-lucide="alert-triangle"
+                                        class="h-4 w-4 text-red-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Issues
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        7
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm"
+                            >
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-stone-100"
+                                >
+                                    <i
+                                        data-lucide="archive"
+                                        class="h-4 w-4 text-stone-600"
+                                    ></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p
+                                        class="text-xs font-medium text-stone-500"
+                                    >
+                                        Archived
+                                    </p>
+                                    <p class="text-lg font-bold text-stone-900">
+                                        312
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="buttons" class="space-y-4">
+                        <div>
+                            <h2
+                                class="text-lg font-bold text-stone-900 sm:text-xl"
+                            >
+                                Buttons And Badges
+                            </h2>
+                            <p class="text-xs text-stone-500 sm:text-sm">
+                                Primary, secondary, danger, ghost actions, and
+                                status pills.
+                            </p>
+                        </div>
+                        <div
+                            class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                        >
+                            <h3
+                                class="mb-4 text-sm font-semibold text-stone-900"
+                            >
+                                Actions
+                            </h3>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <button
+                                    type="button"
+                                    class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+                                >
+                                    <i data-lucide="save" class="h-4 w-4"></i>
+                                    Save
+                                </button>
+                                <button
+                                    type="button"
+                                    class="rounded-lg border border-stone-200 px-4 py-2.5 text-center text-sm font-medium text-stone-600 transition-colors hover:bg-stone-50"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="button"
+                                    class="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-red-700"
+                                >
+                                    Delete
+                                </button>
+                                <button
+                                    type="button"
+                                    class="text-xs font-medium text-stone-500 hover:text-stone-700"
+                                >
+                                    Ghost
+                                </button>
+                                <button
+                                    type="button"
+                                    class="text-xs font-medium text-teal-600 hover:text-teal-700"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    type="button"
+                                    class="text-xs font-medium text-red-400 hover:text-red-600"
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                            <div class="mt-5 flex flex-wrap items-center gap-2">
+                                <span
+                                    class="inline-flex items-center rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20"
+                                    >Paid</span
+                                >
+                                <span
+                                    class="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 ring-1 ring-inset ring-amber-600/20"
+                                    >Pending</span
+                                >
+                                <span
+                                    class="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20"
+                                    >Cancelled</span
+                                >
+                                <span
+                                    class="inline-flex items-center rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600 ring-1 ring-inset ring-stone-500/20"
+                                    >Inactive</span
+                                >
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="forms" class="space-y-4">
+                        <div>
+                            <h2
+                                class="text-lg font-bold text-stone-900 sm:text-xl"
+                            >
+                                Form Components
+                            </h2>
+                            <p class="text-xs text-stone-500 sm:text-sm">
+                                Form grid, field wrapper, text input, select,
+                                textarea, checkbox, toggle, and file upload.
+                            </p>
+                        </div>
+                        <div
+                            class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                        >
+                            <h3
+                                class="mb-4 text-sm font-semibold text-stone-900"
+                            >
+                                Customer Form
+                            </h3>
+                            <div class="grid gap-4 md:grid-cols-2">
+                                <div>
+                                    <label
+                                        class="mb-1.5 block text-xs font-medium text-stone-700"
+                                        >Name *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        value="Aisha Hassan"
+                                        class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-700 placeholder-stone-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="mb-1.5 block text-xs font-medium text-stone-700"
+                                        >Email</label
+                                    >
+                                    <input
+                                        type="email"
+                                        placeholder="name@example.com"
+                                        class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-700 placeholder-stone-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                    />
+                                    <p class="mt-1 text-xs text-stone-400">
+                                        Used for account notifications.
+                                    </p>
+                                </div>
+                                <div>
+                                    <label
+                                        class="mb-1.5 block text-xs font-medium text-stone-700"
+                                        >Amount</label
+                                    >
+                                    <div class="relative">
+                                        <span
+                                            class="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-stone-400"
+                                            >MVR</span
+                                        >
+                                        <input
+                                            type="number"
+                                            value="1250"
+                                            class="w-full rounded-lg border border-stone-300 py-2 pl-11 pr-3 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label
+                                        class="mb-1.5 block text-xs font-medium text-stone-700"
+                                        >Status</label
+                                    >
+                                    <select
+                                        class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                    >
+                                        <option>Active</option>
+                                        <option>Pending</option>
+                                        <option>Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label
+                                        class="mb-1.5 block text-xs font-medium text-stone-700"
+                                        >Notes</label
+                                    >
+                                    <textarea
+                                        rows="3"
+                                        placeholder="Add internal notes"
+                                        class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-700 placeholder-stone-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                    ></textarea>
+                                </div>
+                                <div>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-stone-700"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                            class="h-4 w-4 rounded border-stone-300 text-teal-600 focus:ring-teal-500"
+                                        />
+                                        Send welcome email
+                                    </label>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between rounded-lg border border-stone-200 px-3 py-2"
+                                >
+                                    <span
+                                        class="text-sm font-medium text-stone-700"
+                                        >Two-factor authentication</span
+                                    >
+                                    <button
+                                        type="button"
+                                        class="inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full bg-teal-500 transition-colors duration-200 focus:outline-none"
+                                    >
+                                        <span
+                                            class="inline-block h-3.5 w-3.5 translate-x-4 rounded-full bg-white shadow transition-transform duration-200"
+                                        ></span>
+                                    </button>
+                                </div>
+                                <label
+                                    class="flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-stone-300 p-4 text-sm text-stone-500 transition-colors hover:border-teal-400 hover:text-teal-600 md:col-span-2"
+                                >
+                                    <i
+                                        data-lucide="upload-cloud"
+                                        class="h-4 w-4"
+                                    ></i>
+                                    Upload profile document
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tables" class="space-y-4">
+                        <div>
+                            <h2
+                                class="text-lg font-bold text-stone-900 sm:text-xl"
+                            >
+                                Table Components
+                            </h2>
+                            <p class="text-xs text-stone-500 sm:text-sm">
+                                Filter bar, responsive data table, row actions,
+                                pagination, and bulk action bar.
+                            </p>
+                        </div>
+                        <div
+                            class="rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5"
+                        >
+                            <div class="flex flex-wrap items-center gap-2">
+                                <div class="relative min-w-[180px] flex-1">
+                                    <i
+                                        data-lucide="search"
+                                        class="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-stone-400"
+                                    ></i>
+                                    <input
+                                        type="search"
+                                        placeholder="Search customers"
+                                        class="w-full rounded-lg border border-stone-200 bg-white py-1.5 pl-8 pr-3 text-sm"
+                                    />
+                                </div>
+                                <input
+                                    type="date"
+                                    class="rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-sm"
+                                />
+                                <select
+                                    class="rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-sm"
+                                >
+                                    <option>All statuses</option>
+                                    <option>Paid</option>
+                                    <option>Pending</option>
+                                </select>
+                                <button
+                                    type="button"
+                                    class="flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-stone-500 hover:bg-stone-200"
+                                >
+                                    <i data-lucide="x" class="h-3.5 w-3.5"></i>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center justify-between rounded-lg border border-red-100 bg-red-50 px-4 py-2.5"
+                        >
+                            <span class="text-sm font-medium text-red-700"
+                                >3 rows selected</span
+                            >
+                            <button
+                                type="button"
+                                class="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-red-700"
+                            >
+                                Delete selected
+                            </button>
+                        </div>
+                        <div
+                            class="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm"
+                        >
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr
+                                            class="border-b border-stone-100 text-left text-xs font-medium text-stone-400"
+                                        >
+                                            <th class="px-5 py-3">Customer</th>
+                                            <th class="px-5 py-3">Date</th>
+                                            <th class="px-5 py-3">Total</th>
+                                            <th class="px-5 py-3">Status</th>
+                                            <th class="px-5 py-3 text-right">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            class="border-b border-stone-100 transition-colors odd:bg-white even:bg-stone-50/50 hover:bg-teal-50/30 last:border-0"
+                                        >
+                                            <td
+                                                class="px-5 py-3 font-medium text-stone-800"
+                                            >
+                                                Aisha Hassan
+                                            </td>
+                                            <td
+                                                class="px-5 py-3 text-stone-500"
+                                            >
+                                                25 Apr 2026
+                                            </td>
+                                            <td
+                                                class="px-5 py-3 font-mono font-medium text-stone-900"
+                                            >
+                                                MVR 1,250
+                                            </td>
+                                            <td class="px-5 py-3">
+                                                <span
+                                                    class="inline-flex items-center rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20"
+                                                    >Paid</span
+                                                >
+                                            </td>
+                                            <td class="px-5 py-3">
+                                                <div
+                                                    class="flex items-center justify-end gap-2"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="text-xs font-medium text-teal-600 hover:text-teal-700"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="text-xs font-medium text-red-400 hover:text-red-600"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-stone-100 transition-colors odd:bg-white even:bg-stone-50/50 hover:bg-teal-50/30 last:border-0"
+                                        >
+                                            <td
+                                                class="px-5 py-3 font-medium text-stone-800"
+                                            >
+                                                Ibrahim Ali
+                                            </td>
+                                            <td
+                                                class="px-5 py-3 text-stone-500"
+                                            >
+                                                24 Apr 2026
+                                            </td>
+                                            <td
+                                                class="px-5 py-3 font-mono font-medium text-stone-900"
+                                            >
+                                                MVR 680
+                                            </td>
+                                            <td class="px-5 py-3">
+                                                <span
+                                                    class="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 ring-1 ring-inset ring-amber-600/20"
+                                                    >Pending</span
+                                                >
+                                            </td>
+                                            <td class="px-5 py-3">
+                                                <div
+                                                    class="flex items-center justify-end gap-2"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="text-xs font-medium text-teal-600 hover:text-teal-700"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="text-xs font-medium text-red-400 hover:text-red-600"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div
+                                class="border-t border-stone-100 px-5 py-3 text-xs text-stone-400"
+                            >
+                                Showing 1 to 2 of 48 results
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="feedback" class="space-y-4">
+                        <div>
+                            <h2
+                                class="text-lg font-bold text-stone-900 sm:text-xl"
+                            >
+                                Feedback Components
+                            </h2>
+                            <p class="text-xs text-stone-500 sm:text-sm">
+                                Empty states, modal, confirm dialog, toast, and
+                                searchable dropdown.
+                            </p>
+                        </div>
+                        <div class="grid gap-4 lg:grid-cols-2">
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <h3
+                                    class="mb-4 text-sm font-semibold text-stone-900"
+                                >
+                                    Empty State
+                                </h3>
+                                <div class="py-12 text-center">
+                                    <i
+                                        data-lucide="inbox"
+                                        class="mx-auto mb-3 h-8 w-8 text-stone-300"
+                                    ></i>
+                                    <p
+                                        class="text-sm font-medium text-stone-400"
+                                    >
+                                        No records found
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <h3
+                                    class="mb-4 text-sm font-semibold text-stone-900"
+                                >
+                                    Searchable Dropdown
+                                </h3>
+                                <div class="relative max-w-sm">
+                                    <button
+                                        type="button"
+                                        class="flex w-full items-center justify-between rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-left text-sm"
+                                    >
+                                        Select customer
+                                        <i
+                                            data-lucide="chevron-down"
+                                            class="h-4 w-4 text-stone-400"
+                                        ></i>
+                                    </button>
+                                    <div
+                                        class="mt-1 w-full min-w-[240px] overflow-hidden rounded-lg border border-stone-200 bg-white shadow-lg"
+                                    >
+                                        <div class="p-2">
+                                            <input
+                                                type="search"
+                                                placeholder="Search"
+                                                class="w-full rounded-md border border-stone-200 px-2.5 py-1.5 text-sm"
+                                            />
+                                        </div>
+                                        <div
+                                            class="max-h-48 overflow-y-auto py-1"
+                                        >
+                                            <button
+                                                type="button"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Aisha Hassan
+                                                <i
+                                                    data-lucide="check"
+                                                    class="h-3.5 w-3.5 text-teal-600"
+                                                ></i>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Ibrahim Ali
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Mariyam Rasheed
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <h3
+                                    class="mb-4 text-sm font-semibold text-stone-900"
+                                >
+                                    Multi Select
+                                </h3>
+                                <div class="relative max-w-sm" data-multiselect>
+                                    <button
+                                        type="button"
+                                        data-multiselect-trigger
+                                        class="flex min-h-9 w-full items-center justify-between gap-2 rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-left text-sm"
+                                    >
+                                        <span
+                                            data-multiselect-values
+                                            class="flex flex-wrap gap-1.5"
+                                        >
+                                            <span
+                                                class="inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20"
+                                                data-value="Forms"
+                                            >
+                                                Forms
+                                                <span
+                                                    data-remove-value="Forms"
+                                                    class="cursor-pointer text-teal-500 hover:text-teal-700"
+                                                    >x</span
+                                                >
+                                            </span>
+                                        </span>
+                                        <i
+                                            data-lucide="chevron-down"
+                                            class="h-4 w-4 shrink-0 text-stone-400"
+                                        ></i>
+                                    </button>
+                                    <div
+                                        data-multiselect-panel
+                                        class="mt-1 hidden w-full min-w-[240px] overflow-hidden rounded-lg border border-stone-200 bg-white shadow-lg"
+                                    >
+                                        <div class="p-2">
+                                            <input
+                                                type="search"
+                                                placeholder="Search components"
+                                                class="w-full rounded-md border border-stone-200 px-2.5 py-1.5 text-sm"
+                                            />
+                                        </div>
+                                        <div
+                                            class="max-h-48 overflow-y-auto py-1"
+                                        >
+                                            <button
+                                                type="button"
+                                                data-option="Forms"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Forms
+                                                <i
+                                                    data-lucide="check"
+                                                    class="h-3.5 w-3.5 text-teal-600"
+                                                ></i>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                data-option="Tables"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Tables
+                                            </button>
+                                            <button
+                                                type="button"
+                                                data-option="Feedback"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Feedback
+                                            </button>
+                                            <button
+                                                type="button"
+                                                data-option="Buttons"
+                                                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-teal-50"
+                                            >
+                                                Buttons
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <div
+                                    class="mb-4 flex items-center justify-between gap-3"
+                                >
+                                    <h3
+                                        class="text-sm font-semibold text-stone-900"
+                                    >
+                                        Repeater
+                                    </h3>
+                                    <button
+                                        type="button"
+                                        data-repeater-add
+                                        class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+                                    >
+                                        <i
+                                            data-lucide="plus"
+                                            class="h-3.5 w-3.5"
+                                        ></i>
+                                        Add row
+                                    </button>
+                                </div>
+                                <div data-repeater-list class="space-y-2">
+                                    <div
+                                        data-repeater-row
+                                        class="grid gap-2 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:grid-cols-[1fr_120px_auto]"
+                                    >
+                                        <input
+                                            type="text"
+                                            value="Complete blood count"
+                                            class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        />
+                                        <input
+                                            type="number"
+                                            value="1"
+                                            min="1"
+                                            class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        />
+                                        <button
+                                            type="button"
+                                            data-repeater-remove
+                                            class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-stone-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                            title="Remove row"
+                                        >
+                                            <i
+                                                data-lucide="trash-2"
+                                                class="h-4 w-4"
+                                            ></i>
+                                        </button>
+                                    </div>
+                                    <div
+                                        data-repeater-row
+                                        class="grid gap-2 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:grid-cols-[1fr_120px_auto]"
+                                    >
+                                        <input
+                                            type="text"
+                                            value="Blood glucose"
+                                            class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        />
+                                        <input
+                                            type="number"
+                                            value="2"
+                                            min="1"
+                                            class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                        />
+                                        <button
+                                            type="button"
+                                            data-repeater-remove
+                                            class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-stone-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                            title="Remove row"
+                                        >
+                                            <i
+                                                data-lucide="trash-2"
+                                                class="h-4 w-4"
+                                            ></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <h3
+                                    class="mb-4 text-sm font-semibold text-stone-900"
+                                >
+                                    Modal
+                                </h3>
+                                <div
+                                    class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 shadow-xl"
+                                >
+                                    <h4
+                                        class="text-base font-semibold text-stone-900"
+                                    >
+                                        Update customer
+                                    </h4>
+                                    <p class="mt-2 text-sm text-stone-500">
+                                        Review the changes before saving this
+                                        record.
+                                    </p>
+                                    <div class="mt-5 flex justify-end gap-2">
+                                        <button
+                                            type="button"
+                                            class="rounded-lg border border-stone-200 px-4 py-2.5 text-center text-sm font-medium text-stone-600 transition-colors hover:bg-stone-50"
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700"
+                                        >
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                            >
+                                <h3
+                                    class="mb-4 text-sm font-semibold text-stone-900"
+                                >
+                                    Confirm And Toast
+                                </h3>
+                                <div
+                                    class="rounded-lg border border-red-100 bg-red-50 p-4"
+                                >
+                                    <p
+                                        class="text-sm font-semibold text-red-700"
+                                    >
+                                        Delete this record?
+                                    </p>
+                                    <p class="mt-1 text-sm text-red-600">
+                                        This action cannot be undone.
+                                    </p>
+                                    <div class="mt-4 flex justify-end gap-2">
+                                        <button
+                                            type="button"
+                                            class="rounded-lg border border-stone-200 bg-white px-4 py-2.5 text-center text-sm font-medium text-stone-600 transition-colors hover:bg-stone-50"
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-red-700"
+                                        >
+                                            Confirm
+                                        </button>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-4 flex max-w-xs items-center gap-2.5 rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg"
+                                >
+                                    <i
+                                        data-lucide="check-circle-2"
+                                        class="h-4 w-4"
+                                    ></i>
+                                    Saved successfully
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <script>
+            lucide.createIcons();
+
+            const navLinks = document.querySelectorAll("[data-nav-link]");
+            const setActiveLink = (activeLink) => {
+                navLinks.forEach((link) => {
+                    const icon = link.querySelector("svg");
+                    const isActive = link === activeLink;
+
+                    link.classList.toggle("bg-teal-50", isActive);
+                    link.classList.toggle("text-teal-700", isActive);
+                    link.classList.toggle("text-stone-600", !isActive);
+
+                    if (icon) {
+                        icon.classList.toggle("text-teal-600", isActive);
+                        icon.classList.toggle("text-stone-400", !isActive);
+                    }
+                });
+            };
+
+            navLinks.forEach((link) => {
+                link.addEventListener("click", () => setActiveLink(link));
+            });
+
+            const accountToggle = document.querySelector("#account-toggle");
+            const accountMenu = document.querySelector("#account-menu");
+
+            accountToggle?.addEventListener("click", () => {
+                const isOpen = !accountMenu.classList.toggle("hidden");
+                accountToggle.setAttribute("aria-expanded", String(isOpen));
+            });
+
+            const multiselect = document.querySelector("[data-multiselect]");
+            const multiselectTrigger = multiselect?.querySelector(
+                "[data-multiselect-trigger]",
+            );
+            const multiselectPanel = multiselect?.querySelector(
+                "[data-multiselect-panel]",
+            );
+            const multiselectValues = multiselect?.querySelector(
+                "[data-multiselect-values]",
+            );
+            const selectedValues = new Set(["Forms"]);
+
+            const renderMultiselect = () => {
+                if (!multiselectValues) return;
+
+                multiselectValues.innerHTML = "";
+
+                if (!selectedValues.size) {
+                    multiselectValues.innerHTML =
+                        '<span class="text-sm text-stone-400">Select components</span>';
+                }
+
+                selectedValues.forEach((value) => {
+                    const chip = document.createElement("span");
+                    chip.className =
+                        "inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20";
+                    chip.dataset.value = value;
+                    chip.innerHTML = `${value}<span data-remove-value="${value}" class="cursor-pointer text-teal-500 hover:text-teal-700">x</span>`;
+                    multiselectValues.appendChild(chip);
+                });
+
+                multiselect
+                    ?.querySelectorAll("[data-option]")
+                    .forEach((option) => {
+                        const value = option.dataset.option;
+                        const isSelected = selectedValues.has(value);
+                        option.classList.toggle("bg-teal-50", isSelected);
+
+                        const existingIcon = option.querySelector("svg");
+                        if (existingIcon) existingIcon.remove();
+
+                        if (isSelected) {
+                            option.insertAdjacentHTML(
+                                "beforeend",
+                                '<i data-lucide="check" class="h-3.5 w-3.5 text-teal-600"></i>',
+                            );
+                        }
+                    });
+
+                lucide.createIcons();
+            };
+
+            multiselectTrigger?.addEventListener("click", () => {
+                multiselectPanel?.classList.toggle("hidden");
+            });
+
+            multiselect?.querySelectorAll("[data-option]").forEach((option) => {
+                option.addEventListener("click", () => {
+                    const value = option.dataset.option;
+                    selectedValues.has(value)
+                        ? selectedValues.delete(value)
+                        : selectedValues.add(value);
+                    renderMultiselect();
+                });
+            });
+
+            multiselectValues?.addEventListener("click", (event) => {
+                const removeButton = event.target.closest(
+                    "[data-remove-value]",
+                );
+                if (!removeButton) return;
+
+                event.stopPropagation();
+                selectedValues.delete(removeButton.dataset.removeValue);
+                renderMultiselect();
+            });
+
+            renderMultiselect();
+
+            const repeaterList = document.querySelector("[data-repeater-list]");
+            const repeaterAdd = document.querySelector("[data-repeater-add]");
+            let repeaterCount =
+                repeaterList?.querySelectorAll("[data-repeater-row]").length ??
+                0;
+
+            const createRepeaterRow = () => {
+                repeaterCount += 1;
+
+                const row = document.createElement("div");
+                row.dataset.repeaterRow = "";
+                row.className =
+                    "grid gap-2 rounded-lg border border-stone-200 bg-stone-50 p-3 sm:grid-cols-[1fr_120px_auto]";
+                row.innerHTML = `
+                <input type="text" value="New item ${repeaterCount}" class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                <input type="number" value="1" min="1" class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                <button type="button" data-repeater-remove class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-stone-400 transition-colors hover:bg-red-50 hover:text-red-600" title="Remove row">
+                    <i data-lucide="trash-2" class="h-4 w-4"></i>
+                </button>
+            `;
+
+                return row;
+            };
+
+            repeaterAdd?.addEventListener("click", () => {
+                repeaterList?.appendChild(createRepeaterRow());
+                lucide.createIcons();
+            });
+
+            repeaterList?.addEventListener("click", (event) => {
+                const removeButton = event.target.closest(
+                    "[data-repeater-remove]",
+                );
+                if (!removeButton) return;
+
+                removeButton.closest("[data-repeater-row]")?.remove();
+            });
+        </script>
+    </body>
+</html>
