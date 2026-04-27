@@ -65,9 +65,9 @@
 
                 <div>
                     <label class="mb-1.5 block text-xs font-medium text-zinc-700">Confirm password</label>
-                    <input type="password" wire:model="passwordConfirmation" autocomplete="new-password"
+                    <input type="password" wire:model="password_confirmation" autocomplete="new-password"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('passwordConfirmation') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                    @error('password_confirmation') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>

@@ -18,7 +18,7 @@ class UserForm extends Component
     public string $name = '';
     public string $email = '';
     public string $password = '';
-    public string $passwordConfirmation = '';
+    public string $password_confirmation = '';
     public array $selectedRoles = ['user'];
     public bool $isActive = true;
 
@@ -41,13 +41,20 @@ class UserForm extends Component
             : ['required', Password::defaults(), 'confirmed'];
 
         return [
-            'name'                 => ['required', 'string', 'max:255'],
-            'email'                => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->userId)],
-            'password'             => $passwordRules,
-            'passwordConfirmation' => ['required_with:password'],
-            'selectedRoles'        => ['required', 'array', 'min:1'],
-            'selectedRoles.*'      => ['string', 'exists:roles,name'],
-            'isActive'             => ['boolean'],
+            'name'                  => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->userId)],
+            'password'              => $passwordRules,
+            'password_confirmation' => ['required_with:password'],
+            'selectedRoles'         => ['required', 'array', 'min:1'],
+            'selectedRoles.*'       => ['string', 'exists:roles,name'],
+            'isActive'              => ['boolean'],
+        ];
+    }
+
+    protected function validationAttributes(): array
+    {
+        return [
+            'password_confirmation' => 'password confirmation',
         ];
     }
 
