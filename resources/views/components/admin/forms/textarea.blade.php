@@ -2,19 +2,6 @@
     Forms: Textarea
     ---------------
     Multi-line text area with consistent styling.
-
-    Usage:
-        <x-admin.forms.textarea wire:model="description" rows="3" placeholder="Optional..." />
-
-        {{-- Inside a form-field wrapper --}}
-        <x-admin.forms.form-field label="Notes" field="notes">
-            <x-admin.forms.textarea wire:model="notes" rows="4" />
-        </x-admin.forms.form-field>
-
-    Props:
-        $rows         (optional) — number of rows. Default: 3
-        $placeholder  (optional) — placeholder text
-        All other attributes forwarded automatically.
 --}}
 @props(['rows' => 3, 'placeholder' => ''])
 

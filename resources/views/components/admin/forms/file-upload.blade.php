@@ -2,24 +2,6 @@
     Forms: FileUpload
     -----------------
     File input with a dashed border, upload icon, and optional image preview.
-
-    Usage:
-        <x-admin.forms.file-upload wire:model="image" accept="image/*" label="Upload image" />
-
-        {{-- With preview (pass the Livewire temporary URL) --}}
-        <x-admin.forms.file-upload
-            wire:model="image"
-            accept="image/*"
-            :preview-url="$image ? $image->temporaryUrl() : null"
-            clear-action="$set('image', null)"
-        />
-
-    Props:
-        $label       (optional) — upload button text. Default: 'Upload file'
-        $accept      (optional) — file type filter. Default: image/*
-        $hint        (optional) — small text below (e.g. 'JPG, PNG · max 2MB')
-        $previewUrl  (optional) — shows an image preview above the upload button
-        $clearAction (optional) — Livewire expression to clear the file (e.g. "$set('image', null)")
 --}}
 @props([
     'label'       => 'Upload file',

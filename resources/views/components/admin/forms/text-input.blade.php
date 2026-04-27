@@ -2,23 +2,6 @@
     Forms: TextInput
     ----------------
     Standard text input with consistent focus styles.
-
-    Usage:
-        <x-admin.forms.text-input wire:model="name" placeholder="Enter name" />
-
-        {{-- Prefix (currency symbol, etc.) --}}
-        <x-admin.forms.text-input wire:model="price" type="number" prefix="MVR" />
-
-        {{-- Inside a form-field wrapper --}}
-        <x-admin.forms.form-field label="Name" field="name" required>
-            <x-admin.forms.text-input wire:model="name" />
-        </x-admin.forms.form-field>
-
-    Props:
-        $type        (optional) — input type. Default: text
-        $prefix      (optional) — text shown inside the left of the input (e.g. MVR, $)
-        $placeholder (optional) — placeholder text
-        All other attributes (wire:model, id, etc.) are forwarded automatically.
 --}}
 @props(['type' => 'text', 'prefix' => null, 'placeholder' => ''])
 

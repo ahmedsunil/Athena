@@ -8,6 +8,7 @@ class Show extends Component
 {
     public function render()
     {
-        return view('livewire.cms.school-profile.show');
+        return view('livewire.cms.school-profile.show')
+            ->layout('layouts.app', ['title' => 'School Profile']);
     }
 }
