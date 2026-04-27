@@ -10,13 +10,15 @@ class CheckPublicApiKey
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $apiKey = $request->header('X-API-KEY');
+        if (config('app.require_api_key', true)) {
+            $apiKey = $request->header('X-API-KEY');
 
-        if (!$apiKey || $apiKey !== config('app.public_api_key')) {
-            return response()->json([
-                'message' => 'Unauthenticated',
-                'error' => 'Invalid or missing API key'
-            ], 401);
+            if (!$apiKey || $apiKey !== config('app.public_api_key')) {
+                return response()->json([
+                    'message' => 'Unauthenticated',
+                    'error' => 'Invalid or missing API key'
+                ], 401);
+            }
         }
 
         return $next($request);

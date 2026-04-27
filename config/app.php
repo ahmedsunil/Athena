@@ -133,5 +133,6 @@ return [
     */
 
     'public_api_key' => env('PUBLIC_API_KEY'),
+    'require_api_key' => env('REQUIRE_API_KEY', false),
 
 ];
