@@ -109,27 +109,6 @@
                             />
                         </x-admin.forms.form-field>
 
-                        <x-admin.forms.form-field label="Hero Image" field="hero_image" :required="! $hero_image_path">
-                            @if($hero_image)
-                                <div class="mb-3 space-y-2">
-                                    <img src="{{ $hero_image->temporaryUrl() }}" alt="Hero image preview" class="aspect-video w-full rounded-lg border border-stone-200 object-cover">
-                                    <button type="button" wire:click="$set('hero_image', null)" class="text-xs font-medium text-red-500 hover:text-red-700">
-                                        Remove
-                                    </button>
-                                </div>
-                            @elseif($hero_image_path)
-                                <div class="mb-3 space-y-2">
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($hero_image_path) }}" alt="Current hero image" class="aspect-video w-full rounded-lg border border-stone-200 object-cover">
-                                    <p class="text-xs text-stone-500">Current hero image</p>
-                                </div>
-                            @endif
-
-                            <x-admin.forms.file-upload
-                                wire:model="hero_image"
-                                :label="$hero_image_path ? 'Change hero image' : 'Upload hero image'"
-                                hint="JPG, PNG, or WebP. Max 4MB."
-                            />
-                        </x-admin.forms.form-field>
                     </div>
                 </div>
 

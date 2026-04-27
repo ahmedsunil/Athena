@@ -19,7 +19,6 @@ class Form extends Component
     public ?string $tagline = null;
     public ?string $description = null;
     public ?string $logo_path = null;
-    public ?string $hero_image_path = null;
     public ?string $mission_statement = null;
     public ?string $vision_statement = null;
     public string $contact_address = '';
@@ -27,7 +26,6 @@ class Form extends Component
     public string $contact_email = '';
 
     public $logo = null;
-    public $hero_image = null;
 
     public function mount(): void
     {
@@ -44,7 +42,6 @@ class Form extends Component
         $this->tagline = $profile->tagline;
         $this->description = $profile->description;
         $this->logo_path = $profile->logo_path;
-        $this->hero_image_path = $profile->hero_image_path;
         $this->mission_statement = $profile->mission_statement;
         $this->vision_statement = $profile->vision_statement;
         $this->contact_address = $profile->contact_address;
@@ -61,7 +58,6 @@ class Form extends Component
             'tagline' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'logo' => [Rule::requiredIf(! $this->logo_path), 'nullable', 'image', 'max:2048'],
-            'hero_image' => [Rule::requiredIf(! $this->hero_image_path), 'nullable', 'image', 'max:4096'],
             'mission_statement' => ['nullable', 'string'],
             'vision_statement' => ['nullable', 'string'],
             'contact_address' => ['required', 'string'],
@@ -86,15 +82,10 @@ class Form extends Component
             'contact_phone' => $validated['contact_phone'],
             'contact_email' => $validated['contact_email'],
             'logo_path' => $this->logo_path,
-            'hero_image_path' => $this->hero_image_path,
         ];
 
         if ($this->logo) {
             $data['logo_path'] = $this->logo->store('school', 'public');
-        }
-
-        if ($this->hero_image) {
-            $data['hero_image_path'] = $this->hero_image->store('school', 'public');
         }
 
         $profile = SchoolProfile::updateOrCreate(
@@ -104,9 +95,7 @@ class Form extends Component
 
         $this->profileId = $profile->id;
         $this->logo_path = $profile->logo_path;
-        $this->hero_image_path = $profile->hero_image_path;
         $this->logo = null;
-        $this->hero_image = null;
 
         $this->dispatch('toast', message: 'School profile saved.');
     }

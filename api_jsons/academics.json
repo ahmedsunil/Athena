@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "models": {
+      "overview": "A short introductory paragraph about the school's academic philosophy shown at the top of the Academics page.",
+      "schoolLevel": "A grouping of courses by school stage (e.g. Junior Secondary, Senior Secondary), with its own heading and description.",
+      "course": "An individual course or subject offered at the school, with a category tag, duration, age/year group, and descriptions."
+    },
+    "relationships": [
+      "schoolLevel has many courses",
+      "courses belong to one schoolLevel and one category"
+    ]
+  },
+
+  "overview": {
+    "text": "At Hulhudhuffaaru School, we believe that academic excellence is built on curiosity, rigour, and relevance. Our curriculum is aligned with the Nigerian national framework and enriched with Cambridge International programmes, giving students both local grounding and global credentials. From the core sciences and humanities to the arts, languages, and vocational skills, every student is supported to discover their strengths and pursue them with confidence.",
+    "curriculum": "Nigerian Curriculum & Cambridge International"
+  },
+
+  "levels": [
+    {
+      "id": "level-jss",
+      "label": "Junior Secondary School",
+      "abbreviation": "JSS",
+      "ageRange": "Ages 10 – 13",
+      "yearGroups": "JSS 1 – JSS 3",
+      "description": "The Junior Secondary programme builds strong foundations in literacy, numeracy, science, and the arts over three years. Students study a broad curriculum before choosing a track in Senior Secondary.",
+      "courses": [
+        {
+          "id": "jss-eng",
+          "name": "English Language & Literature",
+          "category": "Languages",
+          "duration": "3 years",
+          "ageRange": "Ages 10 – 13",
+          "yearGroup": "JSS 1 – 3",
+          "shortDescription": "Develops proficiency in spoken and written English, with exposure to prose, poetry, and drama.",
+          "fullDescription": "English Language & Literature equips students with strong communication skills through structured grammar, composition, and comprehension work. Literature studies introduce classic and contemporary Nigerian and African texts alongside world literature, fostering critical reading and analytical writing. Students develop confidence in debates, presentations, and creative writing across all three years."
+        },
+        {
+          "id": "jss-math",
+          "name": "Mathematics",
+          "category": "Sciences",
+          "duration": "3 years",
+          "ageRange": "Ages 10 – 13",
+          "yearGroup": "JSS 1 – 3",
+          "shortDescription": "Covers number theory, algebra, geometry, statistics, and problem-solving with real-world applications.",
+          "fullDescription": "The JSS Mathematics curriculum is designed to build both procedural fluency and conceptual understanding. Students progress from number and place value through algebraic thinking, coordinate geometry, data handling, and basic trigonometry. Problem-solving and reasoning are woven throughout, preparing students for the more demanding Senior Secondary curriculum and public examinations."
+        },
+        {
+          "id": "jss-bsc",
+          "name": "Basic Science & Technology",
+          "category": "Sciences",
+          "duration": "3 years",
+          "ageRange": "Ages 10 – 13",
+          "yearGroup": "JSS 1 – 3",
+          "shortDescription": "An integrated introduction to physics, chemistry, biology, and technology through hands-on experiments.",
+          "fullDescription": "Basic Science & Technology introduces students to the scientific method and key concepts across biology, chemistry, physics, and technology. Laboratory practicals are central to the course, encouraging observation, hypothesis testing, and evidence-based reasoning. Topics include living systems, matter and change, forces and energy, and an introduction to computer systems and digital literacy."
+        },
+        {
+          "id": "jss-sst",
+          "name": "Social Studies",
+          "category": "Humanities",
+          "duration": "3 years",
+          "ageRange": "Ages 10 – 13",
+          "yearGroup": "JSS 1 – 3",
+          "shortDescription": "Explores Nigerian society, citizenship, governance, culture, and the individual's role in the community.",
+          "fullDescription": "Social Studies helps students understand the world they inhabit — from family and community structures to government, national history, and global citizenship. Students examine Nigerian cultural identity, civic responsibility, environmental sustainability, and human rights. Case studies, debates, and community projects make the subject relevant and engaging."
+        },
+        {
+          "id": "jss-cca",
+          "name": "Creative & Cultural Arts",
+          "category": "Arts",
+          "duration": "3 years",
+          "ageRange": "Ages 10 – 13",
+          "yearGroup": "JSS 1 – 3",
+          "shortDescription": "Develops artistic expression through drawing, painting, craft, music, and drama.",
+          "fullDescription": "Creative & Cultural Arts nurtures students' creative instincts across visual art, music, and the performing arts. Students explore traditional Nigerian art forms alongside contemporary techniques, developing skills in drawing, painting, batik, pottery, and textile design. Drama and music components build confidence, teamwork, and cultural appreciation."
+        },
+        {
+          "id": "jss-ict",
+          "name": "Computer Studies",
+          "category": "Technology",
+          "duration": "3 years",
+          "ageRange": "Ages 10 – 13",
+          "yearGroup": "JSS 1 – 3",
+          "shortDescription": "Covers ICT fundamentals, word processing, spreadsheets, internet safety, and introductory coding.",
+          "fullDescription": "Computer Studies builds digital literacy and practical computing skills. Students learn to use productivity software effectively, understand hardware and software concepts, navigate the internet safely, and begin exploring programming logic through block-based and text-based coding. The course prepares students for an increasingly digital world and for the more advanced ICT tracks available in Senior Secondary."
+        }
+      ]
+    },
+    {
+      "id": "level-sss",
+      "label": "Senior Secondary School",
+      "abbreviation": "SSS",
+      "ageRange": "Ages 14 – 17",
+      "yearGroups": "SSS 1 – SSS 3",
+      "description": "Senior Secondary students choose a specialist track — Science, Arts, or Commercial — and study their chosen subjects in depth, culminating in WAEC and NECO examinations and, where opted, Cambridge International qualifications.",
+      "courses": [
+        {
+          "id": "sss-eng",
+          "name": "English Language",
+          "category": "Languages",
+          "duration": "3 years",
+          "ageRange": "Ages 14 – 17",
+          "yearGroup": "SSS 1 – 3",
+          "shortDescription": "Advanced writing, comprehension, oral English, and literature in preparation for WAEC and NECO.",
+          "fullDescription": "Senior Secondary English Language builds on JSS foundations with a focus on WAEC/NECO examination requirements. Students master formal and informal writing genres, close reading and textual analysis, oral communication, and summary skills. Set texts from the West African Examinations Council syllabus are studied in detail, and students develop independent critical voices through extended essays and class debates."
+        },
+        {
+          "id": "sss-bio",
+          "name": "Biology",
+          "category": "Sciences",
+          "duration": "3 years",
+          "ageRange": "Ages 14 – 17",
+          "yearGroup": "SSS 1 – 3",
+          "shortDescription": "Cell biology, genetics, ecology, human physiology, and evolution for the science track.",
+          "fullDescription": "Biology in the Senior Secondary Science track covers the full breadth of life sciences required for WAEC, NECO, and Cambridge International examinations. Key topics include cell structure and function, genetics and heredity, human anatomy and physiology, plant biology, ecology, and evolution. Weekly laboratory sessions develop practical skills in dissection, microscopy, and experimental design."
+        },
+        {
+          "id": "sss-phy",
+          "name": "Physics",
+          "category": "Sciences",
+          "duration": "3 years",
+          "ageRange": "Ages 14 – 17",
+          "yearGroup": "SSS 1 – 3",
+          "shortDescription": "Mechanics, electricity, waves, optics, and modern physics for science track students.",
+          "fullDescription": "Physics explores the fundamental laws governing the physical world. Students study mechanics (kinematics, dynamics, energy), thermal physics, waves and optics, electricity and magnetism, and an introduction to modern physics including atomic structure and nuclear reactions. Mathematical problem-solving is central to the course, and laboratory work develops experimental technique and data analysis skills."
+        },
+        {
+          "id": "sss-econ",
+          "name": "Economics",
+          "category": "Humanities",
+          "duration": "3 years",
+          "ageRange": "Ages 14 – 17",
+          "yearGroup": "SSS 1 – 3",
+          "shortDescription": "Micro and macroeconomics, Nigerian economy, trade, and development for the commercial track.",
+          "fullDescription": "Economics introduces students to how individuals, businesses, and governments make decisions about scarce resources. The course covers demand and supply, market structures, national income accounting, money and banking, international trade, and the Nigerian economy in a global context. Students apply economic theory to real-world policy issues through case studies, data analysis, and extended essays."
+        },
+        {
+          "id": "sss-lit",
+          "name": "Literature in English",
+          "category": "Arts",
+          "duration": "3 years",
+          "ageRange": "Ages 14 – 17",
+          "yearGroup": "SSS 1 – 3",
+          "shortDescription": "In-depth study of prose, poetry, and drama with a focus on African and world literature.",
+          "fullDescription": "Literature in English develops students' ability to read, analyse, and appreciate literary texts across prose fiction, poetry, and drama. Prescribed WAEC/NECO texts are studied in depth alongside additional world literature selections. Students explore narrative technique, thematic analysis, character study, and literary devices, culminating in both written examinations and oral literature components."
+        },
+        {
+          "id": "sss-cam",
+          "name": "Cambridge International (A Level Track)",
+          "category": "Technology",
+          "duration": "2 years",
+          "ageRange": "Ages 15 – 17",
+          "yearGroup": "SSS 2 – 3",
+          "shortDescription": "An optional Cambridge International pathway in Mathematics, Sciences, or Humanities for globally recognised qualifications.",
+          "fullDescription": "The Cambridge International pathway allows high-achieving SSS students to sit internationally recognised Cambridge AS and A Level examinations alongside the national curriculum. Subject options include Mathematics, Further Mathematics, Biology, Chemistry, Physics, Economics, and English Literature. Cambridge qualifications are widely recognised by universities in Nigeria, the UK, the United States, and across Africa. Students on this pathway receive additional tuition and access to Cambridge-specific resources."
+        }
+      ]
+    }
+  ]
+}

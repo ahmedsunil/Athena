@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "models": {
+      "slide": "A hero carousel slide with a background image, headline, subtitle, and a call-to-action button.",
+      "stat": "A school statistic displayed as a bold number with a label, used in the highlights strip.",
+      "principal": "The school principal's profile and welcome message shown on the home page.",
+      "featuredEvent": "A preview card for an upcoming school event, shown in the featured events strip.",
+      "quickLink": "A labelled icon button in the quick links grid that navigates to a key portal section.",
+      "testimonial": "A community testimonial from a parent, student, or alumni, shown with a photo and role.",
+      "contact": "The school's contact details and the configuration for the contact form."
+    },
+    "relationships": [
+      "featuredEvent references the full Events section for detail pages",
+      "quickLink.href corresponds to a portal section route"
+    ]
+  },
+
+  "slides": [
+    {
+      "id": "slide-1",
+      "imageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80",
+      "title": "Shaping Tomorrow's Leaders",
+      "subtitle": "A place where every student is inspired to achieve their full potential in academics, character, and community.",
+      "ctaLabel": "Apply for Admission",
+      "ctaHref": "/admissions"
+    },
+    {
+      "id": "slide-2",
+      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80",
+      "title": "Excellence in Education",
+      "subtitle": "From early years to senior school, we provide a rigorous and nurturing learning environment.",
+      "ctaLabel": "Explore Academics",
+      "ctaHref": "/academics"
+    },
+    {
+      "id": "slide-3",
+      "imageUrl": "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1600&q=80",
+      "title": "A Thriving Community",
+      "subtitle": "Clubs, sports, arts, and service — student life here goes far beyond the classroom.",
+      "ctaLabel": "Discover Student Life",
+      "ctaHref": "/student-life"
+    }
+  ],
+
+  "stats": [
+    { "id": "stat-1", "value": "1,200+", "label": "Students Enrolled" },
+    { "id": "stat-2", "value": "85+", "label": "Dedicated Staff" },
+    { "id": "stat-3", "value": "38", "label": "Years of Excellence" },
+    { "id": "stat-4", "value": "96%", "label": "Exam Pass Rate" }
+  ],
+
+  "principal": {
+    "name": "Dr. Patricia Nwachukwu",
+    "title": "Principal, Hulhudhuffaaru School",
+    "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    "message": "Welcome to our school — a place built on the belief that every child deserves an education that challenges, inspires, and empowers them. Over the past 38 years, we have grown into a community of passionate learners, dedicated teachers, and supportive families. Whether you are a prospective family exploring enrolment, a current student looking for resources, or a parent keeping up with school news, I hope this portal serves you well. Together, we are raising the next generation of confident, compassionate, and capable leaders."
+  },
+
+  "featuredEvents": [
+    {
+      "id": "evt-1",
+      "title": "Open Day 2025",
+      "date": "2025-05-10",
+      "description": "Tour our facilities, meet our teachers, and learn about our admissions process. All prospective families are welcome.",
+      "href": "/events/open-day-2025"
+    },
+    {
+      "id": "evt-2",
+      "title": "Annual Inter-House Sports",
+      "date": "2025-05-24",
+      "description": "A full day of athletics, team spirit, and friendly competition between our four school houses.",
+      "href": "/events/inter-house-sports"
+    },
+    {
+      "id": "evt-3",
+      "title": "End-of-Term Prize Giving",
+      "date": "2025-07-04",
+      "description": "Celebrating student achievement in academics, arts, and community service at our annual award ceremony.",
+      "href": "/events/prize-giving-2025"
+    }
+  ],
+
+  "quickLinks": [
+    { "id": "ql-1", "label": "Admissions", "href": "/admissions", "icon": "ClipboardList" },
+    { "id": "ql-2", "label": "Events", "href": "/events", "icon": "Calendar" },
+    { "id": "ql-3", "label": "Academics", "href": "/academics", "icon": "BookOpen" },
+    { "id": "ql-4", "label": "Student Life", "href": "/student-life", "icon": "Users" },
+    { "id": "ql-5", "label": "Gallery", "href": "/gallery", "icon": "Image" },
+    { "id": "ql-6", "label": "Downloads", "href": "/downloads", "icon": "Download" },
+    { "id": "ql-7", "label": "Digital Services", "href": "/digital-services", "icon": "Laptop" },
+    { "id": "ql-8", "label": "Contact Us", "href": "#contact", "icon": "Mail" }
+  ],
+
+  "testimonials": [
+    {
+      "id": "test-1",
+      "quote": "The school has transformed my daughter's confidence. She went from a shy child to a class prefect who loves public speaking. The teachers genuinely care.",
+      "author": "Mrs. Adaeze Okonkwo",
+      "role": "Parent of Year 9 Student",
+      "photoUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80"
+    },
+    {
+      "id": "test-2",
+      "quote": "I sat my WAEC exams here and passed with distinctions. The science labs and library resources gave me an edge I still benefit from in university.",
+      "author": "Emeka Adeyemi",
+      "role": "Alumni, Class of 2019",
+      "photoUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80"
+    },
+    {
+      "id": "test-3",
+      "quote": "As a parent, what I appreciate most is how the school communicates. Events, reports, and updates are always timely. I always know what's happening.",
+      "author": "Mr. Chukwuemeka Bello",
+      "role": "Parent of Year 6 Student",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
+    },
+    {
+      "id": "test-4",
+      "quote": "The debate club and drama society here changed my life. I found my voice and my purpose. I cannot recommend this school enough.",
+      "author": "Ngozi Eze",
+      "role": "Alumni, Class of 2022",
+      "photoUrl": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&q=80"
+    }
+  ],
+
+  "contact": {
+    "address": "14 Education Boulevard, Victoria Island, Lagos, Nigeria",
+    "phone": "+234 (0) 801 234 5678",
+    "email": "info@schoolportal.edu.ng",
+    "formFields": ["name", "email", "message"]
+  }
+}
