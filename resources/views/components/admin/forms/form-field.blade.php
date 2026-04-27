@@ -12,21 +12,21 @@
         </x-admin.forms.form-field>
 
         {{-- Required indicator --}}
-        <x-admin.forms.form-field label="Email" field="email" required>
-            ...
-        </x-admin.forms.form-field>
+        {{-- <x-admin.forms.form-field label="Email" field="email" required> --}}
+        {{--     ... --}}
+        {{-- </x-admin.forms.form-field> --}}
 
         {{-- Hint text --}}
-        <x-admin.forms.form-field label="Description" field="description" hint="Max 500 characters">
-            ...
-        </x-admin.forms.form-field>
+        {{-- <x-admin.forms.form-field label="Description" field="description" hint="Max 500 characters"> --}}
+        {{--     ... --}}
+        {{-- </x-admin.forms.form-field> --}}
 
-    Props:
-        $label     (required) — field label text
-        $field     (required) — matches the wire:model / @error key
-        $required  (optional) — adds * to the label
-        $hint      (optional) — small help text below the input
---}}
+{{--    Props:--}}
+{{--        $label     (required) — field label text--}}
+{{--        $field     (required) — matches the wire:model / @error key--}}
+{{--        $required  (optional) — adds * to the label--}}
+{{--        $hint      (optional) — small help text below the input--}}
+
 @props(['label', 'field', 'required' => false, 'hint' => null])
 
 <div>
@@ -37,7 +37,7 @@
     {{ $slot }}
 
     @error($field)
-        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
     @enderror
 
     @if($hint && !$errors->has($field))

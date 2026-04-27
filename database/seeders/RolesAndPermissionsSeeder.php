@@ -32,7 +32,6 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Role::firstOrCreate(['name' => 'user']);
 
-        // Sync existing users to Spatie roles based on their role column
-        User::all()->each(fn ($u) => $u->syncRoles([$u->role ?? 'user']));
+        User::doesntHave('roles')->get()->each(fn ($user) => $user->syncRoles(['user']));
     }
 }

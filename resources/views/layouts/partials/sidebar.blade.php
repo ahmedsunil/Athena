@@ -16,6 +16,17 @@
             ],
         ],
         [
+            'label' => 'CMS',
+            'items' => [
+                [
+                    'label' => 'School Profile',
+                    'route' => 'school-profile',
+                    'href'  => route('school-profile.show'),
+                    'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M3 3v7h7V3H3Zm11 0v7h7V3h-7ZM3 14v7h7v-7H3Zm11 0v7h7v-7h-7Z"/>',
+                ],
+            ],
+        ],
+        [
             'label' => 'User management',
             'items' => [
                 [

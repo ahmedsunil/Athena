@@ -7,7 +7,9 @@
     <title>{{ isset($title) ? $title . ' — ' . config('app.name') : config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -21,17 +23,20 @@
     </aside>
 
     {{-- Mobile topbar + drawer --}}
-    <div class="fixed inset-x-0 top-0 z-40 flex h-12 items-center justify-between border-b border-zinc-200 bg-white px-4 md:hidden"
-         x-data="{ open: false }"
-         @keydown.escape.window="open = false">
+    <div
+        class="fixed inset-x-0 top-0 z-40 flex h-12 items-center justify-between border-b border-zinc-200 bg-white px-4 md:hidden"
+        x-data="{ open: false }"
+        @keydown.escape.window="open = false">
 
         <span class="text-[15px] font-bold tracking-tight text-zinc-950">{{ config('app.name') }}</span>
 
         <button @click="open = !open" class="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100">
-            <svg x-show="!open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg x-show="!open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
-            <svg x-show="open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg x-show="open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
         </button>
@@ -53,7 +58,8 @@
              @click.stop>
             <div class="flex h-12 items-center justify-between border-b border-zinc-100 px-4">
                 <span class="text-[15px] font-bold tracking-tight text-zinc-950">{{ config('app.name') }}</span>
-                <button @click="open = false" class="rounded-lg p-1 text-zinc-400 transition-colors hover:text-zinc-600">
+                <button @click="open = false"
+                        class="rounded-lg p-1 text-zinc-400 transition-colors hover:text-zinc-600">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
@@ -65,23 +71,8 @@
 
     {{-- Main content --}}
     <div class="flex w-full flex-1 flex-col overflow-hidden pt-12 md:pl-64 md:pt-0">
-
-        {{-- Desktop breadcrumb --}}
         @php
-            $routeLabels = [
-                'dashboard'    => 'Dashboard',
-                'users'        => 'Users',
-                'roles'        => 'Roles',
-                'app.activity' => 'Activity Log',
-                'app.settings' => 'System Settings',
-                'app.'         => 'App Management',
-                'profile'      => 'Settings',
-            ];
-            $currentRoute = request()->route()?->getName() ?? '';
-            $breadcrumb   = 'Dashboard';
-            foreach ($routeLabels as $prefix => $label) {
-                if ($currentRoute === $prefix || str_starts_with($currentRoute, $prefix)) { $breadcrumb = $label; break; }
-            }
+            $breadcrumb = current_breadcrumb();
         @endphp
         <div class="hidden h-12 shrink-0 items-center border-b border-zinc-200 bg-white px-6 md:flex">
             <span class="text-xs font-medium text-zinc-500">{{ $breadcrumb }}</span>
@@ -99,7 +90,7 @@
 @if(session('toast'))
     <script>
         setTimeout(() => window.dispatchEvent(new CustomEvent('toast', {
-            detail: { message: @js(session('toast')), type: @js(session('toast_type', 'success')) }
+            detail: {message: @js(session('toast')), type: @js(session('toast_type', 'success')) }
         })), 50);
     </script>
 @endif
@@ -126,10 +117,12 @@
              x-transition:leave-end="opacity-0 translate-x-4"
              :class="toast.type === 'error' ? 'bg-red-600' : 'bg-zinc-950'"
              class="flex min-w-[200px] items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-lg pointer-events-auto">
-            <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
+                 stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
             </svg>
-            <svg x-show="toast.type === 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <svg x-show="toast.type === 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
+                 stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
             <span x-text="toast.message" class="flex-1"></span>

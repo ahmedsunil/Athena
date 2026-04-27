@@ -10,17 +10,21 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::firstOrCreate(
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+            SchoolProfileSeeder::class,
+        ]);
+
+        $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
                 'name'              => 'Admin',
                 'password'          => Hash::make('password'),
-                'role'              => 'admin',
                 'is_active'         => true,
                 'email_verified_at' => now(),
             ]
         );
 
-        $this->call(RolesAndPermissionsSeeder::class);
+        $admin->syncRoles(['admin']);
     }
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Component Examples</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        h2 { margin-top: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; }
+        pre { background: #f5f5f5; padding: 1rem; overflow-x: auto; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Form Component Examples</h1>
+
+    <h2>Text Input</h2>
+    <pre>&lt;x-admin.forms.form-field label="Name" field="name"&gt;
+    &lt;x-admin.forms.text-input wire:model="name" placeholder="Enter name" /&gt;
+&lt;/x-admin.forms.form-field&gt;</pre>
+
+    <h2>Textarea</h2>
+    <pre>&lt;x-admin.forms.form-field label="Description" field="description" hint="Max 500 chars"&gt;
+    &lt;x-admin.forms.textarea wire:model="description" rows="4" /&gt;
+&lt;/x-admin.forms.form-field&gt;</pre>
+
+    <h2>Select</h2>
+    <pre>&lt;x-admin.forms.form-field label="Category" field="category"&gt;
+    &lt;x-admin.forms.select-input wire:model="category" :options="$categories" /&gt;
+&lt;/x-admin.forms.form-field&gt;</pre>
+
+    <h2>Checkbox</h2>
+    <pre>&lt;x-admin.forms.checkbox wire:model="active" label="Active" /&gt;</pre>
+
+    <h2>Toggle Switch</h2>
+    <pre>&lt;x-admin.forms.toggle-switch wire:model="enabled" label="Enable feature" /&gt;</pre>
+
+    <h2>File Upload</h2>
+    <pre>&lt;x-admin.forms.form-field label="Attachment" field="attachment"&gt;
+    &lt;x-admin.forms.file-upload wire:model="attachment" /&gt;
+&lt;/x-admin.forms.form-field&gt;</pre>
+
+    <h2>Full Form (2 columns)</h2>
+    <pre>&lt;x-admin.forms.form-grid&gt;
+    &lt;x-admin.forms.form-field label="First Name" field="firstName" required&gt;
+        &lt;x-admin.forms.text-input wire:model="firstName" /&gt;
+    &lt;/x-admin.forms.form-field&gt;
+    &lt;x-admin.forms.form-field label="Last Name" field="lastName" required&gt;
+        &lt;x-admin.forms.text-input wire:model="lastName" /&gt;
+    &lt;/x-admin.forms.form-field&gt;
+    &lt;x-admin.forms.form-field label="Email" field="email" required&gt;
+        &lt;x-admin.forms.text-input wire:model="email" type="email" /&gt;
+    &lt;/x-admin.forms.form-field&gt;
+    &lt;x-admin.forms.form-field label="Phone" field="phone"&gt;
+        &lt;x-admin.forms.text-input wire:model="phone" /&gt;
+    &lt;/x-admin.forms.form-field&gt;
+&lt;/x-admin.forms.form-grid&gt;</pre>
+
+    <h2>Full Form (3 columns)</h2>
+    <pre>&lt;x-admin.forms.form-grid cols="3"&gt;
+    ...fields...
+&lt;/x-admin.forms.form-grid&gt;</pre>
+
+<h2>Full Form (1 column)</h2>
+    <pre>&lt;x-admin.forms.form-grid cols="1"&gt;
+    ...fields...
+&lt;/x-admin.forms.form-grid&gt;
+
+    <h2>IMPORTANT: Component Directory</h2>
+    <p>For components to work with <code>x-admin.forms.*</code> syntax, they must be in:</p>
+    <pre>resources/views/components/admin/forms/</pre>
+    <p>Not in:</p>
+    <pre>resources/admin-system/components/forms/</pre>
+    <p>Move files from <code>resources/admin-system/components/forms/*</code> to <code>resources/views/components/admin/forms/</code></p>
+</body>
+</html>
