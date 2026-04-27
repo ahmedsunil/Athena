@@ -113,9 +113,64 @@ public function handle(Request $request, Closure $next): Response
 PUBLIC_API_KEY=sk_school_public_2024_secure_key
 ```
 
+### 2.4 Config Registration
+
+**File:** `config/app.php`
+
+```php
+'public_api_key' => env('PUBLIC_API_KEY'),
+```
+
 ---
 
-## 3. Seeder
+## 3. Public Config Endpoint
+
+### 3.1 Controller
+
+**File:** `app/Http/Controllers/Api/PublicConfigController.php`
+
+```php
+public function show(): JsonResponse
+{
+    return response()->json([
+        'api_key' => config('app.public_api_key'),
+        'app_name' => config('app.name'),
+        'app_url' => config('app.url'),
+    ]);
+}
+```
+
+### 3.2 Route
+
+**File:** `routes/api.php`
+
+```php
+Route::get('/config', [PublicConfigController::class, 'show']);
+```
+
+### 3.3 Usage
+
+The public website fetches config once and stores it:
+
+```javascript
+// Fetch config on page load
+fetch('http://cms.domain.com/api/config')
+    .then(r => r.json())
+    .then(config => {
+        localStorage.setItem('cms_config', JSON.stringify(config));
+    });
+
+// Use stored API key for all requests
+const config = JSON.parse(localStorage.getItem('cms_config'));
+
+fetch('http://cms.domain.com/api/school-profile', {
+    headers: { 'X-API-KEY': config.api_key }
+});
+```
+
+---
+
+## 4. Seeder
 
 **File:** `database/seeders/SchoolProfileSeeder.php`
 
@@ -152,21 +207,31 @@ $this->call([
 
 ---
 
-## 4. API Usage
+## 5. API Endpoints
 
-### 4.1 Endpoint
+### 5.1 Config Endpoint (Public)
+
+```
+GET /api/config
+```
+
+**Response:**
+```json
+{
+    "api_key": "sk_school_public_2024_secure_key",
+    "app_name": "Laravel",
+    "app_url": "http://athena.test"
+}
+```
+
+### 5.2 School Profile Endpoint (Protected)
 
 ```
 GET /api/school-profile
+Header: X-API-KEY: sk_school_public_2024_secure_key
 ```
 
-### 4.2 Required Header
-
-```
-X-API-KEY: sk_school_public_2024_secure_key
-```
-
-### 4.3 Sample Response
+**Response:**
 
 ```json
 {
@@ -190,13 +255,21 @@ X-API-KEY: sk_school_public_2024_secure_key
 }
 ```
 
-### 4.4 jQuery/Fetch Example
+### 5.3 jQuery/Fetch Example
 
 ```javascript
+// Fetch config on page load
+fetch('http://cms.domain.com/api/config')
+    .then(r => r.json())
+    .then(config => {
+        localStorage.setItem('cms_config', JSON.stringify(config));
+    });
+
+// Use stored API key for all requests
+const config = JSON.parse(localStorage.getItem('cms_config'));
+
 fetch('http://cms.domain.com/api/school-profile', {
-    headers: {
-        'X-API-KEY': 'sk_school_public_2024_secure_key'
-    }
+    headers: { 'X-API-KEY': config.api_key }
 })
 .then(response => response.json())
 .then(data => {
@@ -207,7 +280,7 @@ fetch('http://cms.domain.com/api/school-profile', {
 
 ---
 
-## 5. Form Components
+## 6. Form Components
 
 **Location:** `resources/views/components/admin/forms/`
 
@@ -237,7 +310,7 @@ Components available:
 
 ---
 
-## 6. Security Features
+## 7. Security Features
 
 - **API Key Gatekeeper** - Prevents unauthorized access to public API
 - **Rate Limiting Ready** - Can add `throttle:60,1` middleware if needed

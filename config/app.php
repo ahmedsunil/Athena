@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Public API Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to authenticate public API requests from the website.
+    |
+    */
+
+    'public_api_key' => env('PUBLIC_API_KEY'),
+
 ];
