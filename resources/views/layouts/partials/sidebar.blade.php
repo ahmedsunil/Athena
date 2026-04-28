@@ -70,7 +70,7 @@
         @else
             <div
                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-950 text-sm font-bold text-white shadow-sm">
-                UI
+                HS
             </div>
         @endif
         <div class="min-w-0">
