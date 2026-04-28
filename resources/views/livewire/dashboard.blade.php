@@ -1,10 +1,11 @@
-<div class="space-y-6 px-4 py-5 sm:px-6">
+<div class="mx-auto space-y-4">
     <div class="flex flex-wrap items-center justify-between gap-3">
         <div>
             <h1 class="text-base font-semibold text-zinc-950">Dashboard</h1>
             <p class="text-xs text-zinc-500">Stats, KPI cards, graphs, and recent users.</p>
         </div>
-        <button type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800">
+        <button type="button"
+                class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800">
             <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/>
             </svg>
@@ -80,9 +81,11 @@
                     <p class="text-xs text-zinc-400">Vertical bar chart</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <input type="date" wire:model.live="usersFrom" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="usersFrom"
+                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     <span class="text-xs text-zinc-400">to</span>
-                    <input type="date" wire:model.live="usersTo" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="usersTo"
+                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 </div>
             </div>
 
@@ -107,7 +110,8 @@
             <div class="flex h-40 items-end gap-1.5">
                 @foreach($usersByMonth as $bar)
                     <div class="group relative flex h-full flex-1 items-end">
-                        <div class="w-full rounded-t-sm bg-zinc-950 transition-all group-hover:bg-zinc-700" style="height: {{ $bar['percent'] }}%"></div>
+                        <div class="w-full rounded-t-sm bg-zinc-950 transition-all group-hover:bg-zinc-700"
+                             style="height: {{ $bar['percent'] }}%"></div>
                     </div>
                 @endforeach
             </div>
@@ -122,9 +126,11 @@
             <div class="mb-4 flex flex-col gap-3">
                 <h2 class="text-sm font-semibold text-zinc-950">Top roles</h2>
                 <div class="flex items-center gap-2">
-                    <input type="date" wire:model.live="rolesFrom" class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="rolesFrom"
+                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     <span class="text-xs text-zinc-400">to</span>
-                    <input type="date" wire:model.live="rolesTo" class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="rolesTo"
+                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 </div>
             </div>
             <div class="space-y-3">
@@ -173,9 +179,11 @@
                     <p class="text-xs text-zinc-400">Daily user trend</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <input type="date" wire:model.live="lineFrom" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="lineFrom"
+                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     <span class="text-xs text-zinc-400">to</span>
-                    <input type="date" wire:model.live="lineTo" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="lineTo"
+                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 </div>
             </div>
             <div class="relative h-44">
@@ -186,7 +194,8 @@
                     <div></div>
                 </div>
                 <svg class="relative h-full w-full" viewBox="0 0 640 190" preserveAspectRatio="none" aria-hidden="true">
-                    <polyline points="{{ $linePoints }}" fill="none" stroke="#09090b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    <polyline points="{{ $linePoints }}" fill="none" stroke="#09090b" stroke-width="4"
+                              stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
             <div class="mt-2 flex justify-between text-[10px] text-zinc-400">
@@ -200,13 +209,16 @@
             <div class="mb-4 flex flex-col gap-3">
                 <h2 class="text-sm font-semibold text-zinc-950">Donut chart</h2>
                 <div class="flex items-center gap-2">
-                    <input type="date" wire:model.live="donutFrom" class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="donutFrom"
+                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     <span class="text-xs text-zinc-400">to</span>
-                    <input type="date" wire:model.live="donutTo" class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="donutTo"
+                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 </div>
             </div>
             <div class="flex items-center justify-center py-2">
-                <div class="grid h-32 w-32 place-items-center rounded-full" style="background: conic-gradient(#09090b 0 {{ $donutActive }}%, #f59e0b {{ $donutActive }}% {{ $donutPendingEnd }}%, #ef4444 {{ $donutPendingEnd }}% {{ $donutInactiveEnd }}%, #e7e5e4 {{ $donutInactiveEnd }}% 100%)">
+                <div class="grid h-32 w-32 place-items-center rounded-full"
+                     style="background: conic-gradient(#09090b 0 {{ $donutActive }}%, #f59e0b {{ $donutActive }}% {{ $donutPendingEnd }}%, #ef4444 {{ $donutPendingEnd }}% {{ $donutInactiveEnd }}%, #e7e5e4 {{ $donutInactiveEnd }}% 100%)">
                     <div class="grid h-20 w-20 place-items-center rounded-full bg-white">
                         <div class="text-center">
                             <p class="text-base font-semibold text-zinc-950">{{ $conversionRate }}%</p>
@@ -232,9 +244,11 @@
             <div class="mb-4 flex flex-col gap-3">
                 <h2 class="text-sm font-semibold text-zinc-950">Horizontal bar</h2>
                 <div class="flex items-center gap-2">
-                    <input type="date" wire:model.live="horizontalFrom" class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="horizontalFrom"
+                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     <span class="text-xs text-zinc-400">to</span>
-                    <input type="date" wire:model.live="horizontalTo" class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="horizontalTo"
+                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 </div>
             </div>
             <div class="space-y-4">
@@ -256,15 +270,18 @@
             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <h2 class="text-sm font-semibold text-zinc-950">Area graph</h2>
                 <div class="flex items-center gap-2">
-                    <input type="date" wire:model.live="areaFrom" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="areaFrom"
+                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     <span class="text-xs text-zinc-400">to</span>
-                    <input type="date" wire:model.live="areaTo" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    <input type="date" wire:model.live="areaTo"
+                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 </div>
             </div>
             <div class="relative h-40 overflow-hidden rounded-lg bg-zinc-50">
                 <svg class="h-full w-full" viewBox="0 0 640 180" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M{{ $areaPoints }} L640 180 L0 180 Z" fill="#f4f4f5" />
-                    <polyline points="{{ $areaPoints }}" fill="none" stroke="#09090b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M{{ $areaPoints }} L640 180 L0 180 Z" fill="#f4f4f5"/>
+                    <polyline points="{{ $areaPoints }}" fill="none" stroke="#09090b" stroke-width="4"
+                              stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
         </div>
@@ -274,14 +291,19 @@
                 <h2 class="text-sm font-semibold text-zinc-950">Stacked bar graph</h2>
                 <div class="flex flex-wrap items-center gap-3">
                     <div class="flex items-center gap-2">
-                        <input type="date" wire:model.live="stackedFrom" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        <input type="date" wire:model.live="stackedFrom"
+                               class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                         <span class="text-xs text-zinc-400">to</span>
-                        <input type="date" wire:model.live="stackedTo" class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        <input type="date" wire:model.live="stackedTo"
+                               class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="flex items-center gap-1.5 text-[10px] text-zinc-400"><span class="h-2.5 w-2.5 rounded-sm bg-zinc-950"></span>Active</span>
-                        <span class="flex items-center gap-1.5 text-[10px] text-zinc-400"><span class="h-2.5 w-2.5 rounded-sm bg-amber-500"></span>Pending</span>
-                        <span class="flex items-center gap-1.5 text-[10px] text-zinc-400"><span class="h-2.5 w-2.5 rounded-sm bg-red-500"></span>Inactive</span>
+                    <span class="flex items-center gap-1.5 text-[10px] text-zinc-400"><span
+                            class="h-2.5 w-2.5 rounded-sm bg-zinc-950"></span>Active</span>
+                        <span class="flex items-center gap-1.5 text-[10px] text-zinc-400"><span
+                                class="h-2.5 w-2.5 rounded-sm bg-amber-500"></span>Pending</span>
+                        <span class="flex items-center gap-1.5 text-[10px] text-zinc-400"><span
+                                class="h-2.5 w-2.5 rounded-sm bg-red-500"></span>Inactive</span>
                     </div>
                 </div>
             </div>
@@ -303,7 +325,8 @@
     <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
         <div class="flex items-center justify-between border-b border-zinc-100 px-5 py-3">
             <h2 class="text-sm font-semibold text-zinc-950">Recent users</h2>
-            <a href="{{ route('users.index') }}" class="text-xs font-medium text-zinc-950 hover:text-zinc-600">View all</a>
+            <a href="{{ route('users.index') }}" class="text-xs font-medium text-zinc-950 hover:text-zinc-600">View
+                all</a>
         </div>
 
         @if($recentUsers->isEmpty())
@@ -314,38 +337,40 @@
             <div class="hidden md:block">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="border-b border-zinc-100 text-left">
-                            <th class="px-5 py-3 text-xs font-medium text-zinc-500">Name</th>
-                            <th class="px-5 py-3 text-xs font-medium text-zinc-500">Email</th>
-                            <th class="px-5 py-3 text-xs font-medium text-zinc-500">Role</th>
-                            <th class="px-5 py-3 text-xs font-medium text-zinc-500">Status</th>
-                            <th class="px-5 py-3 text-xs font-medium text-zinc-500">Joined</th>
-                        </tr>
+                    <tr class="border-b border-zinc-100 text-left">
+                        <th class="px-5 py-3 text-xs font-medium text-zinc-500">Name</th>
+                        <th class="px-5 py-3 text-xs font-medium text-zinc-500">Email</th>
+                        <th class="px-5 py-3 text-xs font-medium text-zinc-500">Role</th>
+                        <th class="px-5 py-3 text-xs font-medium text-zinc-500">Status</th>
+                        <th class="px-5 py-3 text-xs font-medium text-zinc-500">Joined</th>
+                    </tr>
                     </thead>
                     <tbody class="admin-table-body">
-                        @foreach($recentUsers as $user)
-                            <tr>
-                                <td class="px-5 py-3 font-medium text-zinc-950">{{ $user->name }}</td>
-                                <td class="px-5 py-3 text-zinc-500">{{ $user->email }}</td>
-                                <td class="px-5 py-3">
-                                    <div class="flex flex-wrap gap-1">
-                                        @forelse($user->roles->sortBy('name') as $role)
-                                            <span class="inline-flex rounded-full px-2 py-0.5 text-xs font-medium {{ $role->name === 'admin' ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-600' }}">
+                    @foreach($recentUsers as $user)
+                        <tr>
+                            <td class="px-5 py-3 font-medium text-zinc-950">{{ $user->name }}</td>
+                            <td class="px-5 py-3 text-zinc-500">{{ $user->email }}</td>
+                            <td class="px-5 py-3">
+                                <div class="flex flex-wrap gap-1">
+                                    @forelse($user->roles->sortBy('name') as $role)
+                                        <span
+                                            class="inline-flex rounded-full px-2 py-0.5 text-xs font-medium {{ $role->name === 'admin' ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-600' }}">
                                                 {{ ucfirst($role->name) }}
                                             </span>
-                                        @empty
-                                            <span class="text-xs text-zinc-400">—</span>
-                                        @endforelse
-                                    </div>
-                                </td>
-                                <td class="px-5 py-3">
-                                    <span class="inline-flex rounded-full px-2 py-0.5 text-xs font-medium {{ $user->is_active ? 'bg-zinc-950 text-white' : 'bg-red-50 text-red-700' }}">
+                                    @empty
+                                        <span class="text-xs text-zinc-400">—</span>
+                                    @endforelse
+                                </div>
+                            </td>
+                            <td class="px-5 py-3">
+                                    <span
+                                        class="inline-flex rounded-full px-2 py-0.5 text-xs font-medium {{ $user->is_active ? 'bg-zinc-950 text-white' : 'bg-red-50 text-red-700' }}">
                                         {{ $user->is_active ? 'Active' : 'Inactive' }}
                                     </span>
-                                </td>
-                                <td class="px-5 py-3 text-zinc-400">{{ $user->created_at->format('M d, Y') }}</td>
-                            </tr>
-                        @endforeach
+                            </td>
+                            <td class="px-5 py-3 text-zinc-400">{{ $user->created_at->format('M d, Y') }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -358,7 +383,8 @@
                                 <p class="truncate text-sm font-medium text-zinc-950">{{ $user->name }}</p>
                                 <p class="truncate text-xs text-zinc-400">{{ $user->email }}</p>
                             </div>
-                            <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium {{ $user->is_active ? 'bg-zinc-950 text-white' : 'bg-red-50 text-red-700' }}">
+                            <span
+                                class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium {{ $user->is_active ? 'bg-zinc-950 text-white' : 'bg-red-50 text-red-700' }}">
                                 {{ $user->is_active ? 'Active' : 'Inactive' }}
                             </span>
                         </div>

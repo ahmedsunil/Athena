@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(curl -s http://athena.test/api/home)",
+      "Bash(python3 -m json.tool)",
+      "Bash(php -r \"echo 'PHP OK';\")",
+      "Bash(php *)",
+      "Bash(git -C /Users/shaan/Herd/Athena add routes/web.php resources/views/components/admin/layout/sidebar.blade.php)",
+      "Bash(git -C /Users/shaan/Herd/Athena commit -m ' *)",
+      "Bash(composer show *)"
+    ]
+  }
+}

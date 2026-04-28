@@ -3,6 +3,7 @@
 use App\Http\Controllers\GoogleAuthController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
+use App\Livewire\Auditing\ActivityLogShow;
 use App\Livewire\Cms\Home\HomeIndex;
 use App\Livewire\Dashboard;
 use App\Livewire\Profile\ProfileSettings;
@@ -26,6 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // App Management
     Route::get('/app/activity', ActivityLog::class)->name('app.activity');
+    Route::get('/app/activity/{activityId}', ActivityLogShow::class)
+        ->whereNumber('activityId')
+        ->name('app.activity.show');
     Route::get('/app/settings', SystemSettings::class)->name('app.settings');
 
     // Profile & settings

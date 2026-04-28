@@ -5,7 +5,7 @@
     $errorClass = 'mt-1 text-xs text-red-600';
 @endphp
 
-<div class="mx-auto max-w-6xl space-y-4"
+<div class="mx-auto space-y-4"
      x-data="{ tab: new URLSearchParams(window.location.search).get('tab') || 'slides' }"
      x-init="$watch('tab', value => { const url = new URL(window.location); url.searchParams.set('tab', value); window.history.replaceState({}, '', url); })">
 
@@ -63,7 +63,9 @@
             <div class="flex items-center justify-between">
                 <p class="text-xs font-medium text-zinc-500">Hero carousel slides</p>
                 @if($isEditing)
-                    <button type="button" wire:click="addSlide" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Slide</button>
+                    <button type="button" wire:click="addSlide"
+                            class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Slide
+                    </button>
                 @endif
             </div>
 
@@ -72,39 +74,47 @@
                     <div class="mb-3 flex items-center justify-between gap-3">
                         <p class="text-sm font-semibold text-zinc-950">Slide {{ $index + 1 }}</p>
                         @if($isEditing)
-                            <button type="button" wire:click="removeSlide({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                            <button type="button" wire:click="removeSlide({{ $index }})"
+                                    class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                            </button>
                         @endif
                     </div>
                     <div class="grid gap-4 sm:grid-cols-2">
                         <div>
                             <label class="{{ $labelClass }}">Image URL</label>
-                            <input wire:model="slides.{{ $index }}.imageUrl" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            <input wire:model="slides.{{ $index }}.imageUrl"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
                             @error("slides.$index.imageUrl") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div>
                             <label class="{{ $labelClass }}">Title</label>
-                            <input wire:model="slides.{{ $index }}.title" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            <input wire:model="slides.{{ $index }}.title"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
                             @error("slides.$index.title") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div>
                             <label class="{{ $labelClass }}">CTA Label</label>
-                            <input wire:model="slides.{{ $index }}.ctaLabel" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            <input wire:model="slides.{{ $index }}.ctaLabel"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
                             @error("slides.$index.ctaLabel") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div class="sm:col-span-2">
                             <label class="{{ $labelClass }}">Subtitle</label>
-                            <textarea wire:model="slides.{{ $index }}.subtitle" rows="3" class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
+                            <textarea wire:model="slides.{{ $index }}.subtitle" rows="3"
+                                      class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
                             @error("slides.$index.subtitle") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div class="sm:col-span-2">
                             <label class="{{ $labelClass }}">CTA Href</label>
-                            <input wire:model="slides.{{ $index }}.ctaHref" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            <input wire:model="slides.{{ $index }}.ctaHref"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
                             @error("slides.$index.ctaHref") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                     </div>
                 </div>
             @empty
-                <p class="rounded-xl border border-zinc-200 bg-white p-6 text-center text-sm text-zinc-400">No slides configured.</p>
+                <p class="rounded-xl border border-zinc-200 bg-white p-6 text-center text-sm text-zinc-400">No slides
+                    configured.</p>
             @endforelse
         </section>
 
@@ -112,7 +122,9 @@
             <div class="flex items-center justify-between">
                 <p class="text-xs font-medium text-zinc-500">Highlight statistics</p>
                 @if($isEditing)
-                    <button type="button" wire:click="addStat" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Stat</button>
+                    <button type="button" wire:click="addStat"
+                            class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Stat
+                    </button>
                 @endif
             </div>
 
@@ -122,18 +134,22 @@
                         <div class="mb-3 flex items-center justify-between">
                             <p class="text-sm font-semibold text-zinc-950">Stat {{ $index + 1 }}</p>
                             @if($isEditing)
-                                <button type="button" wire:click="removeStat({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                                <button type="button" wire:click="removeStat({{ $index }})"
+                                        class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                                </button>
                             @endif
                         </div>
                         <div class="grid gap-3">
                             <div>
                                 <label class="{{ $labelClass }}">Value</label>
-                                <input wire:model="stats.{{ $index }}.value" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                <input wire:model="stats.{{ $index }}.value"
+                                       class="{{ $inputClass }}" @disabled(!$isEditing)>
                                 @error("stats.$index.value") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="{{ $labelClass }}">Label</label>
-                                <input wire:model="stats.{{ $index }}.label" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                <input wire:model="stats.{{ $index }}.label"
+                                       class="{{ $inputClass }}" @disabled(!$isEditing)>
                                 @error("stats.$index.label") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                         </div>
@@ -161,7 +177,8 @@
                 </div>
                 <div class="sm:col-span-2">
                     <label class="{{ $labelClass }}">Message</label>
-                    <textarea wire:model="principal.message" rows="7" class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
+                    <textarea wire:model="principal.message" rows="7"
+                              class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
                     @error('principal.message') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                 </div>
             </div>
@@ -180,11 +197,12 @@
                                wire:model="featuredEventIds"
                                value="{{ $event->public_id }}"
                                class="mt-1 h-4 w-4 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950"
-                               @disabled(!$isEditing)>
+                            @disabled(!$isEditing)>
                         <div class="min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
                                 <p class="text-sm font-semibold text-zinc-950">{{ $event->title }}</p>
-                                <span class="rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500">{{ $event->status }}</span>
+                                <span
+                                    class="rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500">{{ $event->status }}</span>
                             </div>
                             <p class="mt-1 text-xs text-zinc-500">
                                 {{ $event->date_start?->format('Y-m-d') }}
@@ -202,7 +220,8 @@
             </div>
 
             @if($events->hasPages())
-                <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
+                <div
+                    class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
                     <p class="text-xs text-zinc-500">
                         Showing {{ $events->firstItem() }}-{{ $events->lastItem() }} of {{ $events->total() }}
                     </p>
@@ -247,7 +266,8 @@
                         @foreach($featuredEventIds as $index => $publicId)
                             @php $selectedEvent = $selectedEvents->get($publicId); @endphp
                             <div class="flex items-center justify-between rounded-lg bg-zinc-50 px-3 py-2">
-                                <span class="text-xs font-medium text-zinc-700">{{ $index + 1 }}. {{ $selectedEvent?->title ?? $publicId }}</span>
+                                <span
+                                    class="text-xs font-medium text-zinc-700">{{ $index + 1 }}. {{ $selectedEvent?->title ?? $publicId }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -259,7 +279,9 @@
             <div class="flex items-center justify-between">
                 <p class="text-xs font-medium text-zinc-500">Quick links</p>
                 @if($isEditing)
-                    <button type="button" wire:click="addQuickLink" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Link</button>
+                    <button type="button" wire:click="addQuickLink"
+                            class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Link
+                    </button>
                 @endif
             </div>
 
@@ -269,24 +291,32 @@
                         <div class="mb-3 flex items-center justify-between">
                             <p class="text-sm font-semibold text-zinc-950">Link {{ $index + 1 }}</p>
                             @if($isEditing)
-                                <button type="button" wire:click="removeQuickLink({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                                <button type="button" wire:click="removeQuickLink({{ $index }})"
+                                        class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                                </button>
                             @endif
                         </div>
                         <div class="grid gap-3">
                             <div>
                                 <label class="{{ $labelClass }}">Label</label>
-                                <input wire:model="quickLinks.{{ $index }}.label" class="{{ $inputClass }}" @disabled(!$isEditing)>
-                                @error("quickLinks.$index.label") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                                <input wire:model="quickLinks.{{ $index }}.label"
+                                       class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("quickLinks.$index.label") <p
+                                    class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="{{ $labelClass }}">Href</label>
-                                <input wire:model="quickLinks.{{ $index }}.href" class="{{ $inputClass }}" @disabled(!$isEditing)>
-                                @error("quickLinks.$index.href") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                                <input wire:model="quickLinks.{{ $index }}.href"
+                                       class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("quickLinks.$index.href") <p
+                                    class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="{{ $labelClass }}">Icon</label>
-                                <input wire:model="quickLinks.{{ $index }}.icon" class="{{ $inputClass }}" @disabled(!$isEditing)>
-                                @error("quickLinks.$index.icon") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                                <input wire:model="quickLinks.{{ $index }}.icon"
+                                       class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("quickLinks.$index.icon") <p
+                                    class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                         </div>
                     </div>
@@ -298,38 +328,50 @@
             <div class="flex items-center justify-between">
                 <p class="text-xs font-medium text-zinc-500">Testimonials</p>
                 @if($isEditing)
-                    <button type="button" wire:click="addTestimonial" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Testimonial</button>
+                    <button type="button" wire:click="addTestimonial"
+                            class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Testimonial
+                    </button>
                 @endif
             </div>
 
             @foreach($testimonials as $index => $testimonial)
-                <div wire:key="testimonial-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                <div wire:key="testimonial-{{ $index }}"
+                     class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
                     <div class="mb-3 flex items-center justify-between">
                         <p class="text-sm font-semibold text-zinc-950">Testimonial {{ $index + 1 }}</p>
                         @if($isEditing)
-                            <button type="button" wire:click="removeTestimonial({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                            <button type="button" wire:click="removeTestimonial({{ $index }})"
+                                    class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                            </button>
                         @endif
                     </div>
                     <div class="grid gap-4 sm:grid-cols-2">
                         <div>
                             <label class="{{ $labelClass }}">Photo URL</label>
-                            <input wire:model="testimonials.{{ $index }}.photoUrl" class="{{ $inputClass }}" @disabled(!$isEditing)>
-                            @error("testimonials.$index.photoUrl") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            <input wire:model="testimonials.{{ $index }}.photoUrl"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("testimonials.$index.photoUrl") <p
+                                class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div>
                             <label class="{{ $labelClass }}">Author</label>
-                            <input wire:model="testimonials.{{ $index }}.author" class="{{ $inputClass }}" @disabled(!$isEditing)>
-                            @error("testimonials.$index.author") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            <input wire:model="testimonials.{{ $index }}.author"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("testimonials.$index.author") <p
+                                class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div>
                             <label class="{{ $labelClass }}">Role</label>
-                            <input wire:model="testimonials.{{ $index }}.role" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            <input wire:model="testimonials.{{ $index }}.role"
+                                   class="{{ $inputClass }}" @disabled(!$isEditing)>
                             @error("testimonials.$index.role") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div class="sm:col-span-2">
                             <label class="{{ $labelClass }}">Quote</label>
-                            <textarea wire:model="testimonials.{{ $index }}.quote" rows="4" class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
-                            @error("testimonials.$index.quote") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            <textarea wire:model="testimonials.{{ $index }}.quote" rows="4"
+                                      class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
+                            @error("testimonials.$index.quote") <p
+                                class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                     </div>
                 </div>
@@ -357,18 +399,25 @@
                     <div class="mb-2 flex items-center justify-between">
                         <label class="{{ $labelClass }} mb-0">Form Fields</label>
                         @if($isEditing)
-                            <button type="button" wire:click="addContactField" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Field</button>
+                            <button type="button" wire:click="addContactField"
+                                    class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Field
+                            </button>
                         @endif
                     </div>
                     <div class="grid gap-2 sm:grid-cols-3">
                         @foreach(($contact['formFields'] ?? []) as $index => $field)
                             <div wire:key="contact-field-{{ $index }}" class="flex gap-2">
-                                <input wire:model="contact.formFields.{{ $index }}" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                <input wire:model="contact.formFields.{{ $index }}"
+                                       class="{{ $inputClass }}" @disabled(!$isEditing)>
                                 @if($isEditing)
-                                    <button type="button" wire:click="removeContactField({{ $index }})" class="h-9 rounded-md border border-red-200 px-2 text-xs font-medium text-red-600 hover:bg-red-50">Remove</button>
+                                    <button type="button" wire:click="removeContactField({{ $index }})"
+                                            class="h-9 rounded-md border border-red-200 px-2 text-xs font-medium text-red-600 hover:bg-red-50">
+                                        Remove
+                                    </button>
                                 @endif
                             </div>
-                            @error("contact.formFields.$index") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            @error("contact.formFields.$index") <p
+                                class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         @endforeach
                     </div>
                 </div>

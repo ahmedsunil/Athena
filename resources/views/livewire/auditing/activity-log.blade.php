@@ -49,6 +49,7 @@
                         <th class="px-4 py-3 text-left font-semibold text-zinc-500">Subject</th>
                         <th class="px-4 py-3 text-left font-semibold text-zinc-500">Changes</th>
                         <th class="px-4 py-3 text-right font-semibold text-zinc-500">When</th>
+                        <th class="px-4 py-3 text-right font-semibold text-zinc-500">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-zinc-100">
@@ -117,6 +118,18 @@
                             {{-- Timestamp --}}
                             <td class="px-4 py-3 text-right text-zinc-400 whitespace-nowrap">
                                 {{ $log->created_at->format('M j, Y g:i A') }}
+                            </td>
+
+                            {{-- Action --}}
+                            <td class="px-4 py-3 text-right">
+                                <a href="{{ route('app.activity.show', $log->id) }}"
+                                   class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950">
+                                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12s-3.75 6.75-9.75 6.75S2.25 12 2.25 12z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    View
+                                </a>
                             </td>
                         </tr>
                     @endforeach

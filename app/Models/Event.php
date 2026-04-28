@@ -15,4 +15,13 @@ class Event extends Model
         'contact' => 'array',
         'is_featured' => 'boolean',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Event $event): void {
+            if (blank($event->slug) && filled($event->title)) {
+                $event->slug = str($event->title)->slug()->toString();
+            }
+        });
+    }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('public_id')->unique();
             $table->string('status');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->date('date_start');
             $table->date('date_end');
             $table->string('location');

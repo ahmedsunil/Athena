@@ -1,17 +1,17 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement('ALTER TABLE home_pages MODIFY payload LONGTEXT NOT NULL');
+        // The home_pages table now creates payload as longText from the start.
+        // Keep this migration as a no-op so existing migration histories stay valid.
     }
 
     public function down(): void
     {
-        DB::statement('ALTER TABLE home_pages MODIFY payload JSON NOT NULL');
+        //
     }
 };
