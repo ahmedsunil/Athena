@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\PublicConfigController;
 use App\Http\Controllers\API\SchoolProfileController;
 use Illuminate\Http\Request;
@@ -13,4 +14,5 @@ Route::get('/config', [PublicConfigController::class, 'show']);
 
 Route::middleware('public.api')->group(function () {
     Route::get('/school-profile', [SchoolProfileController::class, 'show']);
+    Route::get('/home', [HomeController::class, 'show']);
 });
