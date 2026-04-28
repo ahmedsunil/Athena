@@ -7,7 +7,9 @@
     <title>{{ isset($title) ? $title . ' — ' . config('app.name') : config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -54,10 +56,12 @@
              x-transition:leave-end="opacity-0 translate-x-4"
              :class="toast.type === 'error' ? 'bg-red-600' : 'bg-zinc-950'"
              class="flex min-w-[220px] items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-lg pointer-events-auto">
-            <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
+                 stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
             </svg>
-            <svg x-show="toast.type === 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <svg x-show="toast.type === 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
+                 stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
             <span x-text="toast.message" class="flex-1"></span>
@@ -69,6 +73,9 @@
         </div>
     </template>
 </div>
-
+<footer
+    class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-2 text-xs text-zinc-500 shadow-sm">
+    <a href="https://github.com/ahmedsunil">Developed by Ahmed Sunil</a>
+</footer>
 </body>
 </html>
