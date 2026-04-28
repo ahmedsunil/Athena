@@ -1,226 +1,378 @@
-<div class="mx-auto max-w-5xl space-y-4"
+@php
+    $inputClass = 'h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
+    $textareaClass = 'w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
+    $labelClass = 'mb-1.5 block text-xs font-medium text-zinc-700';
+    $errorClass = 'mt-1 text-xs text-red-600';
+@endphp
+
+<div class="mx-auto max-w-6xl space-y-4"
      x-data="{ tab: new URLSearchParams(window.location.search).get('tab') || 'slides' }"
-     x-init="$watch('tab', t => { const u = new URL(window.location); u.searchParams.set('tab', t); window.history.replaceState({}, '', u); })">
+     x-init="$watch('tab', value => { const url = new URL(window.location); url.searchParams.set('tab', value); window.history.replaceState({}, '', url); })">
 
-    <div>
-        <h1 class="text-base font-semibold text-zinc-950">Home</h1>
-        <p class="text-xs text-zinc-500">Manage all content shown on the public home page.</p>
-    </div>
+    <div class="flex flex-wrap items-start justify-between gap-3">
+        <div>
+            <h1 class="text-base font-semibold text-zinc-950">Home</h1>
+            <p class="text-xs text-zinc-500">View and manage the public home API content.</p>
+        </div>
 
-    {{-- Tab bar --}}
-    <div class="flex gap-1 rounded-xl border border-zinc-200 bg-zinc-100 p-1">
-        @foreach([
-            ['key' => 'slides',        'label' => 'Slides'],
-            ['key' => 'stats',         'label' => 'Stats'],
-            ['key' => 'principal',     'label' => 'Principal'],
-            ['key' => 'events',        'label' => 'Featured Events'],
-            ['key' => 'links',         'label' => 'Quick Links'],
-            ['key' => 'testimonials',  'label' => 'Testimonials'],
-        ] as $t)
-            <button type="button"
-                    @click="tab = '{{ $t['key'] }}'"
-                    :class="tab === '{{ $t['key'] }}' ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950'"
-                    class="flex-1 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors">
-                {{ $t['label'] }}
-            </button>
-        @endforeach
-    </div>
-
-    {{-- Slides tab --}}
-    <div x-show="tab === 'slides'" x-cloak>
-        <div class="mb-3 flex items-center justify-between">
-            <p class="text-xs text-zinc-500">Hero carousel slides.</p>
-            <a href="{{ route('cms.slides.create') }}"
-               class="inline-flex h-8 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white hover:bg-zinc-800">
-                Add Slide
-            </a>
-        </div>
-        <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
-            @forelse($slides as $slide)
-                <div class="flex items-center gap-4 border-b border-zinc-100 p-4 last:border-0">
-                    @if($slide->image_path)
-                        <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($slide->image_path) }}"
-                             class="h-14 w-24 shrink-0 rounded-lg border border-zinc-200 object-cover" alt="">
-                    @else
-                        <div class="h-14 w-24 shrink-0 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 text-xs">No image</div>
-                    @endif
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-zinc-950 truncate">{{ $slide->title }}</p>
-                        <p class="text-xs text-zinc-500 truncate">{{ $slide->subtitle }}</p>
-                        <p class="text-xs text-zinc-400">Order: {{ $slide->sort_order }} · {{ $slide->cta_label }}</p>
-                    </div>
-                    <div class="flex shrink-0 items-center gap-2">
-                        <a href="{{ route('cms.slides.edit', $slide->id) }}"
-                           class="inline-flex h-8 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 hover:bg-zinc-50">Edit</a>
-                        <button wire:click="deleteSlide({{ $slide->id }})" wire:confirm="Delete this slide?"
-                                class="inline-flex h-8 items-center rounded-md border border-red-200 bg-white px-3 text-xs font-medium text-red-600 hover:bg-red-50">Delete</button>
-                    </div>
-                </div>
-            @empty
-                <p class="p-6 text-center text-sm text-zinc-400">No slides yet.</p>
-            @endforelse
-        </div>
-    </div>
-
-    {{-- Stats tab --}}
-    <div x-show="tab === 'stats'" x-cloak>
-        <div class="mb-3 flex items-center justify-between">
-            <p class="text-xs text-zinc-500">Bold highlight numbers.</p>
-            <a href="{{ route('cms.stats.create') }}"
-               class="inline-flex h-8 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white hover:bg-zinc-800">
-                Add Stat
-            </a>
-        </div>
-        <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
-            @forelse($stats as $stat)
-                <div class="flex items-center gap-4 border-b border-zinc-100 p-4 last:border-0">
-                    <div class="flex-1 min-w-0">
-                        <p class="text-lg font-bold text-zinc-950">{{ $stat->value }}</p>
-                        <p class="text-xs text-zinc-500">{{ $stat->label }}</p>
-                        <p class="text-xs text-zinc-400">Order: {{ $stat->sort_order }}</p>
-                    </div>
-                    <div class="flex shrink-0 items-center gap-2">
-                        <a href="{{ route('cms.stats.edit', $stat->id) }}"
-                           class="inline-flex h-8 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 hover:bg-zinc-50">Edit</a>
-                        <button wire:click="deleteStat({{ $stat->id }})" wire:confirm="Delete this stat?"
-                                class="inline-flex h-8 items-center rounded-md border border-red-200 bg-white px-3 text-xs font-medium text-red-600 hover:bg-red-50">Delete</button>
-                    </div>
-                </div>
-            @empty
-                <p class="p-6 text-center text-sm text-zinc-400">No stats yet.</p>
-            @endforelse
-        </div>
-    </div>
-
-    {{-- Principal tab --}}
-    <div x-show="tab === 'principal'" x-cloak>
-        <div class="mb-3 flex items-center justify-between">
-            <p class="text-xs text-zinc-500">Welcome message and profile.</p>
-            <a href="{{ route('cms.principal.edit') }}"
-               class="inline-flex h-8 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white hover:bg-zinc-800">
-                Edit Principal
-            </a>
-        </div>
-        <div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-5">
-            @if($principal)
-                <div class="flex items-start gap-4">
-                    @if($principal->photo_path)
-                        <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($principal->photo_path) }}"
-                             class="h-16 w-16 shrink-0 rounded-full border border-zinc-200 object-cover" alt="">
-                    @else
-                        <div class="h-16 w-16 shrink-0 rounded-full bg-zinc-100"></div>
-                    @endif
-                    <div class="min-w-0">
-                        <p class="text-sm font-semibold text-zinc-950">{{ $principal->name }}</p>
-                        <p class="text-xs text-zinc-500">{{ $principal->title }}</p>
-                        <p class="mt-2 text-xs text-zinc-600 line-clamp-3">{{ $principal->message }}</p>
-                    </div>
-                </div>
+        <div class="flex items-center gap-2">
+            @if($isEditing)
+                <button type="button"
+                        wire:click="cancelEdit"
+                        class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 shadow-sm hover:bg-zinc-50">
+                    Cancel
+                </button>
+                <button type="button"
+                        wire:click="save"
+                        wire:loading.attr="disabled"
+                        wire:loading.class="cursor-not-allowed opacity-60"
+                        class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 text-xs font-semibold text-white shadow-sm hover:bg-zinc-800 disabled:opacity-60">
+                    Save Home
+                </button>
             @else
-                <p class="text-center text-sm text-zinc-400">No principal set yet.</p>
+                <button type="button"
+                        wire:click="enableEdit"
+                        class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 text-xs font-semibold text-white shadow-sm hover:bg-zinc-800">
+                    Enable Edit
+                </button>
             @endif
         </div>
     </div>
 
-    {{-- Featured Events tab --}}
-    <div x-show="tab === 'events'" x-cloak>
-        <div class="mb-3 flex items-center justify-between">
-            <p class="text-xs text-zinc-500">Upcoming events shown in the home strip.</p>
-            <a href="{{ route('cms.featured-events.create') }}"
-               class="inline-flex h-8 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white hover:bg-zinc-800">
-                Add Event
-            </a>
-        </div>
-        <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
-            @forelse($events as $event)
-                <div class="flex items-start gap-4 border-b border-zinc-100 p-4 last:border-0">
-                    <div class="shrink-0 w-12 text-center">
-                        <p class="text-sm font-bold text-zinc-950">{{ $event->date->format('d') }}</p>
-                        <p class="text-xs text-zinc-400">{{ $event->date->format('M Y') }}</p>
+    <div class="flex gap-1 overflow-x-auto rounded-xl border border-zinc-200 bg-zinc-100 p-1">
+        @foreach([
+            ['key' => 'slides', 'label' => 'Slides'],
+            ['key' => 'stats', 'label' => 'Stats'],
+            ['key' => 'principal', 'label' => 'Principal'],
+            ['key' => 'events', 'label' => 'Featured Events'],
+            ['key' => 'links', 'label' => 'Quick Links'],
+            ['key' => 'testimonials', 'label' => 'Testimonials'],
+            ['key' => 'contact', 'label' => 'Contact'],
+        ] as $item)
+            <button type="button"
+                    @click="tab = '{{ $item['key'] }}'"
+                    :class="tab === '{{ $item['key'] }}' ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950'"
+                    class="shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors">
+                {{ $item['label'] }}
+            </button>
+        @endforeach
+    </div>
+
+    <form wire:submit="save" class="space-y-4">
+        <section x-show="tab === 'slides'" x-cloak class="space-y-3">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-medium text-zinc-500">Hero carousel slides</p>
+                @if($isEditing)
+                    <button type="button" wire:click="addSlide" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Slide</button>
+                @endif
+            </div>
+
+            @forelse($slides as $index => $slide)
+                <div wire:key="slide-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                    <div class="mb-3 flex items-center justify-between gap-3">
+                        <p class="text-sm font-semibold text-zinc-950">Slide {{ $index + 1 }}</p>
+                        @if($isEditing)
+                            <button type="button" wire:click="removeSlide({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                        @endif
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-zinc-950">{{ $event->title }}</p>
-                        <p class="text-xs text-zinc-500 truncate">{{ $event->description }}</p>
-                        <p class="text-xs text-zinc-400">{{ $event->href }} · Order: {{ $event->sort_order }}</p>
-                    </div>
-                    <div class="flex shrink-0 items-center gap-2">
-                        <a href="{{ route('cms.featured-events.edit', $event->id) }}"
-                           class="inline-flex h-8 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 hover:bg-zinc-50">Edit</a>
-                        <button wire:click="deleteFeaturedEvent({{ $event->id }})" wire:confirm="Delete this event?"
-                                class="inline-flex h-8 items-center rounded-md border border-red-200 bg-white px-3 text-xs font-medium text-red-600 hover:bg-red-50">Delete</button>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <label class="{{ $labelClass }}">Image URL</label>
+                            <input wire:model="slides.{{ $index }}.imageUrl" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("slides.$index.imageUrl") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label class="{{ $labelClass }}">Title</label>
+                            <input wire:model="slides.{{ $index }}.title" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("slides.$index.title") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label class="{{ $labelClass }}">CTA Label</label>
+                            <input wire:model="slides.{{ $index }}.ctaLabel" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("slides.$index.ctaLabel") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="{{ $labelClass }}">Subtitle</label>
+                            <textarea wire:model="slides.{{ $index }}.subtitle" rows="3" class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
+                            @error("slides.$index.subtitle") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="{{ $labelClass }}">CTA Href</label>
+                            <input wire:model="slides.{{ $index }}.ctaHref" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("slides.$index.ctaHref") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
                     </div>
                 </div>
             @empty
-                <p class="p-6 text-center text-sm text-zinc-400">No featured events yet.</p>
+                <p class="rounded-xl border border-zinc-200 bg-white p-6 text-center text-sm text-zinc-400">No slides configured.</p>
             @endforelse
-        </div>
-    </div>
+        </section>
 
-    {{-- Quick Links tab --}}
-    <div x-show="tab === 'links'" x-cloak>
-        <div class="mb-3 flex items-center justify-between">
-            <p class="text-xs text-zinc-500">Icon grid navigation buttons.</p>
-            <a href="{{ route('cms.quick-links.create') }}"
-               class="inline-flex h-8 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white hover:bg-zinc-800">
-                Add Link
-            </a>
-        </div>
-        <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
-            @forelse($quickLinks as $link)
-                <div class="flex items-center gap-4 border-b border-zinc-100 p-4 last:border-0">
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-zinc-950">{{ $link->label }}</p>
-                        <p class="text-xs text-zinc-500">{{ $link->href }}</p>
-                        <p class="text-xs text-zinc-400">Icon: {{ $link->icon }} · Order: {{ $link->sort_order }}</p>
+        <section x-show="tab === 'stats'" x-cloak class="space-y-3">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-medium text-zinc-500">Highlight statistics</p>
+                @if($isEditing)
+                    <button type="button" wire:click="addStat" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Stat</button>
+                @endif
+            </div>
+
+            <div class="grid gap-3 md:grid-cols-2">
+                @foreach($stats as $index => $stat)
+                    <div wire:key="stat-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                        <div class="mb-3 flex items-center justify-between">
+                            <p class="text-sm font-semibold text-zinc-950">Stat {{ $index + 1 }}</p>
+                            @if($isEditing)
+                                <button type="button" wire:click="removeStat({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                            @endif
+                        </div>
+                        <div class="grid gap-3">
+                            <div>
+                                <label class="{{ $labelClass }}">Value</label>
+                                <input wire:model="stats.{{ $index }}.value" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("stats.$index.value") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="{{ $labelClass }}">Label</label>
+                                <input wire:model="stats.{{ $index }}.label" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("stats.$index.label") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex shrink-0 items-center gap-2">
-                        <a href="{{ route('cms.quick-links.edit', $link->id) }}"
-                           class="inline-flex h-8 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 hover:bg-zinc-50">Edit</a>
-                        <button wire:click="deleteQuickLink({{ $link->id }})" wire:confirm="Delete this link?"
-                                class="inline-flex h-8 items-center rounded-md border border-red-200 bg-white px-3 text-xs font-medium text-red-600 hover:bg-red-50">Delete</button>
+                @endforeach
+            </div>
+        </section>
+
+        <section x-show="tab === 'principal'" x-cloak class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                    <label class="{{ $labelClass }}">Name</label>
+                    <input wire:model="principal.name" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                    @error('principal.name') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="{{ $labelClass }}">Title</label>
+                    <input wire:model="principal.title" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                    @error('principal.title') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="{{ $labelClass }}">Photo URL</label>
+                    <input wire:model="principal.photoUrl" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                    @error('principal.photoUrl') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="{{ $labelClass }}">Message</label>
+                    <textarea wire:model="principal.message" rows="7" class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
+                    @error('principal.message') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+            </div>
+        </section>
+
+        <section x-show="tab === 'events'" x-cloak class="space-y-3">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-medium text-zinc-500">Choose Event records to show on the home page.</p>
+            </div>
+
+            <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
+                @forelse($events as $event)
+                    <label wire:key="event-option-{{ $event->public_id }}"
+                           class="flex items-start gap-3 border-b border-zinc-100 p-4 last:border-0 {{ $isEditing ? 'cursor-pointer hover:bg-zinc-50' : '' }}">
+                        <input type="checkbox"
+                               wire:model="featuredEventIds"
+                               value="{{ $event->public_id }}"
+                               class="mt-1 h-4 w-4 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950"
+                               @disabled(!$isEditing)>
+                        <div class="min-w-0 flex-1">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <p class="text-sm font-semibold text-zinc-950">{{ $event->title }}</p>
+                                <span class="rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500">{{ $event->status }}</span>
+                            </div>
+                            <p class="mt-1 text-xs text-zinc-500">
+                                {{ $event->date_start?->format('Y-m-d') }}
+                                @if($event->date_end && ! $event->date_end->equalTo($event->date_start))
+                                    to {{ $event->date_end->format('Y-m-d') }}
+                                @endif
+                                · {{ $event->location }}
+                            </p>
+                            <p class="mt-1 line-clamp-2 text-xs text-zinc-600">{{ $event->short_description }}</p>
+                        </div>
+                    </label>
+                @empty
+                    <p class="p-6 text-center text-sm text-zinc-400">No events available.</p>
+                @endforelse
+            </div>
+
+            @if($events->hasPages())
+                <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
+                    <p class="text-xs text-zinc-500">
+                        Showing {{ $events->firstItem() }}-{{ $events->lastItem() }} of {{ $events->total() }}
+                    </p>
+
+                    <div class="flex items-center gap-1">
+                        <button type="button"
+                                wire:click="previousPage('eventsPage')"
+                                @disabled($events->onFirstPage())
+                                class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-zinc-200 bg-white text-zinc-500 shadow-sm transition-colors hover:bg-zinc-50 hover:text-zinc-950 disabled:pointer-events-none disabled:opacity-50">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+
+                        @foreach($events->getUrlRange(1, $events->lastPage()) as $page => $url)
+                            <button type="button"
+                                    wire:click="gotoPage({{ $page }}, 'eventsPage')"
+                                    class="inline-flex h-8 min-w-8 items-center justify-center rounded-md border px-2 text-xs font-medium shadow-sm transition-colors {{ $events->currentPage() === $page ? 'border-zinc-950 bg-zinc-950 text-white' : 'border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-950' }}">
+                                {{ $page }}
+                            </button>
+                        @endforeach
+
+                        <button type="button"
+                                wire:click="nextPage('eventsPage')"
+                                @disabled(! $events->hasMorePages())
+                                class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-zinc-200 bg-white text-zinc-500 shadow-sm transition-colors hover:bg-zinc-50 hover:text-zinc-950 disabled:pointer-events-none disabled:opacity-50">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
-            @empty
-                <p class="p-6 text-center text-sm text-zinc-400">No quick links yet.</p>
-            @endforelse
-        </div>
-    </div>
+            @endif
 
-    {{-- Testimonials tab --}}
-    <div x-show="tab === 'testimonials'" x-cloak>
-        <div class="mb-3 flex items-center justify-between">
-            <p class="text-xs text-zinc-500">Community quotes.</p>
-            <a href="{{ route('cms.testimonials.create') }}"
-               class="inline-flex h-8 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white hover:bg-zinc-800">
-                Add Testimonial
-            </a>
-        </div>
-        <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
-            @forelse($testimonials as $t)
-                <div class="flex items-start gap-4 border-b border-zinc-100 p-4 last:border-0">
-                    @if($t->photo_path)
-                        <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($t->photo_path) }}"
-                             class="h-10 w-10 shrink-0 rounded-full border border-zinc-200 object-cover" alt="">
-                    @else
-                        <div class="h-10 w-10 shrink-0 rounded-full bg-zinc-100"></div>
-                    @endif
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-zinc-950">{{ $t->author }}</p>
-                        <p class="text-xs text-zinc-500">{{ $t->role }}</p>
-                        <p class="mt-1 text-xs text-zinc-600 line-clamp-2">{{ $t->quote }}</p>
-                        <p class="text-xs text-zinc-400">Order: {{ $t->sort_order }}</p>
-                    </div>
-                    <div class="flex shrink-0 items-center gap-2">
-                        <a href="{{ route('cms.testimonials.edit', $t->id) }}"
-                           class="inline-flex h-8 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 hover:bg-zinc-50">Edit</a>
-                        <button wire:click="deleteTestimonial({{ $t->id }})" wire:confirm="Delete this testimonial?"
-                                class="inline-flex h-8 items-center rounded-md border border-red-200 bg-white px-3 text-xs font-medium text-red-600 hover:bg-red-50">Delete</button>
+            @error('featuredEventIds') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+            @error('featuredEventIds.*') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+
+            @if(count($featuredEventIds) > 0)
+                <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                    <p class="mb-3 text-xs font-medium text-zinc-500">Featured display order</p>
+                    <div class="space-y-2">
+                        @foreach($featuredEventIds as $index => $publicId)
+                            @php $selectedEvent = $selectedEvents->get($publicId); @endphp
+                            <div class="flex items-center justify-between rounded-lg bg-zinc-50 px-3 py-2">
+                                <span class="text-xs font-medium text-zinc-700">{{ $index + 1 }}. {{ $selectedEvent?->title ?? $publicId }}</span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            @empty
-                <p class="p-6 text-center text-sm text-zinc-400">No testimonials yet.</p>
-            @endforelse
-        </div>
-    </div>
+            @endif
+        </section>
 
+        <section x-show="tab === 'links'" x-cloak class="space-y-3">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-medium text-zinc-500">Quick links</p>
+                @if($isEditing)
+                    <button type="button" wire:click="addQuickLink" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Link</button>
+                @endif
+            </div>
+
+            <div class="grid gap-3 md:grid-cols-2">
+                @foreach($quickLinks as $index => $link)
+                    <div wire:key="link-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                        <div class="mb-3 flex items-center justify-between">
+                            <p class="text-sm font-semibold text-zinc-950">Link {{ $index + 1 }}</p>
+                            @if($isEditing)
+                                <button type="button" wire:click="removeQuickLink({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                            @endif
+                        </div>
+                        <div class="grid gap-3">
+                            <div>
+                                <label class="{{ $labelClass }}">Label</label>
+                                <input wire:model="quickLinks.{{ $index }}.label" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("quickLinks.$index.label") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="{{ $labelClass }}">Href</label>
+                                <input wire:model="quickLinks.{{ $index }}.href" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("quickLinks.$index.href") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="{{ $labelClass }}">Icon</label>
+                                <input wire:model="quickLinks.{{ $index }}.icon" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @error("quickLinks.$index.icon") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
+        <section x-show="tab === 'testimonials'" x-cloak class="space-y-3">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-medium text-zinc-500">Testimonials</p>
+                @if($isEditing)
+                    <button type="button" wire:click="addTestimonial" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Testimonial</button>
+                @endif
+            </div>
+
+            @foreach($testimonials as $index => $testimonial)
+                <div wire:key="testimonial-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                    <div class="mb-3 flex items-center justify-between">
+                        <p class="text-sm font-semibold text-zinc-950">Testimonial {{ $index + 1 }}</p>
+                        @if($isEditing)
+                            <button type="button" wire:click="removeTestimonial({{ $index }})" class="text-xs font-medium text-red-600 hover:text-red-700">Remove</button>
+                        @endif
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <label class="{{ $labelClass }}">Photo URL</label>
+                            <input wire:model="testimonials.{{ $index }}.photoUrl" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("testimonials.$index.photoUrl") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label class="{{ $labelClass }}">Author</label>
+                            <input wire:model="testimonials.{{ $index }}.author" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("testimonials.$index.author") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label class="{{ $labelClass }}">Role</label>
+                            <input wire:model="testimonials.{{ $index }}.role" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                            @error("testimonials.$index.role") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="{{ $labelClass }}">Quote</label>
+                            <textarea wire:model="testimonials.{{ $index }}.quote" rows="4" class="{{ $textareaClass }}" @disabled(!$isEditing)></textarea>
+                            @error("testimonials.$index.quote") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </section>
+
+        <section x-show="tab === 'contact'" x-cloak class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                    <label class="{{ $labelClass }}">Address</label>
+                    <input wire:model="contact.address" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                    @error('contact.address') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="{{ $labelClass }}">Phone</label>
+                    <input wire:model="contact.phone" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                    @error('contact.phone') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="{{ $labelClass }}">Email</label>
+                    <input type="email" wire:model="contact.email" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                    @error('contact.email') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                </div>
+                <div class="sm:col-span-2">
+                    <div class="mb-2 flex items-center justify-between">
+                        <label class="{{ $labelClass }} mb-0">Form Fields</label>
+                        @if($isEditing)
+                            <button type="button" wire:click="addContactField" class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Field</button>
+                        @endif
+                    </div>
+                    <div class="grid gap-2 sm:grid-cols-3">
+                        @foreach(($contact['formFields'] ?? []) as $index => $field)
+                            <div wire:key="contact-field-{{ $index }}" class="flex gap-2">
+                                <input wire:model="contact.formFields.{{ $index }}" class="{{ $inputClass }}" @disabled(!$isEditing)>
+                                @if($isEditing)
+                                    <button type="button" wire:click="removeContactField({{ $index }})" class="h-9 rounded-md border border-red-200 px-2 text-xs font-medium text-red-600 hover:bg-red-50">Remove</button>
+                                @endif
+                            </div>
+                            @error("contact.formFields.$index") <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
 </div>
