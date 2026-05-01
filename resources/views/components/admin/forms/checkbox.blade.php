@@ -27,9 +27,9 @@
         {{ $attributes->class(['mt-0.5 h-4 w-4 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950']) }}
     >
     <div>
-        <p class="text-sm font-medium text-zinc-700">{{ $label }}</p>
+        <p class="text-sm font-medium leading-5 text-zinc-700">{{ $label }}</p>
         @if($description)
-            <p class="text-xs text-zinc-400">{{ $description }}</p>
+            <p class="admin-muted">{{ $description }}</p>
         @endif
     </div>
 </label>

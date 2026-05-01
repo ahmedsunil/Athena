@@ -49,11 +49,11 @@
     @endif
 
     <div class="min-w-0 flex-1">
-        <p class="text-xs font-medium text-zinc-500">{{ $label }}</p>
-        <p class="text-lg font-bold text-zinc-900">{{ $value }}</p>
+        <p class="admin-stat-label">{{ $label }}</p>
+        <p class="admin-stat-value">{{ $value }}</p>
     </div>
 
     @if($secondary)
-        <span class="shrink-0 text-xs text-zinc-400">{{ $secondary }}</span>
+        <span class="admin-muted shrink-0">{{ $secondary }}</span>
     @endif
 </div>

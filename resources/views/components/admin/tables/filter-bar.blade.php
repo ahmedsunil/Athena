@@ -14,12 +14,12 @@
         >
             {{-- Extra filters go in the slot --}}
             <input type="date" wire:model.live="dateFrom"
-                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
             <span class="text-zinc-400 text-sm">–</span>
             <input type="date" wire:model.live="dateTo"
-                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
             <select wire:model.live="status"
-                    class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 <option value="">All statuses</option>
                 <option value="pending">Pending</option>
                 <option value="paid">Paid</option>
@@ -51,7 +51,7 @@
             <input type="text"
                    wire:model.live.debounce.300ms="{{ $searchModel }}"
                    placeholder="{{ $placeholder }}"
-                   class="w-full rounded-lg border border-zinc-200 bg-white py-1.5 pl-8 pr-3 text-sm text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                   class="admin-form-control w-full rounded-lg border border-zinc-200 bg-white py-1.5 pl-8 pr-3 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
         </div>
 
         {{-- Extra filters (dates, selects) --}}
@@ -60,7 +60,7 @@
         {{-- Clear button --}}
         @if($hasFilters)
             <button wire:click="{{ $clearAction }}"
-                    class="flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:bg-zinc-200">
+                    class="admin-link-label flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-zinc-500 transition-colors hover:bg-zinc-200">
                 <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>

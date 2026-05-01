@@ -18,7 +18,7 @@
     {{-- Brand --}}
     <div class="mb-8 text-center">
         <a href="/" class="inline-block">
-            <span class="text-2xl font-bold tracking-tight text-zinc-950">{{ config('app.name') }}</span>
+            <span class="text-xl font-semibold text-zinc-950">{{ config('app.name') }}</span>
         </a>
     </div>
 

@@ -18,7 +18,7 @@
 
     {{-- App name / logo --}}
     <div class="flex items-center gap-2.5">
-        <span class="text-[15px] font-bold tracking-tight text-zinc-900">{{ config('app.name') }}</span>
+        <span class="text-sm font-semibold leading-5 text-zinc-950">{{ config('app.name') }}</span>
     </div>
 
     {{-- Hamburger / close toggle --}}
@@ -57,7 +57,7 @@
 
         {{-- Drawer header --}}
         <div class="flex h-12 items-center justify-between border-b border-zinc-100 px-4">
-            <span class="text-[15px] font-bold tracking-tight text-zinc-900">{{ config('app.name') }}</span>
+            <span class="text-sm font-semibold leading-5 text-zinc-950">{{ config('app.name') }}</span>
             <button @click="open = false"
                     class="rounded-lg p-1 text-zinc-400 transition-colors hover:text-zinc-600">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

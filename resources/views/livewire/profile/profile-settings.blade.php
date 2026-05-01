@@ -1,7 +1,7 @@
 <div class="space-y-6 px-4 py-5 sm:px-6" x-data="{ tab: 'profile' }">
     <div>
-        <h1 class="text-base font-semibold text-zinc-950">Settings</h1>
-        <p class="mt-1 text-xs text-zinc-500">Manage your profile and account settings.</p>
+        <h1 class="admin-page-title">Settings</h1>
+        <p class="mt-1 admin-caption">Manage your profile and account settings.</p>
     </div>
 
     <div class="grid gap-6 lg:grid-cols-[220px_1fr]">

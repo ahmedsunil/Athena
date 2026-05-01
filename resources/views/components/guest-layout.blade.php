@@ -20,7 +20,7 @@
     {{-- Brand --}}
     <div class="mb-8 text-center">
         <a href="/" class="inline-block">
-            <span class="text-2xl font-bold tracking-tight text-zinc-900">{{ config('app.name') }}</span>
+            <span class="text-xl font-semibold text-zinc-950">{{ config('app.name') }}</span>
         </a>
     </div>
 
@@ -55,7 +55,7 @@
              x-transition:leave-start="opacity-100 translate-x-0"
              x-transition:leave-end="opacity-0 translate-x-4"
              :class="toast.type === 'error' ? 'bg-red-600' : 'bg-zinc-950'"
-             class="flex min-w-[220px] items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-lg pointer-events-auto">
+             class="flex min-w-[220px] items-center gap-2.5 rounded-lg px-4 py-2.5 admin-button-label text-white shadow-lg pointer-events-auto">
             <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
                  stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
@@ -74,7 +74,7 @@
     </template>
 </div>
 <footer
-    class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-2 text-xs text-zinc-500 shadow-sm">
+    class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-2 admin-caption shadow-sm">
     <a href="https://github.com/ahmedsunil">Developed by Ahmed Sunil</a>
 </footer>
 </body>

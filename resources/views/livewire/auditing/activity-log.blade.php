@@ -1,17 +1,17 @@
 <div>
     {{-- Header --}}
     <div class="mb-6">
-        <h1 class="text-base font-semibold text-zinc-950">Activity Log</h1>
-        <p class="mt-1 text-xs text-zinc-500">Track all system events and changes.</p>
+        <h1 class="admin-page-title">Activity Log</h1>
+        <p class="mt-1 admin-caption">Track all system events and changes.</p>
     </div>
 
     {{-- Filters --}}
     <div class="mb-4 flex flex-wrap gap-3">
         <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search user or event…"
-               class="w-48 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+               class="w-48 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
 
         <select wire:model.live="eventFilter"
-                class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
             <option value="">All events</option>
             <option value="created">Created</option>
             <option value="updated">Updated</option>
@@ -19,13 +19,13 @@
         </select>
 
         <input type="date" wire:model.live="dateFrom"
-               class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+               class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
         <input type="date" wire:model.live="dateTo"
-               class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+               class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
 
         @if($search || $eventFilter || $dateFrom || $dateTo)
             <button wire:click="$set('search','');$set('eventFilter','');$set('dateFrom','');$set('dateTo','')"
-                    class="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:bg-zinc-50">
+                    class="rounded-lg border border-zinc-300 px-3 py-1.5 admin-link-label text-zinc-600 hover:bg-zinc-50">
                 Clear
             </button>
         @endif
@@ -38,18 +38,18 @@
                 <svg class="mx-auto mb-3 h-8 w-8 text-zinc-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/>
                 </svg>
-                <p class="text-sm text-zinc-400">No activity found.</p>
+                <p class="admin-body-muted">No activity found.</p>
             </div>
         @else
             <table class="w-full text-xs">
                 <thead>
                     <tr class="border-b border-zinc-200 bg-zinc-50">
-                        <th class="px-4 py-3 text-left font-semibold text-zinc-500">User</th>
-                        <th class="px-4 py-3 text-left font-semibold text-zinc-500">Event</th>
-                        <th class="px-4 py-3 text-left font-semibold text-zinc-500">Subject</th>
-                        <th class="px-4 py-3 text-left font-semibold text-zinc-500">Changes</th>
-                        <th class="px-4 py-3 text-right font-semibold text-zinc-500">When</th>
-                        <th class="px-4 py-3 text-right font-semibold text-zinc-500">Action</th>
+                        <th class="px-4 py-3 text-left admin-label-muted">User</th>
+                        <th class="px-4 py-3 text-left admin-label-muted">Event</th>
+                        <th class="px-4 py-3 text-left admin-label-muted">Subject</th>
+                        <th class="px-4 py-3 text-left admin-label-muted">Changes</th>
+                        <th class="px-4 py-3 text-right admin-label-muted">When</th>
+                        <th class="px-4 py-3 text-right admin-label-muted">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-zinc-100">
@@ -123,7 +123,7 @@
                             {{-- Action --}}
                             <td class="px-4 py-3 text-right">
                                 <a href="{{ route('app.activity.show', $log->id) }}"
-                                   class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950">
+                                   class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 admin-label transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950">
                                     <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12s-3.75 6.75-9.75 6.75S2.25 12 2.25 12z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>

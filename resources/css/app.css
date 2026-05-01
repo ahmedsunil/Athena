@@ -8,11 +8,105 @@
 @theme {
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;
 }
 
 [x-cloak] { display: none !important; }
 
 @layer components {
+    .admin-page-title {
+        @apply text-base font-semibold leading-6 text-zinc-950;
+    }
+
+    .admin-page-subtitle {
+        @apply text-xs font-normal leading-5 text-zinc-500;
+    }
+
+    .admin-section-title {
+        @apply text-sm font-semibold leading-5 text-zinc-950;
+    }
+
+    .admin-section-subtitle {
+        @apply text-xs font-normal leading-5 text-zinc-500;
+    }
+
+    .admin-body {
+        @apply text-sm font-normal leading-6 text-zinc-600;
+    }
+
+    .admin-body-muted {
+        @apply text-sm font-normal leading-6 text-zinc-500;
+    }
+
+    .admin-caption {
+        @apply text-xs font-normal leading-5 text-zinc-500;
+    }
+
+    .admin-muted {
+        @apply text-xs font-normal leading-5 text-zinc-400;
+    }
+
+    .admin-label {
+        @apply text-xs font-medium leading-5 text-zinc-700;
+    }
+
+    .admin-label-muted {
+        @apply text-xs font-medium leading-5 text-zinc-500;
+    }
+
+    .admin-eyebrow {
+        @apply text-[10px] font-medium uppercase leading-4 tracking-wide text-zinc-400;
+    }
+
+    .admin-stat-label {
+        @apply text-xs font-medium leading-5 text-zinc-500;
+    }
+
+    .admin-stat-value {
+        @apply text-lg font-semibold leading-7 text-zinc-950;
+    }
+
+    .admin-table {
+        @apply w-full text-sm leading-5;
+    }
+
+    .admin-table-head-row {
+        @apply border-b border-zinc-100 text-left text-xs font-medium leading-5 text-zinc-500;
+    }
+
+    .admin-table-heading {
+        @apply px-4 py-3 text-xs font-medium leading-5 text-zinc-500;
+    }
+
+    .admin-table-cell {
+        @apply px-4 py-3 text-sm font-normal leading-5 text-zinc-600;
+    }
+
+    .admin-table-cell-primary {
+        @apply px-4 py-3 text-sm font-medium leading-5 text-zinc-950;
+    }
+
+    .admin-form-control {
+        @apply text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400;
+    }
+
+    .admin-form-control-sm {
+        @apply text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400;
+    }
+
+    .admin-button-label {
+        @apply text-sm font-semibold leading-5;
+    }
+
+    .admin-link-label {
+        @apply text-xs font-medium leading-5;
+    }
+
+    .admin-badge {
+        @apply text-xs font-medium leading-5;
+    }
+
     .admin-table-body > tr {
         border-bottom: 1px solid var(--color-zinc-100);
         transition: background-color 150ms ease, color 150ms ease;

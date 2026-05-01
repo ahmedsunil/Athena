@@ -39,6 +39,6 @@
     </button>
 
     @if($label)
-        <span class="text-sm font-medium text-zinc-700">{{ $label }}</span>
+        <span class="text-sm font-medium leading-5 text-zinc-700">{{ $label }}</span>
     @endif
 </div>

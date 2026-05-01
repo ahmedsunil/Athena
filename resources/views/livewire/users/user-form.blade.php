@@ -9,10 +9,10 @@
             </svg>
         </a>
         <div>
-            <h1 class="text-base font-semibold text-zinc-950">
+            <h1 class="admin-page-title">
                 {{ $userId ? 'Edit user' : 'New user' }}
             </h1>
-            <p class="text-xs text-zinc-500">Manage access, credentials, role, and account status.</p>
+            <p class="admin-caption">Manage access, credentials, role, and account status.</p>
         </div>
     </div>
 
@@ -21,23 +21,23 @@
         {{-- Basic info --}}
         <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
             <div class="mb-4">
-                <h3 class="text-sm font-semibold text-zinc-950">Basic information</h3>
-                <p class="text-xs text-zinc-500">Primary identity details for this user.</p>
+                <h3 class="admin-section-title">Basic information</h3>
+                <p class="admin-caption">Primary identity details for this user.</p>
             </div>
 
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Full name</label>
+                    <label class="mb-1.5 block admin-label">Full name</label>
                     <input type="text" wire:model="name" autocomplete="name"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('name') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('name') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Email address</label>
+                    <label class="mb-1.5 block admin-label">Email address</label>
                     <input type="email" wire:model="email" autocomplete="email"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('email') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('email') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>
@@ -45,29 +45,29 @@
         {{-- Password --}}
         <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
             <div class="mb-4">
-                <h3 class="text-sm font-semibold text-zinc-950">Password</h3>
+                <h3 class="admin-section-title">Password</h3>
                 @if($userId)
-                    <p class="text-xs text-zinc-500">Leave blank to keep the current password.</p>
+                    <p class="admin-caption">Leave blank to keep the current password.</p>
                 @else
-                    <p class="text-xs text-zinc-500">Must be at least 8 characters.</p>
+                    <p class="admin-caption">Must be at least 8 characters.</p>
                 @endif
             </div>
 
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">
+                    <label class="mb-1.5 block admin-label">
                         {{ $userId ? 'New password' : 'Password' }}
                     </label>
                     <input type="password" wire:model="password" autocomplete="new-password"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('password') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('password') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Confirm password</label>
+                    <label class="mb-1.5 block admin-label">Confirm password</label>
                     <input type="password" wire:model="password_confirmation" autocomplete="new-password"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('password_confirmation') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('password_confirmation') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>
@@ -75,13 +75,13 @@
         {{-- Role & Status --}}
         <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
             <div class="mb-4">
-                <h3 class="text-sm font-semibold text-zinc-950">Role & status</h3>
-                <p class="text-xs text-zinc-500">Assign permissions and enable or disable access.</p>
+                <h3 class="admin-section-title">Role & status</h3>
+                <p class="admin-caption">Assign permissions and enable or disable access.</p>
             </div>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Roles</label>
+                    <label class="mb-1.5 block admin-label">Roles</label>
                     <div x-data="{
                             open: false,
                             search: '',
@@ -108,10 +108,10 @@
                                 @click="openDropdown()"
                                 class="flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-md border border-zinc-200 bg-white px-2.5 py-1.5 text-left shadow-sm transition-colors hover:border-zinc-300 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                             <template x-if="selected.length === 0">
-                                <span class="text-sm text-zinc-400">Select roles…</span>
+                                <span class="admin-body-muted">Select roles…</span>
                             </template>
                             <template x-for="role in selected" :key="role">
-                                <span class="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700">
+                                <span class="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 admin-label">
                                     <span x-text="cap(role)"></span>
                                     <button type="button"
                                             @click.stop="toggle(role)"
@@ -149,7 +149,7 @@
                                            x-model="search"
                                            type="text"
                                            placeholder="Search roles…"
-                                           class="w-full bg-transparent text-xs text-zinc-700 placeholder-zinc-400 focus:outline-none">
+                                           class="w-full bg-transparent text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:outline-none">
                                 </div>
                             </div>
 
@@ -158,7 +158,7 @@
                                 <template x-for="role in filtered" :key="role">
                                     <button type="button"
                                             @click="toggle(role)"
-                                            class="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-50">
+                                            class="flex w-full items-center gap-2.5 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 hover:bg-zinc-50">
                                         <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors"
                                               :class="has(role) ? 'bg-zinc-950 border-zinc-950' : 'border-zinc-300'">
                                             <svg x-show="has(role)" class="h-2.5 w-2.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@
                                     </button>
                                 </template>
                                 <template x-if="filtered.length === 0">
-                                    <p class="px-3 py-2 text-xs text-zinc-400">No roles match.</p>
+                                    <p class="px-3 py-2 admin-muted">No roles match.</p>
                                 </template>
                             </div>
 
@@ -177,31 +177,31 @@
                             <div x-show="selected.length > 0" class="border-t border-zinc-100 px-3 py-2">
                                 <button type="button"
                                         @click="$wire.selectedRoles = []"
-                                        class="text-xs text-zinc-400 hover:text-zinc-700">
+                                        class="admin-muted hover:text-zinc-700">
                                     Clear selection
                                 </button>
                             </div>
                         </div>
                     </div>
-                    @error('selectedRoles') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
-                    @error('selectedRoles.*') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                    @error('selectedRoles') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('selectedRoles.*') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Status</label>
+                    <label class="mb-1.5 block admin-label">Status</label>
                     <div class="grid h-9 grid-cols-2 rounded-md border border-zinc-200 bg-zinc-100 p-0.5 shadow-sm">
                         <button type="button"
                                 wire:click="$set('isActive', true)"
-                                class="rounded-[5px] text-xs font-medium transition-colors {{ $isActive ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">
+                                class="rounded-[5px] admin-link-label transition-colors {{ $isActive ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">
                             Active
                         </button>
                         <button type="button"
                                 wire:click="$set('isActive', false)"
-                                class="rounded-[5px] text-xs font-medium transition-colors {{ ! $isActive ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">
+                                class="rounded-[5px] admin-link-label transition-colors {{ ! $isActive ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">
                             Inactive
                         </button>
                     </div>
-                    @error('isActive') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                    @error('isActive') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>
@@ -209,11 +209,11 @@
         {{-- Actions --}}
         <div class="flex items-center justify-end gap-2">
             <a href="{{ route('users.index') }}"
-               class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 shadow-sm transition-colors hover:bg-zinc-50 hover:text-zinc-950">
+               class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm transition-colors hover:bg-zinc-50 hover:text-zinc-950">
                 Cancel
             </a>
             <button type="submit"
-                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2">
+                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-3 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2">
                 {{ $userId ? 'Update user' : 'Create user' }}
             </button>
         </div>

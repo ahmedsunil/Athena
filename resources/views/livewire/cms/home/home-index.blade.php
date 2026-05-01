@@ -1,8 +1,8 @@
 @php
-    $inputClass = 'h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
-    $textareaClass = 'w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
-    $labelClass = 'mb-1.5 block text-xs font-medium text-zinc-700';
-    $errorClass = 'mt-1 text-xs text-red-600';
+    $inputClass = 'admin-form-control h-9 w-full rounded-md border border-zinc-200 bg-white px-3 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
+    $textareaClass = 'admin-form-control w-full rounded-md border border-zinc-200 bg-white px-3 py-2 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
+    $labelClass = 'admin-label mb-1.5 block';
+    $errorClass = 'mt-1 text-xs font-normal leading-5 text-red-600';
 @endphp
 
 <div class="mx-auto space-y-4"
@@ -14,8 +14,8 @@
 
     <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
-            <h1 class="text-base font-semibold text-zinc-950">Home</h1>
-            <p class="text-xs text-zinc-500">View and manage the public home API content.</p>
+            <h1 class="admin-page-title">Home</h1>
+            <p class="admin-caption">View and manage the public home API content.</p>
         </div>
 
         <div class="flex items-center gap-2">
@@ -23,7 +23,7 @@
                     x-show="editing"
                     x-cloak
                     wire:click="cancelEdit"
-                    class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 shadow-sm hover:bg-zinc-50">
+                    class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm hover:bg-zinc-50">
                 Cancel
             </button>
             <button type="button"
@@ -32,14 +32,14 @@
                     wire:click="save"
                     wire:loading.attr="disabled"
                     wire:loading.class="cursor-not-allowed opacity-60"
-                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 text-xs font-semibold text-white shadow-sm hover:bg-zinc-800 disabled:opacity-60">
+                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 admin-button-label text-white shadow-sm hover:bg-zinc-800 disabled:opacity-60">
                 Save Home
             </button>
             <button type="button"
                     x-show="!editing"
                     x-cloak
                     @click="editing = true"
-                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 text-xs font-semibold text-white shadow-sm hover:bg-zinc-800">
+                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 admin-button-label text-white shadow-sm hover:bg-zinc-800">
                 Enable Edit
             </button>
         </div>
@@ -58,7 +58,7 @@
             <button type="button"
                     @click="tab = '{{ $item['key'] }}'"
                     :class="tab === '{{ $item['key'] }}' ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950'"
-                    class="shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors">
+                    class="shrink-0 rounded-lg px-3 py-1.5 admin-link-label transition-colors">
                 {{ $item['label'] }}
             </button>
         @endforeach
@@ -67,18 +67,18 @@
     <form wire:submit="save" class="space-y-4">
         <section x-show="tab === 'slides'" x-cloak class="space-y-3">
             <div class="flex items-center justify-between">
-                <p class="text-xs font-medium text-zinc-500">Hero carousel slides</p>
+                <p class="admin-label-muted">Hero carousel slides</p>
                 <button type="button" wire:click="addSlide" x-show="editing" x-cloak
-                        class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Slide
+                        class="admin-link-label text-zinc-950 hover:text-zinc-600">Add Slide
                 </button>
             </div>
 
             @forelse($slides as $index => $slide)
                 <div wire:key="slide-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
                     <div class="mb-3 flex items-center justify-between gap-3">
-                        <p class="text-sm font-semibold text-zinc-950">Slide {{ $index + 1 }}</p>
+                        <p class="admin-section-title">Slide {{ $index + 1 }}</p>
                         <button type="button" wire:click="removeSlide({{ $index }})" x-show="editing" x-cloak
-                                class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                                class="admin-link-label text-red-600 hover:text-red-700">Remove
                         </button>
                     </div>
                     <div class="grid gap-4 sm:grid-cols-2">
@@ -115,16 +115,16 @@
                     </div>
                 </div>
             @empty
-                <p class="rounded-xl border border-zinc-200 bg-white p-6 text-center text-sm text-zinc-400">No slides
+                <p class="rounded-xl border border-zinc-200 bg-white p-6 text-center admin-body-muted">No slides
                     configured.</p>
             @endforelse
         </section>
 
         <section x-show="tab === 'stats'" x-cloak class="space-y-3">
             <div class="flex items-center justify-between">
-                <p class="text-xs font-medium text-zinc-500">Highlight statistics</p>
+                <p class="admin-label-muted">Highlight statistics</p>
                 <button type="button" wire:click="addStat" x-show="editing" x-cloak
-                        class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Stat
+                        class="admin-link-label text-zinc-950 hover:text-zinc-600">Add Stat
                 </button>
             </div>
 
@@ -132,9 +132,9 @@
                 @foreach($stats as $index => $stat)
                     <div wire:key="stat-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
                         <div class="mb-3 flex items-center justify-between">
-                            <p class="text-sm font-semibold text-zinc-950">Stat {{ $index + 1 }}</p>
+                            <p class="admin-section-title">Stat {{ $index + 1 }}</p>
                             <button type="button" wire:click="removeStat({{ $index }})" x-show="editing" x-cloak
-                                    class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                                    class="admin-link-label text-red-600 hover:text-red-700">Remove
                             </button>
                         </div>
                         <div class="grid gap-3">
@@ -184,7 +184,7 @@
 
         <section x-show="tab === 'events'" x-cloak class="space-y-3">
             <div class="flex items-center justify-between">
-                <p class="text-xs font-medium text-zinc-500">Choose Event records to show on the home page.</p>
+                <p class="admin-label-muted">Choose Event records to show on the home page.</p>
             </div>
 
             <div class="rounded-xl border border-zinc-200 bg-white shadow-sm">
@@ -199,29 +199,29 @@
                             :disabled="!editing">
                         <div class="min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
-                                <p class="text-sm font-semibold text-zinc-950">{{ $event->title }}</p>
+                                <p class="admin-section-title">{{ $event->title }}</p>
                                 <span
                                     class="rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500">{{ $event->status }}</span>
                             </div>
-                            <p class="mt-1 text-xs text-zinc-500">
+                            <p class="mt-1 admin-caption">
                                 {{ $event->date_start?->format('Y-m-d') }}
                                 @if($event->date_end && ! $event->date_end->equalTo($event->date_start))
                                     to {{ $event->date_end->format('Y-m-d') }}
                                 @endif
                                 · {{ $event->location }}
                             </p>
-                            <p class="mt-1 line-clamp-2 text-xs text-zinc-600">{{ $event->short_description }}</p>
+                            <p class="mt-1 line-clamp-2 text-xs font-normal leading-5 text-zinc-600">{{ $event->short_description }}</p>
                         </div>
                     </label>
                 @empty
-                    <p class="p-6 text-center text-sm text-zinc-400">No events available.</p>
+                    <p class="p-6 text-center admin-body-muted">No events available.</p>
                 @endforelse
             </div>
 
             @if($events->hasPages())
                 <div
                     class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
-                    <p class="text-xs text-zinc-500">
+                    <p class="admin-caption">
                         Showing {{ $events->firstItem() }}-{{ $events->lastItem() }} of {{ $events->total() }}
                     </p>
 
@@ -238,7 +238,7 @@
                         @foreach($events->getUrlRange(1, $events->lastPage()) as $page => $url)
                             <button type="button"
                                     wire:click="gotoPage({{ $page }}, 'eventsPage')"
-                                    class="inline-flex h-8 min-w-8 items-center justify-center rounded-md border px-2 text-xs font-medium shadow-sm transition-colors {{ $events->currentPage() === $page ? 'border-zinc-950 bg-zinc-950 text-white' : 'border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-950' }}">
+                                    class="inline-flex h-8 min-w-8 items-center justify-center rounded-md border px-2 admin-link-label shadow-sm transition-colors {{ $events->currentPage() === $page ? 'border-zinc-950 bg-zinc-950 text-white' : 'border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-950' }}">
                                 {{ $page }}
                             </button>
                         @endforeach
@@ -260,13 +260,13 @@
 
             @if(count($featuredEventIds) > 0)
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-                    <p class="mb-3 text-xs font-medium text-zinc-500">Featured display order</p>
+                    <p class="mb-3 admin-label-muted">Featured display order</p>
                     <div class="space-y-2">
                         @foreach($featuredEventIds as $index => $publicId)
                             @php $selectedEvent = $selectedEvents->get($publicId); @endphp
                             <div class="flex items-center justify-between rounded-lg bg-zinc-50 px-3 py-2">
                                 <span
-                                    class="text-xs font-medium text-zinc-700">{{ $index + 1 }}. {{ $selectedEvent?->title ?? $publicId }}</span>
+                                    class="admin-label">{{ $index + 1 }}. {{ $selectedEvent?->title ?? $publicId }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -276,9 +276,9 @@
 
         <section x-show="tab === 'links'" x-cloak class="space-y-3">
             <div class="flex items-center justify-between">
-                <p class="text-xs font-medium text-zinc-500">Quick links</p>
+                <p class="admin-label-muted">Quick links</p>
                 <button type="button" wire:click="addQuickLink" x-show="editing" x-cloak
-                        class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Link
+                        class="admin-link-label text-zinc-950 hover:text-zinc-600">Add Link
                 </button>
             </div>
 
@@ -286,9 +286,9 @@
                 @foreach($quickLinks as $index => $link)
                     <div wire:key="link-{{ $index }}" class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
                         <div class="mb-3 flex items-center justify-between">
-                            <p class="text-sm font-semibold text-zinc-950">Link {{ $index + 1 }}</p>
+                            <p class="admin-section-title">Link {{ $index + 1 }}</p>
                             <button type="button" wire:click="removeQuickLink({{ $index }})" x-show="editing" x-cloak
-                                    class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                                    class="admin-link-label text-red-600 hover:text-red-700">Remove
                             </button>
                         </div>
                         <div class="grid gap-3">
@@ -321,9 +321,9 @@
 
         <section x-show="tab === 'testimonials'" x-cloak class="space-y-3">
             <div class="flex items-center justify-between">
-                <p class="text-xs font-medium text-zinc-500">Testimonials</p>
+                <p class="admin-label-muted">Testimonials</p>
                 <button type="button" wire:click="addTestimonial" x-show="editing" x-cloak
-                        class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Testimonial
+                        class="admin-link-label text-zinc-950 hover:text-zinc-600">Add Testimonial
                 </button>
             </div>
 
@@ -331,9 +331,9 @@
                 <div wire:key="testimonial-{{ $index }}"
                      class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
                     <div class="mb-3 flex items-center justify-between">
-                        <p class="text-sm font-semibold text-zinc-950">Testimonial {{ $index + 1 }}</p>
+                        <p class="admin-section-title">Testimonial {{ $index + 1 }}</p>
                         <button type="button" wire:click="removeTestimonial({{ $index }})" x-show="editing" x-cloak
-                                class="text-xs font-medium text-red-600 hover:text-red-700">Remove
+                                class="admin-link-label text-red-600 hover:text-red-700">Remove
                         </button>
                     </div>
                     <div class="grid gap-4 sm:grid-cols-2">
@@ -390,7 +390,7 @@
                     <div class="mb-2 flex items-center justify-between">
                         <label class="{{ $labelClass }} mb-0">Form Fields</label>
                         <button type="button" wire:click="addContactField" x-show="editing" x-cloak
-                                class="text-xs font-semibold text-zinc-950 hover:text-zinc-600">Add Field
+                                class="admin-link-label text-zinc-950 hover:text-zinc-600">Add Field
                         </button>
                     </div>
                     <div class="grid gap-2 sm:grid-cols-3">
@@ -399,7 +399,7 @@
                                 <input wire:model="contact.formFields.{{ $index }}"
                                        class="{{ $inputClass }}" :disabled="!editing">
                                 <button type="button" wire:click="removeContactField({{ $index }})" x-show="editing" x-cloak
-                                        class="h-9 rounded-md border border-red-200 px-2 text-xs font-medium text-red-600 hover:bg-red-50">
+                                        class="h-9 rounded-md border border-red-200 px-2 admin-link-label text-red-600 hover:bg-red-50">
                                     Remove
                                 </button>
                             </div>

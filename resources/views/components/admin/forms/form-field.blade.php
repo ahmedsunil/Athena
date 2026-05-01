@@ -8,17 +8,17 @@
 @props(['label', 'field', 'required' => false, 'hint' => null])
 
 <div>
-    <label class="mb-1.5 block text-xs font-medium text-zinc-700">
+    <label class="admin-label mb-1.5 block">
         {{ $label }}{{ $required ? ' *' : '' }}
     </label>
 
     {{ $slot }}
 
     @error($field)
-    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p>
     @enderror
 
     @if($hint && !$errors->has($field))
-        <p class="mt-1 text-xs text-zinc-400">{{ $hint }}</p>
+        <p class="admin-muted mt-1">{{ $hint }}</p>
     @endif
 </div>

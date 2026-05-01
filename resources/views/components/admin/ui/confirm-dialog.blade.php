@@ -30,8 +30,8 @@
                 </svg>
             </div>
 
-            <h3 class="mb-1 text-base font-semibold text-zinc-900">Confirm Delete</h3>
-            <p class="mb-5 text-sm text-zinc-500">
+            <h3 class="admin-section-title mb-1">Confirm Delete</h3>
+            <p class="admin-body-muted mb-5">
                 @if($deleteTargetLabel)
                     Are you sure you want to delete
                     <span class="font-medium text-zinc-700">{{ $deleteTargetLabel }}</span>?
@@ -43,11 +43,11 @@
 
             <div class="flex gap-2">
                 <button wire:click="executeDelete"
-                        class="flex-1 rounded-lg bg-red-600 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700 active:scale-95">
+                        class="flex-1 rounded-lg bg-red-600 py-2 admin-button-label text-white transition-colors hover:bg-red-700 active:scale-95">
                     Delete
                 </button>
                 <button wire:click="cancelDelete"
-                        class="flex-1 rounded-lg border border-zinc-200 py-2 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50">
+                        class="flex-1 rounded-lg border border-zinc-200 py-2 text-sm font-medium leading-5 text-zinc-600 transition-colors hover:bg-zinc-50">
                     Cancel
                 </button>
             </div>

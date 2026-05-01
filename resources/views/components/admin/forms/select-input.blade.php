@@ -21,6 +21,6 @@
     All attributes (wire:model, id, etc.) are forwarded automatically.
 --}}
 
-<select {{ $attributes->class(['w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950']) }}>
+<select {{ $attributes->class(['admin-form-control w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950']) }}>
     {{ $slot }}
 </select>

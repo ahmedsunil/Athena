@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="h-full bg-zinc-50 font-sans text-zinc-950 antialiased">
+<body class="h-full bg-zinc-50 font-sans text-sm font-normal leading-5 text-zinc-950 antialiased">
 
 <div class="flex h-full overflow-hidden">
 
@@ -28,7 +28,7 @@
         x-data="{ open: false }"
         @keydown.escape.window="open = false">
 
-        <span class="text-[15px] font-bold tracking-tight text-zinc-950">{{ config('app.name') }}</span>
+        <span class="admin-section-title">{{ config('app.name') }}</span>
 
         <button @click="open = !open" class="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100">
             <svg x-show="!open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2"
@@ -75,7 +75,7 @@
             $breadcrumb = current_breadcrumb();
         @endphp
         <div class="hidden h-12 shrink-0 items-center border-b border-zinc-200 bg-white px-6 md:flex">
-            <span class="text-xs font-medium text-zinc-500">{{ $breadcrumb }}</span>
+            <span class="admin-label-muted">{{ $breadcrumb }}</span>
         </div>
 
         <main class="flex-1 overflow-y-auto p-6">
@@ -116,7 +116,7 @@
              x-transition:leave-start="opacity-100 translate-x-0"
              x-transition:leave-end="opacity-0 translate-x-4"
              :class="toast.type === 'error' ? 'bg-red-600' : 'bg-zinc-950'"
-             class="flex min-w-[200px] items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-lg pointer-events-auto">
+             class="flex min-w-[200px] items-center gap-2.5 rounded-lg px-4 py-2.5 admin-button-label text-white shadow-lg pointer-events-auto">
             <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
                  stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>

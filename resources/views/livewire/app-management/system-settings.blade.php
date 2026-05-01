@@ -1,7 +1,7 @@
 <div class="mx-auto space-y-4">
     <div>
-        <h1 class="text-base font-semibold text-zinc-950">System Settings</h1>
-        <p class="text-xs text-zinc-500">Configure application-wide features and integrations.</p>
+        <h1 class="admin-page-title">System Settings</h1>
+        <p class="admin-caption">Configure application-wide features and integrations.</p>
     </div>
 
     {{-- Google Login --}}
@@ -26,8 +26,8 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm font-semibold text-zinc-950">Google Login</p>
-                    <p class="text-xs text-zinc-500">Allow users to sign in with their Google account.</p>
+                    <p class="admin-section-title">Google Login</p>
+                    <p class="admin-caption">Allow users to sign in with their Google account.</p>
                 </div>
             </div>
 
@@ -49,32 +49,32 @@
 
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Client ID</label>
+                    <label class="mb-1.5 block admin-label">Client ID</label>
                     <input type="text" wire:model="googleClientId"
                            placeholder="xxxxxxxxxxxx.apps.googleusercontent.com"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('googleClientId') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('googleClientId') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label class="mb-1.5 block text-xs font-medium text-zinc-700">Client Secret</label>
+                    <label class="mb-1.5 block admin-label">Client Secret</label>
                     <input type="password" wire:model="googleClientSecret"
                            placeholder="GOCSPX-…"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('googleClientSecret') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('googleClientSecret') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
                 </div>
             </div>
 
             <div>
-                <label class="mb-1.5 block text-xs font-medium text-zinc-700">Redirect URI</label>
+                <label class="mb-1.5 block admin-label">Redirect URI</label>
                 <input type="url" wire:model="googleRedirectUri"
-                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                <p class="mt-1 text-xs text-zinc-400">Copy this URL into your Google Cloud Console → Authorised redirect
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                <p class="mt-1 admin-muted">Copy this URL into your Google Cloud Console → Authorised redirect
                     URIs.</p>
-                @error('googleRedirectUri') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                @error('googleRedirectUri') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
             </div>
 
-            <div class="rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 space-y-1 border border-zinc-200">
+            <div class="rounded-lg bg-zinc-50 p-3 admin-caption space-y-1 border border-zinc-200">
                 <p class="font-medium text-zinc-700">Setup guide</p>
                 <ol class="list-decimal list-inside space-y-0.5">
                     <li>Go to <span class="font-medium text-zinc-950">console.cloud.google.com</span> → APIs &amp;
@@ -91,7 +91,7 @@
             <button wire:click="saveGoogle"
                     wire:loading.attr="disabled" wire:loading.class="opacity-60 cursor-not-allowed"
                     wire:target="saveGoogle"
-                    class="inline-flex h-8 items-center gap-2 rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800 disabled:opacity-60">
+                    class="inline-flex h-8 items-center gap-2 rounded-md bg-zinc-950 px-3 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800 disabled:opacity-60">
                 <svg wire:loading wire:target="saveGoogle" class="h-3 w-3 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>

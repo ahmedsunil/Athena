@@ -117,11 +117,11 @@
              class="overflow-hidden rounded-lg border border-white/10 bg-black shadow-sm">
             <div class="flex items-center gap-2.5 px-2.5 py-2.5">
                 <div
-                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 text-xs font-semibold text-white">
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 admin-button-label text-white">
                     {{ $initial }}
                 </div>
                 <div class="min-w-0">
-                    <p class="truncate text-sm font-semibold text-white">{{ $user?->name ?? 'Admin' }}</p>
+                    <p class="truncate admin-button-label text-white">{{ $user?->name ?? 'Admin' }}</p>
                     <p class="truncate text-xs text-white/60">{{ $user?->email ?? 'admin@example.com' }}</p>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                 @click="accountOpen = !accountOpen">
             <div class="flex min-w-0 items-center gap-2.5">
                 <div
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 text-xs font-semibold text-white">
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 admin-button-label text-white">
                     {{ $initial }}
                 </div>
                 <span class="truncate text-[13px] font-semibold text-white">{{ $user?->name ?? 'Admin' }}</span>

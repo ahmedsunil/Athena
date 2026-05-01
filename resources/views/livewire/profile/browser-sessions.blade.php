@@ -1,7 +1,7 @@
 <div class="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
     <div class="mb-6">
-        <h3 class="text-sm font-semibold text-zinc-950">Browser Sessions</h3>
-        <p class="mt-1 text-xs text-zinc-500">Manage and log out of your active sessions on other browsers and devices.</p>
+        <h3 class="admin-section-title">Browser Sessions</h3>
+        <p class="mt-1 admin-caption">Manage and log out of your active sessions on other browsers and devices.</p>
     </div>
 
     @if(count($sessions))
@@ -20,10 +20,10 @@
                         @endif
                     </div>
                     <div class="flex-1 min-w-0">
-                        <p class="text-xs font-medium text-zinc-700">
+                        <p class="admin-label">
                             {{ $session->agent->platform ?? 'Unknown' }} — {{ $session->agent->browser ?? 'Unknown' }}
                         </p>
-                        <p class="text-xs text-zinc-400">
+                        <p class="admin-muted">
                             {{ $session->ipAddress }}
                             @if($session->isCurrentDevice)
                                 · <span class="text-zinc-950">This device</span>
@@ -39,26 +39,26 @@
 
     @if(! $confirmingLogout)
         <button wire:click="confirmLogoutOtherBrowserSessions"
-                class="rounded-lg bg-zinc-800 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-zinc-950">
+                class="rounded-lg bg-zinc-800 px-4 py-2 admin-button-label text-white shadow-sm hover:bg-zinc-950">
             Log out other sessions
         </button>
     @else
         <div class="space-y-3">
-            <p class="text-xs text-zinc-600">Enter your password to confirm you want to log out of all other sessions.</p>
+            <p class="text-xs font-normal leading-5 text-zinc-600">Enter your password to confirm you want to log out of all other sessions.</p>
             <div>
                 <input type="password" wire:model="password" placeholder="Password"
-                       class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                       class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 @if($error)
-                    <p class="mt-1 text-xs text-red-600">{{ $error }}</p>
+                    <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $error }}</p>
                 @endif
             </div>
             <div class="flex gap-2">
                 <button wire:click="logoutOtherBrowserSessions"
-                        class="rounded-lg bg-zinc-800 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-zinc-950">
+                        class="rounded-lg bg-zinc-800 px-4 py-2 admin-button-label text-white shadow-sm hover:bg-zinc-950">
                     Confirm
                 </button>
                 <button wire:click="$set('confirmingLogout', false)"
-                        class="rounded-lg border border-zinc-300 px-4 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50">
+                        class="rounded-lg border border-zinc-300 px-4 py-2 admin-label hover:bg-zinc-50">
                     Cancel
                 </button>
             </div>

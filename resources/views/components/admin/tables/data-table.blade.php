@@ -66,10 +66,10 @@
     {{-- Desktop table --}}
     @if(isset($head) || isset($body))
         <div class="hidden overflow-x-auto md:block">
-            <table class="w-full text-sm">
+            <table class="admin-table">
                 @if(isset($head))
                     <thead>
-                        <tr class="border-b border-zinc-100 text-left text-xs font-medium text-zinc-500">
+                        <tr class="admin-table-head-row">
                             {{ $head }}
                         </tr>
                     </thead>
