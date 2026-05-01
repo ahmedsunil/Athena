@@ -16,7 +16,7 @@
     <div class="flex flex-wrap items-center gap-2">
         <input type="text" wire:model.live.debounce.300ms="search"
                placeholder="Search name or email…"
-               class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 sm:w-64">
+               class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 sm:w-64">
 
         <select wire:model.live="roleFilter"
                 class="rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">

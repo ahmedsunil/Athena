@@ -30,14 +30,14 @@
                     <label class="mb-1.5 block admin-label">Full name</label>
                     <input type="text" wire:model="name" autocomplete="name"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('name') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
                     <label class="mb-1.5 block admin-label">Email address</label>
                     <input type="email" wire:model="email" autocomplete="email"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('email') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('email') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>
@@ -60,14 +60,14 @@
                     </label>
                     <input type="password" wire:model="password" autocomplete="new-password"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('password') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('password') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
                     <label class="mb-1.5 block admin-label">Confirm password</label>
                     <input type="password" wire:model="password_confirmation" autocomplete="new-password"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('password_confirmation') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('password_confirmation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>
@@ -183,8 +183,8 @@
                             </div>
                         </div>
                     </div>
-                    @error('selectedRoles') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
-                    @error('selectedRoles.*') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('selectedRoles') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('selectedRoles.*') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
@@ -201,7 +201,7 @@
                             Inactive
                         </button>
                     </div>
-                    @error('isActive') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('isActive') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
         </div>

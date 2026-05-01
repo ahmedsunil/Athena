@@ -53,7 +53,7 @@
                     <input type="text" wire:model="googleClientId"
                            placeholder="xxxxxxxxxxxx.apps.googleusercontent.com"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('googleClientId') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('googleClientId') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
@@ -61,7 +61,7 @@
                     <input type="password" wire:model="googleClientSecret"
                            placeholder="GOCSPX-…"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('googleClientSecret') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                    @error('googleClientSecret') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                        class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 <p class="mt-1 admin-muted">Copy this URL into your Google Cloud Console → Authorised redirect
                     URIs.</p>
-                @error('googleRedirectUri') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+                @error('googleRedirectUri') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             <div class="rounded-lg bg-zinc-50 p-3 admin-caption space-y-1 border border-zinc-200">

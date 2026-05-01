@@ -70,7 +70,7 @@
                        maxlength="6" placeholder="000000"
                        class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-center text-lg font-mono tracking-widest text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 @if($error)
-                    <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $error }}</p>
+                    <p class="mt-1 admin-form-error">{{ $error }}</p>
                 @endif
             </div>
             <div class="flex gap-2">

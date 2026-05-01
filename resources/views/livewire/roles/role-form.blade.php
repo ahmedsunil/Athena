@@ -16,7 +16,7 @@
             <label class="mb-1.5 block admin-label">Role name</label>
             <input type="text" wire:model="name" placeholder="e.g. editor"
                    class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-            @error('name') <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+            @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
         </div>
 
         {{-- Permissions grouped + searchable --}}
@@ -66,7 +66,7 @@
                 <template x-for="group in groupKeys()" :key="group">
                     <div class="rounded-lg border border-zinc-200 p-4">
                         <div class="mb-2.5 flex items-center justify-between gap-2">
-                            <p class="text-[11px] font-semibold uppercase tracking-widest text-zinc-400" x-text="group"></p>
+                            <p class="admin-eyebrow" x-text="group"></p>
                             <button type="button"
                                     @click="
                                         const groupPerms = filteredGroups[group];
@@ -110,7 +110,7 @@
                 </template>
             </div>
 
-            @error('selectedPermissions') <p class="mt-2 text-xs font-normal leading-5 text-red-600">{{ $message }}</p> @enderror
+            @error('selectedPermissions') <p class="mt-2 admin-form-error">{{ $message }}</p> @enderror
         </div>
 
         {{-- Actions --}}

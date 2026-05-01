@@ -107,6 +107,10 @@
         @apply text-xs font-medium leading-5;
     }
 
+    .admin-form-error {
+        @apply text-xs font-normal leading-5 text-red-600;
+    }
+
     .admin-table-body > tr {
         border-bottom: 1px solid var(--color-zinc-100);
         transition: background-color 150ms ease, color 150ms ease;

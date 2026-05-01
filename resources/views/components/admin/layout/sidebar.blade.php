@@ -41,7 +41,7 @@
 <nav class="flex-1 space-y-5 overflow-y-auto px-2 py-4">
     @foreach($navGroups as $group)
         <div>
-            <p class="mb-1 px-3 text-[10px] font-semibold uppercase tracking-widest text-zinc-400">
+            <p class="mb-1 px-3 admin-eyebrow">
                 {{ $group['label'] }}
             </p>
             <div class="space-y-0.5">

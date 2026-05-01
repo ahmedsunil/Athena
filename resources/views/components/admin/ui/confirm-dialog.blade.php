@@ -47,7 +47,7 @@
                     Delete
                 </button>
                 <button wire:click="cancelDelete"
-                        class="flex-1 rounded-lg border border-zinc-200 py-2 text-sm font-medium leading-5 text-zinc-600 transition-colors hover:bg-zinc-50">
+                        class="flex-1 rounded-lg border border-zinc-200 py-2 admin-button-label text-zinc-600 transition-colors hover:bg-zinc-50">
                     Cancel
                 </button>
             </div>

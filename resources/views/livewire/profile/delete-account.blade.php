@@ -14,9 +14,9 @@
             <p class="text-xs font-normal leading-5 text-zinc-600">Enter your password to confirm account deletion. This action is irreversible.</p>
             <div>
                 <input type="password" wire:model="password" placeholder="Password"
-                       class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:border-red-400 focus:outline-none focus:ring-1 focus:ring-red-400">
+                       class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 focus:border-red-400 focus:outline-none focus:ring-1 focus:ring-red-400">
                 @if($error)
-                    <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $error }}</p>
+                    <p class="mt-1 admin-form-error">{{ $error }}</p>
                 @endif
             </div>
             <div class="flex gap-2">

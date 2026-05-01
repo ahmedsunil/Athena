@@ -47,9 +47,9 @@
             <p class="text-xs font-normal leading-5 text-zinc-600">Enter your password to confirm you want to log out of all other sessions.</p>
             <div>
                 <input type="password" wire:model="password" placeholder="Password"
-                       class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                       class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 @if($error)
-                    <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $error }}</p>
+                    <p class="mt-1 admin-form-error">{{ $error }}</p>
                 @endif
             </div>
             <div class="flex gap-2">

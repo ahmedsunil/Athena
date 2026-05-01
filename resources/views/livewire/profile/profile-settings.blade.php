@@ -6,7 +6,7 @@
 
     <div class="grid gap-6 lg:grid-cols-[220px_1fr]">
         <aside class="space-y-1">
-            <p class="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-zinc-400">Profile Settings</p>
+            <p class="mb-2 px-3 admin-eyebrow">Profile Settings</p>
             <button type="button"
                     @click="tab = 'profile'"
                     :class="tab === 'profile' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950'"

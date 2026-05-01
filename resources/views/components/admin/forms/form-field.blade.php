@@ -15,7 +15,7 @@
     {{ $slot }}
 
     @error($field)
-    <p class="mt-1 text-xs font-normal leading-5 text-red-600">{{ $message }}</p>
+    <p class="mt-1 admin-form-error">{{ $message }}</p>
     @enderror
 
     @if($hint && !$errors->has($field))

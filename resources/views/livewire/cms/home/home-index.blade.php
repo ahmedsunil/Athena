@@ -2,7 +2,7 @@
     $inputClass = 'admin-form-control h-9 w-full rounded-md border border-zinc-200 bg-white px-3 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
     $textareaClass = 'admin-form-control w-full rounded-md border border-zinc-200 bg-white px-3 py-2 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 disabled:bg-zinc-50 disabled:text-zinc-500 disabled:shadow-none';
     $labelClass = 'admin-label mb-1.5 block';
-    $errorClass = 'mt-1 text-xs font-normal leading-5 text-red-600';
+    $errorClass = 'mt-1 admin-form-error';
 @endphp
 
 <div class="mx-auto space-y-4"
