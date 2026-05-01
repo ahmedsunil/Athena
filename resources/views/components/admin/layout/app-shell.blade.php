@@ -31,19 +31,12 @@
 <div class="flex h-full overflow-hidden">
 
     {{-- Desktop sidebar --}}
-    <aside class="hidden w-56 shrink-0 flex-col border-r border-zinc-200 bg-white md:flex">
+    <aside class="flex w-56 shrink-0 flex-col border-r border-zinc-200 bg-white">
         @include('admin-system.partials.sidebar')
     </aside>
 
-    {{-- Mobile topbar + drawer --}}
-    <x-admin.layout.topbar />
-
     {{-- Main content area --}}
-    <div class="flex flex-1 flex-col overflow-hidden pt-12 md:pt-0">
-
-        {{-- Desktop breadcrumb --}}
-        <x-admin.layout.breadcrumb />
-
+    <div class="flex flex-1 flex-col overflow-hidden">
         <main class="flex-1 overflow-y-auto">
             {{ $slot }}
         </main>

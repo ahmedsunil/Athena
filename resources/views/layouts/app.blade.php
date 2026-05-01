@@ -18,66 +18,12 @@
 <div class="flex h-full overflow-hidden">
 
     {{-- Desktop sidebar --}}
-    <aside class="fixed inset-y-0 left-0 z-30 hidden w-64 shrink-0 flex-col border-r border-black bg-black text-white md:flex">
+    <aside class="fixed inset-y-0 left-0 z-30 flex w-64 shrink-0 flex-col border-r border-black bg-black text-white">
         @include('layouts.partials.sidebar')
     </aside>
 
-    {{-- Mobile topbar + drawer --}}
-    <div
-        class="fixed inset-x-0 top-0 z-40 flex h-12 items-center justify-between border-b border-zinc-200 bg-white px-4 md:hidden"
-        x-data="{ open: false }"
-        @keydown.escape.window="open = false">
-
-        <span class="admin-section-title">{{ config('app.name') }}</span>
-
-        <button @click="open = !open" class="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100">
-            <svg x-show="!open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-            <svg x-show="open" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-        </button>
-
-        <div x-show="open"
-             x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-100"
-             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-             class="fixed inset-0 z-40 bg-zinc-950/20 backdrop-blur-sm"
-             @click="open = false"></div>
-
-        <div x-show="open"
-             x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-             x-transition:leave="transition ease-in duration-100"
-             x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-             class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-black bg-black text-white shadow-xl"
-             @click.stop>
-            <div class="flex h-12 items-center justify-between border-b border-white/10 px-4">
-                <span class="text-[15px] font-bold tracking-tight text-white">{{ config('app.name') }}</span>
-                <button @click="open = false"
-                        class="rounded-lg p-1 text-white/70 transition-colors hover:bg-white/10 hover:text-white">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-            @include('layouts.partials.sidebar')
-        </div>
-    </div>
-
     {{-- Main content --}}
-    <div class="flex w-full flex-1 flex-col overflow-hidden pt-12 md:pl-64 md:pt-0">
-        @php
-            $breadcrumb = current_breadcrumb();
-        @endphp
-        <div class="hidden h-12 shrink-0 items-center border-b border-zinc-200 bg-white px-6 md:flex">
-            <span class="admin-label-muted">{{ $breadcrumb }}</span>
-        </div>
-
+    <div class="flex w-full flex-1 flex-col overflow-hidden pl-64">
         <main class="flex-1 overflow-y-auto p-6">
             {{ $slot }}
         </main>
