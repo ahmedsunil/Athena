@@ -7,13 +7,13 @@
     Usage:
         @if($showModal)
             <x-admin.ui.modal title="New Customer" close-action="closeModal">
-                <p class="text-sm text-stone-500">Modal body content here.</p>
+                <p class="text-sm text-zinc-500">Modal body content here.</p>
 
                 <x-slot name="footer">
-                    <button wire:click="save" class="flex-1 rounded-lg bg-teal-600 py-2 text-sm font-semibold text-white hover:bg-teal-700">
+                    <button wire:click="save" class="flex-1 rounded-lg bg-zinc-900 py-2 text-sm font-semibold text-white hover:bg-zinc-800">
                         Save
                     </button>
-                    <button wire:click="closeModal" class="flex-1 rounded-lg border border-stone-200 py-2 text-sm font-medium text-stone-600 hover:bg-stone-50">
+                    <button wire:click="closeModal" class="flex-1 rounded-lg border border-zinc-200 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
                         Cancel
                     </button>
                 </x-slot>
@@ -27,11 +27,11 @@
 --}}
 @props(['title', 'closeAction' => 'closeModal'])
 
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/30 backdrop-blur-sm"
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/30 backdrop-blur-sm"
      wire:click.self="{{ $closeAction }}">
-    <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 shadow-xl">
+    <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl">
 
-        <h2 class="mb-4 text-base font-semibold text-stone-900">{{ $title }}</h2>
+        <h2 class="mb-4 text-base font-semibold text-zinc-900">{{ $title }}</h2>
 
         <div>{{ $slot }}</div>
 

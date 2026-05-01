@@ -8,5 +8,5 @@
 <textarea
     rows="{{ $rows }}"
     placeholder="{{ $placeholder }}"
-    {{ $attributes->class(['w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-700 placeholder-stone-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500']) }}
+    {{ $attributes->class(['w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950']) }}
 >{{ $slot }}</textarea>

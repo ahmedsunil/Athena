@@ -12,7 +12,7 @@
             icon-color="teal"
         >
             <x-slot name="icon">
-                <svg class="h-4 w-4 text-teal-600" ...>...</svg>
+                <svg class="h-4 w-4 text-zinc-600" ...>...</svg>
             </x-slot>
         </x-admin.ui.stat-card>
 
@@ -32,16 +32,16 @@
 
 @php
     $iconBgMap = [
-        'teal'   => 'bg-teal-50',
+        'teal'   => 'bg-zinc-100',
         'amber'  => 'bg-amber-50',
         'red'    => 'bg-red-50',
-        'stone'  => 'bg-stone-100',
-        'violet' => 'bg-violet-50',
+        'stone'  => 'bg-zinc-100',
+        'violet' => 'bg-zinc-100',
     ];
-    $iconBg = $iconBgMap[$iconColor] ?? 'bg-stone-100';
+    $iconBg = $iconBgMap[$iconColor] ?? 'bg-zinc-100';
 @endphp
 
-<div class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm">
+<div class="flex items-center gap-4 rounded-xl border border-zinc-200 bg-white px-5 py-4 shadow-sm">
     @if(isset($icon))
         <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg {{ $iconBg }}">
             {{ $icon }}
@@ -49,11 +49,11 @@
     @endif
 
     <div class="min-w-0 flex-1">
-        <p class="text-xs font-medium text-stone-500">{{ $label }}</p>
-        <p class="text-lg font-bold text-stone-900">{{ $value }}</p>
+        <p class="text-xs font-medium text-zinc-500">{{ $label }}</p>
+        <p class="text-lg font-bold text-zinc-900">{{ $value }}</p>
     </div>
 
     @if($secondary)
-        <span class="shrink-0 text-xs text-stone-400">{{ $secondary }}</span>
+        <span class="shrink-0 text-xs text-zinc-400">{{ $secondary }}</span>
     @endif
 </div>

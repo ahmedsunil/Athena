@@ -20,8 +20,8 @@
 --}}
 
 @if($showDeleteModal)
-    <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 backdrop-blur-sm">
-        <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 shadow-xl">
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40 backdrop-blur-sm">
+        <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl">
 
             {{-- Warning icon --}}
             <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-50">
@@ -30,11 +30,11 @@
                 </svg>
             </div>
 
-            <h3 class="mb-1 text-base font-semibold text-stone-900">Confirm Delete</h3>
-            <p class="mb-5 text-sm text-stone-500">
+            <h3 class="mb-1 text-base font-semibold text-zinc-900">Confirm Delete</h3>
+            <p class="mb-5 text-sm text-zinc-500">
                 @if($deleteTargetLabel)
                     Are you sure you want to delete
-                    <span class="font-medium text-stone-700">{{ $deleteTargetLabel }}</span>?
+                    <span class="font-medium text-zinc-700">{{ $deleteTargetLabel }}</span>?
                     This action cannot be undone.
                 @else
                     Are you sure you want to delete this item? This action cannot be undone.
@@ -47,7 +47,7 @@
                     Delete
                 </button>
                 <button wire:click="cancelDelete"
-                        class="flex-1 rounded-lg border border-stone-200 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-50">
+                        class="flex-1 rounded-lg border border-zinc-200 py-2 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50">
                     Cancel
                 </button>
             </div>

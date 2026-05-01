@@ -21,7 +21,7 @@
         {{-- Custom actions in slot --}}
         <x-admin.tables.row-actions>
             <a href="{{ route('orders.pdf', $item) }}" target="_blank"
-               class="text-xs font-medium text-teal-600 hover:text-teal-700">PDF</a>
+               class="text-xs font-medium text-zinc-700 hover:text-zinc-950">PDF</a>
             <button wire:click="confirmDelete({{ $item->id }}, 'Order #{{ $item->id }}')"
                     class="text-xs font-medium text-red-400 hover:text-red-600">Delete</button>
         </x-admin.tables.row-actions>
@@ -37,12 +37,12 @@
 
     @if($viewHref)
         <a href="{{ $viewHref }}"
-           class="text-xs font-medium text-teal-600 hover:text-teal-700">View</a>
+           class="text-xs font-medium text-zinc-700 hover:text-zinc-950">View</a>
     @endif
 
     @if($editHref)
         <a href="{{ $editHref }}"
-           class="text-xs font-medium text-stone-500 hover:text-stone-700">Edit</a>
+           class="text-xs font-medium text-zinc-500 hover:text-zinc-700">Edit</a>
     @endif
 
     @if($deleteAction)

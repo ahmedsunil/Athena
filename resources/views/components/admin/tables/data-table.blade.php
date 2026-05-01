@@ -19,9 +19,9 @@
             <x-slot name="body">
                 @foreach($items as $item)
                     <tr>
-                        <td class="px-5 py-3 font-medium text-stone-800">{{ $item->name }}</td>
-                        <td class="px-5 py-3 text-stone-500">{{ $item->created_at->format('d M Y') }}</td>
-                        <td class="px-5 py-3 font-mono font-medium text-stone-900">{{ $item->total }}</td>
+                        <td class="px-5 py-3 font-medium text-zinc-800">{{ $item->name }}</td>
+                        <td class="px-5 py-3 text-zinc-500">{{ $item->created_at->format('d M Y') }}</td>
+                        <td class="px-5 py-3 font-mono font-medium text-zinc-900">{{ $item->total }}</td>
                         <td class="px-5 py-3">
                             <x-admin.tables.row-actions :item="$item" />
                         </td>
@@ -34,7 +34,7 @@
                 @foreach($items as $item)
                     <li class="flex items-start gap-3 px-4 py-3">
                         <div class="min-w-0 flex-1">
-                            <p class="truncate text-sm font-semibold text-stone-800">{{ $item->name }}</p>
+                            <p class="truncate text-sm font-semibold text-zinc-800">{{ $item->name }}</p>
                         </div>
                     </li>
                 @endforeach

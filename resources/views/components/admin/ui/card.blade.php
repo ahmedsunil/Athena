@@ -25,9 +25,9 @@
 --}}
 @props(['title' => null, 'compact' => false])
 
-<div class="{{ $compact ? 'rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm' : 'rounded-xl border border-stone-200 bg-white p-5 shadow-sm' }}">
+<div class="{{ $compact ? 'rounded-xl border border-zinc-200 bg-white px-5 py-4 shadow-sm' : 'rounded-xl border border-zinc-200 bg-white p-5 shadow-sm' }}">
     @if($title)
-        <h2 class="mb-4 text-sm font-semibold text-stone-900">{{ $title }}</h2>
+        <h2 class="mb-4 text-sm font-semibold text-zinc-900">{{ $title }}</h2>
     @endif
     {{ $slot }}
 </div>

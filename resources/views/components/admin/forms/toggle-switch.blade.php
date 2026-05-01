@@ -29,7 +29,7 @@
         type="button"
         role="switch"
         :aria-checked="on"
-        :class="on ? 'bg-teal-500' : 'bg-stone-200'"
+        :class="on ? 'bg-zinc-900' : 'bg-zinc-200'"
         class="inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors duration-200 focus:outline-none">
         {{-- Knob --}}
         <span
@@ -39,6 +39,6 @@
     </button>
 
     @if($label)
-        <span class="text-sm font-medium text-stone-700">{{ $label }}</span>
+        <span class="text-sm font-medium text-zinc-700">{{ $label }}</span>
     @endif
 </div>

@@ -14,12 +14,12 @@
         >
             {{-- Extra filters go in the slot --}}
             <input type="date" wire:model.live="dateFrom"
-                   class="rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500">
-            <span class="text-stone-400 text-sm">–</span>
+                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+            <span class="text-zinc-400 text-sm">–</span>
             <input type="date" wire:model.live="dateTo"
-                   class="rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
             <select wire:model.live="status"
-                    class="rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-sm text-stone-700 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                    class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 <option value="">All statuses</option>
                 <option value="pending">Pending</option>
                 <option value="paid">Paid</option>
@@ -39,19 +39,19 @@
     'clearAction' => 'clearFilters',
 ])
 
-<div class="mb-4 rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5">
+<div class="mb-4 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-2.5">
     <div class="flex flex-wrap items-center gap-2">
 
         {{-- Search --}}
         <div class="relative min-w-[180px] flex-1">
-            <svg class="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-stone-400"
+            <svg class="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-400"
                  fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
             <input type="text"
                    wire:model.live.debounce.300ms="{{ $searchModel }}"
                    placeholder="{{ $placeholder }}"
-                   class="w-full rounded-lg border border-stone-200 bg-white py-1.5 pl-8 pr-3 text-sm text-stone-700 placeholder-stone-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                   class="w-full rounded-lg border border-zinc-200 bg-white py-1.5 pl-8 pr-3 text-sm text-zinc-700 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
         </div>
 
         {{-- Extra filters (dates, selects) --}}
@@ -60,7 +60,7 @@
         {{-- Clear button --}}
         @if($hasFilters)
             <button wire:click="{{ $clearAction }}"
-                    class="flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-stone-500 transition-colors hover:bg-stone-200">
+                    class="flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:bg-zinc-200">
                 <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>

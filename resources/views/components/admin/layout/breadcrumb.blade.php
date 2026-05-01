@@ -31,6 +31,6 @@
     }
 @endphp
 
-<div class="hidden h-12 shrink-0 items-center border-b border-stone-200 bg-white px-6 md:flex">
-    <span class="text-xs font-medium text-stone-500">{{ $breadcrumb }}</span>
+<div class="hidden h-12 shrink-0 items-center border-b border-zinc-200 bg-white px-6 md:flex">
+    <span class="text-xs font-medium text-zinc-500">{{ $breadcrumb }}</span>
 </div>

@@ -8,7 +8,7 @@
 @props(['label', 'field', 'required' => false, 'hint' => null])
 
 <div>
-    <label class="mb-1.5 block text-xs font-medium text-stone-700">
+    <label class="mb-1.5 block text-xs font-medium text-zinc-700">
         {{ $label }}{{ $required ? ' *' : '' }}
     </label>
 
@@ -19,6 +19,6 @@
     @enderror
 
     @if($hint && !$errors->has($field))
-        <p class="mt-1 text-xs text-stone-400">{{ $hint }}</p>
+        <p class="mt-1 text-xs text-zinc-400">{{ $hint }}</p>
     @endif
 </div>

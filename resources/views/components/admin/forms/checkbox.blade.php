@@ -24,12 +24,12 @@
 <label class="flex cursor-pointer items-start gap-3">
     <input
         type="checkbox"
-        {{ $attributes->class(['mt-0.5 h-4 w-4 rounded border-stone-300 text-teal-600 focus:ring-teal-500']) }}
+        {{ $attributes->class(['mt-0.5 h-4 w-4 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950']) }}
     >
     <div>
-        <p class="text-sm font-medium text-stone-700">{{ $label }}</p>
+        <p class="text-sm font-medium text-zinc-700">{{ $label }}</p>
         @if($description)
-            <p class="text-xs text-stone-400">{{ $description }}</p>
+            <p class="text-xs text-zinc-400">{{ $description }}</p>
         @endif
     </div>
 </label>

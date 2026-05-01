@@ -26,12 +26,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="h-full bg-stone-50 font-sans text-stone-900 antialiased">
+<body class="h-full bg-zinc-50 font-sans text-zinc-900 antialiased">
 
 <div class="flex h-full overflow-hidden">
 
     {{-- Desktop sidebar --}}
-    <aside class="hidden w-56 shrink-0 flex-col border-r border-stone-200 bg-white md:flex">
+    <aside class="hidden w-56 shrink-0 flex-col border-r border-zinc-200 bg-white md:flex">
         @include('admin-system.partials.sidebar')
     </aside>
 

@@ -69,35 +69,35 @@
     ];
 @endphp
 
-<div class="flex h-full min-h-0 flex-col bg-white" x-data="{ accountOpen: false }">
+<div class="flex h-full min-h-0 flex-col bg-black text-white" x-data="{ accountOpen: false }">
     <div class="flex items-center gap-3 px-4 py-5">
         @if(file_exists(public_path('images/logo.png')))
             <img src="/images/logo.png" alt="{{ config('app.name') }}" class="h-11 w-11 rounded-xl object-contain">
         @else
             <div
-                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-950 text-sm font-bold text-white shadow-sm">
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-sm font-bold text-black shadow-sm">
                 HS
             </div>
         @endif
         <div class="min-w-0">
-            <p class="truncate text-base font-bold text-zinc-950">{{ config('app.name') }}</p>
-            <p class="truncate text-xs text-zinc-400">Admin system</p>
+            <p class="truncate text-base font-bold text-white">{{ config('app.name') }}</p>
+            <p class="truncate text-xs text-white/60">Admin system</p>
         </div>
     </div>
 
     <nav class="min-h-0 flex-1 space-y-6 overflow-y-auto px-4 pb-5 pt-3">
         @foreach($navGroups as $group)
             <div>
-                <p class="mb-2 px-3 text-[10px] font-medium uppercase tracking-widest text-zinc-500">
+                <p class="mb-2 px-3 text-[10px] font-medium uppercase tracking-widest text-white/60">
                     {{ $group['label'] }}
                 </p>
                 <div class="space-y-1">
                     @foreach($group['items'] as $item)
                         @php $isActive = str_starts_with($currentRoute, $item['route']); @endphp
                         <a href="{{ $item['href'] }}"
-                           class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium
-                                  {{ $isActive ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950' }}">
-                            <span class="shrink-0 {{ $isActive ? 'text-zinc-950' : 'text-zinc-400' }}">
+                           class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors
+                                  {{ $isActive ? 'bg-white/15 text-white' : 'text-white hover:bg-white/10 hover:text-white' }}">
+                            <span class="shrink-0 text-white">
                                 <svg class="h-[15px] w-[15px]" fill="none" stroke="currentColor" stroke-width="1.8"
                                      viewBox="0 0 24 24">
                                     {!! $item['icon'] !!}
@@ -111,25 +111,25 @@
         @endforeach
     </nav>
 
-    <div class="mt-auto shrink-0 border-t border-zinc-100 bg-white px-3 pb-2 pt-2">
+    <div class="mt-auto shrink-0 border-t border-white/10 bg-black px-3 pb-2 pt-2">
         <div x-show="accountOpen"
              x-transition
-             class="overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
+             class="overflow-hidden rounded-lg border border-white/10 bg-black shadow-sm">
             <div class="flex items-center gap-2.5 px-2.5 py-2.5">
                 <div
-                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 text-xs font-semibold text-zinc-950">
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 text-xs font-semibold text-white">
                     {{ $initial }}
                 </div>
                 <div class="min-w-0">
-                    <p class="truncate text-sm font-semibold text-zinc-950">{{ $user?->name ?? 'Admin' }}</p>
-                    <p class="truncate text-xs text-zinc-500">{{ $user?->email ?? 'admin@example.com' }}</p>
+                    <p class="truncate text-sm font-semibold text-white">{{ $user?->name ?? 'Admin' }}</p>
+                    <p class="truncate text-xs text-white/60">{{ $user?->email ?? 'admin@example.com' }}</p>
                 </div>
             </div>
 
-            <div class="border-t border-zinc-200 px-2 py-1.5">
+            <div class="border-t border-white/10 px-2 py-1.5">
                 <a href="{{ route('profile.index') }}"
-                   class="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-50 hover:text-zinc-700">
-                    <svg class="h-4 w-4 shrink-0 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.8"
+                   class="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white">
+                    <svg class="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="1.8"
                          viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="3"/>
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -140,8 +140,8 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
-                            class="flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-50 hover:text-zinc-700">
-                        <svg class="h-4 w-4 shrink-0 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.8"
+                            class="flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white">
+                        <svg class="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="1.8"
                              viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m16 17 5-5-5-5"/>
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12H9"/>
@@ -155,17 +155,17 @@
         </div>
 
         <button type="button"
-                class="flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-zinc-100"
+                class="flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-white/10"
                 :aria-expanded="accountOpen.toString()"
                 @click="accountOpen = !accountOpen">
             <div class="flex min-w-0 items-center gap-2.5">
                 <div
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 text-xs font-semibold text-zinc-950">
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 text-xs font-semibold text-white">
                     {{ $initial }}
                 </div>
-                <span class="truncate text-[13px] font-semibold text-zinc-500">{{ $user?->name ?? 'Admin' }}</span>
+                <span class="truncate text-[13px] font-semibold text-white">{{ $user?->name ?? 'Admin' }}</span>
             </div>
-            <svg class="h-4 w-4 shrink-0 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2"
+            <svg class="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="2"
                  viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m7 15 5 5 5-5"/>
                 <path stroke-linecap="round" stroke-linejoin="round" d="m7 9 5-5 5 5"/>

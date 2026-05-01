@@ -21,7 +21,7 @@
             detail: { message: 'Done!', type: 'success' }
         }));
 
-    Types: 'success' (teal) | 'error' (red)
+    Types: 'success' (zinc) | 'error' (red)
     Auto-dismisses after 3.5 seconds.
 --}}
 <div x-data="{
@@ -46,7 +46,7 @@
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100 translate-x-0"
              x-transition:leave-end="opacity-0 translate-x-4"
-             :class="toast.type === 'error' ? 'bg-red-600' : 'bg-teal-600'"
+             :class="toast.type === 'error' ? 'bg-red-600' : 'bg-zinc-900'"
              class="flex items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-lg pointer-events-auto min-w-[200px]">
 
             {{-- Success checkmark --}}

@@ -14,7 +14,7 @@
         <x-admin.layout.page-header title="Products" subtitle="{{ $count }} products">
             <x-slot name="action">
                 <a href="{{ route('products.create') }}"
-                   class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700">
+                   class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                     </svg>
@@ -32,9 +32,9 @@
 
 <div class="mb-4 flex flex-wrap items-center justify-between gap-3 sm:mb-6">
     <div>
-        <h1 class="text-lg font-bold text-stone-900 sm:text-xl">{{ $title }}</h1>
+        <h1 class="text-lg font-bold text-zinc-900 sm:text-xl">{{ $title }}</h1>
         @if($subtitle)
-            <p class="text-xs text-stone-500 sm:text-sm">{{ $subtitle }}</p>
+            <p class="text-xs text-zinc-500 sm:text-sm">{{ $subtitle }}</p>
         @endif
     </div>
 
