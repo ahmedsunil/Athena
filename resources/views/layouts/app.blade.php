@@ -18,7 +18,7 @@
 <div class="flex h-full overflow-hidden">
 
     {{-- Desktop sidebar --}}
-    <aside class="fixed inset-y-0 left-0 z-30 hidden w-64 shrink-0 flex-col border-r border-zinc-200 bg-white md:flex">
+    <aside class="fixed inset-y-0 left-0 z-30 hidden w-64 shrink-0 flex-col border-r border-black bg-black text-white md:flex">
         @include('layouts.partials.sidebar')
     </aside>
 
@@ -54,12 +54,12 @@
              x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-             class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-zinc-200 bg-white shadow-xl"
+             class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-black bg-black text-white shadow-xl"
              @click.stop>
-            <div class="flex h-12 items-center justify-between border-b border-zinc-100 px-4">
-                <span class="text-[15px] font-bold tracking-tight text-zinc-950">{{ config('app.name') }}</span>
+            <div class="flex h-12 items-center justify-between border-b border-white/10 px-4">
+                <span class="text-[15px] font-bold tracking-tight text-white">{{ config('app.name') }}</span>
                 <button @click="open = false"
-                        class="rounded-lg p-1 text-zinc-400 transition-colors hover:text-zinc-600">
+                        class="rounded-lg p-1 text-white/70 transition-colors hover:bg-white/10 hover:text-white">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
