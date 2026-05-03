@@ -21,10 +21,10 @@
 
 @if($showDeleteModal)
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40 backdrop-blur-sm">
-        <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl">
+        <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg ring-1 ring-zinc-100/80">
 
             {{-- Warning icon --}}
-            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-50">
+            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-50 shadow-sm">
                 <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                 </svg>
@@ -43,11 +43,11 @@
 
             <div class="flex gap-2">
                 <button wire:click="executeDelete"
-                        class="flex-1 rounded-lg bg-red-600 py-2 admin-button-label text-white transition-colors hover:bg-red-700 active:scale-95">
+                        class="flex-1 rounded-lg bg-red-600 py-2 admin-button-label text-white shadow-sm transition-colors hover:bg-red-700 active:scale-95">
                     Delete
                 </button>
                 <button wire:click="cancelDelete"
-                        class="flex-1 rounded-lg border border-zinc-200 py-2 admin-button-label text-zinc-600 transition-colors hover:bg-zinc-50">
+                        class="flex-1 rounded-lg border border-zinc-200 bg-white py-2 admin-button-label text-zinc-600 shadow-sm transition-colors hover:bg-zinc-50">
                     Cancel
                 </button>
             </div>

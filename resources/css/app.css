@@ -14,6 +14,21 @@
 
 [x-cloak] { display: none !important; }
 
+@layer base {
+    :root {
+        --admin-chart-1: hsl(12 76% 61%);
+        --admin-chart-2: hsl(173 58% 39%);
+        --admin-chart-3: hsl(197 37% 24%);
+        --admin-chart-4: hsl(43 74% 66%);
+        --admin-chart-5: hsl(27 87% 67%);
+        --admin-chart-1-soft: hsl(12 76% 96%);
+        --admin-chart-2-soft: hsl(173 58% 95%);
+        --admin-chart-3-soft: hsl(197 37% 94%);
+        --admin-chart-4-soft: hsl(43 74% 95%);
+        --admin-chart-5-soft: hsl(27 87% 96%);
+    }
+}
+
 @layer components {
     .admin-page-title {
         @apply text-base font-semibold leading-6 text-zinc-950;
@@ -88,11 +103,11 @@
     }
 
     .admin-form-control {
-        @apply text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400;
+        @apply text-sm font-normal leading-5 text-zinc-950 shadow-sm placeholder-zinc-400;
     }
 
     .admin-form-control-sm {
-        @apply text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400;
+        @apply text-xs font-normal leading-5 text-zinc-700 shadow-sm placeholder-zinc-400;
     }
 
     .admin-button-label {
@@ -109,6 +124,34 @@
 
     .admin-form-error {
         @apply text-xs font-normal leading-5 text-red-600;
+    }
+
+    .admin-dashboard-card {
+        @apply rounded-xl border border-zinc-200/80 bg-white p-4 shadow-sm ring-1 ring-zinc-100/70;
+    }
+
+    .admin-dashboard-date {
+        @apply rounded-lg border border-zinc-200 bg-white px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 shadow-sm transition-colors focus:border-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-950/10;
+    }
+
+    .admin-chart-1 {
+        background-color: var(--admin-chart-1);
+    }
+
+    .admin-chart-2 {
+        background-color: var(--admin-chart-2);
+    }
+
+    .admin-chart-3 {
+        background-color: var(--admin-chart-3);
+    }
+
+    .admin-chart-4 {
+        background-color: var(--admin-chart-4);
+    }
+
+    .admin-chart-5 {
+        background-color: var(--admin-chart-5);
     }
 
     .admin-table-body > tr {

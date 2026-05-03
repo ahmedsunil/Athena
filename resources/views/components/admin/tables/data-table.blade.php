@@ -54,7 +54,7 @@
         $pagination  — Livewire links() call
 --}}
 
-<div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
+<div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm ring-1 ring-zinc-100/70">
 
     {{-- Mobile card list --}}
     @if(isset($mobile))

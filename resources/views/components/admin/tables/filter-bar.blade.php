@@ -39,7 +39,7 @@
     'clearAction' => 'clearFilters',
 ])
 
-<div class="mb-4 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-2.5">
+<div class="mb-4 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-2.5 shadow-sm ring-1 ring-zinc-100/70">
     <div class="flex flex-wrap items-center gap-2">
 
         {{-- Search --}}
@@ -60,7 +60,7 @@
         {{-- Clear button --}}
         @if($hasFilters)
             <button wire:click="{{ $clearAction }}"
-                    class="admin-link-label flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-zinc-500 transition-colors hover:bg-zinc-200">
+                    class="admin-link-label flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-zinc-500 shadow-sm transition-colors hover:bg-zinc-50">
                 <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>

@@ -47,7 +47,7 @@
              x-transition:leave-start="opacity-100 translate-x-0"
              x-transition:leave-end="opacity-0 translate-x-4"
              :class="toast.type === 'error' ? 'bg-red-600' : 'bg-zinc-900'"
-             class="flex items-center gap-2.5 rounded-lg px-4 py-2.5 admin-button-label text-white shadow-lg pointer-events-auto min-w-[200px]">
+             class="pointer-events-auto flex min-w-[200px] items-center gap-2.5 rounded-lg px-4 py-2.5 admin-button-label text-white shadow-lg ring-1 ring-white/10">
 
             {{-- Success checkmark --}}
             <svg x-show="toast.type !== 'error'" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">

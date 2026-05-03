@@ -1,5 +1,5 @@
 <div class="mx-auto space-y-4">
-    <div class="flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-white px-5 py-4 shadow-sm ring-1 ring-zinc-100/70">
         <div>
             <h1 class="admin-page-title">Dashboard</h1>
             <p class="admin-caption">Stats, KPI cards, graphs, and recent users.</p>
@@ -14,27 +14,31 @@
     </div>
 
     <div class="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm ring-1 ring-zinc-100/70"
+             style="background-color: var(--admin-chart-3-soft)">
             <p class="admin-link-label text-zinc-500">Total users</p>
-            <p class="mt-1 admin-stat-value">{{ number_format($stats['totalUsers']) }}</p>
+            <p class="mt-1 admin-stat-value" style="color: var(--admin-chart-3)">{{ number_format($stats['totalUsers']) }}</p>
         </div>
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm ring-1 ring-zinc-100/70"
+             style="background-color: var(--admin-chart-2-soft)">
             <p class="admin-link-label text-zinc-500">Active users</p>
-            <p class="mt-1 admin-stat-value">{{ number_format($stats['activeUsers']) }}</p>
+            <p class="mt-1 admin-stat-value" style="color: var(--admin-chart-2)">{{ number_format($stats['activeUsers']) }}</p>
         </div>
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm ring-1 ring-zinc-100/70"
+             style="background-color: var(--admin-chart-1-soft)">
             <p class="admin-link-label text-zinc-500">Admins</p>
-            <p class="mt-1 admin-stat-value">{{ number_format($stats['adminUsers']) }}</p>
+            <p class="mt-1 admin-stat-value" style="color: var(--admin-chart-1)">{{ number_format($stats['adminUsers']) }}</p>
         </div>
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm ring-1 ring-zinc-100/70"
+             style="background-color: var(--admin-chart-4-soft)">
             <p class="admin-link-label text-zinc-500">New this month</p>
-            <p class="mt-1 admin-stat-value">{{ number_format($stats['newThisMonth']) }}</p>
+            <p class="mt-1 admin-stat-value" style="color: hsl(32 95% 44%)">{{ number_format($stats['newThisMonth']) }}</p>
         </div>
     </div>
 
     <div class="grid gap-3 sm:grid-cols-3">
-        <div class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
-            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-950">
+        <div class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm ring-1 ring-zinc-100/70">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg shadow-sm" style="background-color: var(--admin-chart-2-soft); color: var(--admin-chart-2)">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/>
                     <circle cx="12" cy="12" r="9"/>
@@ -46,8 +50,8 @@
             </div>
             <span class="shrink-0 admin-muted">active</span>
         </div>
-        <div class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
-            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-700">
+        <div class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm ring-1 ring-zinc-100/70">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg shadow-sm" style="background-color: var(--admin-chart-4-soft); color: hsl(32 95% 44%)">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="9"/>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3"/>
@@ -59,8 +63,8 @@
             </div>
             <span class="shrink-0 admin-muted">inactive</span>
         </div>
-        <div class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm">
-            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-700">
+        <div class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm ring-1 ring-zinc-100/70">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg shadow-sm" style="background-color: var(--admin-chart-3-soft); color: var(--admin-chart-3)">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m4 14v-7m4 7V8m4 11v-4m4 4V9"/>
                 </svg>
@@ -74,7 +78,7 @@
     </div>
 
     <div class="grid gap-4 lg:grid-cols-3">
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm lg:col-span-2">
+        <div class="admin-dashboard-card lg:col-span-2">
             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                     <h2 class="admin-section-title">Users by month</h2>
@@ -82,10 +86,10 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <input type="date" wire:model.live="usersFrom"
-                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date">
                     <span class="admin-muted">to</span>
                     <input type="date" wire:model.live="usersTo"
-                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date">
                 </div>
             </div>
 
@@ -110,8 +114,8 @@
             <div class="flex h-40 items-end gap-1.5">
                 @foreach($usersByMonth as $bar)
                     <div class="group relative flex h-full flex-1 items-end">
-                        <div class="w-full rounded-t-sm bg-zinc-950 transition-all group-hover:bg-zinc-700"
-                             style="height: {{ $bar['percent'] }}%"></div>
+                        <div class="w-full rounded-t-sm transition-opacity group-hover:opacity-80"
+                             style="height: {{ $bar['percent'] }}%; background-color: var(--admin-chart-3)"></div>
                     </div>
                 @endforeach
             </div>
@@ -122,15 +126,15 @@
             </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="admin-dashboard-card">
             <div class="mb-4 flex flex-col gap-3">
                 <h2 class="admin-section-title">Top roles</h2>
                 <div class="flex items-center gap-2">
                     <input type="date" wire:model.live="rolesFrom"
-                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date min-w-0">
                     <span class="admin-muted">to</span>
                     <input type="date" wire:model.live="rolesTo"
-                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date min-w-0">
                 </div>
             </div>
             <div class="space-y-3">
@@ -141,7 +145,7 @@
                             <span class="admin-muted">{{ number_format($role['total']) }}</span>
                         </div>
                         <div class="h-1.5 overflow-hidden rounded-full bg-zinc-100">
-                            <div class="h-full rounded-full bg-zinc-950" style="width: {{ $role['percent'] }}%"></div>
+                            <div class="h-full rounded-full" style="width: {{ $role['percent'] }}%; background-color: var(--admin-chart-1)"></div>
                         </div>
                     </div>
                 @endforeach
@@ -172,7 +176,7 @@
             $donutInactiveEnd = $donutPendingEnd + $donutInactive;
         @endphp
 
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm lg:col-span-2">
+        <div class="admin-dashboard-card lg:col-span-2">
             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                     <h2 class="admin-section-title">Line graph</h2>
@@ -180,10 +184,10 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <input type="date" wire:model.live="lineFrom"
-                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date">
                     <span class="admin-muted">to</span>
                     <input type="date" wire:model.live="lineTo"
-                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date">
                 </div>
             </div>
             <div class="relative h-44">
@@ -194,7 +198,8 @@
                     <div></div>
                 </div>
                 <svg class="relative h-full w-full" viewBox="0 0 640 190" preserveAspectRatio="none" aria-hidden="true">
-                    <polyline points="{{ $linePoints }}" fill="none" stroke="#09090b" stroke-width="4"
+                    <polyline points="{{ $linePoints }}" fill="none" stroke-width="4"
+                              style="stroke: var(--admin-chart-3)"
                               stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
@@ -205,21 +210,37 @@
             </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="admin-dashboard-card">
             <div class="mb-4 flex flex-col gap-3">
                 <h2 class="admin-section-title">Donut chart</h2>
                 <div class="flex items-center gap-2">
                     <input type="date" wire:model.live="donutFrom"
-                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date min-w-0">
                     <span class="admin-muted">to</span>
                     <input type="date" wire:model.live="donutTo"
-                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date min-w-0">
                 </div>
             </div>
             <div class="flex items-center justify-center py-2">
-                <div class="grid h-32 w-32 place-items-center rounded-full"
-                     style="background: conic-gradient(#09090b 0 {{ $donutActive }}%, #f59e0b {{ $donutActive }}% {{ $donutPendingEnd }}%, #ef4444 {{ $donutPendingEnd }}% {{ $donutInactiveEnd }}%, #e7e5e4 {{ $donutInactiveEnd }}% 100%)">
-                    <div class="grid h-20 w-20 place-items-center rounded-full bg-white">
+                <div class="relative grid h-32 w-32 place-items-center">
+                    <svg class="h-32 w-32 -rotate-90" viewBox="0 0 120 120" aria-hidden="true">
+                        <circle cx="60" cy="60" r="44" fill="none" stroke="#e7e5e4" stroke-width="18"/>
+                        <circle cx="60" cy="60" r="44" fill="none" pathLength="100"
+                                stroke-width="18" stroke-linecap="round"
+                                stroke-dasharray="{{ $donutActive }} {{ 100 - $donutActive }}"
+                                style="stroke: var(--admin-chart-2)"/>
+                        <circle cx="60" cy="60" r="44" fill="none" pathLength="100"
+                                stroke-width="18" stroke-linecap="round"
+                                stroke-dasharray="{{ $donutPending }} {{ 100 - $donutPending }}"
+                                stroke-dashoffset="-{{ $donutActive }}"
+                                style="stroke: var(--admin-chart-4)"/>
+                        <circle cx="60" cy="60" r="44" fill="none" pathLength="100"
+                                stroke-width="18" stroke-linecap="round"
+                                stroke-dasharray="{{ $donutInactive }} {{ 100 - $donutInactive }}"
+                                stroke-dashoffset="-{{ $donutPendingEnd }}"
+                                style="stroke: var(--admin-chart-1)"/>
+                    </svg>
+                    <div class="absolute inset-0 grid place-items-center">
                         <div class="text-center">
                             <p class="admin-page-title">{{ $conversionRate }}%</p>
                             <p class="admin-muted">active</p>
@@ -240,15 +261,15 @@
             </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <div class="admin-dashboard-card">
             <div class="mb-4 flex flex-col gap-3">
                 <h2 class="admin-section-title">Horizontal bar</h2>
                 <div class="flex items-center gap-2">
                     <input type="date" wire:model.live="horizontalFrom"
-                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date min-w-0">
                     <span class="admin-muted">to</span>
                     <input type="date" wire:model.live="horizontalTo"
-                           class="min-w-0 rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date min-w-0">
                 </div>
             </div>
             <div class="space-y-4">
@@ -259,51 +280,52 @@
                             <span class="admin-muted">{{ number_format($item['total']) }}</span>
                         </div>
                         <div class="h-2 overflow-hidden rounded-full bg-zinc-100">
-                            <div class="h-full rounded-full bg-zinc-950" style="width: {{ $item['percent'] }}%"></div>
+                            <div class="h-full rounded-full" style="width: {{ $item['percent'] }}%; background-color: var(--admin-chart-2)"></div>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm lg:col-span-2">
+        <div class="admin-dashboard-card lg:col-span-2">
             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <h2 class="admin-section-title">Area graph</h2>
                 <div class="flex items-center gap-2">
                     <input type="date" wire:model.live="areaFrom"
-                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date">
                     <span class="admin-muted">to</span>
                     <input type="date" wire:model.live="areaTo"
-                           class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                           class="admin-dashboard-date">
                 </div>
             </div>
-            <div class="relative h-40 overflow-hidden rounded-lg bg-zinc-50">
+            <div class="relative h-40 overflow-hidden rounded-lg" style="background-color: var(--admin-chart-3-soft)">
                 <svg class="h-full w-full" viewBox="0 0 640 180" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M{{ $areaPoints }} L640 180 L0 180 Z" fill="#f4f4f5"/>
-                    <polyline points="{{ $areaPoints }}" fill="none" stroke="#09090b" stroke-width="4"
+                    <path d="M{{ $areaPoints }} L640 180 L0 180 Z" style="fill: var(--admin-chart-5-soft)"/>
+                    <polyline points="{{ $areaPoints }}" fill="none" stroke-width="4"
+                              style="stroke: var(--admin-chart-5)"
                               stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm lg:col-span-3">
+        <div class="admin-dashboard-card lg:col-span-3">
             <div class="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <h2 class="admin-section-title">Stacked bar graph</h2>
                 <div class="flex flex-wrap items-center gap-3">
                     <div class="flex items-center gap-2">
                         <input type="date" wire:model.live="stackedFrom"
-                               class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                               class="admin-dashboard-date">
                         <span class="admin-muted">to</span>
                         <input type="date" wire:model.live="stackedTo"
-                               class="rounded-lg border border-zinc-300 px-2 py-1.5 text-xs font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                               class="admin-dashboard-date">
                     </div>
                     <div class="flex items-center gap-3">
                     <span class="flex items-center gap-1.5 admin-muted"><span
-                            class="h-2.5 w-2.5 rounded-sm bg-zinc-950"></span>Active</span>
+                            class="h-2.5 w-2.5 rounded-sm admin-chart-2"></span>Active</span>
                         <span class="flex items-center gap-1.5 admin-muted"><span
-                                class="h-2.5 w-2.5 rounded-sm bg-amber-500"></span>Pending</span>
+                                class="h-2.5 w-2.5 rounded-sm admin-chart-4"></span>Pending</span>
                         <span class="flex items-center gap-1.5 admin-muted"><span
-                                class="h-2.5 w-2.5 rounded-sm bg-red-500"></span>Inactive</span>
+                                class="h-2.5 w-2.5 rounded-sm admin-chart-1"></span>Inactive</span>
                     </div>
                 </div>
             </div>
@@ -312,9 +334,9 @@
                     <div class="grid items-center gap-3 sm:grid-cols-[72px_1fr]">
                         <span class="admin-link-label text-zinc-500">{{ $month['label'] }}</span>
                         <div class="flex h-5 overflow-hidden rounded-full bg-zinc-100">
-                            <div class="bg-zinc-950" style="width: {{ $month['active'] }}%"></div>
-                            <div class="bg-amber-500" style="width: {{ $month['pending'] }}%"></div>
-                            <div class="bg-red-500" style="width: {{ $month['inactive'] }}%"></div>
+                            <div class="admin-chart-2" style="width: {{ $month['active'] }}%"></div>
+                            <div class="admin-chart-4" style="width: {{ $month['pending'] }}%"></div>
+                            <div class="admin-chart-1" style="width: {{ $month['inactive'] }}%"></div>
                         </div>
                     </div>
                 @endforeach
@@ -322,8 +344,8 @@
         </div>
     </div>
 
-    <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
-        <div class="flex items-center justify-between border-b border-zinc-100 px-5 py-3">
+    <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm ring-1 ring-zinc-100/70">
+        <div class="flex items-center justify-between border-b border-zinc-100 bg-zinc-50 px-5 py-3">
             <h2 class="admin-section-title">Recent users</h2>
             <a href="{{ route('users.index') }}" class="admin-link-label text-zinc-950 hover:text-zinc-600">View
                 all</a>
@@ -354,7 +376,7 @@
                                 <div class="flex flex-wrap gap-1">
                                     @forelse($user->roles->sortBy('name') as $role)
                                         <span
-                                            class="inline-flex rounded-full px-2 py-0.5 admin-badge {{ $role->name === 'admin' ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-600' }}">
+                                            class="inline-flex rounded-full px-2 py-0.5 admin-badge shadow-sm {{ $role->name === 'admin' ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-600' }}">
                                                 {{ ucfirst($role->name) }}
                                             </span>
                                     @empty
@@ -364,7 +386,7 @@
                             </td>
                             <td class="px-5 py-3">
                                     <span
-                                        class="inline-flex rounded-full px-2 py-0.5 admin-badge {{ $user->is_active ? 'bg-zinc-950 text-white' : 'bg-red-50 text-red-700' }}">
+                                        class="inline-flex rounded-full px-2 py-0.5 admin-badge shadow-sm {{ $user->is_active ? 'text-white admin-chart-2' : 'text-white admin-chart-1' }}">
                                         {{ $user->is_active ? 'Active' : 'Inactive' }}
                                     </span>
                             </td>
@@ -384,7 +406,7 @@
                                 <p class="truncate admin-muted">{{ $user->email }}</p>
                             </div>
                             <span
-                                class="shrink-0 rounded-full px-2 py-0.5 admin-badge {{ $user->is_active ? 'bg-zinc-950 text-white' : 'bg-red-50 text-red-700' }}">
+                                class="shrink-0 rounded-full px-2 py-0.5 admin-badge shadow-sm {{ $user->is_active ? 'text-white admin-chart-2' : 'text-white admin-chart-1' }}">
                                 {{ $user->is_active ? 'Active' : 'Inactive' }}
                             </span>
                         </div>

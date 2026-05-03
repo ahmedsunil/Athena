@@ -41,9 +41,9 @@
     $iconBg = $iconBgMap[$iconColor] ?? 'bg-zinc-100';
 @endphp
 
-<div class="flex items-center gap-4 rounded-xl border border-zinc-200 bg-white px-5 py-4 shadow-sm">
+<div class="flex items-center gap-4 rounded-xl border border-zinc-200 bg-white px-5 py-4 shadow-sm ring-1 ring-zinc-100/70">
     @if(isset($icon))
-        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg {{ $iconBg }}">
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg shadow-sm {{ $iconBg }}">
             {{ $icon }}
         </div>
     @endif

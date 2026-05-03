@@ -185,9 +185,9 @@ class Dashboard extends Component
         $total = max($active + $inactive + $unverified, 1);
 
         return [
-            ['label' => 'Active', 'total' => $active, 'percent' => round(($active / $total) * 100), 'class' => 'bg-zinc-950'],
-            ['label' => 'Pending', 'total' => $unverified, 'percent' => round(($unverified / $total) * 100), 'class' => 'bg-amber-500'],
-            ['label' => 'Inactive', 'total' => $inactive, 'percent' => round(($inactive / $total) * 100), 'class' => 'bg-red-500'],
+            ['label' => 'Active', 'total' => $active, 'percent' => round(($active / $total) * 100), 'class' => 'admin-chart-2'],
+            ['label' => 'Pending', 'total' => $unverified, 'percent' => round(($unverified / $total) * 100), 'class' => 'admin-chart-4'],
+            ['label' => 'Inactive', 'total' => $inactive, 'percent' => round(($inactive / $total) * 100), 'class' => 'admin-chart-1'],
         ];
     }
 
