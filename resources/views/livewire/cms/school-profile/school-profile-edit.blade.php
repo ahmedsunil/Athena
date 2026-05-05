@@ -1,0 +1,144 @@
+<div class="mx-auto max-w-4xl space-y-4">
+
+    <div>
+        <h1 class="admin-page-title">School Profile</h1>
+        <p class="admin-muted">Shared identity used across the public website.</p>
+    </div>
+
+    <form wire:submit="save" class="space-y-4">
+
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
+            <div class="mb-4">
+                <h3 class="admin-section-title">Identity</h3>
+                <p class="admin-caption">School name, motto, and short description.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div>
+                        <label class="mb-1.5 block admin-label">School name</label>
+                        <input type="text" wire:model="school_name"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('school_name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="mb-1.5 block admin-label">Motto</label>
+                        <input type="text" wire:model="motto"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('motto') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Short description</label>
+                    <textarea wire:model="short_description" rows="3"
+                              class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                    @error('short_description') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Logo</label>
+                    @if($existing_logo)
+                        <img src="{{ Storage::url($existing_logo) }}" alt="Logo" class="mb-2 h-16 w-16 rounded-lg object-cover">
+                    @endif
+                    <input type="file" wire:model="logo" accept="image/*"
+                           class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
+                    @error('logo') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
+            <div class="mb-4">
+                <h3 class="admin-section-title">Contact</h3>
+                <p class="admin-caption">Email, phone, and physical address.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div>
+                        <label class="mb-1.5 block admin-label">Email</label>
+                        <input type="email" wire:model="email"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('email') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="mb-1.5 block admin-label">Phone</label>
+                        <input type="text" wire:model="phone"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('phone') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Address</label>
+                    <input type="text" wire:model="address"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('address') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div>
+                        <label class="mb-1.5 block admin-label">Island</label>
+                        <input type="text" wire:model="island"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('island') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="mb-1.5 block admin-label">Atoll</label>
+                        <input type="text" wire:model="atoll"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('atoll') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="mb-1.5 block admin-label">Country</label>
+                        <input type="text" wire:model="country"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('country') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
+            <div class="mb-4">
+                <h3 class="admin-section-title">Principal</h3>
+                <p class="admin-caption">Principal's name, designation, message, and photo.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div>
+                        <label class="mb-1.5 block admin-label">Name</label>
+                        <input type="text" wire:model="principal_name"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('principal_name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="mb-1.5 block admin-label">Designation</label>
+                        <input type="text" wire:model="principal_designation"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('principal_designation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Message</label>
+                    <textarea wire:model="principal_message" rows="4"
+                              class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                    @error('principal_message') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Photo</label>
+                    @if($existing_principal_photo)
+                        <img src="{{ Storage::url($existing_principal_photo) }}" alt="Principal" class="mb-2 h-16 w-16 rounded-full object-cover">
+                    @endif
+                    <input type="file" wire:model="principal_photo" accept="image/*"
+                           class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
+                    @error('principal_photo') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end">
+            <button type="submit"
+                    class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-3 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2">
+                Save profile
+            </button>
+        </div>
+
+    </form>
+
+</div>

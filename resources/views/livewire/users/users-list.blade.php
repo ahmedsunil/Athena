@@ -121,7 +121,9 @@
                         <td class="px-4 py-3 admin-muted">{{ $user->created_at->format('M d, Y') }}</td>
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-2">
-                                <a href="{{ route('users.edit', $user) }}"
+                                <a href="{{ route('users.show', $user->id) }}" wire:navigate
+                                   class="admin-link-label text-zinc-600 hover:text-zinc-950">View</a>
+                                <a href="{{ route('users.edit', $user) }}" wire:navigate
                                    class="admin-link-label text-zinc-950 hover:text-zinc-800">Edit</a>
                                 @if($user->id !== auth()->id())
                                     <button wire:click="confirmDelete({{ $user->id }})"
@@ -166,7 +168,9 @@
                         </div>
                     </div>
                     <div class="flex flex-col items-end gap-1.5">
-                        <a href="{{ route('users.edit', $user) }}"
+                        <a href="{{ route('users.show', $user->id) }}" wire:navigate
+                           class="admin-link-label text-zinc-600 hover:text-zinc-950">View</a>
+                        <a href="{{ route('users.edit', $user) }}" wire:navigate
                            class="admin-link-label text-zinc-950 hover:text-zinc-800">Edit</a>
                         @if($user->id !== auth()->id())
                             <button wire:click="confirmDelete({{ $user->id }})"

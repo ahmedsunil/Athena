@@ -49,6 +49,10 @@
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-2">
+                                <a href="{{ route('roles.show', $role->id) }}" wire:navigate
+                                   class="admin-link-label text-zinc-600 hover:text-zinc-950">
+                                    View
+                                </a>
                                 <a href="{{ route('roles.edit', $role->id) }}" wire:navigate
                                    class="admin-link-label text-zinc-950 hover:text-zinc-800">
                                     Edit
@@ -81,6 +85,10 @@
                         <p class="admin-muted">{{ $role->users_count }} {{ Str::plural('user', $role->users_count) }}</p>
                     </div>
                     <div class="flex items-center gap-1.5 shrink-0">
+                        <a href="{{ route('roles.show', $role->id) }}" wire:navigate
+                           class="rounded-md px-2.5 py-1.5 admin-label border border-zinc-200 hover:bg-zinc-50">
+                            View
+                        </a>
                         <a href="{{ route('roles.edit', $role->id) }}" wire:navigate
                            class="rounded-md px-2.5 py-1.5 admin-label border border-zinc-200 hover:bg-zinc-50">
                             Edit
