@@ -10,7 +10,8 @@
       "Bash(php *)",
       "Bash(git -C /Users/shaan/Herd/Athena add routes/web.php resources/views/components/admin/layout/sidebar.blade.php)",
       "Bash(git -C /Users/shaan/Herd/Athena commit -m ' *)",
-      "Bash(composer show *)"
+      "Bash(composer show *)",
+      "Bash(grep -v \"^$\\\\|INFO\\\\|Psy\")"
     ]
   }
 }

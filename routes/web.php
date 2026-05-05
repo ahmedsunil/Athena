@@ -4,6 +4,8 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
+use App\Livewire\Cms\Links\LinkForm;
+use App\Livewire\Cms\Links\LinksList;
 use App\Livewire\Dashboard;
 use App\Livewire\Profile\ProfileSettings;
 use App\Livewire\Roles\RoleForm;
@@ -30,6 +32,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->whereNumber('activityId')
         ->name('app.activity.show');
     Route::get('/app/settings', SystemSettings::class)->name('app.settings');
+
+    // CMS — Links
+    Route::get('/cms/links', LinksList::class)->name('cms.links.index');
+    Route::get('/cms/links/create', LinkForm::class)->name('cms.links.create');
+    Route::get('/cms/links/{linkId}/edit', LinkForm::class)->name('cms.links.edit');
 
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
