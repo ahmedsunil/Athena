@@ -44,6 +44,7 @@
             <table class="w-full text-xs">
                 <thead>
                     <tr class="border-b border-zinc-200 bg-zinc-50">
+                        <th class="px-4 py-3 text-left admin-label-muted">ID</th>
                         <th class="px-4 py-3 text-left admin-label-muted">User</th>
                         <th class="px-4 py-3 text-left admin-label-muted">Event</th>
                         <th class="px-4 py-3 text-left admin-label-muted">Subject</th>
@@ -70,6 +71,9 @@
                             $new = $log->properties['attributes'] ?? [];
                         @endphp
                         <tr class="hover:bg-zinc-50">
+                            {{-- ID --}}
+                            <td class="px-4 py-3 text-zinc-400 whitespace-nowrap">#{{ $log->id }}</td>
+
                             {{-- Causer --}}
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-2">

@@ -19,6 +19,7 @@
         <table class="admin-table">
             <thead>
                 <tr class="border-b border-zinc-100 text-left">
+                    <th class="px-4 py-3 admin-link-label text-zinc-500">ID</th>
                     <th class="px-4 py-3 admin-link-label text-zinc-500">Role</th>
                     <th class="px-4 py-3 admin-link-label text-zinc-500">Users</th>
                     <th class="px-4 py-3 admin-link-label text-zinc-500">Resources</th>
@@ -28,6 +29,7 @@
             <tbody class="admin-table-body">
                 @forelse($roles as $role)
                     <tr>
+                        <td class="px-4 py-3 admin-muted whitespace-nowrap">#{{ $role->id }}</td>
                         <td class="admin-table-cell-primary capitalize">{{ $role->name }}</td>
                         <td class="px-4 py-3 admin-muted">
                             {{ $role->users_count }} {{ Str::plural('user', $role->users_count) }}
@@ -62,7 +64,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="px-4 py-12 text-center admin-body-muted">No roles found.</td>
+                        <td colspan="5" class="px-4 py-12 text-center admin-body-muted">No roles found.</td>
                     </tr>
                 @endforelse
             </tbody>

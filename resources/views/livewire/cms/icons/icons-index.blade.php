@@ -8,6 +8,7 @@
 
     <x-admin.tables.data-table>
         <x-slot name="head">
+            <th class="admin-table-heading">ID</th>
             <th class="admin-table-heading">Preview</th>
             <th class="admin-table-heading">Key</th>
             <th class="admin-table-heading">Label</th>
@@ -16,6 +17,7 @@
         <x-slot name="body">
             @foreach($icons as $key => $icon)
                 <tr>
+                    <td class="admin-table-cell text-zinc-400 whitespace-nowrap">#{{ $loop->iteration }}</td>
                     <td class="admin-table-cell">
                         <i data-lucide="{{ $icon['lucide'] }}" class="h-4 w-4"></i>
                     </td>

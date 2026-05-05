@@ -8,6 +8,7 @@
 
     <x-admin.tables.data-table>
         <x-slot name="head">
+            <th class="admin-table-heading">ID</th>
             <th class="admin-table-heading">Route</th>
             <th class="admin-table-heading">Label</th>
         </x-slot>
@@ -15,6 +16,7 @@
         <x-slot name="body">
             @foreach($links as $route => $label)
                 <tr>
+                    <td class="admin-table-cell text-zinc-400 whitespace-nowrap">#{{ $loop->iteration }}</td>
                     <td class="admin-table-cell-primary">
                         <code
                             class="rounded bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-700">{{ $route }}</code>

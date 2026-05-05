@@ -54,6 +54,7 @@
                         <table class="w-full min-w-[720px] text-xs">
                             <thead>
                                 <tr class="border-b border-zinc-100 bg-zinc-50 text-left admin-label-muted">
+                                    <th class="px-5 py-3">ID</th>
                                     <th class="px-5 py-3">Field</th>
                                     <th class="px-5 py-3">Previous Value</th>
                                     <th class="px-5 py-3">New Value</th>
@@ -63,6 +64,7 @@
                             <tbody class="divide-y divide-zinc-100">
                                 @foreach($changeRows as $row)
                                     <tr class="align-top hover:bg-zinc-50">
+                                        <td class="px-5 py-4 text-zinc-400 whitespace-nowrap">#{{ $loop->iteration }}</td>
                                         <td class="px-5 py-4">
                                             <p class="font-medium text-zinc-950">{{ $row['field'] }}</p>
                                             <p class="mt-1 text-[11px] text-zinc-400">Tracked attribute</p>

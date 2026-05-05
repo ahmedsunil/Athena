@@ -360,6 +360,7 @@
                 <table class="admin-table">
                     <thead>
                     <tr class="border-b border-zinc-100 text-left">
+                        <th class="px-5 py-3 admin-link-label text-zinc-500">ID</th>
                         <th class="px-5 py-3 admin-link-label text-zinc-500">Name</th>
                         <th class="px-5 py-3 admin-link-label text-zinc-500">Email</th>
                         <th class="px-5 py-3 admin-link-label text-zinc-500">Role</th>
@@ -370,6 +371,7 @@
                     <tbody class="admin-table-body">
                     @foreach($recentUsers as $user)
                         <tr>
+                            <td class="px-5 py-3 admin-muted whitespace-nowrap">#{{ $user->id }}</td>
                             <td class="px-5 py-3 text-sm font-medium leading-5 text-zinc-950">{{ $user->name }}</td>
                             <td class="px-5 py-3 admin-caption">{{ $user->email }}</td>
                             <td class="px-5 py-3">

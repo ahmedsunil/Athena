@@ -62,6 +62,7 @@
         <table class="admin-table">
             <thead>
                 <tr class="border-b border-zinc-100 text-left">
+                    <th class="px-4 py-3 admin-link-label text-zinc-500">ID</th>
                     <th class="px-4 py-3">
                         <input type="checkbox" wire:model.live="selectAll" class="rounded border-zinc-300 text-zinc-950">
                     </th>
@@ -91,6 +92,7 @@
             <tbody class="admin-table-body">
                 @forelse($users as $user)
                     <tr>
+                        <td class="px-4 py-3 admin-muted whitespace-nowrap">#{{ $user->id }}</td>
                         <td class="px-4 py-3">
                             <input type="checkbox" wire:model.live="selected" value="{{ $user->id }}"
                                    class="rounded border-zinc-300 text-zinc-950">
@@ -130,7 +132,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-4 py-12 text-center admin-body-muted">No users found.</td>
+                        <td colspan="8" class="px-4 py-12 text-center admin-body-muted">No users found.</td>
                     </tr>
                 @endforelse
             </tbody>
