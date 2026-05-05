@@ -14,8 +14,63 @@
         </a>
     </div>
 
-    {{-- Roles grid --}}
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {{-- Desktop table --}}
+    <div class="hidden overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm md:block">
+        <table class="admin-table">
+            <thead>
+                <tr class="border-b border-zinc-100 text-left">
+                    <th class="px-4 py-3 admin-link-label text-zinc-500">Role</th>
+                    <th class="px-4 py-3 admin-link-label text-zinc-500">Users</th>
+                    <th class="px-4 py-3 admin-link-label text-zinc-500">Resources</th>
+                    <th class="px-4 py-3 admin-link-label text-zinc-500">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="admin-table-body">
+                @forelse($roles as $role)
+                    <tr>
+                        <td class="admin-table-cell-primary capitalize">{{ $role->name }}</td>
+                        <td class="px-4 py-3 admin-muted">
+                            {{ $role->users_count }} {{ Str::plural('user', $role->users_count) }}
+                        </td>
+                        <td class="px-4 py-3">
+                            @if($role->permission_resources->count())
+                                <div class="flex flex-wrap gap-1.5">
+                                    @foreach($role->permission_resources as $resource)
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600">
+                                            {{ $resource }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @else
+                                <span class="admin-muted italic">No resources assigned.</span>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center gap-2">
+                                <a href="{{ route('roles.edit', $role->id) }}" wire:navigate
+                                   class="admin-link-label text-zinc-950 hover:text-zinc-800">
+                                    Edit
+                                </a>
+                                @if(!in_array($role->name, ['admin', 'manager', 'user']))
+                                    <button wire:click="confirmDelete({{ $role->id }})"
+                                            class="admin-link-label text-red-500 hover:text-red-700">
+                                        Delete
+                                    </button>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-4 py-12 text-center admin-body-muted">No roles found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Mobile cards --}}
+    <div class="space-y-2 md:hidden">
         @forelse($roles as $role)
             <div class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
                 <div class="mb-3 flex items-start justify-between gap-2">
@@ -37,20 +92,20 @@
                     </div>
                 </div>
 
-                @if($role->permissions->count())
+                @if($role->permission_resources->count())
                     <div class="flex flex-wrap gap-1.5">
-                        @foreach($role->permissions->sortBy('name') as $perm)
+                        @foreach($role->permission_resources as $resource)
                             <span class="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600">
-                                {{ $perm->name }}
+                                {{ $resource }}
                             </span>
                         @endforeach
                     </div>
                 @else
-                    <p class="admin-muted italic">No permissions assigned.</p>
+                    <p class="admin-muted italic">No resources assigned.</p>
                 @endif
             </div>
         @empty
-            <div class="col-span-3 rounded-xl border border-zinc-200 bg-white py-16 text-center">
+            <div class="rounded-xl border border-zinc-200 bg-white py-16 text-center shadow-sm">
                 <p class="admin-body-muted">No roles found.</p>
             </div>
         @endforelse

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Roles;
 
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
@@ -37,6 +38,16 @@ class RolesList extends Component
     public function render()
     {
         $roles = Role::with('permissions')->withCount('users')->orderBy('name')->get();
+
+        $roles->each(function (Role $role) {
+            $role->permission_resources = $role->permissions
+                ->pluck('name')
+                ->map(fn (string $permission) => Str::before($permission, '.'))
+                ->unique()
+                ->map(fn (string $resource) => Str::of($resource)->replace(['-', '_'], ' ')->headline()->toString())
+                ->sort()
+                ->values();
+        });
 
         return view('livewire.roles.roles-list', compact('roles'))
             ->layout('layouts.app', ['title' => 'Roles']);
