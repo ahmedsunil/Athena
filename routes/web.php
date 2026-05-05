@@ -4,7 +4,6 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
-use App\Livewire\Cms\Home\HomeIndex;
 use App\Livewire\Dashboard;
 use App\Livewire\Profile\ProfileSettings;
 use App\Livewire\Roles\RoleForm;
@@ -34,12 +33,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
-
-    // CMS
-    Route::get('/home', HomeIndex::class)->name('cms.home');
-
-    // School Profile
-    Route::get('/school-profile', App\Livewire\Cms\SchoolProfile\Show::class)->name('school-profile.show');
 
 });
 

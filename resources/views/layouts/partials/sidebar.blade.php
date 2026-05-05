@@ -16,23 +16,6 @@
             ],
         ],
         [
-            'label' => 'CMS',
-            'items' => [
-                [
-                    'label' => 'Home',
-                    'route' => 'cms.home',
-                    'href'  => route('cms.home'),
-                    'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5M5.25 9.75V21h13.5V9.75M9 21v-6h6v6"/>',
-                ],
-                [
-                    'label' => 'School Profile',
-                    'route' => 'school-profile',
-                    'href'  => route('school-profile.show'),
-                    'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M3 3v7h7V3H3Zm11 0v7h7V3h-7ZM3 14v7h7v-7H3Zm11 0v7h7v-7h-7Z"/>',
-                ],
-            ],
-        ],
-        [
             'label' => 'User management',
             'items' => [
                 [
