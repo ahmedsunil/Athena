@@ -1,8 +1,3 @@
-{{--
-    Forms: FileUpload
-    -----------------
-    File input with a dashed border, upload icon, and optional image preview.
---}}
 @props([
     'label'       => 'Upload file',
     'accept'      => 'image/*',

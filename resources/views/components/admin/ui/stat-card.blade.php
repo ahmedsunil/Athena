@@ -1,28 +1,3 @@
-{{--
-    UI: StatCard
-    ------------
-    Metric card with a colored icon, label, value, and optional secondary text.
-    Used in the dashboard KPI row.
-
-    Usage:
-        <x-admin.ui.stat-card
-            label="Total Paid"
-            value="MVR 12,400"
-            secondary="48 sales"
-            icon-color="teal"
-        >
-            <x-slot name="icon">
-                <svg class="h-4 w-4 text-zinc-600" ...>...</svg>
-            </x-slot>
-        </x-admin.ui.stat-card>
-
-    Props:
-        $label       (required)  — small label above the value
-        $value       (required)  — large bold value
-        $secondary   (optional)  — small text to the right (count, period, etc.)
-        $iconColor   (optional)  — Tailwind color name for icon bg: teal | amber | stone | red
-        $icon        (slot)      — SVG icon markup
---}}
 @props([
     'label'     => '',
     'value'     => '',

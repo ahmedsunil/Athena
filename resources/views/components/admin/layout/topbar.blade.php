@@ -1,16 +1,3 @@
-{{--
-    Layout: TopBar (Mobile only)
-    ----------------------------
-    Fixed top bar shown on mobile (md:hidden).
-    Contains the app name/logo and a hamburger button that opens
-    a slide-in drawer with the full sidebar.
-
-    Usage:
-        <x-admin.layout.topbar />
-
-    Customise:
-        - Replace "App Name" with your app name or logo image.
---}}
 <div
     class="fixed inset-x-0 top-0 z-40 flex h-12 items-center justify-between border-b border-zinc-200 bg-white px-4 shadow-sm md:hidden"
     x-data="{ open: false }"

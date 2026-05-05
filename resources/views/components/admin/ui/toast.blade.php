@@ -1,29 +1,3 @@
-{{--
-    UI: Toast
-    ---------
-    Auto-dismissing toast notification stack (bottom-right).
-    Listens for a custom 'toast' browser event dispatched from Livewire or a <script> tag.
-
-    Usage:
-        {{-- Place once in your layout, just before </body> --}}
-        <x-admin.ui.toast />
-
-        {{-- Fire from Livewire PHP: --}}
-        $this->dispatch('toast', message: 'Saved!', type: 'success');
-        $this->dispatch('toast', message: 'Something went wrong.', type: 'error');
-
-        {{-- Fire from Blade (post-redirect flash): --}}
-        session()->flash('toast', 'Customer created.');
-        session()->flash('toast_type', 'success');
-
-        {{-- Fire from JavaScript: --}}
-        window.dispatchEvent(new CustomEvent('toast', {
-            detail: { message: 'Done!', type: 'success' }
-        }));
-
-    Types: 'success' (zinc) | 'error' (red)
-    Auto-dismisses after 3.5 seconds.
---}}
 <div x-data="{
         toasts: [],
         show(message, type = 'success') {

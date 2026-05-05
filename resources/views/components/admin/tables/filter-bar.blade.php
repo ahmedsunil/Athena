@@ -1,37 +1,3 @@
-{{--
-    Tables: FilterBar
-    -----------------
-    Search + filter row shown above a data table.
-    Contains a search input and an optional slot for additional filters (dates, selects).
-    Shows a "Clear" button when any filter is active.
-
-    Usage:
-        <x-admin.tables.filter-bar
-            search-model="search"
-            placeholder="Search customer..."
-            :has-filters="$search || $dateFrom || $dateTo || $status"
-            clear-action="clearFilters"
-        >
-            {{-- Extra filters go in the slot --}}
-            <input type="date" wire:model.live="dateFrom"
-                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-            <span class="text-zinc-400 text-sm">–</span>
-            <input type="date" wire:model.live="dateTo"
-                   class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-            <select wire:model.live="status"
-                    class="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-sm font-normal leading-5 text-zinc-700 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                <option value="">All statuses</option>
-                <option value="pending">Pending</option>
-                <option value="paid">Paid</option>
-            </select>
-        </x-admin.tables.filter-bar>
-
-    Props:
-        $searchModel  (required) — wire:model value for the search field
-        $placeholder  (optional) — search input placeholder
-        $hasFilters   (optional) — boolean; shows Clear button when true
-        $clearAction  (optional) — Livewire method name to clear all filters. Default: clearFilters
---}}
 @props([
     'searchModel' => 'search',
     'placeholder' => 'Search...',

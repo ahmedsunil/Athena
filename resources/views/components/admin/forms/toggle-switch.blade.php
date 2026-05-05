@@ -1,22 +1,3 @@
-{{--
-    Forms: ToggleSwitch
-    -------------------
-    On/off toggle switch. Binds to a Livewire boolean property.
-
-    Usage:
-        <x-admin.forms.toggle-switch wire:model="isPublished" label="Published" />
-
-        {{-- No label (standalone) --}}
-        <x-admin.forms.toggle-switch wire:model="isActive" />
-
-    Props:
-        $label    (optional) — text label displayed next to the toggle
-        $modelValue is read via $attributes — wire:model handles the state
-
-    Implementation note:
-        Uses Alpine.js to reflect the Livewire boolean as a local `on` value.
-        The track color and knob position animate based on `on`.
---}}
 @props(['label' => null])
 
 <div

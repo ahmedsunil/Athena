@@ -1,17 +1,3 @@
-{{--
-    Layout: AppShell
-    ----------------
-    Full-page shell with fixed sidebar (desktop) and slide-in drawer (mobile).
-    Wraps every authenticated admin page.
-
-    Usage:
-        <x-admin.layout.app-shell title="Page Title">
-            {{ $slot }}
-        </x-admin.layout.app-shell>
-
-    Props:
-        $title  (optional) — sets the <title> tag
---}}
 @props(['title' => null])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">

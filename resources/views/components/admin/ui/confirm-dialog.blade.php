@@ -1,24 +1,3 @@
-{{--
-    UI: ConfirmDialog
-    -----------------
-    Delete confirmation modal with warning icon, label, and confirm/cancel buttons.
-    Pairs with a Livewire trait that exposes:
-        $showDeleteModal     bool
-        $deleteTargetLabel   string|null
-        confirmDelete($id, $label)
-        executeDelete()
-        cancelDelete()
-
-    Usage:
-        {{-- Include once at the bottom of any Livewire view that needs delete confirmation --}}
-        @include('admin-system.components.ui.confirm-dialog')
-
-        {{-- Or as a component: --}}
-        <x-admin.ui.confirm-dialog />
-
-    The modal is shown when $showDeleteModal === true on the parent Livewire component.
---}}
-
 @if($showDeleteModal)
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40 backdrop-blur-sm">
         <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg ring-1 ring-zinc-100/80">

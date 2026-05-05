@@ -1,15 +1,3 @@
-{{--
-    Layout: Breadcrumb Bar (Desktop only)
-    --------------------------------------
-    Thin bar shown below the topbar on md+ screens.
-    Automatically resolves the current route name to a human label.
-
-    Usage:
-        <x-admin.layout.breadcrumb />
-
-    Customise:
-        - Add more entries to $routeLabels to match your routes.
---}}
 @php
     $routeLabels = [
         'dashboard'  => 'Dashboard',

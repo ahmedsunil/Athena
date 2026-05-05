@@ -1,8 +1,3 @@
-{{--
-    Forms: TextInput
-    ----------------
-    Standard text input with consistent focus styles.
---}}
 @props(['type' => 'text', 'prefix' => null, 'placeholder' => ''])
 
 @if($prefix)

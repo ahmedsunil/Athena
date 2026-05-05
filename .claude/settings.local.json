@@ -11,7 +11,9 @@
       "Bash(git -C /Users/shaan/Herd/Athena add routes/web.php resources/views/components/admin/layout/sidebar.blade.php)",
       "Bash(git -C /Users/shaan/Herd/Athena commit -m ' *)",
       "Bash(composer show *)",
-      "Bash(grep -v \"^$\\\\|INFO\\\\|Psy\")"
+      "Bash(grep -v \"^$\\\\|INFO\\\\|Psy\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -b \"laravel_session=$\\(php artisan tinker --execute=\"echo \\\\App\\\\Models\\\\User::first\\(\\)->createToken\\('test'\\)->plainTextToken;\")",
+      "Bash(python3 *)"
     ]
   }
 }

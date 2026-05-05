@@ -1,17 +1,3 @@
-{{--
-    Layout: Sidebar
-    ---------------
-    Navigation sidebar with grouped nav items + user footer.
-    Shared between the desktop aside and the mobile drawer.
-
-    Customise:
-        1. Replace the logo <img> src with your own logo path.
-        2. Edit $navGroups to match your routes.
-        3. Each item needs: label, route (prefix for active detection), href, icon (maps to <x-admin.ui.nav-icon>).
-
-    Usage:
-        @include('admin-system.components.layout.sidebar')
---}}
 @php
     $currentRoute = request()->route()?->getName() ?? '';
 

@@ -1,23 +1,3 @@
-{{--
-    UI: StatusBadge
-    ---------------
-    Colored pill for record status. Supports built-in variants and arbitrary custom ones.
-
-    Usage:
-        <x-admin.ui.status-badge status="paid" />
-        <x-admin.ui.status-badge status="pending" />
-        <x-admin.ui.status-badge status="cancelled" />
-
-        {{-- Custom label override --}}
-        <x-admin.ui.status-badge status="paid" label="Completed" />
-
-    Props:
-        $status  (required) — key that maps to a color variant
-        $label   (optional) — overrides the auto-capitalized status text
-
-    Built-in status variants:
-        paid, pending, cancelled, accepted, rejected, draft, active, inactive
---}}
 @props(['status', 'label' => null])
 
 @php

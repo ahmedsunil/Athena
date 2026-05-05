@@ -1,10 +1,3 @@
-{{--
-    Forms: FormField
-    ----------------
-    Wrapper that renders a label, an input slot, and an @error message.
-    Use this to wrap any individual form control for consistent spacing.
-    Props: label, field, required, hint.
---}}
 @props(['label', 'field', 'required' => false, 'hint' => null])
 
 <div>

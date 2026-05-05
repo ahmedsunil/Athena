@@ -1,25 +1,3 @@
-{{--
-    UI: BulkActionBar
-    -----------------
-    Red alert bar shown when rows are selected in a table.
-    Displays selection count and a destructive action button.
-
-    Usage:
-        @if(count($selected) > 0)
-            <x-admin.ui.bulk-action-bar
-                :count="count($selected)"
-                label="sale"
-                action="bulkDelete"
-                action-label="Delete Selected"
-            />
-        @endif
-
-    Props:
-        $count        (required) — number of selected rows
-        $label        (optional) — singular resource label (pluralized automatically). Default: 'item'
-        $action       (optional) — Livewire method to call. Default: 'bulkDelete'
-        $actionLabel  (optional) — button text. Default: 'Delete Selected'
---}}
 @props([
     'count'       => 0,
     'label'       => 'item',

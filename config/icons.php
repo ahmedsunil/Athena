@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'ClipboardList' => 'Clipboard List',
+    'Calendar'      => 'Calendar',
+    'BookOpen'      => 'Book Open',
+    'Users'         => 'Users',
+    'Image'         => 'Image',
+    'Download'      => 'Download',
+    'Laptop'        => 'Laptop',
+    'Mail'          => 'Mail',
+    'Camera'        => 'Camera',
+    'Info'          => 'Info',
+    'BarChart2'     => 'Bar Chart',
+    'CreditCard'    => 'Credit Card',
+    'Library'       => 'Library',
+    'Briefcase'     => 'Briefcase',
+    'Bell'          => 'Bell',
+    'Search'        => 'Search',
+    'ExternalLink'  => 'External Link',
+    'ChevronDown'   => 'Chevron Down',
+    'ArrowRight'    => 'Arrow Right',
+    'File'          => 'File',
+    'Menu'          => 'Menu',
+    'X'             => 'Close',
+];

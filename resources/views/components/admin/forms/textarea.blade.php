@@ -1,8 +1,3 @@
-{{--
-    Forms: Textarea
-    ---------------
-    Multi-line text area with consistent styling.
---}}
 @props(['rows' => 3, 'placeholder' => ''])
 
 <textarea
