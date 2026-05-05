@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — Hulhudhuffaaru School</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['DM Sans','system-ui','sans-serif'], mono: ['IBM Plex Mono','ui-monospace','monospace'] } } } }</script>
+</head>
+<body class="font-sans bg-slate-50 text-slate-900">
+<nav id="nav"></nav>
+<main id="main"><div class="flex items-center justify-center min-h-[60vh]"><div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div></div></main>
+<footer id="footer"></footer>
+<script src="app.js"></script>
+<script>
+let allEvents = [];
+let activeFilter = 'ongoing';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  App.init('events');
+  try {
+    const d = await App.fetch('events');
+    allEvents = d.events;
+    renderPage();
+  } catch(e) { App.showError(); }
+});
+
+function renderPage() {
+  document.getElementById('main').innerHTML = `
+    <div class="bg-white border-b border-slate-200 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">School Events</p>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Events</h1>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex gap-2 flex-wrap mb-8" id="filters">
+        ${['ongoing','upcoming','completed','all'].map(f=>`
+          <button data-filter="${f}" onclick="setFilter('${f}')"
+            class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors filter-btn ${f===activeFilter?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}">
+            ${f.charAt(0).toUpperCase()+f.slice(1)}
+          </button>`).join('')}
+      </div>
+      <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>`;
+  renderEvents();
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const isActive = btn.dataset.filter === f;
+    btn.className = `px-4 py-2 rounded-full text-sm font-semibold border transition-colors filter-btn ${isActive?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}`;
+  });
+  renderEvents();
+}
+
+function renderEvents() {
+  const filtered = activeFilter === 'all' ? allEvents : allEvents.filter(e => e.status === activeFilter);
+  const grid = document.getElementById('events-grid');
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="col-span-3 text-center py-16 text-slate-400"><p class="text-lg font-semibold">No ${activeFilter} events</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(e => `
+    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+      <div class="relative h-48 overflow-hidden">
+        <img src="${e.coverImageUrl}" alt="${e.title}" class="w-full h-full object-cover">
+        <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${App.statusBadge(e.status)}">${e.status}</span>
+      </div>
+      <div class="p-5">
+        <p class="text-xs text-sky-600 font-semibold mb-1">${App.formatShortDate(e.dateStart)}${e.dateEnd && e.dateEnd !== e.dateStart ? ' – '+App.formatShortDate(e.dateEnd) : ''}</p>
+        <h3 class="font-bold text-slate-900 mb-1">${e.title}</h3>
+        <p class="text-xs text-slate-500 mb-3 flex items-center gap-1">${App.icon('Info')} ${e.location}</p>
+        <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">${e.shortDescription}</p>
+        <a href="event.html?id=${e.id}" class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">View Details</a>
+      </div>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About — Hulhudhuffaaru School</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ["DM Sans", "system-ui", "sans-serif"],
+                            mono: [
+                                "IBM Plex Mono",
+                                "ui-monospace",
+                                "monospace",
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body class="font-sans bg-white text-slate-900">
+        <nav id="nav"></nav>
+        <main id="main">
+            <div class="flex items-center justify-center min-h-[60vh]">
+                <div
+                    class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"
+                ></div>
+            </div>
+        </main>
+        <footer id="footer"></footer>
+        <script src="app.js"></script>
+        <script>
+            let activeTab = "about";
+            let activeCategory = "all";
+            let activeYear = "all";
+            let pageData = null;
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                App.init("about");
+                try {
+                    pageData = await App.fetch("about");
+                    renderPage();
+                } catch (e) {
+                    App.showError();
+                }
+            });
+
+            function renderPage() {
+                const tabs = [
+                    { id: "about", label: "About Us" },
+                    { id: "history", label: "History" },
+                    { id: "achievements", label: "Achievements" },
+                ];
+
+                document.getElementById("main").innerHTML = `
+    <!-- Hero -->
+    <section class="relative h-72 sm:h-96 overflow-hidden">
+      <img src="${pageData.school.heroImageUrl}" alt="" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
+      <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-10">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-2">About Our School</p>
+          <h1 class="text-3xl sm:text-5xl font-black text-white">${pageData.school.name}</h1>
+          <p class="text-slate-300 italic mt-1">"${pageData.school.motto}"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab bar -->
+    <div class="bg-white border-b border-slate-200 sticky top-16 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex gap-0 overflow-x-auto">
+          ${tabs
+              .map(
+                  (t) => `
+            <button data-tab="${t.id}" onclick="switchTab('${t.id}')" class="tab-btn px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors ${t.id === activeTab ? "border-rose-600 text-rose-600" : "border-transparent text-slate-500 hover:text-slate-700"}">
+              ${t.label}
+            </button>`,
+              )
+              .join("")}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab content -->
+    <div id="tab-content"></div>`;
+
+                renderTab();
+            }
+
+            function switchTab(t) {
+                activeTab = t;
+                document.querySelectorAll(".tab-btn").forEach((btn) => {
+                    const isActive = btn.dataset.tab === t;
+                    btn.className = `tab-btn px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors ${isActive ? "border-rose-600 text-rose-600" : "border-transparent text-slate-500 hover:text-slate-700"}`;
+                });
+                renderTab();
+            }
+
+            function renderTab() {
+                const el = document.getElementById("tab-content");
+                if (activeTab === "about") el.innerHTML = renderAboutTab();
+                else if (activeTab === "history")
+                    el.innerHTML = renderHistoryTab();
+                else if (activeTab === "achievements")
+                    el.innerHTML = renderAchievementsTab();
+            }
+
+            // ── renderBlock (History tab) ────────────────────────────────────────────────
+            function renderBlock(block) {
+                if (block.type === "paragraph")
+                    return `<p class="text-slate-600 leading-relaxed">${block.text}</p>`;
+                if (block.type === "founderList")
+                    return `<ul class="space-y-2 my-1">${block.items.map((f) => `<li class="flex items-baseline gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 flex-shrink-0 mt-1.5"></span><span class="text-slate-800"><strong>${f.name}</strong><span class="text-slate-500"> — ${f.subject}</span></span></li>`).join("")}</ul>`;
+                if (block.type === "highlightList")
+                    return `<dl class="space-y-2 my-1">${block.items.map((h) => `<div class="flex gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0 mt-1.5"></span><div class="text-sm"><dt class="inline font-semibold text-slate-800">${h.label}: </dt><dd class="inline text-slate-600">${h.text}</dd></div></div>`).join("")}</dl>`;
+                return "";
+            }
+
+            // ── Tab: About Us ────────────────────────────────────────────────────────────
+            function renderAboutTab() {
+                const d = pageData;
+                return `
+    <!-- Mission & Vision -->
+    <section class="py-20 sm:py-28 bg-stone-950 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image:repeating-linear-gradient(0deg,#f43f5e 0,#f43f5e 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#f43f5e 0,#f43f5e 1px,transparent 0,transparent 48px)"></div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-14">
+          <span class="text-xs font-black uppercase tracking-widest text-rose-500">Our Purpose</span>
+          <h2 class="text-4xl sm:text-5xl font-black text-white mt-2 leading-tight">Mission &amp; Vision</h2>
+          <div class="mt-5 w-14 h-0.5 bg-rose-500"></div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-stone-800">
+          <div class="relative pb-12 lg:pb-0 lg:pr-14">
+            <div class="absolute top-0 right-0 lg:right-auto lg:top-0 text-[8rem] font-black text-rose-500/8 leading-none select-none pointer-events-none">01</div>
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-full border-2 border-rose-500 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                </div>
+                <p class="text-xs font-black uppercase tracking-widest text-rose-500">Mission</p>
+              </div>
+              <p class="text-stone-200 text-lg leading-relaxed">${d.mission.missionStatement}</p>
+            </div>
+          </div>
+          <div class="relative pt-12 lg:pt-0 lg:pl-14">
+            <div class="absolute top-0 right-0 text-[8rem] font-black text-sky-500/8 leading-none select-none pointer-events-none">02</div>
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-full border-2 border-sky-400 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                </div>
+                <p class="text-xs font-black uppercase tracking-widest text-sky-400">Vision</p>
+              </div>
+              <p class="text-stone-200 text-lg leading-relaxed">${d.mission.visionStatement}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principal's Message -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">A Word From Leadership</p>
+          <h2 class="text-3xl font-black text-slate-900">Principal's Message</h2>
+          <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
+        </div>
+        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 sm:p-10">
+          <div class="flex flex-col sm:flex-row gap-8">
+            <div class="flex-shrink-0 flex flex-col items-center gap-3">
+              <div class="w-60 h-60 rounded-full overflow-hidden ring-4 ring-white shadow-md">
+                <img src="${d.principal.photoUrl}" alt="${d.principal.name}" class="w-full h-full object-cover object-top">
+              </div>
+              <div class="text-center">
+                <p class="font-bold text-slate-900">${d.principal.name}</p>
+                <p class="text-xs text-rose-600 font-semibold mt-0.5">${d.principal.title}</p>
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="border-l-4 border-rose-500 pl-5 mb-6"><p class="text-xs font-bold uppercase tracking-widest text-rose-600">Open Letter</p></div>
+              <div class="space-y-4 text-slate-700 leading-relaxed text-sm">
+                ${d.principal.message
+                    .split("\n\n")
+                    .filter(Boolean)
+                    .map(
+                        (p, i) =>
+                            `<p class="${i === 0 ? "font-medium text-slate-800" : ""}">${p}</p>`,
+                    )
+                    .join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="py-16 sm:py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">The People Behind the School</p>
+          <h2 class="text-3xl font-black text-slate-900">Leadership Team</h2>
+          <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${d.leadership
+              .map(
+                  (m, i) => `
+            <div class="rounded-2xl border ${i === 0 ? "border-rose-200 hover:border-rose-400" : "border-slate-200 hover:border-slate-300"} bg-white p-6 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center">
+              <div class="relative mb-4">
+                <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ${i === 0 ? "ring-rose-100" : "ring-slate-100"}">
+                  <img src="${m.photoUrl}" alt="${m.name}" class="w-full h-full object-cover object-top">
+                </div>
+                ${i === 0 ? `<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">Principal</div>` : ""}
+              </div>
+              <p class="font-bold text-slate-900 mt-${i === 0 ? "3" : "1"}">${m.name}</p>
+              <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 ${i === 0 ? "text-rose-600" : "text-sky-600"}">${m.role}</p>
+              <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">${m.bio}</p>
+            </div>`,
+              )
+              .join("")}
+        </div>
+      </div>
+    </section>`;
+            }
+
+            // ── Tab: History ─────────────────────────────────────────────────────────────
+            function renderHistoryTab() {
+                const d = pageData;
+                const meta = [
+                    {
+                        year: "1993 – 1995",
+                        nodeBg: "bg-rose-500",
+                        ring: "ring-rose-200",
+                        badgeCls: "bg-rose-50 border-rose-200 text-rose-700",
+                    },
+                    {
+                        year: "1994 – 1995",
+                        nodeBg: "bg-amber-500",
+                        ring: "ring-amber-200",
+                        badgeCls: "bg-amber-50 border-amber-200 text-amber-700",
+                    },
+                    {
+                        year: "May 1995",
+                        nodeBg: "bg-sky-500",
+                        ring: "ring-sky-200",
+                        badgeCls: "bg-sky-50 border-sky-200 text-sky-700",
+                    },
+                    {
+                        year: "Present",
+                        nodeBg: "bg-emerald-500",
+                        ring: "ring-emerald-200",
+                        badgeCls:
+                            "bg-emerald-50 border-emerald-200 text-emerald-700",
+                    },
+                ];
+
+                return `
+    <!-- Overview -->
+    <section class="py-16 sm:py-20 bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div class="space-y-6">
+            <div class="pb-5 border-b border-slate-100">
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Founded</p>
+              <p class="text-3xl font-black text-rose-600">${d.school.foundedYear}</p>
+            </div>
+            <div class="pb-5 border-b border-slate-100">
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Motto</p>
+              <p class="font-semibold text-slate-900 italic">"${d.school.motto}"</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Tagline</p>
+              <p class="font-medium text-slate-700">${d.school.tagline}</p>
+            </div>
+          </div>
+          <div class="lg:col-span-2">
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">Who We Are</p>
+            ${d.school.description
+                .split("\n\n")
+                .filter(Boolean)
+                .map(
+                    (p, i) =>
+                        `<p class="mb-4 leading-relaxed ${i === 0 ? "text-lg font-medium text-slate-800" : "text-slate-600"}">${p}</p>`,
+                )
+                .join("")}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="py-16 sm:py-24 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-14 pb-10 border-b border-slate-100">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">School History</p>
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900 mb-5">Our Journey</h2>
+          <p class="text-slate-500 text-lg leading-relaxed max-w-2xl">${d.schoolHistory.intro}</p>
+        </div>
+        <div class="relative">
+          <div class="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-rose-300 via-slate-200 to-slate-100"></div>
+          <div class="space-y-10">
+            ${d.schoolHistory.sections
+                .map(
+                    (s, i) => `
+              <div class="relative flex gap-6 sm:gap-10">
+                <div class="flex-shrink-0 pt-0.5 z-10">
+                  <div class="w-10 h-10 rounded-full bg-white ring-4 ${meta[i] ? meta[i].ring : "ring-slate-200"} flex items-center justify-center shadow-sm">
+                    <div class="w-3.5 h-3.5 rounded-full ${meta[i] ? meta[i].nodeBg : "bg-slate-400"}"></div>
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0 pb-4">
+                  <span class="inline-block text-[11px] font-black uppercase tracking-wider border px-2.5 py-0.5 rounded-full mb-3 ${meta[i] ? meta[i].badgeCls : "bg-slate-50 border-slate-200 text-slate-600"}">${meta[i] ? meta[i].year : ""}</span>
+                  <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-4 leading-snug">${s.title}</h3>
+                  <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 sm:p-7 space-y-3">
+                    ${s.blocks.map((b) => renderBlock(b)).join("")}
+                  </div>
+                </div>
+              </div>`,
+                )
+                .join("")}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founding Teachers -->
+    <section class="py-16 sm:py-20 bg-stone-950 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image:repeating-linear-gradient(0deg,#d97706 0,#d97706 1px,transparent 0,transparent 32px),repeating-linear-gradient(90deg,#d97706 0,#d97706 1px,transparent 0,transparent 32px)"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <div class="inline-flex items-center gap-3 mb-4">
+            <span class="h-px w-10 bg-amber-600/50"></span>
+            <span class="text-[10px] font-black uppercase tracking-widest text-amber-500 border border-amber-700/30 px-3 py-1 rounded-sm">Est. 1993</span>
+            <span class="h-px w-10 bg-amber-600/50"></span>
+          </div>
+          <h2 class="text-3xl font-black text-white">Our Founding Teachers</h2>
+          <p class="mt-3 text-amber-200/50 text-sm max-w-md mx-auto">The educators who built this school from the ground up during the years of migration and transition.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+          ${d.foundingMembers
+              .map(
+                  (m) => `
+            <div class="group">
+              <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 ring-1 ring-amber-700/20">
+                <img src="${m.photoUrl}" alt="${m.name}" class="w-full h-full object-cover object-top grayscale sepia brightness-75 group-hover:grayscale-0 group-hover:sepia-0 group-hover:brightness-90 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>
+                <div class="absolute top-2 left-2"><span class="bg-amber-500 text-stone-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-sm">Founder</span></div>
+              </div>
+              <p class="font-bold text-white text-sm leading-tight">${m.name}</p>
+              <p class="text-amber-400 text-[11px] font-semibold uppercase tracking-wide mt-0.5">${m.subject}</p>
+              <p class="text-stone-400 text-xs mt-1.5 leading-relaxed line-clamp-3">${m.tribute}</p>
+            </div>`,
+              )
+              .join("")}
+        </div>
+      </div>
+    </section>`;
+            }
+
+            // ── Tab: Achievements ────────────────────────────────────────────────────────
+            function catActiveCls(cat) {
+                if (cat === "students")
+                    return "bg-sky-600 border-sky-600 text-white";
+                if (cat === "staff")
+                    return "bg-violet-600 border-violet-600 text-white";
+                if (cat === "school")
+                    return "bg-rose-600 border-rose-600 text-white";
+                return "bg-slate-900 border-slate-900 text-white";
+            }
+
+            function catBadgeCls(cat) {
+                if (cat === "students") return "bg-sky-100 text-sky-700";
+                if (cat === "staff") return "bg-violet-100 text-violet-700";
+                if (cat === "school") return "bg-rose-100 text-rose-700";
+                return "bg-slate-100 text-slate-600";
+            }
+
+            function renderAchievementCards() {
+                const all = pageData.achievements || [];
+                const filtered = all.filter((a) => {
+                    const catOk =
+                        activeCategory === "all" ||
+                        a.category === activeCategory;
+                    const yearOk =
+                        activeYear === "all" ||
+                        String(a.year) === String(activeYear);
+                    return catOk && yearOk;
+                });
+
+                if (filtered.length === 0) {
+                    return `<div class="flex flex-col items-center justify-center py-20 text-center">
+      <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+        <svg class="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      </div>
+      <p class="text-slate-500 font-medium">No achievements match this filter.</p>
+    </div>`;
+                }
+
+                return `<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+    ${filtered
+        .map(
+            (a) => `
+      <div class="bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all duration-200 p-6 flex flex-col gap-4">
+        <div class="flex items-start gap-4">
+          ${
+              a.photoUrl
+                  ? `<div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-slate-100 flex-shrink-0">
+            <img src="${a.photoUrl}" alt="${a.personName || ""}" class="w-full h-full object-cover object-top">
+          </div>`
+                  : `<div class="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+            <svg class="w-10 h-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>`
+          }
+          <div class="flex-1 min-w-0 pt-1">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${catBadgeCls(a.category)}">${a.category}</span>
+              <span class="text-xs font-semibold text-slate-400 flex-shrink-0">${a.year}</span>
+            </div>
+            ${a.personName ? `<p class="text-sm font-semibold text-slate-700 mt-1">${a.personName}</p>` : ""}
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-bold text-slate-900 text-base leading-snug mb-2">${a.title}</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">${a.description}</p>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+          <span class="inline-flex items-center gap-1.5 text-xs font-black text-slate-900">
+            <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            ${a.award}
+          </span>
+          <span class="text-slate-300">·</span>
+          <span class="text-xs text-slate-500">${a.event}</span>
+        </div>
+      </div>`,
+        )
+        .join("")}
+  </div>`;
+            }
+
+            function switchCategory(cat) {
+                activeCategory = cat;
+                document.querySelectorAll(".cat-btn").forEach((btn) => {
+                    const isActive = btn.dataset.cat === cat;
+                    btn.className = `cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${isActive ? catActiveCls(cat) : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"}`;
+                });
+                document.getElementById("achievements-grid").innerHTML =
+                    renderAchievementCards();
+            }
+
+            function switchYear(year) {
+                activeYear = year;
+                document.getElementById("achievements-grid").innerHTML =
+                    renderAchievementCards();
+            }
+
+            function renderAchievementsTab() {
+                const d = pageData;
+                const all = d.achievements || [];
+
+                const totalCount = all.length;
+                const studentCount = all.filter(
+                    (a) => a.category === "students",
+                ).length;
+                const schoolCount = all.filter(
+                    (a) => a.category === "school",
+                ).length;
+                const years = [...new Set(all.map((a) => a.year))].sort(
+                    (a, b) => b - a,
+                );
+
+                return `
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+      <!-- Section header -->
+      <div class="mb-10">
+        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Recognition &amp; Honours</p>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Achievements</h2>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="grid grid-cols-3 gap-4 mb-10">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center">
+          <p class="text-3xl font-black text-slate-900">${totalCount}</p>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mt-1">Total</p>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 rounded-2xl p-5 text-center">
+          <p class="text-3xl font-black text-sky-700">${studentCount}</p>
+          <p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-1">Students</p>
+        </div>
+        <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 text-center">
+          <p class="text-3xl font-black text-rose-700">${schoolCount}</p>
+          <p class="text-xs font-semibold uppercase tracking-wide text-rose-600 mt-1">School-wide</p>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <div class="flex gap-2 flex-wrap">
+          ${["all", "students", "staff", "school"]
+              .map(
+                  (cat) => `
+            <button
+              onclick="switchCategory('${cat}')"
+              data-cat="${cat}"
+              class="cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${activeCategory === cat ? catActiveCls(cat) : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"}">
+              ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </button>`,
+              )
+              .join("")}
+        </div>
+        <select onchange="switchYear(this.value)" class="sm:ml-auto px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-rose-400">
+          <option value="all" ${activeYear === "all" ? "selected" : ""}>All Years</option>
+          ${years.map((y) => `<option value="${y}" ${String(activeYear) === String(y) ? "selected" : ""}>${y}</option>`).join("")}
+        </select>
+      </div>
+
+      <!-- Cards -->
+      <div id="achievements-grid">
+        ${renderAchievementCards()}
+      </div>
+    </div>`;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Hulhudhuffaaru School</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['DM Sans','system-ui','sans-serif'], mono: ['IBM Plex Mono','ui-monospace','monospace'] } } } }</script>
+</head>
+<body class="font-sans bg-slate-50 text-slate-900">
+<nav id="nav"></nav>
+<main id="main"><div class="flex items-center justify-center min-h-[60vh]"><div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div></div></main>
+<footer id="footer"></footer>
+<script src="app.js"></script>
+<script>
+let allAlbums = [];
+let activeCategory = 'All';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  App.init('gallery');
+  try {
+    const d = await App.fetch('gallery');
+    allAlbums = d.albums;
+    renderPage(d.categories);
+  } catch(e) { App.showError(); }
+});
+
+function renderPage(categories) {
+  document.getElementById('main').innerHTML = `
+    <div class="bg-white border-b border-slate-200 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Photo Albums</p>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Gallery</h1>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-wrap gap-2 mb-8" id="cat-filters">
+        ${['All',...categories].map(c=>`
+          <button data-cat="${c}" onclick="filterAlbums('${c}')"
+            class="cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${c==='All'?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}">
+            ${c}
+          </button>`).join('')}
+      </div>
+      <div id="albums-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+    </div>`;
+  renderAlbums();
+}
+
+function filterAlbums(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.className = `cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${isActive?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}`;
+  });
+  renderAlbums();
+}
+
+function renderAlbums() {
+  const filtered = activeCategory === 'All' ? allAlbums : allAlbums.filter(a => a.category === activeCategory);
+  document.getElementById('albums-grid').innerHTML = filtered.map(a => `
+    <div class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-0.5">
+      <div class="relative h-44 overflow-hidden">
+        <img src="${a.coverImage}" alt="${a.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <span class="absolute bottom-2 left-2 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-700 px-2 py-0.5 rounded">${a.category}</span>
+        <span class="absolute bottom-2 right-2 text-[10px] text-white/80">${App.icon('Camera')} ${a.photoCount}</span>
+      </div>
+      <div class="p-4">
+        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">${a.title}</h3>
+        <p class="text-xs text-slate-400 mb-3">${App.formatShortDate(a.date)}</p>
+        ${a.facebookUrl ? `<a href="${a.facebookUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 hover:text-sky-700">View on Facebook ${App.icon('ExternalLink')}</a>` : `<span class="text-xs text-slate-300">No Facebook link</span>`}
+      </div>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>

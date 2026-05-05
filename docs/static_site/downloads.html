@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downloads — Hulhudhuffaaru School</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['DM Sans','system-ui','sans-serif'], mono: ['IBM Plex Mono','ui-monospace','monospace'] } } } }</script>
+</head>
+<body class="font-sans bg-slate-50 text-slate-900">
+<nav id="nav"></nav>
+<main id="main"><div class="flex items-center justify-center min-h-[60vh]"><div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div></div></main>
+<footer id="footer"></footer>
+<script src="app.js"></script>
+<script>
+let allDocs = [];
+let activeCategory = 'All';
+let searchQuery = '';
+const fileTypeColors = { PDF:'bg-rose-100 text-rose-700', DOCX:'bg-sky-100 text-sky-700', XLS:'bg-emerald-100 text-emerald-700', XLSX:'bg-emerald-100 text-emerald-700' };
+const audienceColors = { Parents:'bg-violet-100 text-violet-700', Students:'bg-amber-100 text-amber-700', Staff:'bg-slate-100 text-slate-600' };
+
+document.addEventListener('DOMContentLoaded', async () => {
+  App.init('downloads');
+  try {
+    const d = await App.fetch('downloads');
+    allDocs = d.documents;
+    renderPage(d.categories);
+  } catch(e) { App.showError(); }
+});
+
+function renderPage(categories) {
+  document.getElementById('main').innerHTML = `
+    <div class="bg-white border-b border-slate-200 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Document Library</p>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-5">Downloads</h1>
+        <div class="relative max-w-md">
+          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">${App.icon('Search')}</span>
+          <input type="text" id="search-input" placeholder="Search documents..." oninput="onSearch(this.value)"
+            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm bg-white">
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-wrap gap-2 mb-6" id="cat-filters">
+        ${['All',...categories].map(c=>`
+          <button data-cat="${c}" onclick="filterDocs('${c}')"
+            class="cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${c==='All'?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}">
+            ${c}
+          </button>`).join('')}
+      </div>
+      <div id="docs-list" class="space-y-2"></div>
+    </div>`;
+  renderDocs();
+}
+
+function onSearch(val) { searchQuery = val.toLowerCase(); renderDocs(); }
+
+function filterDocs(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.className = `cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${isActive?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}`;
+  });
+  renderDocs();
+}
+
+function renderDocs() {
+  let filtered = activeCategory === 'All' ? allDocs : allDocs.filter(d => d.category === activeCategory);
+  if (searchQuery) filtered = filtered.filter(d => d.title.toLowerCase().includes(searchQuery));
+  const el = document.getElementById('docs-list');
+  if (!filtered.length) {
+    el.innerHTML = `<div class="text-center py-12 text-slate-400"><p class="font-semibold">No documents found</p></div>`;
+    return;
+  }
+  el.innerHTML = filtered.map(doc => `
+    <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center gap-4 hover:shadow-sm transition-shadow">
+      <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0">${App.icon('File')}</div>
+      <div class="flex-1 min-w-0">
+        <p class="font-semibold text-slate-900 text-sm truncate">${doc.title}</p>
+        <div class="flex items-center gap-2 mt-1 flex-wrap">
+          <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${fileTypeColors[doc.fileType]||'bg-slate-100 text-slate-600'}">${doc.fileType}</span>
+          <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${audienceColors[doc.audience]||'bg-slate-100 text-slate-600'}">${doc.audience}</span>
+          <span class="text-xs text-slate-400">${doc.fileSize}</span>
+          <span class="text-xs text-slate-400">${App.formatShortDate(doc.publishedAt)}</span>
+        </div>
+      </div>
+      <a href="${doc.downloadUrl}" class="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-2 rounded-lg transition-colors">
+        ${App.icon('Download')} Download
+      </a>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>

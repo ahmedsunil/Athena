@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event — Hulhudhuffaaru School</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['DM Sans','system-ui','sans-serif'], mono: ['IBM Plex Mono','ui-monospace','monospace'] } } } }</script>
+</head>
+<body class="font-sans bg-slate-50 text-slate-900">
+<nav id="nav"></nav>
+<main id="main"><div class="flex items-center justify-center min-h-[60vh]"><div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div></div></main>
+<footer id="footer"></footer>
+<script src="app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  App.init('events');
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) { window.location.replace('events.html'); return; }
+  try {
+    const d = await App.fetch('events');
+    const e = d.events.find(x => x.id === id);
+    if (!e) { document.getElementById('main').innerHTML = `<div class="max-w-3xl mx-auto px-4 py-24 text-center"><p class="text-slate-500 text-lg">Event not found.</p><a href="events.html" class="mt-4 inline-block text-rose-600 font-semibold hover:underline">← Back to Events</a></div>`; return; }
+    document.title = `${e.title} — Hulhudhuffaaru School`;
+    renderPage(e);
+  } catch(err) { App.showError(); }
+});
+
+function renderPage(e) {
+  document.getElementById('main').innerHTML = `
+    <!-- Hero -->
+    <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
+      <img src="${e.coverImageUrl}" alt="${e.title}" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <span class="inline-block text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3 ${App.statusBadge(e.status)}">${e.status}</span>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">${e.title}</h1>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+
+      <!-- Back -->
+      <a href="events.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors mb-10">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+        Back to Events
+      </a>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <!-- Main content -->
+        <div class="lg:col-span-2 space-y-8">
+          <div class="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-5">About This Event</p>
+            <div class="space-y-4 text-slate-600 leading-relaxed">
+              ${e.fullDescription.split('\n\n').filter(Boolean).map((p,i)=>`<p class="${i===0?'text-slate-800 font-medium':''}">${p}</p>`).join('')}
+            </div>
+          </div>
+
+          ${e.attachments && e.attachments.length ? `
+          <div class="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-5">Attachments</p>
+            <div class="space-y-2">
+              ${e.attachments.map(a=>`
+                <a href="${a.fileUrl}" class="flex items-center gap-4 p-4 bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-200 rounded-xl transition-colors group">
+                  <div class="w-10 h-10 rounded-lg bg-rose-100 group-hover:bg-rose-200 flex items-center justify-center flex-shrink-0 transition-colors">
+                    ${App.icon('File')}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-slate-800 group-hover:text-rose-700 truncate transition-colors">${a.title}</p>
+                    <p class="text-xs text-slate-400 uppercase tracking-wide">${a.fileType}</p>
+                  </div>
+                  <svg class="w-4 h-4 text-slate-400 group-hover:text-rose-500 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                </a>`).join('')}
+            </div>
+          </div>` : ''}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-5">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Event Details</p>
+            <dl class="space-y-4">
+              <div>
+                <dt class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Date</dt>
+                <dd class="text-sm font-semibold text-slate-800">${App.formatShortDate(e.dateStart)}${e.dateEnd && e.dateEnd !== e.dateStart ? ' – ' + App.formatShortDate(e.dateEnd) : ''}</dd>
+              </div>
+              <div>
+                <dt class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Location</dt>
+                <dd class="text-sm text-slate-700 leading-snug">${e.location}</dd>
+              </div>
+              <div>
+                <dt class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Status</dt>
+                <dd><span class="inline-block text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${App.statusBadge(e.status)}">${e.status}</span></dd>
+              </div>
+            </dl>
+          </div>
+
+          ${e.contact ? `
+          <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Contact</p>
+            <p class="font-bold text-slate-900 text-sm">${e.contact.name}</p>
+            <p class="text-xs text-slate-500 mb-3">${e.contact.role}</p>
+            ${e.contact.email ? `<a href="mailto:${e.contact.email}" class="flex items-center gap-2 text-xs text-rose-600 hover:text-rose-700 font-medium hover:underline">${App.icon('Info')} ${e.contact.email}</a>` : ''}
+            ${e.contact.phone ? `<p class="text-xs text-slate-500 mt-1">${e.contact.phone}</p>` : ''}
+          </div>` : ''}
+        </div>
+
+      </div>
+    </div>`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+{
+  "_meta": {
+    "models": {
+      "album": "A photo album representing a school event or occasion, with a cover image, date, photo count, category, and an optional link to the full album on Facebook.",
+      "category": "A label used to group albums (e.g. Events, Sports, Graduation) for filtering."
+    },
+    "relationships": [
+      "Each album belongs to one category",
+      "Albums are browsed and filtered by category on the Gallery page"
+    ]
+  },
+
+  "categories": [
+    "Events",
+    "Sports",
+    "Graduation",
+    "Cultural",
+    "Academic",
+    "Trips"
+  ],
+
+  "albums": [
+    {
+      "id": "album-graduation-2024",
+      "title": "Graduation Ceremony 2024",
+      "category": "Graduation",
+      "date": "2024-11-15",
+      "photoCount": 148,
+      "coverImage": "https://images.unsplash.com/photo-1627556592933-e7d17e8b6463?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-interhouse-2024",
+      "title": "Inter-House Sports Competition 2024",
+      "category": "Sports",
+      "date": "2024-10-04",
+      "photoCount": 212,
+      "coverImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-cultural-day-2024",
+      "title": "Cultural Day & Heritage Festival 2024",
+      "category": "Cultural",
+      "date": "2024-09-20",
+      "photoCount": 93,
+      "coverImage": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-science-fair-2024",
+      "title": "Annual Science Fair 2024",
+      "category": "Academic",
+      "date": "2024-09-06",
+      "photoCount": 67,
+      "coverImage": "https://images.unsplash.com/photo-1532094349884-543559ac01b4?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-founders-day-2024",
+      "title": "Founder's Day Celebration",
+      "category": "Events",
+      "date": "2024-07-14",
+      "photoCount": 104,
+      "coverImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-abuja-trip-2024",
+      "title": "FCT Educational Trip — Abuja",
+      "category": "Trips",
+      "date": "2024-06-21",
+      "photoCount": 178,
+      "coverImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-speech-day-2024",
+      "title": "Prize Giving & Speech Day 2024",
+      "category": "Events",
+      "date": "2024-06-07",
+      "photoCount": 89,
+      "coverImage": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-football-2024",
+      "title": "State Schools Football Tournament",
+      "category": "Sports",
+      "date": "2024-04-18",
+      "photoCount": 134,
+      "coverImage": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-debate-2024",
+      "title": "National Debate Championship — Lagos",
+      "category": "Academic",
+      "date": "2024-03-29",
+      "photoCount": 41,
+      "coverImage": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=80",
+      "facebookUrl": ""
+    },
+    {
+      "id": "album-drama-2024",
+      "title": "End-of-Term Drama Production",
+      "category": "Cultural",
+      "date": "2024-03-15",
+      "photoCount": 76,
+      "coverImage": "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-graduation-2023",
+      "title": "Graduation Ceremony 2023",
+      "category": "Graduation",
+      "date": "2023-11-17",
+      "photoCount": 162,
+      "coverImage": "https://images.unsplash.com/photo-1576267423048-15c0040fec78?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    },
+    {
+      "id": "album-sports-day-2023",
+      "title": "Annual Sports Day 2023",
+      "category": "Sports",
+      "date": "2023-10-13",
+      "photoCount": 198,
+      "coverImage": "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600&q=80",
+      "facebookUrl": "https://facebook.com"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hulhudhuffaaru School</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['DM Sans','system-ui','sans-serif'], mono: ['IBM Plex Mono','ui-monospace','monospace'] } } } }</script>
+</head>
+<body class="font-sans bg-white text-slate-900">
+<nav id="nav"></nav>
+<main id="main"><div class="flex items-center justify-center min-h-[60vh]"><div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div></div></main>
+<footer id="footer"></footer>
+<script src="app.js"></script>
+<script>
+let slideData = [];
+let currentSlide = 0;
+let slideTimer = null;
+
+document.addEventListener('DOMContentLoaded', async () => {
+  App.init('home');
+  try {
+    const d = await App.fetch('home');
+    slideData = d.slides || [];
+    renderPage(d);
+    startSlideshow();
+  } catch(e) { App.showError(); }
+});
+
+function renderPage(d) {
+  document.getElementById('main').innerHTML = `
+    <!-- Hero -->
+    <section class="relative h-[55vh] min-h-[420px] overflow-hidden" id="hero-section">
+      <img id="hero-img" src="${d.slides[0].imageUrl}" alt="" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
+      <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+        <div class="max-w-xl">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-3">Hulhudhuffaaru School</p>
+          <h1 id="hero-title" class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5">${d.slides[0].title}</h1>
+          <p id="hero-sub" class="text-slate-300 text-base mb-8 leading-relaxed">${d.slides[0].subtitle}</p>
+          <div class="flex flex-wrap gap-3">
+            <a id="hero-cta" href="admissions.html" class="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm">${d.slides[0].ctaLabel}</a>
+            <a href="about.html" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2" id="slide-dots">
+        ${d.slides.map((_, i) => `<button onclick="goToSlide(${i})" class="slide-dot w-2 h-2 rounded-full transition-all ${i===0?'bg-white w-4':'bg-white/40'}"></button>`).join('')}
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="bg-rose-600 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center text-white">
+          ${d.stats.map(s => `
+            <div>
+              <p class="text-3xl sm:text-4xl font-black">${s.value}</p>
+              <p class="text-rose-200 text-sm font-medium mt-1">${s.label}</p>
+            </div>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="py-16 sm:py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Navigate the Portal</p>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Quick Access</h2>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          ${d.quickLinks.map(q => `
+            <a href="${q.href.replace('/', '')}.html" class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-200 hover:shadow-md transition-all text-center">
+              <div class="w-10 h-10 rounded-xl bg-rose-50 group-hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors">${App.icon(q.icon)}</div>
+              <span class="text-sm font-semibold text-slate-700 group-hover:text-slate-900">${q.label}</span>
+            </a>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Events -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">What's On</p>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Featured Events</h2>
+          </div>
+          <a href="events.html" class="text-sm font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1">${App.icon('ArrowRight')} All Events</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          ${d.featuredEvents.map(e => `
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+              <p class="text-xs font-semibold text-sky-600 mb-2">${App.formatShortDate(e.date)}</p>
+              <h3 class="font-bold text-slate-900 mb-2">${e.title}</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">${e.description}</p>
+            </div>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Principal's Message -->
+    <section class="py-16 sm:py-20 bg-slate-900">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
+          <div class="flex flex-col md:flex-row">
+            <div class="flex-shrink-0 w-full md:w-56">
+              <img src="${d.principal.photoUrl}" alt="${d.principal.name}" class="w-full h-56 md:h-full object-cover object-top">
+            </div>
+            <div class="flex-1 p-8 flex flex-col justify-center">
+              <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-4">Principal's Welcome</p>
+              <p class="text-slate-200 leading-relaxed italic text-lg">"${d.principal.message.split('.').slice(0,2).join('.')}"</p>
+              <div class="mt-6 pt-5 border-t border-slate-700">
+                <p class="font-bold text-white">${d.principal.name}</p>
+                <p class="text-sm text-slate-400">${d.principal.title}</p>
+              </div>
+              <a href="about.html" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-400 hover:text-rose-300">Read full message ${App.icon('ArrowRight')}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Community Voices</p>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">What People Say</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          ${d.testimonials.map(t => `
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col">
+              <p class="text-sm text-slate-700 leading-relaxed italic flex-1">"${t.quote}"</p>
+              <div class="mt-5 flex items-center gap-3">
+                <img src="${t.photoUrl}" alt="${t.author}" class="w-10 h-10 rounded-full object-cover">
+                <div>
+                  <p class="text-sm font-semibold text-slate-900">${t.author}</p>
+                  <p class="text-xs text-slate-500">${t.role}</p>
+                </div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact (anchor) -->
+    <section id="contact" class="py-16 sm:py-20 bg-slate-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Get In Touch</p>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Contact Us</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">${App.icon('Mail')}</div><div><p class="font-semibold text-slate-900 text-sm">Email</p><p class="text-slate-600 text-sm">${d.contact.email}</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0">${App.icon('Users')}</div><div><p class="font-semibold text-slate-900 text-sm">Phone</p><p class="text-slate-600 text-sm">${d.contact.phone}</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">${App.icon('Info')}</div><div><p class="font-semibold text-slate-900 text-sm">Address</p><p class="text-slate-600 text-sm">${d.contact.address}</p></div></div>
+          </div>
+          <form class="space-y-4" onsubmit="return false">
+            <input type="text" placeholder="Your name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
+            <input type="email" placeholder="Email address" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
+            <textarea rows="4" placeholder="Your message" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm resize-none"></textarea>
+            <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl transition-colors text-sm">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>`;
+}
+
+function goToSlide(i) {
+  currentSlide = i;
+  const s = slideData[i];
+  if (!s) return;
+  const img = document.getElementById('hero-img');
+  if (img) { img.style.opacity = '0'; setTimeout(() => { img.src = s.imageUrl; img.style.opacity = '1'; }, 300); }
+  const t = document.getElementById('hero-title'); if (t) t.textContent = s.title;
+  const sub = document.getElementById('hero-sub'); if (sub) sub.textContent = s.subtitle;
+  const cta = document.getElementById('hero-cta'); if (cta) cta.textContent = s.ctaLabel;
+  document.querySelectorAll('.slide-dot').forEach((d, idx) => {
+    d.className = `slide-dot rounded-full transition-all ${idx===i?'bg-white w-4 h-2':'bg-white/40 w-2 h-2'}`;
+  });
+}
+
+function startSlideshow() {
+  if (slideData.length <= 1) return;
+  slideTimer = setInterval(() => { goToSlide((currentSlide + 1) % slideData.length); }, 5000);
+}
+</script>
+</body>
+</html>
