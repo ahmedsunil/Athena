@@ -1,0 +1,206 @@
+{
+  "_meta": {
+    "models": {
+      "club": "An extracurricular club students can join, with meeting details, a staff patron, and a student president.",
+      "prefect": "A student leader elected or appointed to the prefect body, shown with their role, class, and a personal quote.",
+      "schoolHouse": "One of the school's four houses, identified by a name, colour, and motto, with a staff house master and student captain.",
+      "scoutsGroup": "A uniformed extracurricular group (scouts, brigade, etc.) with meeting details and leadership."
+    },
+    "relationships": [
+      "Each club has one patron (staff) and one president (student)",
+      "Each schoolHouse has one houseMaster (staff) and one houseCaptain (student)",
+      "Each scoutsGroup has one patron (staff) and one leader (student)"
+    ]
+  },
+
+  "clubs": [
+    {
+      "id": "club-sci-tech",
+      "name": "Science & Technology Club",
+      "description": "Explores real-world science through experiments, robotics projects, and visits to tech companies. Open to all students with a passion for STEM.",
+      "meetingSchedule": "Thursdays, 2:30 – 4:00 PM",
+      "patron": { "name": "Mr. Adeyemi Olawale", "role": "Physics Teacher" },
+      "president": { "name": "Temi Okafor", "className": "SSS 2A" }
+    },
+    {
+      "id": "club-drama",
+      "name": "Drama & Creative Arts Society",
+      "description": "Produces two major stage productions per year and trains students in acting, stagecraft, and public speaking. Welcomes all year groups.",
+      "meetingSchedule": "Tuesdays, 3:00 – 4:30 PM",
+      "patron": { "name": "Mrs. Ngozi Abiodun", "role": "English Teacher" },
+      "president": { "name": "Chidinma Eze", "className": "SSS 3B" }
+    },
+    {
+      "id": "club-debate",
+      "name": "Debate Club",
+      "description": "Sharpens critical thinking and public speaking through inter-school debate competitions. Members compete at state and national levels.",
+      "meetingSchedule": "Wednesdays, 2:00 – 3:30 PM",
+      "patron": { "name": "Mr. Emeka Chukwuemeka", "role": "Literature Teacher" },
+      "president": { "name": "Adaeze Nwosu", "className": "SSS 2C" }
+    },
+    {
+      "id": "club-math",
+      "name": "Mathematics Club",
+      "description": "Tackles challenging problems beyond the classroom syllabus and prepares students for mathematics olympiads at all levels.",
+      "meetingSchedule": "Fridays, 1:00 – 2:30 PM",
+      "patron": { "name": "Mrs. Ifeanyi Eze", "role": "Mathematics Teacher" },
+      "president": { "name": "Seun Adeleke", "className": "SSS 1A" }
+    },
+    {
+      "id": "club-green-earth",
+      "name": "Green Earth Environmental Club",
+      "description": "Promotes sustainability on campus through recycling drives, tree planting, and environmental awareness campaigns.",
+      "meetingSchedule": "Mondays, 3:00 – 4:00 PM",
+      "patron": { "name": "Mr. Usman Ibrahim", "role": "Geography Teacher" },
+      "president": { "name": "Blessing Okonkwo", "className": "JSS 3B" }
+    },
+    {
+      "id": "club-french",
+      "name": "French Language & Culture Club",
+      "description": "Develops French language skills through conversation sessions, cultural events, and preparation for DELF certification.",
+      "meetingSchedule": "Thursdays, 12:30 – 1:30 PM",
+      "patron": { "name": "Mrs. Amaka Okonkwo", "role": "French Teacher" },
+      "president": { "name": "Fatima Musa", "className": "SSS 2B" }
+    }
+  ],
+
+  "prefects": [
+    {
+      "id": "prefect-head-boy",
+      "name": "Chukwuemeka Obi",
+      "photo": "",
+      "role": "Head Boy",
+      "className": "SSS 3A",
+      "quote": "Leadership is not about being in charge — it is about taking care of those in your charge."
+    },
+    {
+      "id": "prefect-head-girl",
+      "name": "Amaka Nwosu",
+      "photo": "",
+      "role": "Head Girl",
+      "className": "SSS 3B",
+      "quote": "We rise by lifting others. My goal is to leave this school better than I found it."
+    },
+    {
+      "id": "prefect-senior",
+      "name": "Tunde Adebayo",
+      "photo": "",
+      "role": "Senior Prefect",
+      "className": "SSS 3A",
+      "quote": "Discipline is the bridge between goals and accomplishment."
+    },
+    {
+      "id": "prefect-sports",
+      "name": "Aisha Ibrahim",
+      "photo": "",
+      "role": "Sports Prefect",
+      "className": "SSS 3C",
+      "quote": "Sport teaches you character, challenges you, and teaches you what it means to never give up."
+    },
+    {
+      "id": "prefect-library",
+      "name": "David Oyelaran",
+      "photo": "",
+      "role": "Library Prefect",
+      "className": "SSS 3B",
+      "quote": "A reader lives a thousand lives. I am here to open those doors for every student."
+    },
+    {
+      "id": "prefect-social",
+      "name": "Chisom Adeleke",
+      "photo": "",
+      "role": "Social Prefect",
+      "className": "SSS 3A",
+      "quote": "A strong community is built one act of kindness at a time."
+    },
+    {
+      "id": "prefect-sanitation",
+      "name": "Kelechi Eze",
+      "photo": "",
+      "role": "Sanitation Prefect",
+      "className": "SSS 2C",
+      "quote": "A clean environment is the first sign of a disciplined mind."
+    },
+    {
+      "id": "prefect-cultural",
+      "name": "Ngozi Okafor",
+      "photo": "",
+      "role": "Cultural Prefect",
+      "className": "SSS 2B",
+      "quote": "Our culture is our identity — I am proud to celebrate and share it every day."
+    }
+  ],
+
+  "houses": [
+    {
+      "id": "house-eagle",
+      "name": "Eagle House",
+      "colour": "rose",
+      "tailwindAccent": "rose",
+      "motto": "Soar High, Aim Higher",
+      "description": "Eagle House embodies ambition and excellence, challenging its members to reach for the highest standards in academics and character.",
+      "houseMaster": { "name": "Mr. Adeyemi Olawale", "role": "House Master" },
+      "houseCaptain": { "name": "Emeka Okonkwo", "className": "SSS 3A" }
+    },
+    {
+      "id": "house-lion",
+      "name": "Lion House",
+      "colour": "sky",
+      "tailwindAccent": "sky",
+      "motto": "Strength and Courage",
+      "description": "Lion House is built on bravery, resilience, and team spirit — qualities that define champions on the field and in the classroom.",
+      "houseMaster": { "name": "Mrs. Adaeze Nwachukwu", "role": "House Mistress" },
+      "houseCaptain": { "name": "Fatima Ibrahim", "className": "SSS 3B" }
+    },
+    {
+      "id": "house-dolphin",
+      "name": "Dolphin House",
+      "colour": "emerald",
+      "tailwindAccent": "emerald",
+      "motto": "Unity in Excellence",
+      "description": "Dolphin House celebrates collaboration and creativity, fostering a community where every member supports and uplifts each other.",
+      "houseMaster": { "name": "Mr. Chidi Okafor", "role": "House Master" },
+      "houseCaptain": { "name": "Blessing Adesanya", "className": "SSS 3C" }
+    },
+    {
+      "id": "house-falcon",
+      "name": "Falcon House",
+      "colour": "amber",
+      "tailwindAccent": "amber",
+      "motto": "Swift and True",
+      "description": "Falcon House values precision, integrity, and determination. Its members are known for their sharp focus and unwavering commitment.",
+      "houseMaster": { "name": "Mrs. Yetunde Adeleke", "role": "House Mistress" },
+      "houseCaptain": { "name": "Kelechi Eze", "className": "SSS 3A" }
+    }
+  ],
+
+  "scoutsGroups": [
+    {
+      "id": "scouts-boy",
+      "name": "Boy Scouts Troop",
+      "groupType": "Boy Scouts",
+      "description": "Develops boys into responsible, self-reliant young men through outdoor skills, community service, and character training aligned with the world scouting movement.",
+      "meetingSchedule": "Saturdays, 8:00 – 10:00 AM",
+      "patron": { "name": "Mr. Kunle Balogun", "role": "Physical Education Teacher" },
+      "leader": { "name": "Samuel Adeyemi", "className": "SSS 2A" }
+    },
+    {
+      "id": "scouts-girls-brigade",
+      "name": "Girls Brigade Company",
+      "groupType": "Girls Brigade",
+      "description": "Builds young women of faith, discipline, and service through uniformed activities, skill development, and community outreach programmes.",
+      "meetingSchedule": "Saturdays, 8:00 – 10:00 AM",
+      "patron": { "name": "Mrs. Ngozi Okonkwo", "role": "Home Economics Teacher" },
+      "leader": { "name": "Grace Obiora", "className": "SSS 2B" }
+    },
+    {
+      "id": "scouts-red-cross",
+      "name": "Red Cross Society",
+      "groupType": "Red Cross",
+      "description": "Trains students in first aid, emergency response, and humanitarian values. Members serve at school events and participate in community health outreaches.",
+      "meetingSchedule": "Fridays, 2:00 – 3:30 PM",
+      "patron": { "name": "Mr. Tayo Adeleke", "role": "Biology Teacher" },
+      "leader": { "name": "Adaora Nwosu", "className": "SSS 1C" }
+    }
+  ]
+}

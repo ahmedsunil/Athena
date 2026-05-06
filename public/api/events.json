@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "models": {
+      "event": "A school event with a status, date range, location, cover image, and expandable detail content including attachments and contact info.",
+      "attachment": "A downloadable file attached to an event, such as a programme, schedule, or registration form.",
+      "eventContact": "Contact information for enquiries or RSVPs related to a specific event."
+    },
+    "relationships": [
+      "event has many attachments",
+      "event has one optional eventContact",
+      "events are filtered by status: ongoing | upcoming | completed"
+    ]
+  },
+
+  "events": [
+    {
+      "id": "evt-001",
+      "status": "ongoing",
+      "title": "Science & Innovation Fair 2025",
+      "dateStart": "2025-04-22",
+      "dateEnd": "2025-04-26",
+      "location": "Main Hall & Science Block, Hulhudhuffaaru School Campus",
+      "coverImageUrl": "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
+      "shortDescription": "A week-long showcase of student projects in science, technology, and engineering. Open to parents and community visitors daily from 9am to 4pm.",
+      "fullDescription": "The Annual Science & Innovation Fair brings together students from JSS1 through SS3 to present original research projects, engineering prototypes, and scientific investigations. This year's theme is 'Technology for a Better Nigeria', with over 120 projects registered across categories including Biology, Chemistry, Physics, Computing, and Environmental Science.\n\nVisitors are welcome to tour the exhibition halls, interact with student researchers, and vote for their favourite projects. A panel of external judges from the University of Lagos and industry partners will award prizes across each category. The fair culminates on Saturday the 26th with a prize-giving ceremony and a STEM careers panel open to all SS2 and SS3 students.",
+      "attachments": [
+        {
+          "id": "att-001-1",
+          "title": "Visitor Programme 2025",
+          "fileUrl": "/downloads/science-fair-2025-programme.pdf",
+          "fileType": "PDF"
+        },
+        {
+          "id": "att-001-2",
+          "title": "Project Category Guidelines",
+          "fileUrl": "/downloads/science-fair-categories.pdf",
+          "fileType": "PDF"
+        }
+      ],
+      "contact": {
+        "name": "Mr. Segun Adewale",
+        "role": "Head of Science Department",
+        "email": "s.adewale@schoolportal.edu.ng",
+        "phone": "+234 801 234 5601"
+      }
+    },
+    {
+      "id": "evt-002",
+      "status": "upcoming",
+      "title": "Open Day — May 2025",
+      "dateStart": "2025-05-10",
+      "dateEnd": "2025-05-10",
+      "location": "Hulhudhuffaaru School Campus, Victoria Island, Lagos",
+      "coverImageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+      "shortDescription": "Prospective families are invited to tour the school, meet our teachers, and learn about the admissions process for the 2025/2026 academic year.",
+      "fullDescription": "Our annual Open Day is the perfect opportunity for families considering enrolment to experience Hulhudhuffaaru School firsthand. The day includes guided campus tours, classroom visits, demonstrations by student clubs, and one-on-one conversations with subject teachers and the admissions team.\n\nThe Principal will address all visitors at 10:00am in the Main Hall, followed by department open houses running throughout the day. Lunch will be provided for all registered visitors. Space is limited — early registration is strongly encouraged.",
+      "attachments": [
+        {
+          "id": "att-002-1",
+          "title": "Open Day Schedule",
+          "fileUrl": "/downloads/open-day-may-2025-schedule.pdf",
+          "fileType": "PDF"
+        }
+      ],
+      "contact": {
+        "name": "Dr. Amaka Eze",
+        "role": "Director of Admissions",
+        "email": "admissions@schoolportal.edu.ng",
+        "phone": "+234 801 234 5602"
+      }
+    },
+    {
+      "id": "evt-003",
+      "status": "upcoming",
+      "title": "Inter-House Sports Day",
+      "dateStart": "2025-05-24",
+      "dateEnd": "2025-05-24",
+      "location": "School Sports Complex",
+      "coverImageUrl": "https://images.unsplash.com/photo-1598136490941-30d885318abd?w=800&q=80",
+      "shortDescription": "A full day of athletic competition between our four school houses — Eagle, Phoenix, Lion, and Dolphin. All parents and guardians are warmly invited to cheer on their children.",
+      "fullDescription": "Inter-House Sports Day is one of the most anticipated events of the school calendar. Students compete across track and field events, relays, and field sports in a day filled with school spirit, friendly rivalry, and celebration.\n\nThe day begins at 8:00am with the march-past parade, followed by the opening ceremony and blessing. Events run throughout the day with the final relay and closing ceremony from 3:30pm to 5:00pm. Parents are encouraged to join us from 9:00am. Refreshments will be available for purchase at the venue.",
+      "attachments": [],
+      "contact": {
+        "name": "Mrs. Funke Olawale",
+        "role": "Head of Physical Education",
+        "email": "f.olawale@schoolportal.edu.ng",
+        "phone": null
+      }
+    },
+    {
+      "id": "evt-004",
+      "status": "upcoming",
+      "title": "SS3 Valedictory Service & Send-Off",
+      "dateStart": "2025-06-20",
+      "dateEnd": "2025-06-20",
+      "location": "School Chapel & Multipurpose Hall",
+      "coverImageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80",
+      "shortDescription": "A formal send-off ceremony for our graduating SS3 students, celebrating their journey and wishing them well as they prepare for their WAEC examinations.",
+      "fullDescription": "The Valedictory Service marks the official farewell to our SS3 graduating class. The morning begins with a chapel service of thanksgiving, followed by speeches from the Principal, staff, student body president, and a guest speaker from among our distinguished alumni.\n\nFamilies are invited to a reception in the Multipurpose Hall after the ceremony. Each graduating student will receive a personalised yearbook. Photography packages will be available from our official photographer on the day.",
+      "attachments": [
+        {
+          "id": "att-004-1",
+          "title": "Valedictory Service Order of Events",
+          "fileUrl": "/downloads/valedictory-2025-order.pdf",
+          "fileType": "PDF"
+        },
+        {
+          "id": "att-004-2",
+          "title": "Photography Package Details",
+          "fileUrl": "/downloads/valedictory-photo-packages.pdf",
+          "fileType": "PDF"
+        }
+      ],
+      "contact": {
+        "name": "Mrs. Chioma Okafor",
+        "role": "Vice Principal, Student Affairs",
+        "email": "c.okafor@schoolportal.edu.ng",
+        "phone": "+234 801 234 5603"
+      }
+    },
+    {
+      "id": "evt-005",
+      "status": "completed",
+      "title": "Annual Prize Giving Day 2024",
+      "dateStart": "2024-11-30",
+      "dateEnd": "2024-11-30",
+      "location": "Multipurpose Hall, Hulhudhuffaaru School Campus",
+      "coverImageUrl": "https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=800&q=80",
+      "shortDescription": "A celebration of academic achievement, character, and service. Awards were presented to outstanding students across all year groups.",
+      "fullDescription": "The 2024 Annual Prize Giving Day honoured students who demonstrated excellence in academics, leadership, sport, and community service throughout the year. This year's keynote speaker was Dr. Ngozi Adichie-Bello, alumna and Professor of Engineering at the University of Lagos.\n\nOver 200 awards were presented across 35 categories. The highlight of the evening was the Grand Academic Prize, awarded to Miss Adaeze Ikenna of SS3 for achieving the highest cumulative GPA in the school's history.",
+      "attachments": [
+        {
+          "id": "att-005-1",
+          "title": "2024 Prize Giving Day Programme",
+          "fileUrl": "/downloads/prize-giving-2024-programme.pdf",
+          "fileType": "PDF"
+        },
+        {
+          "id": "att-005-2",
+          "title": "Full List of Award Winners",
+          "fileUrl": "/downloads/prize-giving-2024-winners.pdf",
+          "fileType": "PDF"
+        }
+      ],
+      "contact": {
+        "name": "Mr. Babatunde Adeyemi",
+        "role": "Vice Principal, Academics",
+        "email": "b.adeyemi@schoolportal.edu.ng",
+        "phone": null
+      }
+    },
+    {
+      "id": "evt-006",
+      "status": "completed",
+      "title": "Cultural Day & Food Fair 2024",
+      "dateStart": "2024-10-04",
+      "dateEnd": "2024-10-04",
+      "location": "School Grounds & Classrooms",
+      "coverImageUrl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+      "shortDescription": "Students and staff celebrated Nigeria's diversity through traditional attire, music, dance, and regional cuisine in a vibrant all-day festival.",
+      "fullDescription": "Cultural Day 2024 brought the school community together in a joyful celebration of Nigeria's rich heritage. Each class adopted a different state, decorating their classroom and preparing traditional food, music, and cultural displays for visitors to experience.\n\nHighlights included a traditional attire parade, a live drumming ensemble by the music department, and a food fair featuring dishes from over 20 Nigerian states. The event was attended by nearly 800 students, staff, and family members.",
+      "attachments": [],
+      "contact": null
+    }
+  ]
+}

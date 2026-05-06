@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasRoles, LogsActivity;
+    use HasFactory, HasRoles, LogsActivity, Notifiable, TwoFactorAuthenticatable;
 
     protected $fillable = [
         'name',
@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'google_id',
         'is_active',
+        'email_verified_at',
     ];
 
     protected $hidden = [
@@ -29,16 +30,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_secret',
         'two_factor_recovery_codes',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at'       => 'datetime',
-            'password'                => 'hashed',
-            'is_active'               => 'boolean',
-            'two_factor_confirmed_at' => 'datetime',
-        ];
-    }
 
     public function isAdmin(): bool
     {
@@ -67,5 +58,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ->logOnlyDirty()
             ->dontLogEmptyChanges()
             ->setDescriptionForEvent(fn (string $eventName) => "User {$eventName}");
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'is_active' => 'boolean',
+            'two_factor_confirmed_at' => 'datetime',
+        ];
     }
 }

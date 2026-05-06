@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\Site\SiteController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
@@ -21,6 +22,33 @@ use App\Livewire\Users\UserForm;
 use App\Livewire\Users\UserShow;
 use App\Livewire\Users\UsersList;
 use Illuminate\Support\Facades\Route;
+
+// Public website
+Route::controller(SiteController::class)->name('site.')->group(function () {
+    Route::get('/', 'home')->name('home');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/academics', 'academics')->name('academics');
+    Route::get('/admissions', 'admissions')->name('admissions');
+    Route::get('/events', 'events')->name('events.index');
+    Route::get('/events/{slug}', 'event')->name('events.show');
+    Route::get('/event.html', 'legacyEvent')->name('events.legacy');
+    Route::get('/student-life', 'studentLife')->name('student-life');
+    Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/downloads', 'downloads')->name('downloads');
+    Route::get('/digital-services', 'digitalServices')->name('digital-services');
+    Route::get('/search', 'search')->name('search');
+});
+
+Route::redirect('/index.html', '/');
+Route::redirect('/about.html', '/about');
+Route::redirect('/events.html', '/events');
+Route::redirect('/academics.html', '/academics');
+Route::redirect('/admissions.html', '/admissions');
+Route::redirect('/student-life.html', '/student-life');
+Route::redirect('/gallery.html', '/gallery');
+Route::redirect('/downloads.html', '/downloads');
+Route::redirect('/digital-services.html', '/digital-services');
+Route::redirect('/search.html', '/search');
 
 // Protected routes
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -62,11 +90,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Google OAuth
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
-
-// Root redirect
-// Route::redirect('/', '/dashboard');
-
-// Website Routes
-Route::get('/', function () {
-    return 'Website';
-});
