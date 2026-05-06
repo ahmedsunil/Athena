@@ -4,7 +4,6 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
-use App\Livewire\Cms\ContactSubmissions\ContactSubmissionsIndex;
 use App\Livewire\Cms\FooterLinks\FooterLinksIndex;
 use App\Livewire\Cms\HomeQuickAccess\HomeQuickAccessIndex;
 use App\Livewire\Cms\HomeSlides\HomeSlidesIndex;
@@ -55,8 +54,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
     Route::get('/cms/home/quick-access', HomeQuickAccessIndex::class)->name('cms.home.quick-access');
     Route::get('/cms/home/testimonials', HomeTestimonialsIndex::class)->name('cms.home.testimonials');
-    Route::get('/cms/contact-submissions', ContactSubmissionsIndex::class)->name('cms.contact-submissions');
-
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 

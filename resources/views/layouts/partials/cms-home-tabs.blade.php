@@ -3,7 +3,6 @@
     $homeTabs = [
         ['label' => 'School Profile',     'route' => 'cms.school-profile',     'href' => route('cms.school-profile')],
         ['label' => 'Footer Links',        'route' => 'cms.footer-links',        'href' => route('cms.footer-links')],
-        ['label' => 'Contact',             'route' => 'cms.contact-submissions', 'href' => route('cms.contact-submissions')],
         ['label' => 'Slides',              'route' => 'cms.home.slides',         'href' => route('cms.home.slides')],
         ['label' => 'Stats',               'route' => 'cms.home.stats',          'href' => route('cms.home.stats')],
         ['label' => 'Quick Access',        'route' => 'cms.home.quick-access',   'href' => route('cms.home.quick-access')],
