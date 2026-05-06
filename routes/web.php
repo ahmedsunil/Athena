@@ -64,4 +64,9 @@ Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('aut
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
 // Root redirect
-Route::redirect('/', '/dashboard');
+// Route::redirect('/', '/dashboard');
+
+// Website Routes
+Route::get('/', function () {
+    return 'Website';
+});
