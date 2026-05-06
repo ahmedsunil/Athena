@@ -1,7 +1,9 @@
-<div class="mx-auto max-w-4xl space-y-4">
+<div class="space-y-4">
+
+    @include('layouts.partials.cms-home-tabs')
 
     <div>
-        <h1 class="admin-page-title">School Profile</h1>
+        {{--        <h1 class="admin-page-title">School Profile</h1>--}}
         <p class="admin-muted">Shared identity used across the public website.</p>
     </div>
 
@@ -36,7 +38,8 @@
                 <div>
                     <label class="mb-1.5 block admin-label">Logo</label>
                     @if($existing_logo)
-                        <img src="{{ Storage::url($existing_logo) }}" alt="Logo" class="mb-2 h-16 w-16 rounded-lg object-cover">
+                        <img src="{{ Storage::url($existing_logo) }}" alt="Logo"
+                             class="mb-2 h-16 w-16 rounded-lg object-cover">
                     @endif
                     <input type="file" wire:model="logo" accept="image/*"
                            class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
@@ -123,7 +126,8 @@
                 <div>
                     <label class="mb-1.5 block admin-label">Photo</label>
                     @if($existing_principal_photo)
-                        <img src="{{ Storage::url($existing_principal_photo) }}" alt="Principal" class="mb-2 h-16 w-16 rounded-full object-cover">
+                        <img src="{{ Storage::url($existing_principal_photo) }}" alt="Principal"
+                             class="mb-2 h-16 w-16 rounded-full object-cover">
                     @endif
                     <input type="file" wire:model="principal_photo" accept="image/*"
                            class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">

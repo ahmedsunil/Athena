@@ -1,5 +1,7 @@
 <div class="space-y-4">
 
+    @include('layouts.partials.cms-home-tabs')
+
     <div class="flex items-start justify-between">
         <div>
             <h1 class="admin-page-title">Contact Submissions</h1>

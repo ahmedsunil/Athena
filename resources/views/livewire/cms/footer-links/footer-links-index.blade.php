@@ -1,5 +1,7 @@
 <div class="space-y-4">
 
+    @include('layouts.partials.cms-home-tabs')
+
     <div>
         <h1 class="admin-page-title">Footer Links</h1>
         <p class="admin-muted">Manage navigation links shown in the website footer.</p>

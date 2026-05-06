@@ -1,5 +1,7 @@
 <div class="space-y-4">
 
+    @include('layouts.partials.cms-home-tabs')
+
     <div>
         <h1 class="admin-page-title">Home Slides</h1>
         <p class="admin-muted">Manage the hero slideshow on the home page.</p>

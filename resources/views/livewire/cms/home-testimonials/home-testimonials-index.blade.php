@@ -1,5 +1,7 @@
 <div class="space-y-4">
 
+    @include('layouts.partials.cms-home-tabs')
+
     <div>
         <h1 class="admin-page-title">Testimonials</h1>
         <p class="admin-muted">Alumni and parent testimonials shown on the home page.</p>
