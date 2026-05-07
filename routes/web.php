@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\LocaleController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
@@ -59,6 +60,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
 });
+
+// Locale
+Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
 // Google OAuth
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');

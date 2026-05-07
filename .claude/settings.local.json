@@ -15,7 +15,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" -b \"laravel_session=$\\(php artisan tinker --execute=\"echo \\\\App\\\\Models\\\\User::first\\(\\)->createToken\\('test'\\)->plainTextToken;\")",
       "Bash(python3 *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://athena.test/cms/school-profile -L --cookie \"laravel_session=test\")",
-      "Bash(grep *)"
+      "Bash(grep *)",
+      "Bash(curl -s -b \"athena-session=\" http://athena.test/)"
     ]
   }
 }
