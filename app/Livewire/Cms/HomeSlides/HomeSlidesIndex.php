@@ -20,6 +20,7 @@ class HomeSlidesIndex extends Component
     public int $sort_order = 0;
     public $image = null;
     public ?string $existing_image = null;
+    public bool $imageRemoved = false;
     public ?int $editingId = null;
 
     protected function rules(): array
@@ -54,6 +55,8 @@ class HomeSlidesIndex extends Component
 
         if ($this->image) {
             $data['image_path'] = $this->image->store('slides', 'public');
+        } elseif ($this->imageRemoved) {
+            $data['image_path'] = null;
         }
 
         if ($this->editingId) {
@@ -82,6 +85,13 @@ class HomeSlidesIndex extends Component
         $this->existing_image    = $slide->image_path;
     }
 
+    public function removeImage(): void
+    {
+        $this->image = null;
+        $this->existing_image = null;
+        $this->imageRemoved = true;
+    }
+
     public function cancel(): void
     {
         $this->resetForm();
@@ -97,7 +107,7 @@ class HomeSlidesIndex extends Component
     {
         $this->reset(['title', 'description', 'button_1_label', 'button_1_link_key',
             'button_2_label', 'button_2_link_key', 'is_active', 'sort_order',
-            'image', 'existing_image', 'editingId']);
+            'image', 'existing_image', 'imageRemoved', 'editingId']);
         $this->is_active = true;
     }
 

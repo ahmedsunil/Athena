@@ -16,7 +16,7 @@ class SchoolProfileEdit extends Component
     public string $email = '';
     public string $phone = '';
     public string $address = '';
-    public string $island = '';
+    public string $school_island = '';
     public string $atoll = '';
     public string $country = '';
     public string $principal_name = '';
@@ -26,6 +26,8 @@ class SchoolProfileEdit extends Component
     public ?string $existing_principal_photo = null;
     public $logo = null;
     public $principal_photo = null;
+    public bool $logoRemoved = false;
+    public bool $principalPhotoRemoved = false;
 
     public function mount(): void
     {
@@ -36,7 +38,7 @@ class SchoolProfileEdit extends Component
         $this->email                = $profile->email ?? '';
         $this->phone                = $profile->phone ?? '';
         $this->address              = $profile->address ?? '';
-        $this->island               = $profile->island ?? '';
+        $this->school_island        = $profile->island ?? '';
         $this->atoll                = $profile->atoll ?? '';
         $this->country              = $profile->country ?? '';
         $this->principal_name       = $profile->principal_name ?? '';
@@ -55,7 +57,7 @@ class SchoolProfileEdit extends Component
             'email'                 => ['nullable', 'email', 'max:255'],
             'phone'                 => ['nullable', 'string', 'max:50'],
             'address'               => ['nullable', 'string', 'max:500'],
-            'island'                => ['nullable', 'string', 'max:100'],
+            'school_island'         => ['nullable', 'string', 'max:100'],
             'atoll'                 => ['nullable', 'string', 'max:100'],
             'country'               => ['nullable', 'string', 'max:100'],
             'principal_name'        => ['nullable', 'string', 'max:255'],
@@ -64,6 +66,20 @@ class SchoolProfileEdit extends Component
             'logo'                  => ['nullable', 'image', 'max:2048'],
             'principal_photo'       => ['nullable', 'image', 'max:2048'],
         ];
+    }
+
+    public function removeLogo(): void
+    {
+        $this->logo = null;
+        $this->existing_logo = null;
+        $this->logoRemoved = true;
+    }
+
+    public function removePrincipalPhoto(): void
+    {
+        $this->principal_photo = null;
+        $this->existing_principal_photo = null;
+        $this->principalPhotoRemoved = true;
     }
 
     public function save(): void
@@ -78,7 +94,7 @@ class SchoolProfileEdit extends Component
             'email'                 => $this->email,
             'phone'                 => $this->phone,
             'address'               => $this->address,
-            'island'                => $this->island,
+            'island'                => $this->school_island,
             'atoll'                 => $this->atoll,
             'country'               => $this->country,
             'principal_name'        => $this->principal_name,
@@ -88,10 +104,14 @@ class SchoolProfileEdit extends Component
 
         if ($this->logo) {
             $data['logo_path'] = $this->logo->store('school', 'public');
+        } elseif ($this->logoRemoved) {
+            $data['logo_path'] = null;
         }
 
         if ($this->principal_photo) {
             $data['principal_photo_path'] = $this->principal_photo->store('school', 'public');
+        } elseif ($this->principalPhotoRemoved) {
+            $data['principal_photo_path'] = null;
         }
 
         $profile->update($data);

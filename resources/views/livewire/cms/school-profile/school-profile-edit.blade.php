@@ -37,11 +37,24 @@
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Logo</label>
-                    @if($existing_logo)
-                        <img src="{{ Storage::url($existing_logo) }}" alt="Logo"
-                             class="mb-2 h-16 w-16 rounded-lg object-cover">
+                    @if($logo)
+                        <div class="relative mb-2 inline-block">
+                            <img src="{{ $logo->temporaryUrl() }}" alt="Logo" class="h-16 w-16 rounded-lg object-cover">
+                            <button type="button" wire:click="removeLogo"
+                                    class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                            </button>
+                        </div>
+                    @elseif($existing_logo)
+                        <div class="relative mb-2 inline-block">
+                            <img src="{{ Storage::url($existing_logo) }}" alt="Logo" class="h-16 w-16 rounded-lg object-cover">
+                            <button type="button" wire:click="removeLogo"
+                                    class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                            </button>
+                        </div>
                     @endif
-                    <input type="file" wire:model="logo" accept="image/*"
+                    <input type="file" wire:model.live="logo" accept="image/*"
                            class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
                     @error('logo') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
@@ -77,9 +90,9 @@
                 <div class="grid gap-4 sm:grid-cols-3">
                     <div>
                         <label class="mb-1.5 block admin-label">Island</label>
-                        <input type="text" wire:model="island"
+                        <input type="text" wire:model="school_island"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('island') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('school_island') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                     <div>
                         <label class="mb-1.5 block admin-label">Atoll</label>
@@ -125,11 +138,24 @@
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Photo</label>
-                    @if($existing_principal_photo)
-                        <img src="{{ Storage::url($existing_principal_photo) }}" alt="Principal"
-                             class="mb-2 h-16 w-16 rounded-full object-cover">
+                    @if($principal_photo)
+                        <div class="relative mb-2 inline-block">
+                            <img src="{{ $principal_photo->temporaryUrl() }}" alt="Principal" class="h-16 w-16 rounded-full object-cover">
+                            <button type="button" wire:click="removePrincipalPhoto"
+                                    class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                            </button>
+                        </div>
+                    @elseif($existing_principal_photo)
+                        <div class="relative mb-2 inline-block">
+                            <img src="{{ Storage::url($existing_principal_photo) }}" alt="Principal" class="h-16 w-16 rounded-full object-cover">
+                            <button type="button" wire:click="removePrincipalPhoto"
+                                    class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                            </button>
+                        </div>
                     @endif
-                    <input type="file" wire:model="principal_photo" accept="image/*"
+                    <input type="file" wire:model.live="principal_photo" accept="image/*"
                            class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
                     @error('principal_photo') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>

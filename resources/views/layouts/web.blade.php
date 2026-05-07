@@ -22,14 +22,25 @@
             src: url('{{ asset('fonts/Dhivehi.ttf') }}') format('truetype');
             font-display: swap;
         }
+        .locale-dv [data-lang-key] {
+            font-family: 'Dhivehi', sans-serif !important;
+            line-height: 2;
+            word-spacing: 0.05em;
+        }
         @if(app()->getLocale() === 'dv')
-        body, body * {
+        [data-lang-key] {
             font-family: 'Dhivehi', sans-serif !important;
             line-height: 2;
             word-spacing: 0.05em;
         }
         @endif
     </style>
+    <script>
+        window.__locale  = '{{ app()->getLocale() }}';
+        window.__en      = {!! file_get_contents(base_path('lang/en.json')) !!};
+        window.__dv      = {!! file_get_contents(base_path('lang/dv.json')) !!};
+        window.__langUrl = '{{ url('/lang') }}';
+    </script>
 </head>
 <body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen">
 @include('layouts.partials.nav')

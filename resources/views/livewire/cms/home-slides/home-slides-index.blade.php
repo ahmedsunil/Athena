@@ -26,10 +26,24 @@
             </div>
             <div>
                 <label class="mb-1.5 block admin-label">Image</label>
-                @if($existing_image)
-                    <img src="{{ Storage::url($existing_image) }}" alt="Slide" class="mb-2 h-24 w-auto rounded-lg object-cover">
+                @if($image)
+                    <div class="relative mb-2 inline-block">
+                        <img src="{{ $image->temporaryUrl() }}" alt="Preview" class="h-24 w-auto rounded-lg object-cover">
+                        <button type="button" wire:click="removeImage"
+                                class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                        </button>
+                    </div>
+                @elseif($existing_image)
+                    <div class="relative mb-2 inline-block">
+                        <img src="{{ Storage::url($existing_image) }}" alt="Slide" class="h-24 w-auto rounded-lg object-cover">
+                        <button type="button" wire:click="removeImage"
+                                class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                        </button>
+                    </div>
                 @endif
-                <input type="file" wire:model="image" accept="image/*"
+                <input type="file" wire:model.live="image" accept="image/*"
                        class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
                 @error('image') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
