@@ -7,38 +7,57 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['DM Sans','system-ui','sans-serif'],mono:['IBM Plex Mono','ui-monospace','monospace']}}}}</script>
 </head>
-<body class="font-sans bg-slate-50 text-slate-900">
+<body class="font-sans bg-slate-50 text-slate-900 pt-16">
 
-<header class="bg-white/95 border-b border-slate-200 sticky top-0 z-50">
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
         <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-8 h-8 object-contain">
         <span class="font-bold text-slate-900 text-sm leading-tight">Hulhudhuffaaru<br><span class="font-normal text-slate-500 text-xs">School</span></span>
       </a>
-      <nav class="flex items-center gap-5 flex-wrap">
-        <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Home</a>
-        <a href="about.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">About</a>
-        <a href="events.html" class="text-sm font-medium text-rose-600">Events</a>
-        <a href="academics.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Academics</a>
-        <a href="student-life.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Student Life</a>
-        <a href="gallery.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Gallery</a>
-        <a href="downloads.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Downloads</a>
-        <a href="digital-services.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Digital Services</a>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a href="index.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Home</a>
+        <a href="about.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">About</a>
+        <a href="events.html" class="text-sm font-medium transition-colors text-rose-600">Events</a>
+        <a href="academics.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Academics</a>
+        <a href="student-life.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Student Life</a>
+        <a href="gallery.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Gallery</a>
+        <a href="downloads.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Downloads</a>
+        <a href="digital-services.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Digital Services</a>
       </nav>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
+          <button id="lang-en" onclick="setLang('en')" class="px-2.5 py-1.5 bg-slate-900 text-white transition-colors">EN</button>
+          <button id="lang-dv" onclick="setLang('dv')" class="px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors">DV</button>
+        </div>
+        <button class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        </button>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
+    <a href="index.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Home</a>
+    <a href="about.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">About</a>
+    <a href="events.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg bg-rose-50 text-rose-600">Events</a>
+    <a href="academics.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Academics</a>
+    <a href="student-life.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Student Life</a>
+    <a href="gallery.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Gallery</a>
+    <a href="downloads.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Downloads</a>
+    <a href="digital-services.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Digital Services</a>
   </div>
 </header>
 
 <main>
-  <div class="relative h-72 sm:h-96 overflow-hidden">
+  <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
     <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80" alt="Science &amp; Innovation Fair 2025" class="w-full h-full object-cover">
-    <div class="absolute inset-0 bg-slate-900/50"></div>
-    <div class="absolute top-4 left-4">
-      <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-emerald-500 text-white">
-        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-        Ongoing
-      </span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+    <div class="absolute bottom-4 left-4">
+      <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Ongoing</span>
     </div>
   </div>
 
@@ -51,16 +70,17 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">Science &amp; Innovation Fair 2025</h1>
-        <div class="prose prose-sm max-w-none text-slate-700 space-y-4">
-          <p class="leading-relaxed">The Annual Science &amp; Innovation Fair brings together students from JSS1 through SS3 to present original research projects, engineering prototypes, and scientific investigations. This year's theme is 'Technology for a Better Nigeria', with over 120 projects registered across categories including Biology, Chemistry, Physics, Computing, and Environmental Science.</p>
-          <p class="leading-relaxed">Visitors are welcome to tour the exhibition halls, interact with student researchers, and vote for their favourite projects. A panel of external judges from the University of Lagos and industry partners will award prizes across each category. The fair culminates on Saturday the 26th with a prize-giving ceremony and a STEM careers panel open to all SS2 and SS3 students.</p>
+        <div class="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9">
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">The Annual Science &amp; Innovation Fair brings together students from JSS1 through SS3 to present original research projects, engineering prototypes, and scientific investigations. This year's theme is 'Technology for a Better Nigeria', with over 120 projects registered across categories including Biology, Chemistry, Physics, Computing, and Environmental Science.</p>
+            <p class="leading-relaxed">Visitors are welcome to tour the exhibition halls, interact with student researchers, and vote for their favourite projects. A panel of external judges from the University of Lagos and industry partners will award prizes across each category. The fair culminates on Saturday the 26th with a prize-giving ceremony and a STEM careers panel open to all SS2 and SS3 students.</p>
+          </div>
         </div>
 
-        <!-- Attachments -->
         <div class="mt-8">
           <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Downloads</p>
           <div class="space-y-2">
-            <a href="/downloads/science-fair-2025-programme.pdf" class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-3.5 hover:border-rose-200 hover:shadow-sm transition-all">
+            <a href="/downloads/science-fair-2025-programme.pdf" class="flex items-center gap-3 bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-200 rounded-xl p-3.5 transition-all">
               <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
               </div>
@@ -70,7 +90,7 @@
               </div>
               <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             </a>
-            <a href="/downloads/science-fair-categories.pdf" class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-3.5 hover:border-rose-200 hover:shadow-sm transition-all">
+            <a href="/downloads/science-fair-categories.pdf" class="flex items-center gap-3 bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-200 rounded-xl p-3.5 transition-all">
               <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
               </div>
@@ -84,26 +104,32 @@
         </div>
       </div>
 
-      <!-- Sidebar -->
       <div class="space-y-4">
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
           <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Event Details</p>
-          <div class="space-y-3">
+          <dl class="space-y-3">
             <div class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
               <div>
-                <p class="text-xs text-slate-400">Dates</p>
-                <p class="text-sm font-semibold text-slate-900">22 Apr – 26 Apr 2025</p>
+                <dt class="text-xs text-slate-400">Date</dt>
+                <dd class="text-sm font-semibold text-slate-900">22 Apr – 26 Apr 2025</dd>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               <div>
-                <p class="text-xs text-slate-400">Location</p>
-                <p class="text-sm font-semibold text-slate-900">Main Hall &amp; Science Block, Hulhudhuffaaru School Campus</p>
+                <dt class="text-xs text-slate-400">Location</dt>
+                <dd class="text-sm font-semibold text-slate-900">Main Hall &amp; Science Block, Hulhudhuffaaru School Campus</dd>
               </div>
             </div>
-          </div>
+            <div class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div>
+                <dt class="text-xs text-slate-400">Status</dt>
+                <dd class="text-sm font-semibold text-emerald-600">Ongoing</dd>
+              </div>
+            </div>
+          </dl>
         </div>
 
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
@@ -111,20 +137,54 @@
           <p class="text-sm font-semibold text-slate-900">Mr. Segun Adewale</p>
           <p class="text-xs text-slate-500 mb-3">Head of Science Department</p>
           <a href="mailto:s.adewale@schoolportal.edu.ng" class="text-xs text-rose-600 hover:underline block mb-1">s.adewale@schoolportal.edu.ng</a>
-          <p class="text-xs text-slate-600">+234 801 234 5601</p>
+          <p class="text-xs text-slate-500">+234 801 234 5601</p>
         </div>
       </div>
     </div>
   </div>
 </main>
 
-<footer class="bg-slate-900 text-slate-300 mt-10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <div class="border-t border-slate-700 pt-6 text-xs text-slate-500 text-center">
-      &copy; 2025 Hulhudhuffaaru School. All rights reserved. &nbsp;·&nbsp; <a href="events.html" class="hover:text-white transition-colors">Back to Events</a>
+<footer class="bg-slate-900 text-slate-400 mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-7 h-7 object-contain">
+          <span class="text-white font-bold text-sm">Hulhudhuffaaru School</span>
+        </div>
+        <p class="text-xs leading-relaxed">Knowledge, Character, Service.<br>Raa Atoll, Republic of Maldives.</p>
+      </div>
+      <div>
+        <p class="text-white text-sm font-semibold mb-3">Quick Links</p>
+        <div class="space-y-1.5">
+          <a href="about.html" class="block text-xs hover:text-white transition-colors">About</a>
+          <a href="events.html" class="block text-xs hover:text-white transition-colors">Events</a>
+          <a href="admissions.html" class="block text-xs hover:text-white transition-colors">Admissions</a>
+          <a href="academics.html" class="block text-xs hover:text-white transition-colors">Academics</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-white text-sm font-semibold mb-3">Contact</p>
+        <div class="space-y-1.5 text-xs">
+          <p>info@hulhudhuffaaru.edu.mv</p>
+          <p>+960 658 0000</p>
+          <p>Hulhudhuffaaru, Raa Atoll</p>
+        </div>
+      </div>
     </div>
+    <div class="border-t border-slate-800 pt-6 text-xs text-center">&copy; 2025 Hulhudhuffaaru School. All rights reserved. &nbsp;·&nbsp; <a href="events.html" class="hover:text-white transition-colors">Back to Events</a></div>
   </div>
 </footer>
 
+<script>
+function setLang(l) {
+  var en = document.getElementById('lang-en'), dv = document.getElementById('lang-dv');
+  if (!en || !dv) return;
+  var active = 'px-2.5 py-1.5 bg-slate-900 text-white transition-colors';
+  var inactive = 'px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors';
+  en.className = l==='en' ? active : inactive;
+  dv.className = l==='dv' ? active : inactive;
+}
+</script>
 </body>
 </html>

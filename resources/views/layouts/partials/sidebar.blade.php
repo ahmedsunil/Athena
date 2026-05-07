@@ -76,7 +76,7 @@
     ];
 @endphp
 
-<div class="flex h-full min-h-0 flex-col bg-black text-white" x-data="{ accountOpen: false }">
+<div class="flex h-full min-h-0 flex-col bg-black text-slate-100" x-data="{ accountOpen: false }">
     <div class="flex items-center gap-3 px-4 py-5">
         @if(file_exists(public_path('images/logo.png')))
             <img src="/images/logo.png" alt="{{ config('app.name') }}" class="h-11 w-11 rounded-xl object-contain">
@@ -99,14 +99,14 @@
                     {{ $group['label'] }}
                 </p>
 
-                    <div class="space-y-1">
-                        @foreach($group['items'] as $item)
-                            @php
-                                $activeRoutes = $item['activeRoutes'] ?? [$item['route']];
-                                $isActive = collect($activeRoutes)->contains(fn($r) => str_starts_with($currentRoute, $r));
-                            @endphp
-                            <a href="{{ $item['href'] }}"
-                               class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors
+                <div class="space-y-1">
+                    @foreach($group['items'] as $item)
+                        @php
+                            $activeRoutes = $item['activeRoutes'] ?? [$item['route']];
+                            $isActive = collect($activeRoutes)->contains(fn($r) => str_starts_with($currentRoute, $r));
+                        @endphp
+                        <a href="{{ $item['href'] }}"
+                           class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors
                                       {{ $isActive ? 'bg-white/15 text-white' : 'text-white hover:bg-white/10 hover:text-white' }}">
                                 <span class="shrink-0 text-white">
                                     <svg class="h-[15px] w-[15px]" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -114,10 +114,10 @@
                                         {!! $item['icon'] !!}
                                     </svg>
                                 </span>
-                                {{ $item['label'] }}
-                            </a>
-                        @endforeach
-                    </div>
+                            {{ $item['label'] }}
+                        </a>
+                    @endforeach
+                </div>
             </div>
         @endforeach
     </nav>

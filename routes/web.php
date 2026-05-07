@@ -20,6 +20,7 @@ use App\Livewire\Roles\RolesList;
 use App\Livewire\Users\UserForm;
 use App\Livewire\Users\UserShow;
 use App\Livewire\Users\UsersList;
+use App\Livewire\Website\Home;
 use Illuminate\Support\Facades\Route;
 
 // Protected routes
@@ -63,7 +64,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
-// Login
-Route::get('/', function () {
-    return 'Hello';
-});
+// Public website
+Route::get('/', Home::class)->name('home');
+Route::get('/about', fn () => 'About')->name('about');
+Route::get('/events', fn () => 'Events')->name('events');
+Route::get('/academics', fn () => 'Academics')->name('academics');
+Route::get('/student-life', fn () => 'Student Life')->name('student-life');
+Route::get('/gallery', fn () => 'Gallery')->name('gallery');
+Route::get('/downloads', fn () => 'Downloads')->name('downloads');
+Route::get('/digital-services', fn () => 'Digital Services')->name('digital-services');
+Route::get('/admissions', fn () => 'Admissions')->name('admissions');

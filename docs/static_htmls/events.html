@@ -7,234 +7,167 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['DM Sans','system-ui','sans-serif'],mono:['IBM Plex Mono','ui-monospace','monospace']}}}}</script>
 </head>
-<body class="font-sans bg-slate-50 text-slate-900">
+<body class="font-sans bg-slate-50 text-slate-900 pt-16">
 
-<header class="bg-white/95 border-b border-slate-200 sticky top-0 z-50">
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
         <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-8 h-8 object-contain">
         <span class="font-bold text-slate-900 text-sm leading-tight">Hulhudhuffaaru<br><span class="font-normal text-slate-500 text-xs">School</span></span>
       </a>
-      <nav class="flex items-center gap-5 flex-wrap">
-        <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Home</a>
-        <a href="about.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">About</a>
-        <a href="events.html" class="text-sm font-medium text-rose-600">Events</a>
-        <a href="academics.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Academics</a>
-        <a href="student-life.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Student Life</a>
-        <a href="gallery.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Gallery</a>
-        <a href="downloads.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Downloads</a>
-        <a href="digital-services.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Digital Services</a>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a href="index.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Home</a>
+        <a href="about.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">About</a>
+        <a href="events.html" class="text-sm font-medium transition-colors text-rose-600">Events</a>
+        <a href="academics.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Academics</a>
+        <a href="student-life.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Student Life</a>
+        <a href="gallery.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Gallery</a>
+        <a href="downloads.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Downloads</a>
+        <a href="digital-services.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Digital Services</a>
       </nav>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
+          <button id="lang-en" onclick="setLang('en')" class="px-2.5 py-1.5 bg-slate-900 text-white transition-colors">EN</button>
+          <button id="lang-dv" onclick="setLang('dv')" class="px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors">DV</button>
+        </div>
+        <button class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        </button>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
+    <a href="index.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Home</a>
+    <a href="about.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">About</a>
+    <a href="events.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg bg-rose-50 text-rose-600">Events</a>
+    <a href="academics.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Academics</a>
+    <a href="student-life.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Student Life</a>
+    <a href="gallery.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Gallery</a>
+    <a href="downloads.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Downloads</a>
+    <a href="digital-services.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Digital Services</a>
   </div>
 </header>
 
-<main>
+<main id="main"></main>
 
-  <!-- Page Header -->
-  <div class="bg-white border-b border-slate-200 py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">School Calendar</p>
-      <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Events</h1>
-    </div>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
-
-    <!-- Ongoing -->
-    <section>
-      <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-5 flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block"></span>
-        Ongoing
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <a href="event-evt-001.html" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow block">
-          <div class="relative h-44 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80" alt="Science &amp; Innovation Fair 2025" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-            <div class="absolute top-3 left-3">
-              <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-emerald-500 text-white">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                Ongoing
-              </span>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-600 transition-colors">Science &amp; Innovation Fair 2025</h3>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              22 Apr – 26 Apr 2025
-            </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              Main Hall &amp; Science Block
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">A week-long showcase of student projects in science, technology, and engineering. Open to parents and community visitors daily from 9am to 4pm.</p>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- Upcoming -->
-    <section>
-      <h2 class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-5">Upcoming</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <a href="event-evt-002.html" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow block">
-          <div class="relative h-44 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80" alt="Open Day — May 2025" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-            <div class="absolute top-3 left-3">
-              <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-sky-500 text-white">Upcoming</span>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-600 transition-colors">Open Day — May 2025</h3>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              10 May 2025
-            </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              School Campus, Victoria Island
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">Prospective families are invited to tour the school, meet our teachers, and learn about the admissions process for the 2025/2026 academic year.</p>
-          </div>
-        </a>
-
-        <a href="event-evt-003.html" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow block">
-          <div class="relative h-44 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1598136490941-30d885318abd?w=800&q=80" alt="Inter-House Sports Day" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-            <div class="absolute top-3 left-3">
-              <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-sky-500 text-white">Upcoming</span>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-600 transition-colors">Inter-House Sports Day</h3>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              24 May 2025
-            </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              School Sports Complex
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">A full day of athletic competition between our four school houses — Eagle, Phoenix, Lion, and Dolphin. All parents and guardians are warmly invited.</p>
-          </div>
-        </a>
-
-        <a href="event-evt-004.html" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow block">
-          <div class="relative h-44 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80" alt="SS3 Valedictory Service" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-            <div class="absolute top-3 left-3">
-              <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-sky-500 text-white">Upcoming</span>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-600 transition-colors">SS3 Valedictory Service &amp; Send-Off</h3>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              20 Jun 2025
-            </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              School Chapel &amp; Multipurpose Hall
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">A formal send-off ceremony for our graduating SS3 students, celebrating their journey and wishing them well as they prepare for their WAEC examinations.</p>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- Completed -->
-    <section>
-      <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-5">Completed</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <a href="event-evt-005.html" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow block opacity-80 hover:opacity-100">
-          <div class="relative h-44 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=800&q=80" alt="Annual Prize Giving Day 2024" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300">
-            <div class="absolute top-3 left-3">
-              <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-slate-500 text-white">Completed</span>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-600 transition-colors">Annual Prize Giving Day 2024</h3>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              30 Nov 2024
-            </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              Multipurpose Hall
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">A celebration of academic achievement, character, and service. Awards were presented to outstanding students across all year groups.</p>
-          </div>
-        </a>
-
-        <a href="event-evt-006.html" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow block opacity-80 hover:opacity-100">
-          <div class="relative h-44 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Cultural Day &amp; Food Fair 2024" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300">
-            <div class="absolute top-3 left-3">
-              <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-slate-500 text-white">Completed</span>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-600 transition-colors">Cultural Day &amp; Food Fair 2024</h3>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              4 Oct 2024
-            </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              School Grounds &amp; Classrooms
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">Students and staff celebrated Nigeria's diversity through traditional attire, music, dance, and regional cuisine in a vibrant all-day festival.</p>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-  </div>
-
-</main>
-
-<footer class="bg-slate-900 text-slate-300">
+<footer class="bg-slate-900 text-slate-400 mt-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
       <div>
-        <div class="flex items-center gap-2.5 mb-4">
-          <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-8 h-8 object-contain brightness-0 invert">
-          <span class="font-bold text-white text-sm leading-tight">Hulhudhuffaaru<br><span class="font-normal text-slate-400 text-xs">School</span></span>
+        <div class="flex items-center gap-2 mb-3">
+          <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-7 h-7 object-contain">
+          <span class="text-white font-bold text-sm">Hulhudhuffaaru School</span>
         </div>
-        <p class="text-sm text-slate-400 leading-relaxed">Knowledge, Character, Service</p>
+        <p class="text-xs leading-relaxed">Knowledge, Character, Service.<br>Raa Atoll, Republic of Maldives.</p>
       </div>
       <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Contact</p>
-        <div class="space-y-2 text-sm">
+        <p class="text-white text-sm font-semibold mb-3">Quick Links</p>
+        <div class="space-y-1.5">
+          <a href="about.html" class="block text-xs hover:text-white transition-colors">About</a>
+          <a href="events.html" class="block text-xs hover:text-white transition-colors">Events</a>
+          <a href="admissions.html" class="block text-xs hover:text-white transition-colors">Admissions</a>
+          <a href="academics.html" class="block text-xs hover:text-white transition-colors">Academics</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-white text-sm font-semibold mb-3">Contact</p>
+        <div class="space-y-1.5 text-xs">
           <p>info@hulhudhuffaaru.edu.mv</p>
           <p>+960 658 0000</p>
           <p>Hulhudhuffaaru, Raa Atoll</p>
         </div>
       </div>
-      <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Quick Links</p>
-        <div class="space-y-2 text-sm">
-          <a href="about.html" class="block hover:text-white transition-colors">About Us</a>
-          <a href="admissions.html" class="block hover:text-white transition-colors">Admissions</a>
-          <a href="downloads.html" class="block hover:text-white transition-colors">Downloads</a>
-          <a href="digital-services.html" class="block hover:text-white transition-colors">Digital Services</a>
-        </div>
-      </div>
     </div>
-    <div class="border-t border-slate-700 mt-10 pt-6 text-xs text-slate-500 text-center">
-      &copy; 2025 Hulhudhuffaaru School. All rights reserved.
-    </div>
+    <div class="border-t border-slate-800 pt-6 text-xs text-center">&copy; 2025 Hulhudhuffaaru School. All rights reserved.</div>
   </div>
 </footer>
 
+<script>
+const App = {
+  formatShortDate(str) { if (!str) return ''; return new Date(str).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); },
+  statusBadge(status) { const m={ongoing:'bg-emerald-100 text-emerald-700',upcoming:'bg-sky-100 text-sky-700',completed:'bg-slate-100 text-slate-600'}; return m[status]||'bg-slate-100 text-slate-600'; },
+  icon(name) {
+    const icons = { Info:`<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` };
+    return icons[name] || '';
+  }
+};
+
+let allEvents = [];
+let activeFilter = 'ongoing';
+
+const eventsData = [{"id":"evt-001","status":"ongoing","title":"Science & Innovation Fair 2025","dateStart":"2025-04-22","dateEnd":"2025-04-26","location":"Main Hall & Science Block, Hulhudhuffaaru School Campus","coverImageUrl":"https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80","shortDescription":"A week-long showcase of student projects in science, technology, and engineering. Open to parents and community visitors daily from 9am to 4pm."},{"id":"evt-002","status":"upcoming","title":"Open Day — May 2025","dateStart":"2025-05-10","dateEnd":"2025-05-10","location":"Hulhudhuffaaru School Campus, Victoria Island, Lagos","coverImageUrl":"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80","shortDescription":"Prospective families are invited to tour the school, meet our teachers, and learn about the admissions process for the 2025/2026 academic year."},{"id":"evt-003","status":"upcoming","title":"Inter-House Sports Day","dateStart":"2025-05-24","dateEnd":"2025-05-24","location":"School Sports Complex","coverImageUrl":"https://images.unsplash.com/photo-1598136490941-30d885318abd?w=800&q=80","shortDescription":"A full day of athletic competition between our four school houses — Eagle, Phoenix, Lion, and Dolphin. All parents and guardians are warmly invited to cheer on their children."},{"id":"evt-004","status":"upcoming","title":"SS3 Valedictory Service & Send-Off","dateStart":"2025-06-20","dateEnd":"2025-06-20","location":"School Chapel & Multipurpose Hall","coverImageUrl":"https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80","shortDescription":"A formal send-off ceremony for our graduating SS3 students, celebrating their journey and wishing them well as they prepare for their WAEC examinations."},{"id":"evt-005","status":"completed","title":"Annual Prize Giving Day 2024","dateStart":"2024-11-30","dateEnd":"2024-11-30","location":"Multipurpose Hall, Hulhudhuffaaru School Campus","coverImageUrl":"https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=800&q=80","shortDescription":"A celebration of academic achievement, character, and service. Awards were presented to outstanding students across all year groups."},{"id":"evt-006","status":"completed","title":"Cultural Day & Food Fair 2024","dateStart":"2024-10-04","dateEnd":"2024-10-04","location":"School Grounds & Classrooms","coverImageUrl":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","shortDescription":"Students and staff celebrated Nigeria's diversity through traditional attire, music, dance, and regional cuisine in a vibrant all-day festival."}];
+
+document.addEventListener('DOMContentLoaded', () => {
+  allEvents = eventsData;
+  renderPage();
+});
+
+function renderPage() {
+  document.getElementById('main').innerHTML = `
+    <div class="bg-white border-b border-slate-200 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">School Events</p>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Events</h1>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex gap-2 flex-wrap mb-8" id="filters">
+        ${['ongoing','upcoming','completed','all'].map(f=>`
+          <button data-filter="${f}" onclick="setFilter('${f}')"
+            class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors filter-btn ${f===activeFilter?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}">
+            ${f.charAt(0).toUpperCase()+f.slice(1)}
+          </button>`).join('')}
+      </div>
+      <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>`;
+  renderEvents();
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const isActive = btn.dataset.filter === f;
+    btn.className = `px-4 py-2 rounded-full text-sm font-semibold border transition-colors filter-btn ${isActive?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}`;
+  });
+  renderEvents();
+}
+
+function renderEvents() {
+  const filtered = activeFilter==='all' ? allEvents : allEvents.filter(e=>e.status===activeFilter);
+  const grid = document.getElementById('events-grid');
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="col-span-3 text-center py-16 text-slate-400"><p class="text-lg font-semibold">No ${activeFilter} events</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(e=>`
+    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+      <div class="relative h-48 overflow-hidden">
+        <img src="${e.coverImageUrl}" alt="${e.title}" class="w-full h-full object-cover">
+        <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${App.statusBadge(e.status)}">${e.status}</span>
+      </div>
+      <div class="p-5">
+        <p class="text-xs text-sky-600 font-semibold mb-1">${App.formatShortDate(e.dateStart)}${e.dateEnd&&e.dateEnd!==e.dateStart?' – '+App.formatShortDate(e.dateEnd):''}</p>
+        <h3 class="font-bold text-slate-900 mb-1">${e.title}</h3>
+        <p class="text-xs text-slate-500 mb-3 flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${e.location}</p>
+        <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">${e.shortDescription}</p>
+        <a href="event-${e.id}.html" class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">View Details</a>
+      </div>
+    </div>`).join('');
+}
+</script>
+<script>
+function setLang(l) {
+  var en = document.getElementById('lang-en'), dv = document.getElementById('lang-dv');
+  if (!en || !dv) return;
+  var active = 'px-2.5 py-1.5 bg-slate-900 text-white transition-colors';
+  var inactive = 'px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors';
+  en.className = l==='en' ? active : inactive;
+  dv.className = l==='dv' ? active : inactive;
+}
+</script>
 </body>
 </html>

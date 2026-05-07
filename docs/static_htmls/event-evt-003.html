@@ -7,35 +7,57 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['DM Sans','system-ui','sans-serif'],mono:['IBM Plex Mono','ui-monospace','monospace']}}}}</script>
 </head>
-<body class="font-sans bg-slate-50 text-slate-900">
+<body class="font-sans bg-slate-50 text-slate-900 pt-16">
 
-<header class="bg-white/95 border-b border-slate-200 sticky top-0 z-50">
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
         <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-8 h-8 object-contain">
         <span class="font-bold text-slate-900 text-sm leading-tight">Hulhudhuffaaru<br><span class="font-normal text-slate-500 text-xs">School</span></span>
       </a>
-      <nav class="flex items-center gap-5 flex-wrap">
-        <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Home</a>
-        <a href="about.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">About</a>
-        <a href="events.html" class="text-sm font-medium text-rose-600">Events</a>
-        <a href="academics.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Academics</a>
-        <a href="student-life.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Student Life</a>
-        <a href="gallery.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Gallery</a>
-        <a href="downloads.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Downloads</a>
-        <a href="digital-services.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Digital Services</a>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a href="index.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Home</a>
+        <a href="about.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">About</a>
+        <a href="events.html" class="text-sm font-medium transition-colors text-rose-600">Events</a>
+        <a href="academics.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Academics</a>
+        <a href="student-life.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Student Life</a>
+        <a href="gallery.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Gallery</a>
+        <a href="downloads.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Downloads</a>
+        <a href="digital-services.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Digital Services</a>
       </nav>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
+          <button id="lang-en" onclick="setLang('en')" class="px-2.5 py-1.5 bg-slate-900 text-white transition-colors">EN</button>
+          <button id="lang-dv" onclick="setLang('dv')" class="px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors">DV</button>
+        </div>
+        <button class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        </button>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
+    <a href="index.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Home</a>
+    <a href="about.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">About</a>
+    <a href="events.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg bg-rose-50 text-rose-600">Events</a>
+    <a href="academics.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Academics</a>
+    <a href="student-life.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Student Life</a>
+    <a href="gallery.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Gallery</a>
+    <a href="downloads.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Downloads</a>
+    <a href="digital-services.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Digital Services</a>
   </div>
 </header>
 
 <main>
-  <div class="relative h-72 sm:h-96 overflow-hidden">
+  <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
     <img src="https://images.unsplash.com/photo-1598136490941-30d885318abd?w=800&q=80" alt="Inter-House Sports Day" class="w-full h-full object-cover">
-    <div class="absolute inset-0 bg-slate-900/50"></div>
-    <div class="absolute top-4 left-4">
-      <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-sky-500 text-white">Upcoming</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+    <div class="absolute bottom-4 left-4">
+      <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-sky-100 text-sky-700">Upcoming</span>
     </div>
   </div>
 
@@ -48,9 +70,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">Inter-House Sports Day</h1>
-        <div class="space-y-4 text-slate-700">
-          <p class="leading-relaxed">Inter-House Sports Day is one of the most anticipated events of the school calendar. Students compete across track and field events, relays, and field sports in a day filled with school spirit, friendly rivalry, and celebration.</p>
-          <p class="leading-relaxed">The day begins at 8:00am with the march-past parade, followed by the opening ceremony and blessing. Events run throughout the day with the final relay and closing ceremony from 3:30pm to 5:00pm. Parents are encouraged to join us from 9:00am. Refreshments will be available for purchase at the venue.</p>
+        <div class="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9">
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">Inter-House Sports Day is one of the most anticipated events of the school calendar. Students compete across track and field events, relays, and field sports in a day filled with school spirit, friendly rivalry, and celebration.</p>
+            <p class="leading-relaxed">The day begins at 8:00am with the march-past parade, followed by the opening ceremony and blessing. Events run throughout the day with the final relay and closing ceremony from 3:30pm to 5:00pm. Parents are encouraged to join us from 9:00am. Refreshments will be available for purchase at the venue.</p>
+          </div>
         </div>
 
         <div class="mt-8 bg-slate-50 rounded-xl border border-slate-200 p-4">
@@ -61,22 +85,29 @@
       <div class="space-y-4">
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
           <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Event Details</p>
-          <div class="space-y-3">
+          <dl class="space-y-3">
             <div class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
               <div>
-                <p class="text-xs text-slate-400">Date</p>
-                <p class="text-sm font-semibold text-slate-900">24 May 2025</p>
+                <dt class="text-xs text-slate-400">Date</dt>
+                <dd class="text-sm font-semibold text-slate-900">24 May 2025</dd>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               <div>
-                <p class="text-xs text-slate-400">Location</p>
-                <p class="text-sm font-semibold text-slate-900">School Sports Complex</p>
+                <dt class="text-xs text-slate-400">Location</dt>
+                <dd class="text-sm font-semibold text-slate-900">School Sports Complex</dd>
               </div>
             </div>
-          </div>
+            <div class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div>
+                <dt class="text-xs text-slate-400">Status</dt>
+                <dd class="text-sm font-semibold text-sky-600">Upcoming</dd>
+              </div>
+            </div>
+          </dl>
         </div>
 
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
@@ -90,13 +121,47 @@
   </div>
 </main>
 
-<footer class="bg-slate-900 text-slate-300 mt-10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <div class="border-t border-slate-700 pt-6 text-xs text-slate-500 text-center">
-      &copy; 2025 Hulhudhuffaaru School. All rights reserved. &nbsp;·&nbsp; <a href="events.html" class="hover:text-white transition-colors">Back to Events</a>
+<footer class="bg-slate-900 text-slate-400 mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-7 h-7 object-contain">
+          <span class="text-white font-bold text-sm">Hulhudhuffaaru School</span>
+        </div>
+        <p class="text-xs leading-relaxed">Knowledge, Character, Service.<br>Raa Atoll, Republic of Maldives.</p>
+      </div>
+      <div>
+        <p class="text-white text-sm font-semibold mb-3">Quick Links</p>
+        <div class="space-y-1.5">
+          <a href="about.html" class="block text-xs hover:text-white transition-colors">About</a>
+          <a href="events.html" class="block text-xs hover:text-white transition-colors">Events</a>
+          <a href="admissions.html" class="block text-xs hover:text-white transition-colors">Admissions</a>
+          <a href="academics.html" class="block text-xs hover:text-white transition-colors">Academics</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-white text-sm font-semibold mb-3">Contact</p>
+        <div class="space-y-1.5 text-xs">
+          <p>info@hulhudhuffaaru.edu.mv</p>
+          <p>+960 658 0000</p>
+          <p>Hulhudhuffaaru, Raa Atoll</p>
+        </div>
+      </div>
     </div>
+    <div class="border-t border-slate-800 pt-6 text-xs text-center">&copy; 2025 Hulhudhuffaaru School. All rights reserved. &nbsp;·&nbsp; <a href="events.html" class="hover:text-white transition-colors">Back to Events</a></div>
   </div>
 </footer>
 
+<script>
+function setLang(l) {
+  var en = document.getElementById('lang-en'), dv = document.getElementById('lang-dv');
+  if (!en || !dv) return;
+  var active = 'px-2.5 py-1.5 bg-slate-900 text-white transition-colors';
+  var inactive = 'px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors';
+  en.className = l==='en' ? active : inactive;
+  dv.className = l==='dv' ? active : inactive;
+}
+</script>
 </body>
 </html>

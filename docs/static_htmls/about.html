@@ -1,400 +1,446 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>About — Hulhudhuffaaru School</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['DM Sans','system-ui','sans-serif'],mono:['IBM Plex Mono','ui-monospace','monospace']}}}}</script>
 </head>
-<body class="font-sans bg-slate-50 text-slate-900">
+<body class="font-sans bg-white text-slate-900 pt-16">
 
-<header class="bg-white/95 border-b border-slate-200 sticky top-0 z-50">
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
         <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-8 h-8 object-contain">
         <span class="font-bold text-slate-900 text-sm leading-tight">Hulhudhuffaaru<br><span class="font-normal text-slate-500 text-xs">School</span></span>
       </a>
-      <nav class="flex items-center gap-5 flex-wrap">
-        <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Home</a>
-        <a href="about.html" class="text-sm font-medium text-rose-600">About</a>
-        <a href="events.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Events</a>
-        <a href="academics.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Academics</a>
-        <a href="student-life.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Student Life</a>
-        <a href="gallery.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Gallery</a>
-        <a href="downloads.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Downloads</a>
-        <a href="digital-services.html" class="text-sm font-medium text-slate-600 hover:text-slate-900">Digital Services</a>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a href="index.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Home</a>
+        <a href="about.html" class="text-sm font-medium transition-colors text-rose-600">About</a>
+        <a href="events.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Events</a>
+        <a href="academics.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Academics</a>
+        <a href="student-life.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Student Life</a>
+        <a href="gallery.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Gallery</a>
+        <a href="downloads.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Downloads</a>
+        <a href="digital-services.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Digital Services</a>
       </nav>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
+          <button id="lang-en" onclick="setLang('en')" class="px-2.5 py-1.5 bg-slate-900 text-white transition-colors">EN</button>
+          <button id="lang-dv" onclick="setLang('dv')" class="px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors">DV</button>
+        </div>
+        <button class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        </button>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
+    <a href="index.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Home</a>
+    <a href="about.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg bg-rose-50 text-rose-600">About</a>
+    <a href="events.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Events</a>
+    <a href="academics.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Academics</a>
+    <a href="student-life.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Student Life</a>
+    <a href="gallery.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Gallery</a>
+    <a href="downloads.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Downloads</a>
+    <a href="digital-services.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Digital Services</a>
   </div>
 </header>
 
-<main>
+<main id="main"></main>
 
-  <!-- Hero -->
-  <div class="relative h-64 sm:h-80 overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80" alt="Hulhudhuffaaru School" class="w-full h-full object-cover">
-    <div class="absolute inset-0 bg-slate-900/60 flex items-end">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
-        <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-2">Founded 1987</p>
-        <h1 class="text-3xl sm:text-4xl font-black text-white">About Hulhudhuffaaru School</h1>
-        <p class="text-slate-300 text-sm mt-2 italic">Shaping Tomorrow's Leaders Since 1987</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- School Overview -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2">
-        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">Who We Are</p>
-        <p class="text-slate-700 leading-relaxed mb-4">Hulhudhuffaaru School is a premier co-educational institution committed to academic excellence, character development, and community service. Founded in 1987 on the belief that every child deserves a world-class education, we have grown from a modest campus of 120 students to a thriving learning community of over 1,200. Our graduates go on to lead in medicine, law, engineering, the arts, and public service across Nigeria and the world.</p>
-        <p class="text-slate-700 leading-relaxed">We believe that education is not simply the acquisition of knowledge — it is the formation of the whole person. Our curriculum is rigorous and internationally benchmarked, while our pastoral care ensures every student feels known, valued, and supported. From the classroom to the playing field, from the debate stage to the science laboratory, we challenge our students to discover and develop their unique gifts.</p>
-      </div>
-      <div class="space-y-4">
-        <div class="bg-white rounded-2xl border border-slate-200 p-6">
-          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">Our Motto</p>
-          <p class="text-xl font-black text-slate-900 italic">"Knowledge, Character, Service"</p>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-200 p-6">
-          <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Mission</p>
-          <p class="text-sm text-slate-600 leading-relaxed">To provide a holistic, values-driven education that equips every student with the knowledge, character, and confidence to lead purposeful lives and contribute meaningfully to society.</p>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-200 p-6">
-          <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Vision</p>
-          <p class="text-sm text-slate-600 leading-relaxed">To be a leading institution of learning in West Africa, recognised for academic excellence, character formation, and the development of global citizens who serve their communities with integrity and compassion.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Principal's Message -->
-  <section class="bg-slate-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-      <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-8">A Message from Our Principal</p>
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
-        <div class="lg:col-span-1 flex flex-col items-center lg:items-start gap-4">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Dr. Patricia Nwachukwu" class="w-36 h-36 rounded-2xl object-cover">
-          <div>
-            <p class="font-bold text-white text-sm">Dr. Patricia Nwachukwu</p>
-            <p class="text-rose-400 text-xs font-semibold">Principal</p>
-          </div>
-        </div>
-        <div class="lg:col-span-3 space-y-4 text-slate-300 leading-relaxed text-sm">
-          <p>Dear Parents, Students, and Friends of Hulhudhuffaaru School,</p>
-          <p>It is my profound honour to serve as the Principal of this exceptional institution. When I joined this school 12 years ago, I was struck by one thing above all else: the unwavering belief, shared by staff, students, and parents alike, that every child is capable of greatness.</p>
-          <p>That belief is the foundation of everything we do here. Our teachers do not simply deliver content — they build relationships, nurture curiosity, and hold every student to the highest expectations of character and intellect. Our students do not simply attend school — they belong to a community that challenges them, celebrates them, and holds them accountable.</p>
-          <p>Over the past decade, we have expanded our facilities, launched our digital services platform, deepened our extracurricular programmes, and achieved some of our best examination results in the school's history. But numbers alone do not capture what makes this place special. What makes this school extraordinary is the young person who walks in on their first day uncertain of themselves, and graduates four or six years later with the confidence, skills, and values to change the world.</p>
-          <p>To prospective families: we warmly invite you to visit us. See our classrooms, meet our teachers, speak to our students. I am confident that what you find will exceed your expectations.</p>
-          <p>To our current families: thank you for your continued trust and partnership. Together, we are raising the next generation of Nigeria's leaders.</p>
-          <p class="text-white font-semibold">With warmest regards,<br>Dr. Patricia Nwachukwu<br><span class="font-normal text-slate-400">Principal, Hulhudhuffaaru School</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leadership Team -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Our Leadership</p>
-    <h2 class="text-2xl font-black text-slate-900 mb-8">Leadership Team</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Dr. Patricia Nwachukwu" class="w-16 h-16 rounded-xl object-cover mb-4">
-        <p class="font-bold text-slate-900">Dr. Patricia Nwachukwu</p>
-        <p class="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-3">Principal</p>
-        <p class="text-sm text-slate-600 leading-relaxed">Dr. Nwachukwu holds a PhD in Educational Leadership from the University of Lagos. With over 25 years in education, she has led the school through its most transformative decade.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Mr. Babatunde Adeyemi" class="w-16 h-16 rounded-xl object-cover mb-4">
-        <p class="font-bold text-slate-900">Mr. Babatunde Adeyemi</p>
-        <p class="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-3">Vice Principal, Academics</p>
-        <p class="text-sm text-slate-600 leading-relaxed">Mr. Adeyemi oversees curriculum design, examination coordination, and teacher development. He joined the school in 2008 and holds an MSc in Mathematics Education.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80" alt="Mrs. Chioma Okafor" class="w-16 h-16 rounded-xl object-cover mb-4">
-        <p class="font-bold text-slate-900">Mrs. Chioma Okafor</p>
-        <p class="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-3">Vice Principal, Student Affairs</p>
-        <p class="text-sm text-slate-600 leading-relaxed">Mrs. Okafor manages student welfare, discipline, and co-curricular activities. She is deeply committed to pastoral care and has pioneered the school's counselling programme.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="Mr. Oluwaseun Fashola" class="w-16 h-16 rounded-xl object-cover mb-4">
-        <p class="font-bold text-slate-900">Mr. Oluwaseun Fashola</p>
-        <p class="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-3">Head of Administration</p>
-        <p class="text-sm text-slate-600 leading-relaxed">Mr. Fashola leads finance, facilities, and operational management. His background in public administration has brought structure and efficiency to the school's operations.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80" alt="Dr. Amaka Eze" class="w-16 h-16 rounded-xl object-cover mb-4">
-        <p class="font-bold text-slate-900">Dr. Amaka Eze</p>
-        <p class="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-3">Director of Admissions</p>
-        <p class="text-sm text-slate-600 leading-relaxed">Dr. Eze manages the admissions process from enquiry through enrolment. She works closely with families to ensure a smooth and transparent transition into the school community.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Mr. Emeka Nweke" class="w-16 h-16 rounded-xl object-cover mb-4">
-        <p class="font-bold text-slate-900">Mr. Emeka Nweke</p>
-        <p class="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-3">Head of ICT &amp; Digital Services</p>
-        <p class="text-sm text-slate-600 leading-relaxed">Mr. Nweke leads the school's digital transformation, overseeing the portal, e-learning platforms, and classroom technology. He holds a BSc in Computer Science.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- School History -->
-  <section class="bg-white border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Our Story</p>
-      <h2 class="text-2xl font-black text-slate-900 mb-6">School History</h2>
-      <p class="text-slate-600 leading-relaxed max-w-3xl mb-10">The story of Hulhudhuffaaru School is a testament to a community's unwavering commitment to its children. Established during a pivotal moment in the history of Raa Atoll, our school has grown from humble beginnings into a leading institution for higher secondary education. The development and success we see today are the direct result of the grit, vision, and tireless hard work of our founding educators and the pioneer community.</p>
-
-      <div class="space-y-10 max-w-3xl">
-
-        <div>
-          <h3 class="text-lg font-black text-slate-900 mb-4 pb-3 border-b border-slate-100">Our Foundations: The Great Migration (1993–1995)</h3>
-          <div class="space-y-4">
-            <p class="text-sm text-slate-600 leading-relaxed">The roots of our school are deeply connected to the relocation of the people from the islands of Ungulu and Undoodhoo. In 1993, families began their migration to Hulhudhuffaaru, seeking better facilities and a brighter future. By 1995, the migration was complete, and the island was officially declared inhabited.</p>
-            <p class="text-sm text-slate-600 leading-relaxed">During these early transition years, education never faltered. Before a dedicated school building existed, teaching was conducted in temporary spaces. In 1994, classes were held within the Magistrate Court, later moving to the Island Office (now the Island Council). These early days were marked by simple conditions — legend has it the office didn't even have a door at the time — but the passion for learning was boundless.</p>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-black text-slate-900 mb-4 pb-3 border-b border-slate-100">The Three Pillars: Honoring Our Pioneers</h3>
-          <div class="space-y-4">
-            <p class="text-sm text-slate-600 leading-relaxed">The success of Hulhudhuffaaru School was carried on the shoulders of dedicated teachers who sacrificed much to ensure no student was left behind. Before the migration was finalized, these educators traveled between islands, exchanging places and traveling from Ungulu or Undoodhoo to Hulhudhuffaaru to keep the classrooms running.</p>
-            <p class="text-sm text-slate-600 leading-relaxed">We honor the "Three Pillars" whose tireless work laid our academic foundation:</p>
-            <div class="bg-rose-50 rounded-xl p-4 space-y-2">
-              <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0"></div><p class="text-sm font-semibold text-slate-900">Mr. Mohamed Rasheed <span class="font-normal text-slate-500">— Mathematics</span></p></div>
-              <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0"></div><p class="text-sm font-semibold text-slate-900">Mr. Ahmed Niyaz <span class="font-normal text-slate-500">— Mathematics &amp; Dhivehi</span></p></div>
-              <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0"></div><p class="text-sm font-semibold text-slate-900">Mr. Abdul Latheef Umar <span class="font-normal text-slate-500">— Practical Arts &amp; Physical Education</span></p></div>
-            </div>
-            <p class="text-sm text-slate-600 leading-relaxed">Following the full relocation in 1995, they were joined by Mr. Saeed (Islam), completing the core team that shaped our school's identity. The standard of excellence we strive for today was set by their hands.</p>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-black text-slate-900 mb-4 pb-3 border-b border-slate-100">Growth and the Modern Era</h3>
-          <div class="space-y-4">
-            <p class="text-sm text-slate-600 leading-relaxed">On May 17, 1995, Hulhudhuffaaru School was formally inaugurated by the then Minister of Education, Dr. Mohamed Latheef. The original "Main School" consisted of just three buildings and six classrooms.</p>
-            <p class="text-sm text-slate-600 leading-relaxed">From those six original classrooms, we have expanded into a comprehensive educational center:</p>
-            <div class="space-y-3">
-              <div class="bg-white border border-slate-200 rounded-xl p-4">
-                <p class="text-xs font-bold uppercase tracking-wide text-rose-600 mb-1">Academic Range</p>
-                <p class="text-sm text-slate-700">We now serve students from Grade 1 through Grade 12.</p>
-              </div>
-              <div class="bg-white border border-slate-200 rounded-xl p-4">
-                <p class="text-xs font-bold uppercase tracking-wide text-rose-600 mb-1">Higher Secondary</p>
-                <p class="text-sm text-slate-700">We offer specialized streams in both Science and Commerce.</p>
-              </div>
-              <div class="bg-white border border-slate-200 rounded-xl p-4">
-                <p class="text-xs font-bold uppercase tracking-wide text-rose-600 mb-1">Our Vision</p>
-                <p class="text-sm text-slate-700">To be the premier higher secondary school in the North Central Province, producing graduates who are both proud Maldivians and global citizens.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-black text-slate-900 mb-4 pb-3 border-b border-slate-100">A Legacy Continued</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">At Hulhudhuffaaru School, we pride ourselves on a holistic education system rooted in Islamic Maldivian identity. As we look toward the future, we remain forever grateful to the pioneer families and teachers from Ungulu and Undoodhoo. Every modern classroom and academic achievement is a tribute to their struggle. We continue to build upon their hard work, ensuring that Hulhudhuffaaru School remains a beacon of hope and opportunity for generations to come.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Founding Members -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">A Legacy of Excellence</p>
-    <h2 class="text-2xl font-black text-slate-900 mb-8">Founding Members</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 flex gap-4">
-        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Mrs. Funke Adeleke" class="w-14 h-14 rounded-xl object-cover flex-shrink-0">
-        <div>
-          <p class="font-bold text-slate-900 text-sm">Mrs. Funke Adeleke</p>
-          <p class="text-xs text-rose-600 font-semibold mb-2">English Language &amp; Literature</p>
-          <p class="text-xs text-slate-500 leading-relaxed">A gifted storyteller and grammarian who instilled a love of language in every student she taught. Retired in 2012 after 25 years of distinguished service.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 flex gap-4">
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Mr. Silas Chukwu" class="w-14 h-14 rounded-xl object-cover flex-shrink-0">
-        <div>
-          <p class="font-bold text-slate-900 text-sm">Mr. Silas Chukwu</p>
-          <p class="text-xs text-rose-600 font-semibold mb-2">Mathematics &amp; Further Maths</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Known for his patient, methodical teaching style, Mr. Chukwu produced dozens of science and engineering graduates. He served as Head of Mathematics until 2005.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 flex gap-4">
-        <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&q=80" alt="Mrs. Adaeze Nwosu" class="w-14 h-14 rounded-xl object-cover flex-shrink-0">
-        <div>
-          <p class="font-bold text-slate-900 text-sm">Mrs. Adaeze Nwosu</p>
-          <p class="text-xs text-rose-600 font-semibold mb-2">Biology &amp; Health Science</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Built the first biology laboratory from scratch. Many of our medical alumni credit her as the reason they pursued medicine. A founding pillar of STEM at this school.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 flex gap-4">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Mr. Rasheed Balogun" class="w-14 h-14 rounded-xl object-cover flex-shrink-0">
-        <div>
-          <p class="font-bold text-slate-900 text-sm">Mr. Rasheed Balogun</p>
-          <p class="text-xs text-rose-600 font-semibold mb-2">History &amp; Civics</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Passionate about Nigeria's story and civic responsibility. His classroom was always alive with debate. Retired in 2018 as Senior Teacher after three decades of service.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 flex gap-4">
-        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&q=80" alt="Mr. Kingsley Eze" class="w-14 h-14 rounded-xl object-cover flex-shrink-0">
-        <div>
-          <p class="font-bold text-slate-900 text-sm">Mr. Kingsley Eze</p>
-          <p class="text-xs text-rose-600 font-semibold mb-2">Physical Education &amp; Sports</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Built the school's first athletics programme from nothing. Under his coaching, the school won its first inter-school championships in 1991 — a titan of school spirit.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Achievements -->
-  <section class="bg-white border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Recognition</p>
-      <h2 class="text-2xl font-black text-slate-900 mb-8">Achievements &amp; Awards</h2>
-
-      <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">2025</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 mb-3">School</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">National Top 10 Schools</p>
-          <p class="text-xs text-slate-500 mb-2">National Education Rankings</p>
-          <p class="text-xs text-slate-600 leading-relaxed">Ranked among top 10 schools nationally in O-Level results.</p>
-        </div>
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 mb-3">Students</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">1st Place — Inter-School Science Quiz</p>
-          <p class="text-xs text-slate-500 mb-2">Inter-School Science Quiz 2025</p>
-          <div class="flex items-center gap-2 mb-2">
-            <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80" alt="Aminath Rifa" class="w-7 h-7 rounded-full object-cover">
-            <p class="text-xs font-semibold text-slate-700">Aminath Rifa</p>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">Grade 10 team took first place at the North Central Province science quiz competition.</p>
-        </div>
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 mb-3">Staff</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">Best Teacher Award</p>
-          <p class="text-xs text-slate-500 mb-2">Raa Atoll Education Awards 2025</p>
-          <div class="flex items-center gap-2 mb-2">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Mr. Ahmed Niyaz" class="w-7 h-7 rounded-full object-cover">
-            <p class="text-xs font-semibold text-slate-700">Mr. Ahmed Niyaz</p>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">Mr. Ahmed Niyaz recognised as Best Teacher at the Raa Atoll Education Awards.</p>
-        </div>
-      </div>
-
-      <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">2024</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 mb-3">School</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">Best School in Maldives — Higher Secondary</p>
-          <p class="text-xs text-slate-500 mb-2">Maldives National Education Awards 2024</p>
-          <p class="text-xs text-slate-600 leading-relaxed">Awarded best higher secondary school in the Maldives at the national education ceremony.</p>
-        </div>
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 mb-3">Students</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">1st Place — National Debate Championship</p>
-          <p class="text-xs text-slate-500 mb-2">National Debate Championship 2024</p>
-          <div class="flex items-center gap-2 mb-2">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt="Hassan Zayan" class="w-7 h-7 rounded-full object-cover">
-            <p class="text-xs font-semibold text-slate-700">Hassan Zayan</p>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">School debate team won the national championship, defeating 24 schools.</p>
-        </div>
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 mb-3">Staff</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">Outstanding Staff Member</p>
-          <p class="text-xs text-slate-500 mb-2">Annual Awards Night 2024</p>
-          <div class="flex items-center gap-2 mb-2">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80" alt="Mrs. Fathimath Shazna" class="w-7 h-7 rounded-full object-cover">
-            <p class="text-xs font-semibold text-slate-700">Mrs. Fathimath Shazna</p>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">Mrs. Fathimath Shazna honoured as Outstanding Staff Member at the school's annual awards night.</p>
-        </div>
-      </div>
-
-      <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">2023</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 mb-3">Students</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">Top Performers — Cambridge O-Level</p>
-          <p class="text-xs text-slate-500 mb-2">Cambridge O-Level 2023</p>
-          <div class="flex items-center gap-2 mb-2">
-            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80" alt="Mariyam Sana" class="w-7 h-7 rounded-full object-cover">
-            <p class="text-xs font-semibold text-slate-700">Mariyam Sana</p>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">School produced 3 students in the national top 10 for O-Level results.</p>
-        </div>
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 mb-3">School</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">1st Place — Atoll Sports Meet</p>
-          <p class="text-xs text-slate-500 mb-2">Raa Atoll Sports Meet 2023</p>
-          <p class="text-xs text-slate-600 leading-relaxed">Overall champions at the Raa Atoll inter-school sports meet.</p>
-        </div>
-        <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
-          <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 mb-3">Staff</span>
-          <p class="font-bold text-slate-900 text-sm mb-1">Best ICT Teacher — National</p>
-          <p class="text-xs text-slate-500 mb-2">National Teachers' Day 2023</p>
-          <div class="flex items-center gap-2 mb-2">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="Mr. Ali Shareef" class="w-7 h-7 rounded-full object-cover">
-            <p class="text-xs font-semibold text-slate-700">Mr. Ali Shareef</p>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">Mr. Ali Shareef awarded Best ICT Teacher at the national teachers' day ceremony.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-</main>
-
-<footer class="bg-slate-900 text-slate-300 mt-0">
+<footer class="bg-slate-900 text-slate-400 mt-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
       <div>
-        <div class="flex items-center gap-2.5 mb-4">
-          <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-8 h-8 object-contain brightness-0 invert">
-          <span class="font-bold text-white text-sm leading-tight">Hulhudhuffaaru<br><span class="font-normal text-slate-400 text-xs">School</span></span>
+        <div class="flex items-center gap-2 mb-3">
+          <img src="../static_site/logo.png" alt="Hulhudhuffaaru School" class="w-7 h-7 object-contain">
+          <span class="text-white font-bold text-sm">Hulhudhuffaaru School</span>
         </div>
-        <p class="text-sm text-slate-400 leading-relaxed">Knowledge, Character, Service</p>
+        <p class="text-xs leading-relaxed">Knowledge, Character, Service.<br>Raa Atoll, Republic of Maldives.</p>
       </div>
       <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Contact</p>
-        <div class="space-y-2 text-sm">
+        <p class="text-white text-sm font-semibold mb-3">Quick Links</p>
+        <div class="space-y-1.5">
+          <a href="about.html" class="block text-xs hover:text-white transition-colors">About</a>
+          <a href="events.html" class="block text-xs hover:text-white transition-colors">Events</a>
+          <a href="admissions.html" class="block text-xs hover:text-white transition-colors">Admissions</a>
+          <a href="academics.html" class="block text-xs hover:text-white transition-colors">Academics</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-white text-sm font-semibold mb-3">Contact</p>
+        <div class="space-y-1.5 text-xs">
           <p>info@hulhudhuffaaru.edu.mv</p>
           <p>+960 658 0000</p>
           <p>Hulhudhuffaaru, Raa Atoll</p>
         </div>
       </div>
-      <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Quick Links</p>
-        <div class="space-y-2 text-sm">
-          <a href="about.html" class="block hover:text-white transition-colors">About Us</a>
-          <a href="admissions.html" class="block hover:text-white transition-colors">Admissions</a>
-          <a href="downloads.html" class="block hover:text-white transition-colors">Downloads</a>
-          <a href="digital-services.html" class="block hover:text-white transition-colors">Digital Services</a>
-        </div>
-      </div>
     </div>
-    <div class="border-t border-slate-700 mt-10 pt-6 text-xs text-slate-500 text-center">
+    <div class="border-t border-slate-800 pt-6 text-xs text-center">
       &copy; 2025 Hulhudhuffaaru School. All rights reserved.
     </div>
   </div>
 </footer>
 
+<script>
+const App = {
+  icon(name) {
+    const icons = {
+      ChevronDown:`<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`,
+    };
+    return icons[name] || '';
+  }
+};
+
+let activeTab = 'about';
+let activeCategory = 'all';
+let activeYear = 'all';
+
+const pageData = {"school":{"name":"Hulhudhuffaaru School","foundedYear":1987,"motto":"Knowledge, Character, Service","tagline":"Shaping Tomorrow's Leaders Since 1987","description":"Hulhudhuffaaru School is a premier co-educational institution committed to academic excellence, character development, and community service. Founded in 1987 on the belief that every child deserves a world-class education, we have grown from a modest campus of 120 students to a thriving learning community of over 1,200. Our graduates go on to lead in medicine, law, engineering, the arts, and public service across Nigeria and the world.\n\nWe believe that education is not simply the acquisition of knowledge — it is the formation of the whole person. Our curriculum is rigorous and internationally benchmarked, while our pastoral care ensures every student feels known, valued, and supported. From the classroom to the playing field, from the debate stage to the science laboratory, we challenge our students to discover and develop their unique gifts.","heroImageUrl":"https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80"},"principal":{"name":"Dr. Patricia Nwachukwu","title":"Principal","photoUrl":"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80","message":"Dear Parents, Students, and Friends of Hulhudhuffaaru School,\n\nIt is my profound honour to serve as the Principal of this exceptional institution. When I joined this school 12 years ago, I was struck by one thing above all else: the unwavering belief, shared by staff, students, and parents alike, that every child is capable of greatness.\n\nThat belief is the foundation of everything we do here. Our teachers do not simply deliver content — they build relationships, nurture curiosity, and hold every student to the highest expectations of character and intellect. Our students do not simply attend school — they belong to a community that challenges them, celebrates them, and holds them accountable.\n\nOver the past decade, we have expanded our facilities, launched our digital services platform, deepened our extracurricular programmes, and achieved some of our best examination results in the school's history. But numbers alone do not capture what makes this place special. What makes this school extraordinary is the young person who walks in on their first day uncertain of themselves, and graduates four or six years later with the confidence, skills, and values to change the world.\n\nTo prospective families: we warmly invite you to visit us. See our classrooms, meet our teachers, speak to our students. I am confident that what you find will exceed your expectations.\n\nTo our current families: thank you for your continued trust and partnership. Together, we are raising the next generation of Nigeria's leaders.\n\nWith warmest regards,\n\nDr. Patricia Nwachukwu\nPrincipal, Hulhudhuffaaru School"},"mission":{"missionStatement":"To provide a holistic, values-driven education that equips every student with the knowledge, character, and confidence to lead purposeful lives and contribute meaningfully to society.","visionStatement":"To be a leading institution of learning in West Africa, recognised for academic excellence, character formation, and the development of global citizens who serve their communities with integrity and compassion."},"schoolHistory":{"intro":"The story of Hulhudhuffaaru School is a testament to a community's unwavering commitment to its children. Established during a pivotal moment in the history of Raa Atoll, our school has grown from humble beginnings into a leading institution for higher secondary education. The development and success we see today are the direct result of the grit, vision, and tireless hard work of our founding educators and the pioneer community.","sections":[{"id":"sh-1","title":"Our Foundations: The Great Migration (1993–1995)","blocks":[{"type":"paragraph","text":"The roots of our school are deeply connected to the relocation of the people from the islands of Ungulu and Undoodhoo. In 1993, families began their migration to Hulhudhuffaaru, seeking better facilities and a brighter future. By 1995, the migration was complete, and the island was officially declared inhabited."},{"type":"paragraph","text":"During these early transition years, education never faltered. Before a dedicated school building existed, teaching was conducted in temporary spaces. In 1994, classes were held within the Magistrate Court, later moving to the Island Office (now the Island Council). These early days were marked by simple conditions — legend has it the office didn't even have a door at the time — but the passion for learning was boundless."}]},{"id":"sh-2","title":"The Three Pillars: Honoring Our Pioneers","blocks":[{"type":"paragraph","text":"The success of Hulhudhuffaaru School was carried on the shoulders of dedicated teachers who sacrificed much to ensure no student was left behind. Before the migration was finalized, these educators traveled between islands, exchanging places and traveling from Ungulu or Undoodhoo to Hulhudhuffaaru to keep the classrooms running."},{"type":"paragraph","text":"We honor the \"Three Pillars\" whose tireless work laid our academic foundation:"},{"type":"founderList","items":[{"name":"Mr. Mohamed Rasheed","subject":"Mathematics"},{"name":"Mr. Ahmed Niyaz","subject":"Mathematics & Dhivehi"},{"name":"Mr. Abdul Latheef Umar","subject":"Practical Arts & Physical Education"}]},{"type":"paragraph","text":"Following the full relocation in 1995, they were joined by Mr. Saeed (Islam), completing the core team that shaped our school's identity. The standard of excellence we strive for today was set by their hands."}]},{"id":"sh-3","title":"Growth and the Modern Era","blocks":[{"type":"paragraph","text":"On May 17, 1995, Hulhudhuffaaru School was formally inaugurated by the then Minister of Education, Dr. Mohamed Latheef. The original \"Main School\" consisted of just three buildings and six classrooms."},{"type":"paragraph","text":"From those six original classrooms, we have expanded into a comprehensive educational center:"},{"type":"highlightList","items":[{"label":"Academic Range","text":"We now serve students from Grade 1 through Grade 12."},{"label":"Higher Secondary","text":"We offer specialized streams in both Science and Commerce."},{"label":"Our Vision","text":"To be the premier higher secondary school in the North Central Province, producing graduates who are both proud Maldivians and global citizens."}]}]},{"id":"sh-4","title":"A Legacy Continued","blocks":[{"type":"paragraph","text":"At Hulhudhuffaaru School, we pride ourselves on a holistic education system rooted in Islamic Maldivian identity. As we look toward the future, we remain forever grateful to the pioneer families and teachers from Ungulu and Undoodhoo. Every modern classroom and academic achievement is a tribute to their struggle. We continue to build upon their hard work, ensuring that Hulhudhuffaaru School remains a beacon of hope and opportunity for generations to come."}]}]},"foundingMembers":[{"id":"fm-1","name":"Mrs. Funke Adeleke","subject":"English Language & Literature","photoUrl":"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80","tribute":"A gifted storyteller and grammarian who instilled a love of language in every student she taught. Retired in 2012 after 25 years of distinguished service."},{"id":"fm-2","name":"Mr. Silas Chukwu","subject":"Mathematics & Further Maths","photoUrl":"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80","tribute":"Known for his patient, methodical teaching style, Mr. Chukwu produced dozens of science and engineering graduates. He served as Head of Mathematics until 2005."},{"id":"fm-3","name":"Mrs. Adaeze Nwosu","subject":"Biology & Health Science","photoUrl":"https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&q=80","tribute":"Built the first biology laboratory from scratch. Many of our medical alumni credit her as the reason they pursued medicine. A founding pillar of STEM at this school."},{"id":"fm-4","name":"Mr. Rasheed Balogun","subject":"History & Civics","photoUrl":"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80","tribute":"Passionate about Nigeria's story and civic responsibility. His classroom was always alive with debate. Retired in 2018 as Senior Teacher after three decades of service."},{"id":"fm-5","name":"Mr. Kingsley Eze","subject":"Physical Education & Sports","photoUrl":"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&q=80","tribute":"Built the school's first athletics programme from nothing. Under his coaching, the school won its first inter-school championships in 1991 — a titan of school spirit."}],"leadership":[{"id":"ldr-1","name":"Dr. Patricia Nwachukwu","role":"Principal","photoUrl":"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80","bio":"Dr. Nwachukwu holds a PhD in Educational Leadership from the University of Lagos. With over 25 years in education, she has led the school through its most transformative decade."},{"id":"ldr-2","name":"Mr. Babatunde Adeyemi","role":"Vice Principal, Academics","photoUrl":"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80","bio":"Mr. Adeyemi oversees curriculum design, examination coordination, and teacher development. He joined the school in 2008 and holds an MSc in Mathematics Education."},{"id":"ldr-3","name":"Mrs. Chioma Okafor","role":"Vice Principal, Student Affairs","photoUrl":"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80","bio":"Mrs. Okafor manages student welfare, discipline, and co-curricular activities. She is deeply committed to pastoral care and has pioneered the school's counselling programme."},{"id":"ldr-4","name":"Mr. Oluwaseun Fashola","role":"Head of Administration","photoUrl":"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80","bio":"Mr. Fashola leads finance, facilities, and operational management. His background in public administration has brought structure and efficiency to the school's operations."},{"id":"ldr-5","name":"Dr. Amaka Eze","role":"Director of Admissions","photoUrl":"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80","bio":"Dr. Eze manages the admissions process from enquiry through enrolment. She works closely with families to ensure a smooth and transparent transition into the school community."},{"id":"ldr-6","name":"Mr. Emeka Nweke","role":"Head of ICT & Digital Services","photoUrl":"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80","bio":"Mr. Nweke leads the school's digital transformation, overseeing the portal, e-learning platforms, and classroom technology. He holds a BSc in Computer Science."}],"achievements":[{"id":"ach-1","title":"National Top 10 Schools","category":"school","year":2025,"description":"Ranked among top 10 schools nationally in O-Level results.","award":"Top 10","event":"National Education Rankings"},{"id":"ach-2","title":"1st Place — Inter-School Science Quiz","category":"students","year":2025,"description":"Grade 10 team took first place at the North Central Province science quiz competition.","award":"1st Place","event":"Inter-School Science Quiz 2025","personName":"Aminath Rifa","photoUrl":"https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80"},{"id":"ach-3","title":"Best Teacher Award","category":"staff","year":2025,"description":"Mr. Ahmed Niyaz recognised as Best Teacher at the Raa Atoll Education Awards.","award":"Best Teacher","event":"Raa Atoll Education Awards 2025","personName":"Mr. Ahmed Niyaz","photoUrl":"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"},{"id":"ach-4","title":"Best School in Maldives — Higher Secondary","category":"school","year":2024,"description":"Awarded best higher secondary school in the Maldives at the national education ceremony.","award":"Best School","event":"Maldives National Education Awards 2024"},{"id":"ach-5","title":"1st Place — National Debate Championship","category":"students","year":2024,"description":"School debate team won the national championship, defeating 24 schools.","award":"1st Place","event":"National Debate Championship 2024","personName":"Hassan Zayan","photoUrl":"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80"},{"id":"ach-6","title":"Outstanding Staff Member","category":"staff","year":2024,"description":"Mrs. Fathimath Shazna honoured as Outstanding Staff Member at the school's annual awards night.","award":"Outstanding Staff","event":"Annual Awards Night 2024","personName":"Mrs. Fathimath Shazna","photoUrl":"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80"},{"id":"ach-7","title":"Top Performers — Cambridge O-Level","category":"students","year":2023,"description":"School produced 3 students in the national top 10 for O-Level results.","award":"Top 10 National","event":"Cambridge O-Level 2023","personName":"Mariyam Sana","photoUrl":"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80"},{"id":"ach-8","title":"1st Place — Atoll Sports Meet","category":"school","year":2023,"description":"Overall champions at the Raa Atoll inter-school sports meet.","award":"1st Place","event":"Raa Atoll Sports Meet 2023"},{"id":"ach-9","title":"Best ICT Teacher — National","category":"staff","year":2023,"description":"Mr. Ali Shareef awarded Best ICT Teacher at the national teachers' day ceremony.","award":"Best ICT Teacher","event":"National Teachers' Day 2023","personName":"Mr. Ali Shareef","photoUrl":"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80"}]};
+
+document.addEventListener('DOMContentLoaded', () => { renderPage(); });
+
+function renderPage() {
+  const tabs = [{ id:'about', label:'About Us' },{ id:'history', label:'History' },{ id:'achievements', label:'Achievements' }];
+  document.getElementById('main').innerHTML = `
+    <section class="relative h-72 sm:h-96 overflow-hidden">
+      <img src="${pageData.school.heroImageUrl}" alt="" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
+      <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-10">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-2">About Our School</p>
+          <h1 class="text-3xl sm:text-5xl font-black text-white">${pageData.school.name}</h1>
+          <p class="text-slate-300 italic mt-1">"${pageData.school.motto}"</p>
+        </div>
+      </div>
+    </section>
+    <div class="bg-white border-b border-slate-200 sticky top-16 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex gap-0 overflow-x-auto">
+          ${tabs.map(t=>`<button data-tab="${t.id}" onclick="switchTab('${t.id}')" class="tab-btn px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors ${t.id===activeTab?'border-rose-600 text-rose-600':'border-transparent text-slate-500 hover:text-slate-700'}">${t.label}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div id="tab-content"></div>`;
+  renderTab();
+}
+
+function switchTab(t) {
+  activeTab = t;
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    const isActive = btn.dataset.tab === t;
+    btn.className = `tab-btn px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors ${isActive?'border-rose-600 text-rose-600':'border-transparent text-slate-500 hover:text-slate-700'}`;
+  });
+  renderTab();
+}
+
+function renderTab() {
+  const el = document.getElementById('tab-content');
+  if (activeTab==='about') el.innerHTML = renderAboutTab();
+  else if (activeTab==='history') el.innerHTML = renderHistoryTab();
+  else if (activeTab==='achievements') el.innerHTML = renderAchievementsTab();
+}
+
+function renderBlock(block) {
+  if (block.type==='paragraph') return `<p class="text-slate-600 leading-relaxed">${block.text}</p>`;
+  if (block.type==='founderList') return `<ul class="space-y-2 my-1">${block.items.map(f=>`<li class="flex items-baseline gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 flex-shrink-0 mt-1.5"></span><span class="text-slate-800"><strong>${f.name}</strong><span class="text-slate-500"> — ${f.subject}</span></span></li>`).join('')}</ul>`;
+  if (block.type==='highlightList') return `<dl class="space-y-2 my-1">${block.items.map(h=>`<div class="flex gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0 mt-1.5"></span><div class="text-sm"><dt class="inline font-semibold text-slate-800">${h.label}: </dt><dd class="inline text-slate-600">${h.text}</dd></div></div>`).join('')}</dl>`;
+  return '';
+}
+
+function renderAboutTab() {
+  const d = pageData;
+  return `
+    <section class="py-20 sm:py-28 bg-stone-950 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image:repeating-linear-gradient(0deg,#f43f5e 0,#f43f5e 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#f43f5e 0,#f43f5e 1px,transparent 0,transparent 48px)"></div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-14">
+          <span class="text-xs font-black uppercase tracking-widest text-rose-500">Our Purpose</span>
+          <h2 class="text-4xl sm:text-5xl font-black text-white mt-2 leading-tight">Mission &amp; Vision</h2>
+          <div class="mt-5 w-14 h-0.5 bg-rose-500"></div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-stone-800">
+          <div class="relative pb-12 lg:pb-0 lg:pr-14">
+            <div class="absolute top-0 right-0 lg:right-auto lg:top-0 text-[8rem] font-black text-rose-500/8 leading-none select-none pointer-events-none">01</div>
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-full border-2 border-rose-500 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                </div>
+                <p class="text-xs font-black uppercase tracking-widest text-rose-500">Mission</p>
+              </div>
+              <p class="text-stone-200 text-lg leading-relaxed">${d.mission.missionStatement}</p>
+            </div>
+          </div>
+          <div class="relative pt-12 lg:pt-0 lg:pl-14">
+            <div class="absolute top-0 right-0 text-[8rem] font-black text-sky-500/8 leading-none select-none pointer-events-none">02</div>
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-full border-2 border-sky-400 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                </div>
+                <p class="text-xs font-black uppercase tracking-widest text-sky-400">Vision</p>
+              </div>
+              <p class="text-stone-200 text-lg leading-relaxed">${d.mission.visionStatement}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">A Word From Leadership</p>
+          <h2 class="text-3xl font-black text-slate-900">Principal's Message</h2>
+          <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
+        </div>
+        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 sm:p-10">
+          <div class="flex flex-col sm:flex-row gap-8">
+            <div class="flex-shrink-0 flex flex-col items-center gap-3">
+              <div class="w-60 h-60 rounded-full overflow-hidden ring-4 ring-white shadow-md">
+                <img src="${d.principal.photoUrl}" alt="${d.principal.name}" class="w-full h-full object-cover object-top">
+              </div>
+              <div class="text-center">
+                <p class="font-bold text-slate-900">${d.principal.name}</p>
+                <p class="text-xs text-rose-600 font-semibold mt-0.5">${d.principal.title}</p>
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="border-l-4 border-rose-500 pl-5 mb-6"><p class="text-xs font-bold uppercase tracking-widest text-rose-600">Open Letter</p></div>
+              <div class="space-y-4 text-slate-700 leading-relaxed text-sm">
+                ${d.principal.message.split('\n\n').filter(Boolean).map((p,i)=>`<p class="${i===0?'font-medium text-slate-800':''}">${p}</p>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">The People Behind the School</p>
+          <h2 class="text-3xl font-black text-slate-900">Leadership Team</h2>
+          <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${d.leadership.map((m,i)=>`
+            <div class="rounded-2xl border ${i===0?'border-rose-200 hover:border-rose-400':'border-slate-200 hover:border-slate-300'} bg-white p-6 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center">
+              <div class="relative mb-4">
+                <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ${i===0?'ring-rose-100':'ring-slate-100'}">
+                  <img src="${m.photoUrl}" alt="${m.name}" class="w-full h-full object-cover object-top">
+                </div>
+                ${i===0?`<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">Principal</div>`:''}
+              </div>
+              <p class="font-bold text-slate-900 mt-${i===0?'3':'1'}">${m.name}</p>
+              <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 ${i===0?'text-rose-600':'text-sky-600'}">${m.role}</p>
+              <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">${m.bio}</p>
+            </div>`).join('')}
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderHistoryTab() {
+  const d = pageData;
+  const meta = [
+    { year:'1993 – 1995', nodeBg:'bg-rose-500', ring:'ring-rose-200', badgeCls:'bg-rose-50 border-rose-200 text-rose-700' },
+    { year:'1994 – 1995', nodeBg:'bg-amber-500', ring:'ring-amber-200', badgeCls:'bg-amber-50 border-amber-200 text-amber-700' },
+    { year:'May 1995', nodeBg:'bg-sky-500', ring:'ring-sky-200', badgeCls:'bg-sky-50 border-sky-200 text-sky-700' },
+    { year:'Present', nodeBg:'bg-emerald-500', ring:'ring-emerald-200', badgeCls:'bg-emerald-50 border-emerald-200 text-emerald-700' },
+  ];
+  return `
+    <section class="py-16 sm:py-20 bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div class="space-y-6">
+            <div class="pb-5 border-b border-slate-100">
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Founded</p>
+              <p class="text-3xl font-black text-rose-600">${d.school.foundedYear}</p>
+            </div>
+            <div class="pb-5 border-b border-slate-100">
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Motto</p>
+              <p class="font-semibold text-slate-900 italic">"${d.school.motto}"</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Tagline</p>
+              <p class="font-medium text-slate-700">${d.school.tagline}</p>
+            </div>
+          </div>
+          <div class="lg:col-span-2">
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">Who We Are</p>
+            ${d.school.description.split('\n\n').filter(Boolean).map((p,i)=>`<p class="mb-4 leading-relaxed ${i===0?'text-lg font-medium text-slate-800':'text-slate-600'}">${p}</p>`).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-24 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-14 pb-10 border-b border-slate-100">
+          <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">School History</p>
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900 mb-5">Our Journey</h2>
+          <p class="text-slate-500 text-lg leading-relaxed max-w-2xl">${d.schoolHistory.intro}</p>
+        </div>
+        <div class="relative">
+          <div class="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-rose-300 via-slate-200 to-slate-100"></div>
+          <div class="space-y-10">
+            ${d.schoolHistory.sections.map((s,i)=>`
+              <div class="relative flex gap-6 sm:gap-10">
+                <div class="flex-shrink-0 pt-0.5 z-10">
+                  <div class="w-10 h-10 rounded-full bg-white ring-4 ${meta[i]?meta[i].ring:'ring-slate-200'} flex items-center justify-center shadow-sm">
+                    <div class="w-3.5 h-3.5 rounded-full ${meta[i]?meta[i].nodeBg:'bg-slate-400'}"></div>
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0 pb-4">
+                  <span class="inline-block text-[11px] font-black uppercase tracking-wider border px-2.5 py-0.5 rounded-full mb-3 ${meta[i]?meta[i].badgeCls:'bg-slate-50 border-slate-200 text-slate-600'}">${meta[i]?meta[i].year:''}</span>
+                  <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-4 leading-snug">${s.title}</h3>
+                  <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 sm:p-7 space-y-3">
+                    ${s.blocks.map(b=>renderBlock(b)).join('')}
+                  </div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20 bg-stone-950 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image:repeating-linear-gradient(0deg,#d97706 0,#d97706 1px,transparent 0,transparent 32px),repeating-linear-gradient(90deg,#d97706 0,#d97706 1px,transparent 0,transparent 32px)"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <div class="inline-flex items-center gap-3 mb-4">
+            <span class="h-px w-10 bg-amber-600/50"></span>
+            <span class="text-[10px] font-black uppercase tracking-widest text-amber-500 border border-amber-700/30 px-3 py-1 rounded-sm">Est. 1993</span>
+            <span class="h-px w-10 bg-amber-600/50"></span>
+          </div>
+          <h2 class="text-3xl font-black text-white">Our Founding Teachers</h2>
+          <p class="mt-3 text-amber-200/50 text-sm max-w-md mx-auto">The educators who built this school from the ground up during the years of migration and transition.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+          ${d.foundingMembers.map(m=>`
+            <div class="group">
+              <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 ring-1 ring-amber-700/20">
+                <img src="${m.photoUrl}" alt="${m.name}" class="w-full h-full object-cover object-top grayscale sepia brightness-75 group-hover:grayscale-0 group-hover:sepia-0 group-hover:brightness-90 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>
+                <div class="absolute top-2 left-2"><span class="bg-amber-500 text-stone-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-sm">Founder</span></div>
+              </div>
+              <p class="font-bold text-white text-sm leading-tight">${m.name}</p>
+              <p class="text-amber-400 text-[11px] font-semibold uppercase tracking-wide mt-0.5">${m.subject}</p>
+              <p class="text-stone-400 text-xs mt-1.5 leading-relaxed line-clamp-3">${m.tribute}</p>
+            </div>`).join('')}
+        </div>
+      </div>
+    </section>`;
+}
+
+function catActiveCls(cat) {
+  if (cat==='students') return 'bg-sky-600 border-sky-600 text-white';
+  if (cat==='staff') return 'bg-violet-600 border-violet-600 text-white';
+  if (cat==='school') return 'bg-rose-600 border-rose-600 text-white';
+  return 'bg-slate-900 border-slate-900 text-white';
+}
+function catBadgeCls(cat) {
+  if (cat==='students') return 'bg-sky-100 text-sky-700';
+  if (cat==='staff') return 'bg-violet-100 text-violet-700';
+  if (cat==='school') return 'bg-rose-100 text-rose-700';
+  return 'bg-slate-100 text-slate-600';
+}
+
+function renderAchievementCards() {
+  const all = pageData.achievements || [];
+  const filtered = all.filter(a=>{
+    const catOk = activeCategory==='all' || a.category===activeCategory;
+    const yearOk = activeYear==='all' || String(a.year)===String(activeYear);
+    return catOk && yearOk;
+  });
+  if (!filtered.length) return `<div class="flex flex-col items-center justify-center py-20 text-center"><div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div><p class="text-slate-500 font-medium">No achievements match this filter.</p></div>`;
+  return `<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">${filtered.map(a=>`
+    <div class="bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all duration-200 p-6 flex flex-col gap-4">
+      <div class="flex items-start gap-4">
+        ${a.photoUrl?`<div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-slate-100 flex-shrink-0"><img src="${a.photoUrl}" alt="${a.personName||''}" class="w-full h-full object-cover object-top"></div>`:`<div class="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0"><svg class="w-10 h-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>`}
+        <div class="flex-1 min-w-0 pt-1">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${catBadgeCls(a.category)}">${a.category}</span>
+            <span class="text-xs font-semibold text-slate-400 flex-shrink-0">${a.year}</span>
+          </div>
+          ${a.personName?`<p class="text-sm font-semibold text-slate-700 mt-1">${a.personName}</p>`:''}
+        </div>
+      </div>
+      <div class="flex-1">
+        <h3 class="font-bold text-slate-900 text-base leading-snug mb-2">${a.title}</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">${a.description}</p>
+      </div>
+      <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-xs font-black text-slate-900"><svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>${a.award}</span>
+        <span class="text-slate-300">·</span>
+        <span class="text-xs text-slate-500">${a.event}</span>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function switchCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.className = `cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${isActive?catActiveCls(cat):'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}`;
+  });
+  document.getElementById('achievements-grid').innerHTML = renderAchievementCards();
+}
+
+function switchYear(year) {
+  activeYear = year;
+  document.getElementById('achievements-grid').innerHTML = renderAchievementCards();
+}
+
+function renderAchievementsTab() {
+  const d = pageData;
+  const all = d.achievements || [];
+  const totalCount = all.length;
+  const studentCount = all.filter(a=>a.category==='students').length;
+  const schoolCount = all.filter(a=>a.category==='school').length;
+  const years = [...new Set(all.map(a=>a.year))].sort((a,b)=>b-a);
+  return `
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-10">
+        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Recognition &amp; Honours</p>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Achievements</h2>
+      </div>
+      <div class="grid grid-cols-3 gap-4 mb-10">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center"><p class="text-3xl font-black text-slate-900">${totalCount}</p><p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mt-1">Total</p></div>
+        <div class="bg-sky-50 border border-sky-200 rounded-2xl p-5 text-center"><p class="text-3xl font-black text-sky-700">${studentCount}</p><p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-1">Students</p></div>
+        <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 text-center"><p class="text-3xl font-black text-rose-700">${schoolCount}</p><p class="text-xs font-semibold uppercase tracking-wide text-rose-600 mt-1">School-wide</p></div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <div class="flex gap-2 flex-wrap">
+          ${['all','students','staff','school'].map(cat=>`<button onclick="switchCategory('${cat}')" data-cat="${cat}" class="cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${activeCategory===cat?catActiveCls(cat):'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}">${cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1)}</button>`).join('')}
+        </div>
+        <select onchange="switchYear(this.value)" class="sm:ml-auto px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-rose-400">
+          <option value="all" ${activeYear==='all'?'selected':''}>All Years</option>
+          ${years.map(y=>`<option value="${y}" ${String(activeYear)===String(y)?'selected':''}>${y}</option>`).join('')}
+        </select>
+      </div>
+      <div id="achievements-grid">${renderAchievementCards()}</div>
+    </div>`;
+}
+</script>
+<script>
+function setLang(l) {
+  var en = document.getElementById('lang-en'), dv = document.getElementById('lang-dv');
+  if (!en || !dv) return;
+  var active = 'px-2.5 py-1.5 bg-slate-900 text-white transition-colors';
+  var inactive = 'px-2.5 py-1.5 bg-white text-slate-600 hover:bg-slate-50 transition-colors';
+  en.className = l==='en' ? active : inactive;
+  dv.className = l==='dv' ? active : inactive;
+}
+</script>
 </body>
 </html>

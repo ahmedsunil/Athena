@@ -6,26 +6,35 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Role;
 
 class UsersList extends Component
 {
     use WithPagination;
 
     public string $search = '';
+
     public string $roleFilter = '';
+
     public string $statusFilter = '';
+
     public string $sortField = 'created_at';
+
     public string $sortDirection = 'desc';
+
     public array $selected = [];
+
     public bool $selectAll = false;
+
     public bool $confirmingDelete = false;
+
     public ?int $deletingId = null;
 
     protected $queryString = [
-        'search'       => ['except' => ''],
-        'roleFilter'   => ['except' => ''],
+        'search' => ['except' => ''],
+        'roleFilter' => ['except' => ''],
         'statusFilter' => ['except' => ''],
-        'sortField'    => ['except' => 'created_at'],
+        'sortField' => ['except' => 'created_at'],
         'sortDirection' => ['except' => 'desc'],
     ];
 
@@ -33,6 +42,12 @@ class UsersList extends Component
     {
         $this->resetPage();
         $this->clearSelection();
+    }
+
+    public function clearSelection(): void
+    {
+        $this->selected = [];
+        $this->selectAll = false;
     }
 
     public function updatingRoleFilter(): void
@@ -58,7 +73,7 @@ class UsersList extends Component
             $this->selected = User::query()
                 ->when($this->search, fn ($q) => $q->where(function ($q) {
                     $q->where('name', 'like', "%{$this->search}%")
-                      ->orWhere('email', 'like', "%{$this->search}%");
+                        ->orWhere('email', 'like', "%{$this->search}%");
                 }))
                 ->when($this->roleFilter, fn ($q) => $q->role($this->roleFilter))
                 ->when($this->statusFilter !== '', fn ($q) => $q->where('is_active', $this->statusFilter === '1'))
@@ -75,12 +90,6 @@ class UsersList extends Component
         if ($this->selected === []) {
             $this->selectAll = false;
         }
-    }
-
-    public function clearSelection(): void
-    {
-        $this->selected = [];
-        $this->selectAll = false;
     }
 
     public function sortBy(string $field): void
@@ -141,14 +150,14 @@ class UsersList extends Component
         $query = User::with('roles')
             ->when($this->search, fn ($q) => $q->where(function ($q) {
                 $q->where('name', 'like', "%{$this->search}%")
-                  ->orWhere('email', 'like', "%{$this->search}%");
+                    ->orWhere('email', 'like', "%{$this->search}%");
             }))
             ->when($this->roleFilter, fn ($q) => $q->role($this->roleFilter))
             ->when($this->statusFilter !== '', fn ($q) => $q->where('is_active', $this->statusFilter === '1'))
             ->orderBy($this->sortField, $this->sortDirection);
 
         $users = $query->paginate(15);
-        $allRoles = \Spatie\Permission\Models\Role::orderBy('name')->pluck('name');
+        $allRoles = Role::orderBy('name')->pluck('name');
 
         return view('livewire.users.users-list', compact('users', 'allRoles'))
             ->layout('layouts.app', ['title' => 'Users']);
