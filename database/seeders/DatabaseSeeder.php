@@ -13,14 +13,16 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesAndPermissionsSeeder::class,
             EventSeeder::class,
+            HomeSlideSeeder::class,
+            HomeTestimonialSeeder::class,
         ]);
 
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
-                'name'              => 'Admin',
-                'password'          => Hash::make('password'),
-                'is_active'         => true,
+                'name' => 'Admin',
+                'password' => Hash::make('password'),
+                'is_active' => true,
                 'email_verified_at' => now(),
             ]
         );

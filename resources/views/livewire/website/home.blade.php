@@ -1,11 +1,12 @@
 <div>
+
     {{-- Hero --}}
     @if($slides->isNotEmpty())
     <section class="relative h-[55vh] min-h-[420px] overflow-hidden" id="hero-slider">
         @foreach($slides as $i => $slide)
         <div class="hero-slide absolute inset-0 transition-opacity duration-700 {{ $i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}">
             @if($slide->image_path)
-                <img src="{{ Storage::url($slide->image_path) }}" alt="{{ $slide->title }}" class="absolute inset-0 w-full h-full object-cover">
+                <img src="{{ $slide->image_url }}" alt="{{ $slide->title }}" class="absolute inset-0 w-full h-full object-cover">
             @else
                 <div class="absolute inset-0 bg-slate-900"></div>
             @endif
@@ -35,13 +36,11 @@
         @endforeach
 
         @if($slides->count() > 1)
-        {{-- Dots --}}
         <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
             @foreach($slides as $i => $slide)
                 <button onclick="heroGoTo({{ $i }})" class="hero-dot w-2 h-2 rounded-full transition-colors {{ $i === 0 ? 'bg-white' : 'bg-white/40' }}"></button>
             @endforeach
         </div>
-        {{-- Arrows --}}
         <button onclick="heroPrev()" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         </button>
@@ -50,7 +49,6 @@
         </button>
         @endif
     </section>
-
     <script>
     (function() {
         var current = 0;
@@ -58,31 +56,208 @@
         var dots    = document.querySelectorAll('.hero-dot');
         var total   = slides.length;
         var timer;
-
         function goTo(n) {
-            slides[current].classList.replace('opacity-100', 'opacity-0');
+            slides[current].classList.replace('opacity-100','opacity-0');
             slides[current].classList.add('pointer-events-none');
-            if (dots[current]) dots[current].classList.replace('bg-white', 'bg-white/40');
-
+            if (dots[current]) dots[current].classList.replace('bg-white','bg-white/40');
             current = (n + total) % total;
-
-            slides[current].classList.replace('opacity-0', 'opacity-100');
+            slides[current].classList.replace('opacity-0','opacity-100');
             slides[current].classList.remove('pointer-events-none');
-            if (dots[current]) dots[current].classList.replace('bg-white/40', 'bg-white');
+            if (dots[current]) dots[current].classList.replace('bg-white/40','bg-white');
         }
-
         function next() { goTo(current + 1); }
         function prev() { goTo(current - 1); }
-
         function startTimer() { timer = setInterval(next, 5000); }
         function resetTimer()  { clearInterval(timer); startTimer(); }
-
         window.heroGoTo = function(n) { goTo(n); resetTimer(); };
-        window.heroNext = function()  { next();  resetTimer(); };
-        window.heroPrev = function()  { prev();  resetTimer(); };
-
+        window.heroNext = function()  { next(); resetTimer(); };
+        window.heroPrev = function()  { prev(); resetTimer(); };
         if (total > 1) startTimer();
     })();
     </script>
     @endif
+
+    {{-- Stats --}}
+    @if($stats->isNotEmpty())
+    <section class="bg-rose-600 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-6 text-center text-white">
+                @foreach($stats as $stat)
+                <div>
+                    <p class="text-3xl sm:text-4xl font-black">{{ $stat->value }}</p>
+                    <p class="text-rose-200 text-sm font-medium mt-1">{{ $stat->title }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    {{-- Quick Access --}}
+    @if($quickAccess->isNotEmpty())
+    <section class="py-16 sm:py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Navigate the Portal</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Quick Access</h2>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                @foreach($quickAccess as $item)
+                <a href="{{ $item->link_key }}" class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-200 hover:shadow-md transition-all text-center">
+                    <div class="w-10 h-10 rounded-xl bg-rose-50 group-hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors">
+                        <x-icon :key="$item->icon_key" />
+                    </div>
+                    <span class="text-sm font-semibold text-slate-700 group-hover:text-slate-900">{{ $item->title }}</span>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    {{-- Principal's Message --}}
+    @if($profile->principal_name || $profile->principal_message)
+    <section class="py-16 sm:py-20 bg-slate-900">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    @if($profile->principal_photo_path)
+                    <div class="flex-shrink-0 w-full md:w-56">
+                        <img src="{{ Storage::url($profile->principal_photo_path) }}" alt="{{ $profile->principal_name }}" class="w-full h-56 md:h-full object-cover object-top">
+                    </div>
+                    @endif
+                    <div class="flex-1 p-8 flex flex-col justify-center">
+                        <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-4">Principal's Welcome</p>
+                        @if($profile->principal_message)
+                            <p class="text-slate-200 leading-relaxed italic text-lg">"{{ $profile->principal_message }}"</p>
+                        @endif
+                        <div class="mt-6 pt-5 border-t border-slate-700">
+                            @if($profile->principal_name)
+                                <p class="font-bold text-white">{{ $profile->principal_name }}</p>
+                            @endif
+                            @if($profile->principal_designation)
+                                <p class="text-sm text-slate-400">{{ $profile->principal_designation }}, {{ $profile->school_name }}</p>
+                            @endif
+                        </div>
+                        <a href="{{ route('about') }}" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-400 hover:text-rose-300">
+                            Read full message
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    {{-- Testimonials --}}
+    @if($testimonials->isNotEmpty())
+    @php $tChunks = $testimonials->chunk(4); @endphp
+    <section class="py-16 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Community Voices</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">What People Say</h2>
+            </div>
+
+            @foreach($tChunks as $ci => $chunk)
+            <div class="t-page {{ $ci === 0 ? '' : 'hidden' }} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach($chunk as $t)
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col">
+                    <p class="text-sm text-slate-700 leading-relaxed italic flex-1">"{{ $t->message }}"</p>
+                    <div class="mt-5 flex items-center gap-3">
+                        @if($t->photo_path)
+                            <img src="{{ Storage::url($t->photo_path) }}" alt="{{ $t->name }}" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                        @else
+                            <div class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                                {{ strtoupper(substr($t->name, 0, 1)) }}
+                            </div>
+                        @endif
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">{{ $t->name }}</p>
+                            <p class="text-xs text-slate-500">{{ $t->current_designation }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endforeach
+
+            @if($tChunks->count() > 1)
+            <div class="flex justify-center gap-2 mt-8" id="t-dots">
+                @foreach($tChunks as $ci => $chunk)
+                <button onclick="tGoTo({{ $ci }})" class="t-dot w-2 h-2 rounded-full transition-colors {{ $ci === 0 ? 'bg-rose-600' : 'bg-slate-300' }}"></button>
+                @endforeach
+            </div>
+            @endif
+        </div>
+    </section>
+    <script>
+    (function() {
+        var pages   = document.querySelectorAll('.t-page');
+        var dots    = document.querySelectorAll('.t-dot');
+        var total   = pages.length;
+        var current = 0;
+
+        window.tGoTo = function(n) {
+            pages[current].classList.add('hidden');
+            if (dots[current]) dots[current].className = 't-dot w-2 h-2 rounded-full transition-colors bg-slate-300';
+            current = (n + total) % total;
+            pages[current].classList.remove('hidden');
+            if (dots[current]) dots[current].className = 't-dot w-2 h-2 rounded-full transition-colors bg-rose-600';
+        };
+
+        if (total > 1) setInterval(function() { tGoTo(current + 1); }, 5000);
+    })();
+    </script>
+    @endif
+
+    {{-- Contact --}}
+    <section id="contact" class="py-16 sm:py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Get In Touch</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Contact Us</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    @if($profile->email)
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
+                            <x-icon key="Mail" />
+                        </div>
+                        <div><p class="font-semibold text-slate-900 text-sm">Email</p><p class="text-slate-600 text-sm">{{ $profile->email }}</p></div>
+                    </div>
+                    @endif
+                    @if($profile->phone)
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0">
+                            <x-icon key="Phone" />
+                        </div>
+                        <div><p class="font-semibold text-slate-900 text-sm">Phone</p><p class="text-slate-600 text-sm">{{ $profile->phone }}</p></div>
+                    </div>
+                    @endif
+                    @if($profile->island || $profile->atoll)
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                            <x-icon key="MapPin" />
+                        </div>
+                        <div>
+                            <p class="font-semibold text-slate-900 text-sm">Address</p>
+                            <p class="text-slate-600 text-sm">{{ collect([$profile->island, $profile->atoll, $profile->country])->filter()->join(', ') }}</p>
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                <form action="#" method="post" class="space-y-4">
+                    @csrf
+                    <input type="text" name="name" placeholder="Your name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
+                    <input type="email" name="email" placeholder="Email address" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
+                    <textarea name="message" rows="4" placeholder="Your message" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm resize-none"></textarea>
+                    <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl transition-colors text-sm">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
 </div>
