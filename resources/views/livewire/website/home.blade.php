@@ -123,7 +123,7 @@
                 <div class="flex flex-col md:flex-row">
                     @if($profile->principal_photo_path)
                     <div class="flex-shrink-0 w-full md:w-56">
-                        <img src="{{ Storage::url($profile->principal_photo_path) }}" alt="{{ $profile->principal_name }}" class="w-full h-56 md:h-full object-cover object-top">
+                        <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}" class="w-full h-56 md:h-full object-cover object-top">
                     </div>
                     @endif
                     <div class="flex-1 p-8 flex flex-col justify-center">
@@ -167,7 +167,7 @@
                     <p class="text-sm text-slate-700 leading-relaxed italic flex-1">"{{ $t->message }}"</p>
                     <div class="mt-5 flex items-center gap-3">
                         @if($t->photo_path)
-                            <img src="{{ Storage::url($t->photo_path) }}" alt="{{ $t->name }}" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
+                            <img src="{{ $t->photo_url }}" alt="{{ $t->name }}" class="w-10 h-10 rounded-full object-cover flex-shrink-0">
                         @else
                             <div class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">
                                 {{ strtoupper(substr($t->name, 0, 1)) }}

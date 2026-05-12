@@ -4,7 +4,7 @@
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     @if($footerProfile['logo_path'])
-                        <img src="{{ Storage::url($footerProfile['logo_path']) }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
+                        <img src="{{ $footerProfile['logo_url'] }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
                     @else
                         <img src="{{ asset('logo.png') }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
                     @endif

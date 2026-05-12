@@ -47,7 +47,7 @@
                         </div>
                     @elseif($existing_logo)
                         <div class="relative mb-2 inline-block">
-                            <img src="{{ Storage::url($existing_logo) }}" alt="Logo" class="h-16 w-16 rounded-lg object-cover">
+                            <img src="{{ \App\Models\SchoolProfile::resolveMediaUrl($existing_logo) }}" alt="Logo" class="h-16 w-16 rounded-lg object-cover">
                             <button type="button" wire:click="removeLogo"
                                     class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
@@ -148,7 +148,7 @@
                         </div>
                     @elseif($existing_principal_photo)
                         <div class="relative mb-2 inline-block">
-                            <img src="{{ Storage::url($existing_principal_photo) }}" alt="Principal" class="h-16 w-16 rounded-full object-cover">
+                            <img src="{{ \App\Models\SchoolProfile::resolveMediaUrl($existing_principal_photo) }}" alt="Principal" class="h-16 w-16 rounded-full object-cover">
                             <button type="button" wire:click="removePrincipalPhoto"
                                     class="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow hover:bg-red-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>

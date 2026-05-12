@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SchoolProfile extends Model
 {
@@ -15,5 +17,28 @@ class SchoolProfile extends Model
     public static function singleton(): self
     {
         return self::firstOrCreate(['id' => 1]);
+    }
+
+    public static function resolveMediaUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+
+        return Storage::url($path);
+    }
+
+    public function getLogoUrlAttribute(): ?string
+    {
+        return self::resolveMediaUrl($this->logo_path);
+    }
+
+    public function getPrincipalPhotoUrlAttribute(): ?string
+    {
+        return self::resolveMediaUrl($this->principal_photo_path);
     }
 }

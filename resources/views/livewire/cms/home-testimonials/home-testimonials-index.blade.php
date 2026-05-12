@@ -22,7 +22,7 @@
                 <div>
                     <label class="mb-1.5 block admin-label">Photo</label>
                     @if($existing_photo)
-                        <img src="{{ Storage::url($existing_photo) }}" alt="" class="mb-1 h-10 w-10 rounded-full object-cover">
+                        <img src="{{ \App\Models\HomeTestimonial::resolvePhotoUrl($existing_photo) }}" alt="" class="mb-1 h-10 w-10 rounded-full object-cover">
                     @endif
                     <input type="file" wire:model="photo" accept="image/*"
                            class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
@@ -96,7 +96,7 @@
                     <td class="admin-table-cell text-zinc-400 whitespace-nowrap">#{{ $t->id }}</td>
                     <td class="admin-table-cell">
                         @if($t->photo_path)
-                            <img src="{{ Storage::url($t->photo_path) }}" alt="" class="h-8 w-8 rounded-full object-cover">
+                            <img src="{{ $t->photo_url }}" alt="" class="h-8 w-8 rounded-full object-cover">
                         @else
                             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-xs font-medium text-zinc-500">
                                 {{ strtoupper(substr($t->name, 0, 1)) }}
@@ -126,7 +126,7 @@
             @foreach($testimonials as $t)
                 <li class="flex items-center gap-3 px-4 py-3">
                     @if($t->photo_path)
-                        <img src="{{ Storage::url($t->photo_path) }}" alt="" class="h-9 w-9 shrink-0 rounded-full object-cover">
+                        <img src="{{ $t->photo_url }}" alt="" class="h-9 w-9 shrink-0 rounded-full object-cover">
                     @else
                         <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-xs font-medium text-zinc-500">
                             {{ strtoupper(substr($t->name, 0, 1)) }}

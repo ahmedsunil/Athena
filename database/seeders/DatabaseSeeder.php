@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesAndPermissionsSeeder::class,
             EventSeeder::class,
-            HomeSlideSeeder::class,
-            HomeTestimonialSeeder::class,
+            HomePageSeeder::class,
         ]);
 
         $admin = User::firstOrCreate(
