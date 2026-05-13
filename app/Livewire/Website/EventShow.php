@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Website;
 
+use App\Models\Event;
 use Livewire\Component;
 
 class EventShow extends Component
 {
-    public string $slug = '';
+    public string $slug;
 
     public function mount(string $slug): void
     {
@@ -15,6 +16,12 @@ class EventShow extends Component
 
     public function render()
     {
-        return view('livewire.website.event-show');
+        $event = Event::where('slug', $this->slug)
+            ->where('is_active', true)
+            ->firstOrFail();
+
+        return view('livewire.website.event-show', [
+            'event' => $event,
+        ])->layout('layouts.web');
     }
 }
