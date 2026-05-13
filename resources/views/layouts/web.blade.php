@@ -77,6 +77,7 @@
         window.__dv      = {!! file_get_contents(base_path('lang/dv.json')) !!};
         window.__langUrl = '{{ url('/lang') }}';
     </script>
+    @livewireStyles
 </head>
 <body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen pt-16">
 @include('layouts.partials.nav')
@@ -86,37 +87,60 @@
 </main>
 
 @include('layouts.partials.footer')
+@livewireScripts
 <script>
     (function () {
-        var revealItems = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+        var observer = null;
 
-        if (!revealItems.length) {
-            return;
-        }
+        function setupReveal() {
+            var revealItems = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]:not(.is-visible)'));
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+            if (!revealItems.length) {
+                return;
+            }
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+                revealItems.forEach(function (item) {
+                    item.classList.add('is-visible');
+                });
+                return;
+            }
+
+            if (!observer) {
+                observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    });
+                }, {
+                    rootMargin: '0px 0px -12% 0px',
+                    threshold: 0.16
+                });
+            }
+
             revealItems.forEach(function (item) {
-                item.classList.add('is-visible');
+                observer.observe(item);
             });
-            return;
         }
 
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) {
-                    return;
-                }
+        document.addEventListener('DOMContentLoaded', setupReveal);
+        document.addEventListener('livewire:navigated', setupReveal);
+        new MutationObserver(function () {
+            requestAnimationFrame(setupReveal);
+        }).observe(document.body, { childList: true, subtree: true });
 
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+        document.addEventListener('livewire:init', function () {
+            if (! window.Livewire || ! window.Livewire.hook) {
+                return;
+            }
+
+            window.Livewire.hook('morph.updated', function () {
+                requestAnimationFrame(setupReveal);
             });
-        }, {
-            rootMargin: '0px 0px -12% 0px',
-            threshold: 0.16
-        });
-
-        revealItems.forEach(function (item) {
-            observer.observe(item);
         });
     })();
 </script>

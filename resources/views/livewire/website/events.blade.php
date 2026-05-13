@@ -14,7 +14,9 @@
         {{-- Filter pills --}}
         <div class="flex gap-2 flex-wrap mb-8">
             @foreach(['all' => 'All', 'ongoing' => 'Ongoing', 'upcoming' => 'Upcoming', 'completed' => 'Completed'] as $value => $label)
-                <button wire:click="setFilter('{{ $value }}')"
+                <button type="button"
+                        wire:key="event-filter-{{ $value }}"
+                        wire:click="setFilter('{{ $value }}')"
                         class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                {{ $filter === $value
                                    ? 'bg-rose-600 border-rose-600 text-white'
@@ -32,7 +34,7 @@
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($events as $event)
-                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 60 }}ms">
+                    <div wire:key="event-card-{{ $event->id }}-{{ $filter }}" class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 60 }}ms">
                         {{-- Cover image --}}
                         <div class="relative h-48 overflow-hidden bg-slate-100">
                             @if($event->cover_image_path)
