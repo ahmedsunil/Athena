@@ -22,6 +22,9 @@ use App\Livewire\Users\UserForm;
 use App\Livewire\Users\UserShow;
 use App\Livewire\Users\UsersList;
 use App\Livewire\Website\Home;
+use App\Livewire\Cms\Events\EventsIndex;
+use App\Livewire\Website\Events;
+use App\Livewire\Website\EventShow;
 use App\Livewire\Cms\About\MissionEdit;
 use App\Livewire\Cms\About\LeadershipIndex;
 use App\Livewire\Cms\About\FoundingMembersIndex;
@@ -70,6 +73,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/about/history', HistorySectionsIndex::class)->name('cms.about.history');
     Route::get('/cms/about/achievements', AchievementsIndex::class)->name('cms.about.achievements');
 
+    // CMS — events module
+    Route::get('/cms/events', EventsIndex::class)->name('cms.events.index');
+
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
@@ -85,7 +91,8 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
 // Public website
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
-Route::get('/events', fn () => 'Events')->name('events');
+Route::get('/events', Events::class)->name('events.index');
+Route::get('/events/{slug}', EventShow::class)->name('events.show');
 Route::get('/academics', fn () => 'Academics')->name('academics');
 Route::get('/student-life', fn () => 'Student Life')->name('student-life');
 Route::get('/gallery', fn () => 'Gallery')->name('gallery');
