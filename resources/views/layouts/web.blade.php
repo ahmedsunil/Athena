@@ -78,7 +78,7 @@
         window.__langUrl = '{{ url('/lang') }}';
     </script>
 </head>
-<body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen">
+<body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen pt-16">
 @include('layouts.partials.nav')
 
 <main class="flex-1">
