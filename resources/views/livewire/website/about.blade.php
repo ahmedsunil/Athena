@@ -379,16 +379,22 @@
                                         <p class="text-sm text-slate-600 leading-relaxed">{{ $achievement->description }}</p>
                                     @endif
                                 </div>
+                                @if($achievement->award || $achievement->event_name)
                                 <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-                                    <span class="inline-flex items-center gap-1.5 text-xs font-black text-slate-900">
-                                        <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                        {{ $achievement->award }}
-                                    </span>
-                                    @if($achievement->event_name)
+                                    @if($achievement->award)
+                                        <span class="inline-flex items-center gap-1.5 text-xs font-black text-slate-900">
+                                            <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            {{ $achievement->award }}
+                                        </span>
+                                    @endif
+                                    @if($achievement->award && $achievement->event_name)
                                         <span class="text-slate-300">·</span>
+                                    @endif
+                                    @if($achievement->event_name)
                                         <span class="text-xs text-slate-500">{{ $achievement->event_name }}</span>
                                     @endif
                                 </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>
