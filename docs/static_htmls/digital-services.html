@@ -23,8 +23,8 @@
         <a href="academics.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Academics</a>
         <a href="student-life.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Student Life</a>
         <a href="gallery.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Gallery</a>
-        <a href="downloads.html" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Downloads</a>
-        <a href="digital-services.html" class="text-sm font-medium transition-colors text-rose-600">Digital Services</a>
+        <a href="digital-services.html#downloads" class="text-sm font-medium transition-colors text-slate-600 hover:text-slate-900">Downloads</a>
+        <a href="digital-services.html#resources" class="text-sm font-medium transition-colors text-rose-600">Digital Services</a>
       </nav>
       <div class="flex items-center gap-2">
         <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
@@ -47,8 +47,8 @@
     <a href="academics.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Academics</a>
     <a href="student-life.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Student Life</a>
     <a href="gallery.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Gallery</a>
-    <a href="downloads.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Downloads</a>
-    <a href="digital-services.html" class="block px-4 py-2.5 text-sm font-medium rounded-lg bg-rose-50 text-rose-600">Digital Services</a>
+    <a href="digital-services.html#downloads" class="block px-4 py-2.5 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50">Downloads</a>
+    <a href="digital-services.html#resources" class="block px-4 py-2.5 text-sm font-medium rounded-lg bg-rose-50 text-rose-600">Digital Services</a>
   </div>
 </header>
 
@@ -105,23 +105,27 @@ const ICONS = {
 
 let allResources = [];
 let activeAudience = 'All';
-let activeTab = 'services';
-let lcTab = 'request';
-let lcState = 'idle';
-let lcvState = 'idle';
-let lcRequestPayload = null;
-let lcOtpExpiresAt = null;
-let lcCountdownTimer = null;
-let lcError = '';
-let lcvError = '';
-let lcCertificateFile = null;
-let lcvCertificateFile = null;
-let lcvExpiresAt = null;
+const validTabs = ['downloads','resources','calendar'];
+function getTabFromHash() {
+  const tab = window.location.hash.replace('#','');
+  return validTabs.includes(tab) ? tab : 'downloads';
+}
+let activeTab = getTabFromHash();
 const iconColorMap = { sky:'bg-sky-100 text-sky-600', rose:'bg-rose-100 text-rose-600', emerald:'bg-emerald-100 text-emerald-600', amber:'bg-amber-100 text-amber-600', violet:'bg-violet-100 text-violet-600', slate:'bg-slate-100 text-slate-600' };
 const calTypeMap = { term:'bg-rose-100 text-rose-700', holiday:'bg-emerald-100 text-emerald-700', exam:'bg-amber-100 text-amber-700', event:'bg-sky-100 text-sky-700' };
-const certificateApiBase = 'http://athena.test/api/leaving-certificates';
 
 const pageData = {"resources":[{"id":"res-google-classroom","title":"Google Classroom","description":"Access your class assignments, submit work, and communicate with teachers through the school's learning management system.","category":"Learning","audience":"Students","icon":"BookOpen","iconColor":"sky","url":"https://classroom.google.com"},{"id":"res-results-portal","title":"Student Results Portal","description":"View term-end report cards, exam scores, and academic progress summaries for current and past sessions.","category":"Academic","audience":"Students","icon":"BarChart2","iconColor":"rose","url":"https://results.schoolportal.ng"},{"id":"res-parent-portal","title":"Parent Dashboard","description":"Monitor your child's attendance, academic performance, fee payment status, and receive school notifications.","category":"Admin","audience":"Parents","icon":"Users","iconColor":"emerald","url":"https://parents.schoolportal.ng"},{"id":"res-fee-payment","title":"Fee Payment Portal","description":"Pay school fees securely online using bank transfer, card, or USSD. Download receipts and view payment history.","category":"Admin","audience":"Parents","icon":"CreditCard","iconColor":"amber","url":"https://fees.schoolportal.ng"},{"id":"res-elibrary","title":"Digital Library","description":"Browse and borrow from thousands of e-books, academic journals, and reference materials available 24/7.","category":"Learning","audience":"Students","icon":"Library","iconColor":"violet","url":"https://library.schoolportal.ng"},{"id":"res-staff-portal","title":"Staff Portal","description":"Internal platform for staff to manage class registers, submit grades, access HR documents, and view announcements.","category":"Admin","audience":"Staff","icon":"Briefcase","iconColor":"slate","url":"https://staff.schoolportal.ng"},{"id":"res-school-email","title":"School Email (Google Workspace)","description":"Access your official school email address and Google Drive for school communications and document collaboration.","category":"Communication","audience":"Students","icon":"Mail","iconColor":"sky","url":"https://mail.google.com"},{"id":"res-cbt-platform","title":"CBT Examination Platform","description":"The school's Computer-Based Testing platform used for internal assessments, mock exams, and practice tests.","category":"Academic","audience":"Students","icon":"ClipboardList","iconColor":"rose","url":"https://cbt.schoolportal.ng"},{"id":"res-school-website","title":"School Notice Board","description":"Stay up to date with the latest school announcements, circulars, and official notices published by the administration.","category":"Communication","audience":"All","icon":"Bell","iconColor":"amber","url":"https://notices.schoolportal.ng"}],"calendarEntries":[{"id":"cal-term2-start","title":"Second Term Begins","date":"2025-01-06","endDate":null,"type":"term","description":"Students resume for the second term of the 2024/2025 academic session."},{"id":"cal-mock-waec","title":"Mock WAEC Examinations","date":"2025-01-20","endDate":"2025-01-31","type":"exam","description":"Internal mock examinations for SSS 3 students in preparation for WAEC."},{"id":"cal-mid-term-break","title":"Mid-Term Break","date":"2025-02-21","endDate":"2025-02-28","type":"holiday","description":"One-week mid-term break for all students."},{"id":"cal-parents-day","title":"Parents' Visiting Day","date":"2025-03-08","endDate":null,"type":"event","description":"Annual parents' day — parents are invited to meet teachers and review progress reports."},{"id":"cal-term2-exams","title":"Second Term Examinations","date":"2025-03-17","endDate":"2025-03-28","type":"exam","description":"End-of-term examinations for all classes."},{"id":"cal-term2-end","title":"Second Term Ends","date":"2025-04-04","endDate":null,"type":"term","description":"Last day of the second term. Long vacation begins."},{"id":"cal-term3-start","title":"Third Term Begins","date":"2025-04-28","endDate":null,"type":"term","description":"Students resume for the third and final term of the 2024/2025 session."},{"id":"cal-waec-start","title":"WAEC/NECO Examinations Begin","date":"2025-05-05","endDate":"2025-06-20","type":"exam","description":"West African Senior School Certificate Examination (WASSCE) for SSS 3 students."},{"id":"cal-sports-day","title":"Annual Sports Day","date":"2025-05-16","endDate":null,"type":"event","description":"Inter-house sports competition held on the school field. All students participate."},{"id":"cal-graduation","title":"Graduation & Prize Giving Ceremony","date":"2025-06-27","endDate":null,"type":"event","description":"Annual graduation ceremony for the SSS 3 graduating class."},{"id":"cal-term3-end","title":"Third Term Ends — Long Vacation","date":"2025-07-18","endDate":null,"type":"term","description":"End of the 2024/2025 academic session. Long vacation begins."}]};
+
+const allDocs = [{"id":"doc-enrolment-form","title":"New Student Enrolment Form","category":"Forms & Applications","fileType":"PDF","fileSize":"245 KB","audience":"Parents","publishedAt":"2024-08-01","downloadUrl":"/downloads/enrolment-form.pdf"},{"id":"doc-leave-request","title":"Student Leave of Absence Request Form","category":"Forms & Applications","fileType":"PDF","fileSize":"118 KB","audience":"Parents","publishedAt":"2024-08-01","downloadUrl":"/downloads/leave-request.pdf"},{"id":"doc-medical-form","title":"Medical / Health Information Form","category":"Forms & Applications","fileType":"PDF","fileSize":"189 KB","audience":"Parents","publishedAt":"2024-08-01","downloadUrl":"/downloads/medical-form.pdf"},{"id":"doc-club-registration","title":"Extracurricular Club Registration Form","category":"Forms & Applications","fileType":"DOCX","fileSize":"92 KB","audience":"Students","publishedAt":"2024-09-02","downloadUrl":"/downloads/club-registration.docx"},{"id":"doc-student-handbook","title":"Student Handbook 2024–2025","category":"Policies & Handbooks","fileType":"PDF","fileSize":"1.4 MB","audience":"Students","publishedAt":"2024-08-15","downloadUrl":"/downloads/student-handbook-2024.pdf"},{"id":"doc-parent-guide","title":"Parent & Guardian Information Guide","category":"Policies & Handbooks","fileType":"PDF","fileSize":"876 KB","audience":"Parents","publishedAt":"2024-08-15","downloadUrl":"/downloads/parent-guide-2024.pdf"},{"id":"doc-code-of-conduct","title":"Code of Conduct & Disciplinary Policy","category":"Policies & Handbooks","fileType":"PDF","fileSize":"512 KB","audience":"Parents","publishedAt":"2024-07-20","downloadUrl":"/downloads/code-of-conduct.pdf"},{"id":"doc-ict-policy","title":"ICT & Acceptable Use Policy","category":"Policies & Handbooks","fileType":"PDF","fileSize":"304 KB","audience":"Students","publishedAt":"2024-07-20","downloadUrl":"/downloads/ict-policy.pdf"},{"id":"doc-timetable-jss","title":"JSS Class Timetable — 2024/2025 Session","category":"Timetables & Schedules","fileType":"PDF","fileSize":"198 KB","audience":"Students","publishedAt":"2024-09-09","downloadUrl":"/downloads/jss-timetable-2024.pdf"},{"id":"doc-timetable-sss","title":"SSS Class Timetable — 2024/2025 Session","category":"Timetables & Schedules","fileType":"PDF","fileSize":"214 KB","audience":"Students","publishedAt":"2024-09-09","downloadUrl":"/downloads/sss-timetable-2024.pdf"},{"id":"doc-exam-schedule","title":"First Term Examination Schedule 2024","category":"Timetables & Schedules","fileType":"PDF","fileSize":"156 KB","audience":"Students","publishedAt":"2024-10-28","downloadUrl":"/downloads/exam-schedule-t1-2024.pdf"},{"id":"doc-term-dates","title":"Academic Calendar — Term Dates 2024/2025","category":"Timetables & Schedules","fileType":"PDF","fileSize":"134 KB","audience":"Parents","publishedAt":"2024-07-15","downloadUrl":"/downloads/term-dates-2024-25.pdf"},{"id":"doc-waec-syllabus","title":"WAEC Syllabus — Core Subjects 2025","category":"Academic Resources","fileType":"PDF","fileSize":"2.1 MB","audience":"Students","publishedAt":"2024-08-20","downloadUrl":"/downloads/waec-syllabus-2025.pdf"},{"id":"doc-past-papers-math","title":"Mathematics Past Examination Papers (2019–2023)","category":"Academic Resources","fileType":"PDF","fileSize":"3.8 MB","audience":"Students","publishedAt":"2024-08-20","downloadUrl":"/downloads/math-past-papers.pdf"},{"id":"doc-past-papers-eng","title":"English Language Past Papers & Model Answers","category":"Academic Resources","fileType":"PDF","fileSize":"2.6 MB","audience":"Students","publishedAt":"2024-08-20","downloadUrl":"/downloads/english-past-papers.pdf"},{"id":"doc-study-guide","title":"SSS Revision & Study Skills Guide","category":"Academic Resources","fileType":"PDF","fileSize":"445 KB","audience":"Students","publishedAt":"2024-09-15","downloadUrl":"/downloads/study-skills-guide.pdf"}];
+const docCategories = ["Forms & Applications","Policies & Handbooks","Timetables & Schedules","Academic Resources"];
+const fileTypeColors = { PDF:'bg-rose-100 text-rose-700', DOCX:'bg-sky-100 text-sky-700', XLS:'bg-emerald-100 text-emerald-700', XLSX:'bg-emerald-100 text-emerald-700' };
+const audienceColors = { Parents:'bg-violet-100 text-violet-700', Students:'bg-amber-100 text-amber-700', Staff:'bg-slate-100 text-slate-600' };
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+let activeCategory = 'All';
+let activeYear = 'All';
+let activeMonth = 'All';
+let searchQuery = '';
+const allYears = [...new Set(allDocs.map(d => new Date(d.publishedAt).getFullYear()))].sort((a,b) => b-a);
 
 document.addEventListener('DOMContentLoaded', () => {
   allResources = pageData.resources;
@@ -140,7 +144,7 @@ function renderPage(d) {
     <div class="bg-white border-b border-slate-200 sticky top-16 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex gap-0 overflow-x-auto">
-          ${[['services','Services'],['resources','Resources'],['calendar','Academic Calendar']].map(([id,label])=>`
+          ${[['downloads','Downloads'],['resources','Resources'],['calendar','Academic Calendar']].map(([id,label])=>`
             <button data-tab="${id}" onclick="switchTab('${id}')"
               class="tab-btn flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap
               ${id===activeTab?'border-rose-600 text-rose-600':'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}">
@@ -150,356 +154,131 @@ function renderPage(d) {
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" id="tab-content">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6" id="tab-content">
       ${renderTabContent()}
     </div>`;
 
   if (activeTab === 'resources') renderResources();
+  if (activeTab === 'downloads') renderDocs();
 }
 
-function switchTab(tab) {
+function switchTab(tab, updateHash = true) {
+  if (!validTabs.includes(tab)) tab = 'downloads';
   activeTab = tab;
+  if (updateHash) history.replaceState(null, '', `#${tab}`);
   document.querySelectorAll('.tab-btn').forEach(btn => {
     const active = btn.dataset.tab === tab;
     btn.className = `tab-btn flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap ${active?'border-rose-600 text-rose-600':'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`;
   });
   document.getElementById('tab-content').innerHTML = renderTabContent();
   if (tab === 'resources') renderResources();
+  if (tab === 'downloads') renderDocs();
 }
 
+window.addEventListener('hashchange', () => {
+  const tab = getTabFromHash();
+  if (tab !== activeTab) switchTab(tab, false);
+});
+
 function renderTabContent() {
-  if (activeTab === 'services') return renderServicesTab();
+  if (activeTab === 'downloads') return renderDownloadsTab();
   if (activeTab === 'resources') return renderResourcesTab();
   if (activeTab === 'calendar') return renderCalendarTab(pageData);
   return '';
 }
 
-function renderServicesTab() {
+function renderDownloadsTab() {
   return `
-    <div class="max-w-5xl" id="services-panel">
-      <p class="text-sm text-slate-500 mb-8">Request and access official school documents and certificates.</p>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start" id="services-cards">
-        ${renderLCCard()}
-        ${renderLCVerificationCard()}
+    <div>
+      <div class="relative max-w-md mb-4">
+        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></span>
+        <input type="text" id="search-input" placeholder="Search documents..." value="${searchQuery.replace(/"/g,'&quot;')}" oninput="onSearch(this.value)"
+          class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm bg-white">
       </div>
-    </div>`;
-}
-
-function renderLCCard() {
-  return `
-    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" id="lc-card">
-      <div class="px-6 pt-6 pb-4 border-b border-slate-100">
-        <div class="flex items-center gap-3 mb-1">
-          <div class="w-9 h-9 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          </div>
-          <div>
-            <h3 class="font-bold text-slate-900 text-sm">Leaving Certificate</h3>
-            <p class="text-xs text-slate-400">Official school leaving document</p>
-          </div>
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <div class="flex flex-wrap items-center gap-2" id="cat-filters">
+          ${['All',...docCategories].map(c=>`
+            <button data-cat="${c}" onclick="filterCat('${c}')"
+              class="cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${c===activeCategory?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}">
+              ${c}
+            </button>`).join('')}
+        </div>
+        <div class="ml-auto flex items-center gap-2 flex-wrap">
+          <select id="month-select" onchange="filterMonth(this.value)"
+            class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+            <option value="All">All Months</option>
+            ${MONTHS.map((m,i)=>`<option value="${i+1}" ${activeMonth==i+1?'selected':''}>${m}</option>`).join('')}
+          </select>
+          <select id="year-select" onchange="filterYear(this.value)"
+            class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+            <option value="All">All Years</option>
+            ${allYears.map(y=>`<option value="${y}" ${activeYear==y?'selected':''}>${y}</option>`).join('')}
+          </select>
+          <button onclick="clearFilters()" class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">Clear</button>
         </div>
       </div>
-      <div class="flex border-b border-slate-100">
-        <button onclick="switchLCTab('request')"
-          class="lc-tab flex-1 py-3 text-sm font-semibold transition-colors ${lcTab==='request'?'bg-slate-50 text-slate-900 border-b-2 border-rose-500':'text-slate-400 hover:text-slate-600'}">
-          Request
-        </button>
-        <button onclick="switchLCTab('download')"
-          class="lc-tab flex-1 py-3 text-sm font-semibold transition-colors ${lcTab==='download'?'bg-slate-50 text-slate-900 border-b-2 border-rose-500':'text-slate-400 hover:text-slate-600'}">
-          Access
-        </button>
+      <div id="result-count-row" class="hidden mb-3">
+        <span id="result-count" class="text-xs text-slate-400"></span>
       </div>
-      <div class="p-6" id="lc-body">
-        ${lcTab === 'request' ? renderLCRequest() : renderLCDownload()}
-      </div>
+      <div id="docs-list" class="space-y-2"></div>
     </div>`;
 }
 
-function renderLCRequest() {
-  if (lcState === 'sending') return `
-    <div class="flex flex-col items-center py-8 gap-3">
-      <div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div>
-      <p class="text-sm text-slate-500">Sending verification code…</p>
-    </div>`;
-  if (lcState === 'sent') return `
-    <div class="flex flex-col items-center py-6 gap-3 text-center">
-      <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
-        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      </div>
-      <p class="font-semibold text-slate-900 text-sm">Code sent!</p>
-      <p class="text-xs text-slate-500 max-w-xs">A verification code has been sent to the registered parent phone number. Switch to the <strong>Access</strong> tab to enter your code.</p>
-      <button onclick="switchLCTab('download')" class="mt-2 px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold rounded-xl transition-colors">Go to Access →</button>
-    </div>`;
-  return `
-    <div class="space-y-4">
-      ${lcError ? renderInlineMessage(lcError, lcState === 'rateLimited' ? 'warning' : 'error') : ''}
-      <p class="text-xs text-slate-500 leading-relaxed">Enter the student's index number and the registered parent phone number. A one-time verification code will be sent via SMS.</p>
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Student Index Number</label>
-        <input id="lc-index" type="text" placeholder="e.g. 2024-HS-0142" value="${escapeAttr(lcRequestPayload?.studentIndexNumber || '')}"
-          class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition">
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Parent Phone Number</label>
-        <input id="lc-phone" type="tel" placeholder="e.g. +960 777 1234" value="${escapeAttr(lcRequestPayload?.parentPhone || '')}"
-          class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition">
-      </div>
-      <button onclick="lcRequestCode()" ${lcState === 'rateLimited' ? 'disabled' : ''} class="w-full py-2.5 ${lcState === 'rateLimited'?'bg-slate-300 cursor-not-allowed':'bg-rose-600 hover:bg-rose-700'} text-white text-sm font-bold rounded-xl transition-colors mt-2">Send Verification Code</button>
-    </div>`;
+function onSearch(val) { searchQuery = val.toLowerCase(); renderDocs(); }
+
+function filterCat(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.className = `cat-btn px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${isActive?'bg-rose-600 border-rose-600 text-white':'bg-white border-slate-200 text-slate-600 hover:border-slate-300'}`;
+  });
+  renderDocs();
 }
 
-function renderLCDownload() {
-  if (lcState === 'verifying') return `
-    <div class="flex flex-col items-center py-8 gap-3">
-      <div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div>
-      <p class="text-sm text-slate-500">Verifying code…</p>
-    </div>`;
-  if (lcState === 'done') return `
-    <div class="flex flex-col items-center py-6 gap-3 text-center">
-      <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
-        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      </div>
-      <p class="font-semibold text-slate-900 text-sm">Certificate file ready</p>
-      <p class="text-xs text-slate-500">Use the link below to open the leaving certificate file.</p>
-      ${renderCertificateLink(lcCertificateFile)}
-      <button onclick="lcReset()" class="mt-2 text-xs text-slate-400 hover:text-slate-600 underline transition-colors">Start a new request</button>
-    </div>`;
-  return `
-    <div class="space-y-4">
-      ${lcError ? renderInlineMessage(lcError, lcState === 'rateLimited' ? 'warning' : 'error') : ''}
-      <p class="text-xs text-slate-500 leading-relaxed">Enter the 6-digit verification code sent to the parent's phone number. Then press <strong>Process</strong> to get the certificate file link.</p>
-      ${lcOtpExpiresAt ? `<p class="text-xs font-semibold text-rose-600">Code expires in <span id="lc-countdown">${formatCountdown()}</span></p>` : ''}
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Verification Code</label>
-        <input id="lc-code" type="text" maxlength="6" placeholder="6-digit code"
-          class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition font-mono tracking-widest text-center text-lg">
-      </div>
-      <button onclick="lcProcessDownload()" ${lcState === 'rateLimited' ? 'disabled' : ''} class="w-full py-2.5 ${lcState === 'rateLimited'?'bg-slate-300 cursor-not-allowed':'bg-slate-900 hover:bg-slate-800'} text-white text-sm font-bold rounded-xl transition-colors flex items-center justify-center gap-2 mt-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-        Process
-      </button>
-      <p class="text-center text-xs text-slate-400">Didn't receive a code? <button onclick="lcReset()" class="text-rose-600 hover:underline font-medium">Request again</button></p>
-    </div>`;
+function filterMonth(m) { activeMonth = m === 'All' ? 'All' : parseInt(m); renderDocs(); }
+function filterYear(y) { activeYear = y === 'All' ? 'All' : parseInt(y); renderDocs(); }
+function clearFilters() {
+  activeCategory = 'All'; activeMonth = 'All'; activeYear = 'All'; searchQuery = '';
+  document.getElementById('tab-content').innerHTML = renderDownloadsTab();
+  renderDocs();
 }
 
-function switchLCTab(tab) {
-  lcTab = tab;
-  lcState = tab === 'download' && lcOtpExpiresAt ? 'sent' : 'idle';
-  lcError = '';
-  const card = document.getElementById('lc-card');
-  if (card) card.outerHTML = renderLCCard();
-  startLCCountdown();
-}
+function renderDocs() {
+  let filtered = allDocs;
+  if (activeCategory !== 'All') filtered = filtered.filter(d => d.category === activeCategory);
+  if (activeYear !== 'All') filtered = filtered.filter(d => new Date(d.publishedAt).getFullYear() === activeYear);
+  if (activeMonth !== 'All') filtered = filtered.filter(d => new Date(d.publishedAt).getMonth() + 1 === activeMonth);
+  if (searchQuery) filtered = filtered.filter(d => d.title.toLowerCase().includes(searchQuery));
 
-async function lcRequestCode() {
-  const idx = document.getElementById('lc-index')?.value.trim();
-  const phone = document.getElementById('lc-phone')?.value.trim();
-  if (!idx || !phone) { alert('Please fill in both fields.'); return; }
-  lcRequestPayload = { studentIndexNumber: idx, parentPhone: phone };
-  lcError = '';
-  lcState = 'sending';
-  document.getElementById('lc-body').innerHTML = renderLCRequest();
-  try {
-    const data = await postJson(`${certificateApiBase}/request-code`, lcRequestPayload);
-    lcOtpExpiresAt = Date.now() + ((Number(data.expiresInSeconds) || 600) * 1000);
-    lcState = 'sent';
-    lcTab = 'download';
-    const card = document.getElementById('lc-card');
-    if (card) card.outerHTML = renderLCCard();
-    startLCCountdown();
-  } catch (err) {
-    lcState = err.status === 429 ? 'rateLimited' : 'idle';
-    lcError = err.status === 422 ? 'Student index number or phone number is invalid.' : normalizeCertificateError(err);
-    const card = document.getElementById('lc-card');
-    if (card) card.outerHTML = renderLCCard();
-    if (err.status === 429) releaseRateLimit(() => { if (lcState === 'rateLimited') { lcState = 'idle'; const freshCard = document.getElementById('lc-card'); if (freshCard) freshCard.outerHTML = renderLCCard(); } });
+  const countEl = document.getElementById('result-count');
+  const countRow = document.getElementById('result-count-row');
+  const hasActiveFilter = filtered.length !== allDocs.length;
+  if (countEl) countEl.textContent = hasActiveFilter ? `${filtered.length} result${filtered.length !== 1 ? 's' : ''}` : '';
+  if (countRow) countRow.classList.toggle('hidden', !hasActiveFilter);
+
+  const el = document.getElementById('docs-list');
+  if (!el) return;
+  if (!filtered.length) {
+    el.innerHTML = `<div class="text-center py-12 text-slate-400"><p class="font-semibold">No documents found</p></div>`;
+    return;
   }
-}
-
-async function lcProcessDownload() {
-  const code = document.getElementById('lc-code')?.value.trim();
-  if (!lcRequestPayload?.studentIndexNumber) { lcError = 'Please request a verification code first.'; const card = document.getElementById('lc-card'); if (card) card.outerHTML = renderLCCard(); return; }
-  if (!code || code.length !== 6) { alert('Please enter the verification code.'); return; }
-  lcError = '';
-  lcState = 'verifying';
-  document.getElementById('lc-body').innerHTML = renderLCDownload();
-  try {
-    lcCertificateFile = await fetchCertificateFile(`${certificateApiBase}/download`, { studentIndexNumber: lcRequestPayload.studentIndexNumber, code });
-    lcState = 'done';
-    document.getElementById('lc-body').innerHTML = renderLCDownload();
-  } catch (err) {
-    lcState = err.status === 429 ? 'rateLimited' : 'sent';
-    lcError = err.status === 422 ? 'Invalid or expired verification code.' : normalizeCertificateError(err);
-    const card = document.getElementById('lc-card');
-    if (card) card.outerHTML = renderLCCard();
-    startLCCountdown();
-    if (err.status === 429) releaseRateLimit(() => { if (lcState === 'rateLimited') { lcState = 'sent'; const freshCard = document.getElementById('lc-card'); if (freshCard) freshCard.outerHTML = renderLCCard(); startLCCountdown(); } });
-  }
-}
-
-function lcReset() {
-  lcState = 'idle'; lcTab = 'request'; lcError = ''; lcCertificateFile = null; lcOtpExpiresAt = null;
-  stopLCCountdown();
-  const card = document.getElementById('lc-card');
-  if (card) card.outerHTML = renderLCCard();
-}
-
-function renderLCVerificationCard() {
-  return `
-    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" id="lc-verification-card">
-      <div class="px-6 pt-6 pb-4 border-b border-slate-100">
-        <div class="flex items-center gap-3 mb-1">
-          <div class="w-9 h-9 rounded-xl bg-sky-50 flex items-center justify-center text-sky-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <div>
-            <h3 class="font-bold text-slate-900 text-sm">Leaving Certificate Verification</h3>
-            <p class="text-xs text-slate-400">Open with printed certificate code</p>
-          </div>
+  el.innerHTML = filtered.map(doc => `
+    <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center gap-4 hover:shadow-sm transition-shadow">
+      <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+      <div class="flex-1 min-w-0">
+        <p class="font-semibold text-slate-900 text-sm truncate">${doc.title}</p>
+        <div class="flex items-center gap-2 mt-1 flex-wrap">
+          <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${fileTypeColors[doc.fileType]||'bg-slate-100 text-slate-600'}">${doc.fileType}</span>
+          <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${audienceColors[doc.audience]||'bg-slate-100 text-slate-600'}">${doc.audience}</span>
+          <span class="text-xs text-slate-400">${doc.fileSize}</span>
+          <span class="text-xs text-slate-400">${App.formatShortDate(doc.publishedAt)}</span>
         </div>
       </div>
-      <div class="p-6" id="lc-verification-body">
-        ${renderLCVerificationBody()}
-      </div>
-    </div>`;
+      <a href="${doc.downloadUrl}" class="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-2 rounded-lg transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> Download
+      </a>
+    </div>`).join('');
 }
-
-function renderLCVerificationBody() {
-  if (lcvState === 'verifying') return `
-    <div class="flex flex-col items-center py-8 gap-3">
-      <div class="w-8 h-8 border-2 border-sky-600 border-t-transparent rounded-full animate-spin"></div>
-      <p class="text-sm text-slate-500">Verifying certificate code...</p>
-    </div>`;
-  if (lcvState === 'done') return `
-    <div class="flex flex-col items-center py-6 gap-3 text-center">
-      <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
-        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      </div>
-      <p class="font-semibold text-slate-900 text-sm">Certificate verified</p>
-      <p class="text-xs text-slate-500">Use the link below to open the matching certificate file.</p>
-      ${renderCertificateLink(lcvCertificateFile)}
-      ${lcvExpiresAt ? `<p class="text-[11px] text-slate-400">This link expires in 5 minutes. Verify again if it expires.</p>` : ''}
-      <button onclick="lcVerificationReset()" class="mt-2 text-xs text-slate-400 hover:text-slate-600 underline transition-colors">Verify another certificate</button>
-    </div>`;
-  return `
-    <div class="space-y-4">
-      ${lcvError ? renderInlineMessage(lcvError, lcvState === 'rateLimited' ? 'warning' : 'error') : ''}
-      <p class="text-xs text-slate-500 leading-relaxed">Enter the verification code printed on the leaving certificate. If the code matches a generated certificate, the file link will be shown.</p>
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Certificate Verification Code</label>
-        <input id="lc-verification-code" type="text" maxlength="24" placeholder="e.g. LC-2026-ABCDEFGH12345678"
-          class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition font-mono tracking-widest text-center uppercase">
-      </div>
-      <button onclick="lcVerifyAndDownload()" ${lcvState === 'rateLimited' ? 'disabled' : ''} class="w-full py-2.5 ${lcvState === 'rateLimited'?'bg-slate-300 cursor-not-allowed':'bg-slate-900 hover:bg-slate-800'} text-white text-sm font-bold rounded-xl transition-colors flex items-center justify-center gap-2 mt-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-        Verify
-      </button>
-    </div>`;
-}
-
-async function lcVerifyAndDownload() {
-  const code = document.getElementById('lc-verification-code')?.value.trim();
-  if (!code || code.length < 6) { alert('Please enter the certificate verification code.'); return; }
-  lcvError = ''; lcvState = 'verifying';
-  document.getElementById('lc-verification-body').innerHTML = renderLCVerificationBody();
-  try {
-    lcvCertificateFile = await fetchCertificateFile(`${certificateApiBase}/verify`, { verificationCode: code });
-    lcvExpiresAt = lcvCertificateFile.expiresAt || null;
-    lcvState = 'done';
-    document.getElementById('lc-verification-body').innerHTML = renderLCVerificationBody();
-  } catch (err) {
-    lcvState = err.status === 429 ? 'rateLimited' : 'idle';
-    lcvError = err.status === 403 ? 'This certificate has been revoked. Please contact the school office.' : normalizeCertificateError(err);
-    const card = document.getElementById('lc-verification-card');
-    if (card) card.outerHTML = renderLCVerificationCard();
-    if (err.status === 429) releaseRateLimit(() => { if (lcvState === 'rateLimited') { lcvState = 'idle'; const freshCard = document.getElementById('lc-verification-card'); if (freshCard) freshCard.outerHTML = renderLCVerificationCard(); } });
-  }
-}
-
-function lcVerificationReset() {
-  lcvState = 'idle'; lcvError = ''; lcvCertificateFile = null; lcvExpiresAt = null;
-  const card = document.getElementById('lc-verification-card');
-  if (card) card.outerHTML = renderLCVerificationCard();
-}
-
-function certificateHeaders(accept = 'application/json') {
-  const headers = { 'Content-Type': 'application/json', 'Accept': accept };
-  if (window.PUBLIC_API_KEY) headers['X-Public-Api-Key'] = window.PUBLIC_API_KEY;
-  return headers;
-}
-
-async function postJson(url, payload) {
-  const response = await fetch(url, { method: 'POST', headers: certificateHeaders('application/json'), credentials: 'same-origin', body: JSON.stringify(payload) });
-  if (!response.ok) throw await readCertificateError(response);
-  return response.json();
-}
-
-async function fetchCertificateFile(url, payload) {
-  const response = await fetch(url, { method: 'POST', headers: certificateHeaders('application/json'), credentials: 'same-origin', body: JSON.stringify(payload) });
-  if (!response.ok) throw await readCertificateError(response);
-  const data = await response.json();
-  const fileUrl = data.pdf_url || data.pdfUrl;
-  if (!fileUrl) throw { status: 422, message: 'Certificate file link is unavailable. Backend returned no pdf_url.' };
-  return { url: fileUrl, fileName: data.fileName || data.filename || data.file_name || 'leaving-certificate', fileType: data.fileType || data.mimeType || data.contentType || data.file_type || '', expiresAt: data.expiresInSeconds ? Date.now() + (Number(data.expiresInSeconds) * 1000) : null };
-}
-
-async function readCertificateError(response) {
-  let message = '';
-  try { const data = await response.json(); message = data.message || ''; } catch(e) {}
-  return { status: response.status, message };
-}
-
-function normalizeCertificateError(err) {
-  if (err.status === 429) return 'Too many requests. Please try again later.';
-  if (err.status === 403 && /revoked/i.test(err.message || '')) return 'This certificate has been revoked. Please contact the school office.';
-  if (err.status === 403) return err.message || 'Certificate is not available.';
-  if (err.status === 404) return err.message || 'Certificate verification code was not found.';
-  if (err.status === 422) return err.message || 'Certificate file unavailable or misconfigured.';
-  return err.message || 'Unable to get certificate file link.';
-}
-
-function renderCertificateLink(file) {
-  if (!file?.url) return '';
-  const type = file.fileType ? `<span class="block text-[10px] uppercase tracking-wide text-slate-400 mt-0.5">${escapeHtml(file.fileType)}</span>` : '';
-  return `
-    <a href="${escapeAttr(file.url)}" target="_blank" rel="noopener noreferrer" class="mt-2 w-full flex items-center justify-center gap-2 rounded-xl border border-sky-200 bg-sky-50 px-4 py-2.5 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      <span class="min-w-0"><span class="block truncate">View Certificate</span>${type}</span>
-    </a>`;
-}
-
-function renderInlineMessage(message, tone = 'error') {
-  const color = tone === 'warning' ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-rose-50 border-rose-200 text-rose-700';
-  return `<p class="text-xs leading-relaxed border rounded-xl px-3 py-2 ${color}">${escapeHtml(message)}</p>`;
-}
-
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-}
-
-function escapeAttr(value) { return escapeHtml(value); }
-
-function formatCountdown() {
-  if (!lcOtpExpiresAt) return '10:00';
-  const remaining = Math.max(0, Math.ceil((lcOtpExpiresAt - Date.now()) / 1000));
-  const minutes = Math.floor(remaining / 60);
-  const seconds = String(remaining % 60).padStart(2, '0');
-  return `${minutes}:${seconds}`;
-}
-
-function startLCCountdown() {
-  stopLCCountdown();
-  if (!lcOtpExpiresAt || lcTab !== 'download') return;
-  const update = () => { const el = document.getElementById('lc-countdown'); if (el) el.textContent = formatCountdown(); if (Date.now() >= lcOtpExpiresAt) stopLCCountdown(); };
-  update();
-  lcCountdownTimer = window.setInterval(update, 1000);
-}
-
-function stopLCCountdown() {
-  if (lcCountdownTimer) { window.clearInterval(lcCountdownTimer); lcCountdownTimer = null; }
-}
-
-function releaseRateLimit(callback) { window.setTimeout(callback, 3000); }
 
 function renderResourcesTab() {
   return `

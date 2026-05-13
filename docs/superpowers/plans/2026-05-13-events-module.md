@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement a full Events module — `events` DB table + Model, CMS CRUD component, public `/events` listing page with modal details, and a Featured Events section on the home page.
+**Goal:** Implement a full Events module — `events` DB table + Model, CMS CRUD component, public `/events` listing page, individual event detail page at `/events/{slug}`, and a Featured Events section on the home page.
 
-**Architecture:** Follows the exact pattern of existing CMS modules (AchievementsIndex, HomeSlidesIndex): one Livewire component per module with inline list + form. Website page is a Livewire component under `layouts.web`. Home page gets a new section driven by `is_featured` flag.
+**Architecture:** Follows the exact pattern of existing CMS modules (AchievementsIndex, HomeSlidesIndex): one Livewire component per module with inline list + form. Website has two pages: listing (`Website\Events`) and detail (`Website\EventShow`), both under `layouts.web`. Home page gets a new section driven by `is_featured` flag.
 
-**Tech Stack:** Laravel 11, Livewire 3, Tailwind CSS (via CDN in web layout), Alpine.js (for modal on events page)
+**Tech Stack:** Laravel 11, Livewire 4, Tailwind CSS (via CDN in web layout)
 
 ---
 
@@ -20,6 +20,8 @@
 | Create | `resources/views/livewire/cms/events/events-index.blade.php` |
 | Create | `app/Livewire/Website/Events.php` |
 | Create | `resources/views/livewire/website/events.blade.php` |
+| Create | `app/Livewire/Website/EventShow.php` |
+| Create | `resources/views/livewire/website/event-show.blade.php` |
 | Modify | `routes/web.php` |
 | Modify | `resources/views/layouts/partials/sidebar.blade.php` |
 | Modify | `app/Livewire/Website/Home.php` |
@@ -624,11 +626,12 @@ git commit -m "feat: add CMS events-index blade view"
 
 - [ ] **Step 1: Update routes/web.php**
 
-Add import at top (with other CMS imports):
+Add imports at top (with other CMS/website imports):
 
 ```php
 use App\Livewire\Cms\Events\EventsIndex;
 use App\Livewire\Website\Events;
+use App\Livewire\Website\EventShow;
 ```
 
 Inside the `auth` middleware group, after the about routes, add:
@@ -638,12 +641,13 @@ Inside the `auth` middleware group, after the about routes, add:
     Route::get('/cms/events', EventsIndex::class)->name('cms.events.index');
 ```
 
-Replace the placeholder website events route:
+Replace the placeholder website events route AND add detail route:
 
 ```php
 // Replace: Route::get('/events', fn () => 'Events')->name('events');
 // With:
 Route::get('/events', Events::class)->name('events.index');
+Route::get('/events/{slug}', EventShow::class)->name('events.show');
 ```
 
 - [ ] **Step 2: Update sidebar.blade.php**
@@ -660,13 +664,13 @@ In `resources/views/layouts/partials/sidebar.blade.php`, in the `$navGroups` arr
 ],
 ```
 
-- [ ] **Step 3: Verify CMS route requires auth**
+- [ ] **Step 3: Verify routes**
 
 ```bash
-php artisan route:list --name=cms.events
+php artisan route:list --name=events
 ```
 
-Expected output includes `cms.events.index` with `auth,verified` middleware.
+Expected output includes `events.index`, `events.show`, and `cms.events.index` (with `auth,verified` middleware on the CMS route).
 
 - [ ] **Step 4: Commit**
 
@@ -697,22 +701,10 @@ use Livewire\Component;
 class Events extends Component
 {
     public string $filter = 'all';
-    public ?int $selectedEventId = null;
 
     public function setFilter(string $filter): void
     {
         $this->filter = $filter;
-        $this->selectedEventId = null;
-    }
-
-    public function selectEvent(int $id): void
-    {
-        $this->selectedEventId = $id;
-    }
-
-    public function closeModal(): void
-    {
-        $this->selectedEventId = null;
     }
 
     public function render()
@@ -723,13 +715,8 @@ class Events extends Component
             ->orderBy('date_start')
             ->get();
 
-        $selectedEvent = $this->selectedEventId
-            ? $events->firstWhere('id', $this->selectedEventId)
-            : null;
-
         return view('livewire.website.events', [
-            'events'        => $events,
-            'selectedEvent' => $selectedEvent,
+            'events' => $events,
         ])->layout('layouts.web');
     }
 }
@@ -749,7 +736,7 @@ git commit -m "feat: add Website Events Livewire component"
 **Files:**
 - Create: `resources/views/livewire/website/events.blade.php`
 
-Design source: `docs/static_htmls/events.html` for cards and filter tabs. Modal is a Livewire-driven fixed overlay.
+Design source: `docs/static_htmls/events.html`. Cards link to `/events/{slug}` detail page — no modal.
 
 - [ ] **Step 1: Create the view**
 
@@ -815,92 +802,16 @@ Create `resources/views/livewire/website/events.blade.php`:
                                 {{ $event->location }}
                             </p>
                             <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">{{ $event->short_description }}</p>
-                            <button wire:click="selectEvent({{ $event->id }})"
-                                    class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">
+                            <a href="{{ route('events.show', $event->slug) }}"
+                               class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">
                                 View Details
-                            </button>
+                            </a>
                         </div>
                     </div>
                 @endforeach
             </div>
         @endif
     </div>
-
-    {{-- Modal overlay --}}
-    @if($selectedEvent)
-        <div class="fixed inset-0 z-50 flex items-center justify-center px-4 py-8" wire:click.self="closeModal">
-            <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-
-                {{-- Close button --}}
-                <button wire:click="closeModal" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-
-                {{-- Cover image --}}
-                @if($selectedEvent->cover_image_path)
-                    <div class="h-56 overflow-hidden rounded-t-2xl">
-                        <img src="{{ $selectedEvent->cover_image_url }}" alt="{{ $selectedEvent->title }}" class="w-full h-full object-cover">
-                    </div>
-                @endif
-
-                <div class="p-6 sm:p-8">
-                    {{-- Status + date --}}
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
-                            {{ $selectedEvent->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($selectedEvent->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
-                            {{ $selectedEvent->status }}
-                        </span>
-                        <span class="text-xs text-sky-600 font-semibold">{{ $selectedEvent->formatted_date_range }}</span>
-                    </div>
-
-                    {{-- Title --}}
-                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 mb-3">{{ $selectedEvent->title }}</h2>
-
-                    {{-- Location --}}
-                    <p class="text-sm text-slate-500 flex items-start gap-1.5 mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        {{ $selectedEvent->location }}
-                    </p>
-
-                    {{-- Description --}}
-                    <div class="text-sm text-slate-700 leading-relaxed mb-6 space-y-3">
-                        @if($selectedEvent->full_description)
-                            {!! nl2br(e($selectedEvent->full_description)) !!}
-                        @else
-                            {{ $selectedEvent->short_description }}
-                        @endif
-                    </div>
-
-                    {{-- Attachments --}}
-                    @if($selectedEvent->attachments && count($selectedEvent->attachments) > 0)
-                        <div class="mb-5">
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Attachments</p>
-                            <div class="space-y-1.5">
-                                @foreach($selectedEvent->attachments as $attachment)
-                                    @if(!empty($attachment['url']))
-                                        <a href="{{ $attachment['url'] }}" target="_blank" rel="noopener"
-                                           class="flex items-center gap-2 text-sm text-rose-600 hover:text-rose-700 font-medium">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
-                                            {{ $attachment['label'] ?: $attachment['url'] }}
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                    {{-- Contact --}}
-                    @if($selectedEvent->contact)
-                        <div class="border-t border-slate-100 pt-4">
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Contact</p>
-                            <p class="text-sm text-slate-600">{{ $selectedEvent->contact }}</p>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endif
 
 </div>
 ```
@@ -909,7 +820,184 @@ Create `resources/views/livewire/website/events.blade.php`:
 
 ```bash
 git add resources/views/livewire/website/events.blade.php
-git commit -m "feat: add website events blade view with modal"
+git commit -m "feat: add website events blade view"
+```
+
+---
+
+### Task 6b: Website Event Detail Page
+
+**Files:**
+- Create: `app/Livewire/Website/EventShow.php`
+- Create: `resources/views/livewire/website/event-show.blade.php`
+
+Design source: `docs/static_htmls/event-evt-001.html`
+
+- [ ] **Step 1: Create EventShow Livewire component**
+
+Create `app/Livewire/Website/EventShow.php`:
+
+```php
+<?php
+
+namespace App\Livewire\Website;
+
+use App\Models\Event;
+use Livewire\Component;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class EventShow extends Component
+{
+    public string $slug;
+
+    public function mount(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public function render()
+    {
+        $event = Event::where('slug', $this->slug)
+            ->where('is_active', true)
+            ->firstOrFail();
+
+        return view('livewire.website.event-show', [
+            'event' => $event,
+        ])->layout('layouts.web');
+    }
+}
+```
+
+- [ ] **Step 2: Create event-show blade view**
+
+Create `resources/views/livewire/website/event-show.blade.php`:
+
+```blade
+<div>
+
+    {{-- Hero image --}}
+    <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
+        @if($event->cover_image_path)
+            <img src="{{ $event->cover_image_url }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
+        @else
+            <div class="w-full h-full bg-gradient-to-br from-slate-800 via-rose-950 to-slate-900"></div>
+        @endif
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+        <div class="absolute bottom-4 left-4">
+            <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
+                {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
+                {{ ucfirst($event->status) }}
+            </span>
+        </div>
+    </div>
+
+    {{-- Content --}}
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        {{-- Back link --}}
+        <a href="{{ route('events.index') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-rose-600 transition-colors mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            Back to Events
+        </a>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            {{-- Main content (2/3) --}}
+            <div class="lg:col-span-2">
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">{{ $event->title }}</h1>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9">
+                    <div class="space-y-4 text-slate-700 text-sm leading-relaxed">
+                        @if($event->full_description)
+                            @foreach(explode("\n\n", $event->full_description) as $para)
+                                @if(trim($para))
+                                    <p>{{ trim($para) }}</p>
+                                @endif
+                            @endforeach
+                        @else
+                            <p>{{ $event->short_description }}</p>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Attachments / Downloads --}}
+                @if($event->attachments && count($event->attachments) > 0)
+                    <div class="mt-8">
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Downloads</p>
+                        <div class="space-y-2">
+                            @foreach($event->attachments as $attachment)
+                                @if(!empty($attachment['url']))
+                                    <a href="{{ $attachment['url'] }}" target="_blank" rel="noopener"
+                                       class="flex items-center gap-3 bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-200 rounded-xl p-3.5 transition-all">
+                                        <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-semibold text-slate-900">{{ $attachment['label'] ?: $attachment['url'] }}</p>
+                                        </div>
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            {{-- Sidebar (1/3) --}}
+            <div class="space-y-4">
+
+                {{-- Event details --}}
+                <div class="bg-white rounded-2xl border border-slate-200 p-5">
+                    <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Event Details</p>
+                    <dl class="space-y-3">
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <div>
+                                <dt class="text-xs text-slate-400">Date</dt>
+                                <dd class="text-sm font-semibold text-slate-900">{{ $event->formatted_date_range }}</dd>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <div>
+                                <dt class="text-xs text-slate-400">Location</dt>
+                                <dd class="text-sm font-semibold text-slate-900">{{ $event->location }}</dd>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <div>
+                                <dt class="text-xs text-slate-400">Status</dt>
+                                <dd class="text-sm font-semibold
+                                    {{ $event->status === 'ongoing' ? 'text-emerald-600' : ($event->status === 'upcoming' ? 'text-sky-600' : 'text-slate-600') }}">
+                                    {{ ucfirst($event->status) }}
+                                </dd>
+                            </div>
+                        </div>
+                    </dl>
+                </div>
+
+                {{-- Contact --}}
+                @if($event->contact)
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Contact</p>
+                        <p class="text-sm text-slate-700">{{ $event->contact }}</p>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+    </div>
+
+</div>
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/Livewire/Website/EventShow.php resources/views/livewire/website/event-show.blade.php
+git commit -m "feat: add EventShow page at /events/{slug}"
 ```
 
 ---
