@@ -31,6 +31,9 @@ use App\Livewire\Cms\About\FoundingMembersIndex;
 use App\Livewire\Cms\About\HistorySectionsIndex;
 use App\Livewire\Cms\About\AchievementsIndex;
 use App\Livewire\Website\About;
+use App\Livewire\Cms\Academics\AcademicsOverviewEdit;
+use App\Livewire\Cms\Academics\AcademicLevelsIndex;
+use App\Livewire\Website\Academics;
 use Illuminate\Support\Facades\Route;
 
 // Protected routes
@@ -76,6 +79,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // CMS — events module
     Route::get('/cms/events', EventsIndex::class)->name('cms.events.index');
 
+    // CMS — academics module
+    Route::get('/cms/academics/overview', AcademicsOverviewEdit::class)->name('cms.academics.overview');
+    Route::get('/cms/academics/levels', AcademicLevelsIndex::class)->name('cms.academics.levels');
+
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
@@ -93,7 +100,7 @@ Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
 Route::get('/events', Events::class)->name('events.index');
 Route::get('/events/{slug}', EventShow::class)->name('events.show');
-Route::get('/academics', fn () => 'Academics')->name('academics');
+Route::get('/academics', Academics::class)->name('academics.index');
 Route::get('/student-life', fn () => 'Student Life')->name('student-life');
 Route::get('/gallery', fn () => 'Gallery')->name('gallery');
 Route::get('/downloads', fn () => 'Downloads')->name('downloads');
