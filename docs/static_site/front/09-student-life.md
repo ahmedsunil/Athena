@@ -29,7 +29,7 @@ Tabs can be handled with Livewire state or simple anchor links. Use Livewire sta
 
 ```php
 $clubs = Club::query()
-    ->with('patron')
+    ->with('teacherIncharge')
     ->where('is_active', true)
     ->orderBy('sort_order')
     ->get();
@@ -46,7 +46,6 @@ $prefects = Prefect::query()
     ->get();
 
 $scoutGroups = ScoutGroup::query()
-    ->with('patron')
     ->where('is_active', true)
     ->orderBy('sort_order')
     ->get();
@@ -73,9 +72,10 @@ match ($house->colour) {
 Render:
 
 - name
+- logo if available
 - meeting schedule
 - description
-- patron name and title if available
+- teacher incharge name and title if available
 - president name and class if available
 
 ## Prefects
@@ -98,8 +98,8 @@ Render:
 - group type
 - meeting schedule
 - description
-- patron if available
 - leader name if available
+- assistant leader name if available
 
 ## SEO
 
@@ -110,4 +110,3 @@ Student Life | Hulhudhuffaaru School
 ```
 
 Description should mention houses, clubs, leadership, and student activities.
-

@@ -16,6 +16,7 @@ An extracurricular club shown in the Clubs tab.
 | name | string | no | |
 | meeting_schedule | string | yes | e.g. "Tuesdays, 3:00–4:30 PM" |
 | description | text | yes | |
+| logo_path | string | yes | uploaded club logo |
 | teacher_incharge_id | unsignedBigInteger | yes | FK → staff |
 | president_name | string | yes | student name — not a Staff record |
 | president_class | string | yes | e.g. "Year 12B" |
@@ -101,6 +102,7 @@ $table->id();
 $table->string('name');
 $table->string('meeting_schedule')->nullable();
 $table->text('description')->nullable();
+$table->string('logo_path')->nullable();
 $table->foreignId('teacher_incharge_id')->nullable()->constrained('staff')->nullOnDelete();
 $table->string('president_name')->nullable();
 $table->string('president_class')->nullable();
