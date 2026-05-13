@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             EventSeeder::class,
             HomePageSeeder::class,
+            AboutSeeder::class,
         ]);
 
         $admin = User::firstOrCreate(
