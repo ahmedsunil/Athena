@@ -42,6 +42,9 @@ class Event extends Model
 
     public function getFormattedDateRangeAttribute(): string
     {
+        if (! $this->date_start) {
+            return '';
+        }
         $start = $this->date_start->format('j M Y');
         if (! $this->date_end || $this->date_end->eq($this->date_start)) {
             return $start;
