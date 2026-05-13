@@ -40,40 +40,32 @@
         @if($activeTab === 'about')
 
             {{-- Mission & Vision --}}
-            <section class="py-20 sm:py-28 bg-stone-950 relative overflow-hidden">
-                <div class="absolute inset-0 opacity-[0.04]" style="background-image:repeating-linear-gradient(0deg,#f43f5e 0,#f43f5e 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#f43f5e 0,#f43f5e 1px,transparent 0,transparent 48px)"></div>
-                <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="mb-14">
+            <section class="py-12 sm:py-16 bg-slate-50 border-b border-slate-200">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="mb-8">
                         <span class="text-xs font-black uppercase tracking-widest text-rose-500">Our Purpose</span>
-                        <h2 class="text-4xl sm:text-5xl font-black text-white mt-2 leading-tight">Mission &amp; Vision</h2>
-                        <div class="mt-5 w-14 h-0.5 bg-rose-500"></div>
+                        <h2 class="text-3xl font-black text-slate-900 mt-1">Mission &amp; Vision</h2>
                     </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-stone-800">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                         {{-- Mission --}}
-                        <div class="relative pb-12 lg:pb-0 lg:pr-14">
-                            <div class="absolute top-0 right-0 lg:right-auto lg:top-0 text-[8rem] font-black text-rose-500/[0.08] leading-none select-none pointer-events-none">01</div>
-                            <div class="relative">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <div class="w-9 h-9 rounded-full border-2 border-rose-500 flex items-center justify-center flex-shrink-0">
-                                        <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                                    </div>
-                                    <p class="text-xs font-black uppercase tracking-widest text-rose-500">Mission</p>
+                        <div class="bg-white rounded-2xl border border-rose-100 p-7">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                                 </div>
-                                <p class="text-stone-200 text-lg leading-relaxed">{{ $mission->mission ?? 'Mission not yet set.' }}</p>
+                                <p class="text-xs font-black uppercase tracking-widest text-rose-600">Mission</p>
                             </div>
+                            <p class="text-slate-700 leading-relaxed">{{ $mission->mission ?? 'Mission not yet set.' }}</p>
                         </div>
                         {{-- Vision --}}
-                        <div class="relative pt-12 lg:pt-0 lg:pl-14">
-                            <div class="absolute top-0 right-0 text-[8rem] font-black text-sky-500/[0.08] leading-none select-none pointer-events-none">02</div>
-                            <div class="relative">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <div class="w-9 h-9 rounded-full border-2 border-sky-400 flex items-center justify-center flex-shrink-0">
-                                        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                    </div>
-                                    <p class="text-xs font-black uppercase tracking-widest text-sky-400">Vision</p>
+                        <div class="bg-white rounded-2xl border border-sky-100 p-7">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-sky-50 border border-sky-200 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                 </div>
-                                <p class="text-stone-200 text-lg leading-relaxed">{{ $mission->vision ?? 'Vision not yet set.' }}</p>
+                                <p class="text-xs font-black uppercase tracking-widest text-sky-600">Vision</p>
                             </div>
+                            <p class="text-slate-700 leading-relaxed">{{ $mission->vision ?? 'Vision not yet set.' }}</p>
                         </div>
                     </div>
                 </div>
