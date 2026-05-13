@@ -1,7 +1,7 @@
 <div>
 
     {{-- Page header --}}
-    <section class="bg-white border-b border-slate-200 py-10">
+    <section class="bg-white border-b border-slate-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">School Events</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">Events</h1>

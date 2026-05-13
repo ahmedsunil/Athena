@@ -66,7 +66,7 @@ function renderTab() {
           <p class="text-xs text-sky-600 font-semibold mb-3 flex items-center gap-1">${App.icon('Calendar')} ${c.meetingSchedule}</p>
           <p class="text-sm text-slate-600 leading-relaxed mb-4">${c.description}</p>
           <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div><p class="text-xs text-slate-400">Patron</p><p class="text-xs font-semibold text-slate-700">${c.patron.name}</p></div>
+            <div><p class="text-xs text-slate-400">Teacher incharge</p><p class="text-xs font-semibold text-slate-700">${(c.teacherIncharge||c.patron).name}</p></div>
             <div class="text-right"><p class="text-xs text-slate-400">President</p><p class="text-xs font-semibold text-slate-700">${c.president.name} · ${c.president.className}</p></div>
           </div>
         </div>`).join('')}
@@ -109,8 +109,8 @@ function renderTab() {
           <p class="text-xs text-sky-600 font-semibold mb-3">${App.icon('Calendar')} ${g.meetingSchedule}</p>
           <p class="text-sm text-slate-600 leading-relaxed mb-4">${g.description}</p>
           <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div><p class="text-xs text-slate-400">Patron</p><p class="text-xs font-semibold text-slate-700">${g.patron.name}</p></div>
-            <div class="text-right"><p class="text-xs text-slate-400">Leader</p><p class="text-xs font-semibold text-slate-700">${g.leader.name}</p></div>
+            <div><p class="text-xs text-slate-400">Leader</p><p class="text-xs font-semibold text-slate-700">${g.leader.name}</p></div>
+            <div class="text-right"><p class="text-xs text-slate-400">Assistant Leader</p><p class="text-xs font-semibold text-slate-700">${(g.assistantLeader||g.patron).name}</p></div>
           </div>
         </div>`).join('')}
     </div>`;

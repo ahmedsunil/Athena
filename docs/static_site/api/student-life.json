@@ -1,15 +1,15 @@
 {
   "_meta": {
     "models": {
-      "club": "An extracurricular club students can join, with meeting details, a staff patron, and a student president.",
+      "club": "An extracurricular club students can join, with meeting details, a teacher incharge, and a student president.",
       "prefect": "A student leader elected or appointed to the prefect body, shown with their role, class, and a personal quote.",
       "schoolHouse": "One of the school's four houses, identified by a name, colour, and motto, with a staff house master and student captain.",
       "scoutsGroup": "A uniformed extracurricular group (scouts, brigade, etc.) with meeting details and leadership."
     },
     "relationships": [
-      "Each club has one patron (staff) and one president (student)",
+      "Each club has one teacherIncharge (staff) and one president (student)",
       "Each schoolHouse has one houseMaster (staff) and one houseCaptain (student)",
-      "Each scoutsGroup has one patron (staff) and one leader (student)"
+      "Each scoutsGroup has one leader and one assistantLeader"
     ]
   },
 
@@ -19,7 +19,7 @@
       "name": "Science & Technology Club",
       "description": "Explores real-world science through experiments, robotics projects, and visits to tech companies. Open to all students with a passion for STEM.",
       "meetingSchedule": "Thursdays, 2:30 – 4:00 PM",
-      "patron": { "name": "Mr. Adeyemi Olawale", "role": "Physics Teacher" },
+      "teacherIncharge": { "name": "Mr. Adeyemi Olawale", "role": "Physics Teacher" },
       "president": { "name": "Temi Okafor", "className": "SSS 2A" }
     },
     {
@@ -27,7 +27,7 @@
       "name": "Drama & Creative Arts Society",
       "description": "Produces two major stage productions per year and trains students in acting, stagecraft, and public speaking. Welcomes all year groups.",
       "meetingSchedule": "Tuesdays, 3:00 – 4:30 PM",
-      "patron": { "name": "Mrs. Ngozi Abiodun", "role": "English Teacher" },
+      "teacherIncharge": { "name": "Mrs. Ngozi Abiodun", "role": "English Teacher" },
       "president": { "name": "Chidinma Eze", "className": "SSS 3B" }
     },
     {
@@ -35,7 +35,7 @@
       "name": "Debate Club",
       "description": "Sharpens critical thinking and public speaking through inter-school debate competitions. Members compete at state and national levels.",
       "meetingSchedule": "Wednesdays, 2:00 – 3:30 PM",
-      "patron": { "name": "Mr. Emeka Chukwuemeka", "role": "Literature Teacher" },
+      "teacherIncharge": { "name": "Mr. Emeka Chukwuemeka", "role": "Literature Teacher" },
       "president": { "name": "Adaeze Nwosu", "className": "SSS 2C" }
     },
     {
@@ -43,7 +43,7 @@
       "name": "Mathematics Club",
       "description": "Tackles challenging problems beyond the classroom syllabus and prepares students for mathematics olympiads at all levels.",
       "meetingSchedule": "Fridays, 1:00 – 2:30 PM",
-      "patron": { "name": "Mrs. Ifeanyi Eze", "role": "Mathematics Teacher" },
+      "teacherIncharge": { "name": "Mrs. Ifeanyi Eze", "role": "Mathematics Teacher" },
       "president": { "name": "Seun Adeleke", "className": "SSS 1A" }
     },
     {
@@ -51,7 +51,7 @@
       "name": "Green Earth Environmental Club",
       "description": "Promotes sustainability on campus through recycling drives, tree planting, and environmental awareness campaigns.",
       "meetingSchedule": "Mondays, 3:00 – 4:00 PM",
-      "patron": { "name": "Mr. Usman Ibrahim", "role": "Geography Teacher" },
+      "teacherIncharge": { "name": "Mr. Usman Ibrahim", "role": "Geography Teacher" },
       "president": { "name": "Blessing Okonkwo", "className": "JSS 3B" }
     },
     {
@@ -59,7 +59,7 @@
       "name": "French Language & Culture Club",
       "description": "Develops French language skills through conversation sessions, cultural events, and preparation for DELF certification.",
       "meetingSchedule": "Thursdays, 12:30 – 1:30 PM",
-      "patron": { "name": "Mrs. Amaka Okonkwo", "role": "French Teacher" },
+      "teacherIncharge": { "name": "Mrs. Amaka Okonkwo", "role": "French Teacher" },
       "president": { "name": "Fatima Musa", "className": "SSS 2B" }
     }
   ],
@@ -181,8 +181,8 @@
       "groupType": "Boy Scouts",
       "description": "Develops boys into responsible, self-reliant young men through outdoor skills, community service, and character training aligned with the world scouting movement.",
       "meetingSchedule": "Saturdays, 8:00 – 10:00 AM",
-      "patron": { "name": "Mr. Kunle Balogun", "role": "Physical Education Teacher" },
-      "leader": { "name": "Samuel Adeyemi", "className": "SSS 2A" }
+      "leader": { "name": "Samuel Adeyemi", "className": "SSS 2A" },
+      "assistantLeader": { "name": "Mr. Kunle Balogun", "role": "Physical Education Teacher" }
     },
     {
       "id": "scouts-girls-brigade",
@@ -190,8 +190,8 @@
       "groupType": "Girls Brigade",
       "description": "Builds young women of faith, discipline, and service through uniformed activities, skill development, and community outreach programmes.",
       "meetingSchedule": "Saturdays, 8:00 – 10:00 AM",
-      "patron": { "name": "Mrs. Ngozi Okonkwo", "role": "Home Economics Teacher" },
-      "leader": { "name": "Grace Obiora", "className": "SSS 2B" }
+      "leader": { "name": "Grace Obiora", "className": "SSS 2B" },
+      "assistantLeader": { "name": "Mrs. Ngozi Okonkwo", "role": "Home Economics Teacher" }
     },
     {
       "id": "scouts-red-cross",
@@ -199,8 +199,8 @@
       "groupType": "Red Cross",
       "description": "Trains students in first aid, emergency response, and humanitarian values. Members serve at school events and participate in community health outreaches.",
       "meetingSchedule": "Fridays, 2:00 – 3:30 PM",
-      "patron": { "name": "Mr. Tayo Adeleke", "role": "Biology Teacher" },
-      "leader": { "name": "Adaora Nwosu", "className": "SSS 1C" }
+      "leader": { "name": "Adaora Nwosu", "className": "SSS 1C" },
+      "assistantLeader": { "name": "Mr. Tayo Adeleke", "role": "Biology Teacher" }
     }
   ]
 }
