@@ -146,6 +146,7 @@
                     <label class="mb-1.5 block admin-label">Featured order</label>
                     <input type="number" wire:model="featured_sort_order" min="0"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('featured_sort_order') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Visibility</label>
@@ -231,7 +232,7 @@
             @endforelse
         </x-slot>
         <x-slot name="mobile">
-            @foreach($events as $event)
+            @forelse($events as $event)
                 <li class="flex items-center gap-3 px-4 py-3">
                     @if($event->cover_image_path)
                         <img src="{{ $event->cover_image_url }}" alt="{{ $event->title }}" class="h-10 w-14 flex-shrink-0 rounded-md object-cover">
@@ -245,7 +246,9 @@
                         <button wire:click="delete({{ $event->id }})" wire:confirm="Delete?" class="text-xs text-red-500">Del</button>
                     </div>
                 </li>
-            @endforeach
+            @empty
+                <li class="px-4 py-6 text-center text-sm text-zinc-400">No events yet.</li>
+            @endforelse
         </x-slot>
     </x-admin.tables.data-table>
 
