@@ -16,7 +16,9 @@
       "Bash(python3 *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://athena.test/cms/school-profile -L --cookie \"laravel_session=test\")",
       "Bash(grep *)",
-      "Bash(curl -s -b \"athena-session=\" http://athena.test/)"
+      "Bash(curl -s -b \"athena-session=\" http://athena.test/)",
+      "Bash(git *)",
+      "Bash(xargs cat -n)"
     ]
   }
 }
