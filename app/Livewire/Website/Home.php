@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Website;
 
+use App\Models\Event;
 use App\Models\HomeQuickAccess;
 use App\Models\HomeSlide;
 use App\Models\HomeStat;
@@ -21,6 +22,11 @@ class Home extends Component
             'quickAccess' => HomeQuickAccess::where('is_active', true)->orderBy('sort_order')->get(),
             'testimonials' => HomeTestimonial::where('is_active', true)->orderBy('sort_order')->get(),
             'profile' => $profile,
+            'featuredEvents' => Event::where('is_featured', true)
+                ->where('is_active', true)
+                ->orderBy('featured_sort_order')
+                ->take(3)
+                ->get(),
         ])->layout('layouts.web');
     }
 }

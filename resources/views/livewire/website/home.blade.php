@@ -115,6 +115,33 @@
     </section>
     @endif
 
+    {{-- Featured Events --}}
+    @if($featuredEvents->isNotEmpty())
+    <section class="py-16 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-end justify-between mb-10" data-reveal="fade">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">What's On</p>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Featured Events</h2>
+                </div>
+                <a href="{{ route('events.index') }}" class="text-sm font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1">
+                    All Events
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                @foreach($featuredEvents as $event)
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 80 }}ms">
+                    <p class="text-xs font-semibold text-sky-600 mb-2">{{ $event->date_start->format('j M Y') }}</p>
+                    <h3 class="font-bold text-slate-900 mb-2">{{ $event->title }}</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">{{ $event->short_description }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     {{-- Principal's Message --}}
     @if($profile->principal_name || $profile->principal_message)
     <section class="py-16 sm:py-20 bg-slate-900">
