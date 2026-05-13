@@ -71,6 +71,7 @@ class LeadershipIndex extends Component
         $this->is_active      = $item->is_active;
         $this->sort_order     = $item->sort_order;
         $this->existing_photo = $item->photo_path;
+        $this->photoRemoved   = false;
     }
 
     public function removePhoto(): void
