@@ -14,7 +14,7 @@ class Achievement extends Model
         'is_active', 'sort_order',
     ];
 
-    protected $casts = ['is_active' => 'boolean'];
+    protected $casts = ['is_active' => 'boolean', 'year' => 'integer'];
 
     public static function resolvePhotoUrl(?string $path): ?string
     {
