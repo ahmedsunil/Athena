@@ -69,6 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/about/founding-members', FoundingMembersIndex::class)->name('cms.about.founding-members');
     Route::get('/cms/about/history', HistorySectionsIndex::class)->name('cms.about.history');
     Route::get('/cms/about/achievements', AchievementsIndex::class)->name('cms.about.achievements');
+
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
