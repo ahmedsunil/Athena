@@ -22,6 +22,12 @@ use App\Livewire\Users\UserForm;
 use App\Livewire\Users\UserShow;
 use App\Livewire\Users\UsersList;
 use App\Livewire\Website\Home;
+use App\Livewire\Cms\About\MissionEdit;
+use App\Livewire\Cms\About\LeadershipIndex;
+use App\Livewire\Cms\About\FoundingMembersIndex;
+use App\Livewire\Cms\About\HistorySectionsIndex;
+use App\Livewire\Cms\About\AchievementsIndex;
+use App\Livewire\Website\About;
 use Illuminate\Support\Facades\Route;
 
 // Protected routes
@@ -56,6 +62,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
     Route::get('/cms/home/quick-access', HomeQuickAccessIndex::class)->name('cms.home.quick-access');
     Route::get('/cms/home/testimonials', HomeTestimonialsIndex::class)->name('cms.home.testimonials');
+
+    // CMS — about module
+    Route::get('/cms/about/mission', MissionEdit::class)->name('cms.about.mission');
+    Route::get('/cms/about/leadership', LeadershipIndex::class)->name('cms.about.leadership');
+    Route::get('/cms/about/founding-members', FoundingMembersIndex::class)->name('cms.about.founding-members');
+    Route::get('/cms/about/history', HistorySectionsIndex::class)->name('cms.about.history');
+    Route::get('/cms/about/achievements', AchievementsIndex::class)->name('cms.about.achievements');
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
@@ -70,7 +83,7 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
 
 // Public website
 Route::get('/', Home::class)->name('home');
-Route::get('/about', fn () => 'About')->name('about');
+Route::get('/about', About::class)->name('about');
 Route::get('/events', fn () => 'Events')->name('events');
 Route::get('/academics', fn () => 'Academics')->name('academics');
 Route::get('/student-life', fn () => 'Student Life')->name('student-life');
