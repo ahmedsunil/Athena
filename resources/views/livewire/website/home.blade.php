@@ -12,7 +12,7 @@
             @endif
             <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
             <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center pt-16">
-                <div class="max-w-xl">
+                <div class="max-w-xl" data-reveal="left">
                     <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-3">
                         <span data-lang-key="school_name" data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
                     </p>
@@ -83,7 +83,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-6 text-center text-white">
                 @foreach($stats as $stat)
-                <div>
+                <div data-reveal="scale" style="--reveal-delay: {{ $loop->index * 80 }}ms">
                     <p class="text-3xl sm:text-4xl font-black">{{ $stat->value }}</p>
                     <p class="text-rose-200 text-sm font-medium mt-1">{{ $stat->title }}</p>
                 </div>
@@ -97,13 +97,13 @@
     @if($quickAccess->isNotEmpty())
     <section class="py-16 sm:py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
+            <div class="text-center mb-10" data-reveal="fade">
                 <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Navigate the Portal</p>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Quick Access</h2>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 @foreach($quickAccess as $item)
-                <a href="{{ $item->link_key }}" class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-200 hover:shadow-md transition-all text-center">
+                <a href="{{ $item->link_key }}" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 55 }}ms" class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-200 hover:shadow-md transition-all text-center">
                     <div class="w-10 h-10 rounded-xl bg-rose-50 group-hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors">
                         <x-icon :key="$item->icon_key" />
                     </div>
@@ -119,7 +119,7 @@
     @if($profile->principal_name || $profile->principal_message)
     <section class="py-16 sm:py-20 bg-slate-900">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
+            <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden" data-reveal="scale">
                 <div class="flex flex-col md:flex-row">
                     @if($profile->principal_photo_path)
                     <div class="flex-shrink-0 w-full md:w-56">
@@ -155,7 +155,7 @@
     @php $tChunks = $testimonials->chunk(4); @endphp
     <section class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12" data-reveal="fade">
                 <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Community Voices</p>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900">What People Say</h2>
             </div>
@@ -163,7 +163,7 @@
             @foreach($tChunks as $ci => $chunk)
             <div class="t-page {{ $ci === 0 ? '' : 'hidden' }} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($chunk as $t)
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col">
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 70 }}ms">
                     <p class="text-sm text-slate-700 leading-relaxed italic flex-1">"{{ $t->message }}"</p>
                     <div class="mt-5 flex items-center gap-3">
                         @if($t->photo_path)
@@ -215,12 +215,12 @@
     {{-- Contact --}}
     <section id="contact" class="py-16 sm:py-20 bg-slate-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
+            <div class="text-center mb-10" data-reveal="fade">
                 <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Get In Touch</p>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Contact Us</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-4">
+                <div class="space-y-4" data-reveal="left">
                     @if($profile->email)
                     <div class="flex items-start gap-3">
                         <div class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
@@ -249,7 +249,7 @@
                     </div>
                     @endif
                 </div>
-                <form action="#" method="post" class="space-y-4">
+                <form action="#" method="post" class="space-y-4" data-reveal="right" style="--reveal-delay: 120ms">
                     @csrf
                     <input type="text" name="name" placeholder="Your name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
                     <input type="email" name="email" placeholder="Email address" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">

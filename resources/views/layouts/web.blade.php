@@ -34,6 +34,42 @@
             word-spacing: 0.05em;
         }
         @endif
+        [data-reveal] {
+            opacity: 0;
+            transform: translate3d(0, 22px, 0);
+            transition:
+                opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+                filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+        [data-reveal="fade"] {
+            transform: translate3d(0, 0, 0);
+        }
+        [data-reveal="left"] {
+            transform: translate3d(-28px, 0, 0);
+        }
+        [data-reveal="right"] {
+            transform: translate3d(28px, 0, 0);
+        }
+        [data-reveal="scale"] {
+            transform: scale(0.96);
+            filter: blur(3px);
+        }
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-reveal] {
+                opacity: 1;
+                transform: none;
+                filter: none;
+                transition: none;
+            }
+        }
     </style>
     <script>
         window.__locale  = '{{ app()->getLocale() }}';
@@ -50,5 +86,39 @@
 </main>
 
 @include('layouts.partials.footer')
+<script>
+    (function () {
+        var revealItems = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+
+        if (!revealItems.length) {
+            return;
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+            revealItems.forEach(function (item) {
+                item.classList.add('is-visible');
+            });
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            });
+        }, {
+            rootMargin: '0px 0px -12% 0px',
+            threshold: 0.16
+        });
+
+        revealItems.forEach(function (item) {
+            observer.observe(item);
+        });
+    })();
+</script>
 </body>
 </html>
