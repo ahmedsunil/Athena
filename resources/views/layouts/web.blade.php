@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'dv' ? 'rtl' : 'ltr' }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'dv' ? 'rtl' : 'ltr' }}" class="{{ app()->getLocale() === 'dv' ? 'locale-dv' : '' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,13 +27,6 @@
             line-height: 2;
             word-spacing: 0.05em;
         }
-        @if(app()->getLocale() === 'dv')
-        [data-lang-key] {
-            font-family: 'Dhivehi', sans-serif !important;
-            line-height: 2;
-            word-spacing: 0.05em;
-        }
-        @endif
         [data-reveal] {
             opacity: 0;
             transform: translate3d(0, 22px, 0);
