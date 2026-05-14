@@ -410,8 +410,8 @@
 
                 {{-- Senior Management --}}
                 @php $seniorStaff = $staff->get('senior_management', collect()); @endphp
-                <div class="bg-white rounded-2xl border border-rose-200 overflow-hidden" data-reveal="scale">
-                    <div class="px-6 py-4 border-b border-rose-100 bg-rose-50">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale">
+                    <div class="px-6 py-4 border-b border-slate-100">
                         <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Leadership</p>
                         <h2 class="text-xl font-black text-slate-900 mt-0.5">Senior Management Team</h2>
                     </div>
@@ -439,14 +439,14 @@
                         'library'          => 'Library',
                     ];
                 @endphp
-                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-sky-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-sky-100 bg-sky-50 hover:bg-sky-100 transition-colors">
+                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-sky-600">Section</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Section</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">Academic Section</h2>
-                            <p class="text-xs text-slate-500 mt-0.5">Principal as Team Lead</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Principal as Team Lead</p>
                         </div>
-                        <svg class="w-5 h-5 text-sky-400 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
@@ -455,8 +455,8 @@
                             @php $group = $academicStaff->get($key, collect()); @endphp
                             @if($group->isNotEmpty())
                                 @php $isNested = in_array($key, ['laboratory', 'library']); @endphp
-                                <div class="{{ $isNested ? 'ml-6 pl-4 border-l-2 border-sky-100' : '' }}">
-                                    <p class="text-xs font-bold uppercase tracking-widest text-sky-500 mb-4">{{ $label }}</p>
+                                <div class="{{ $isNested ? 'ml-6 pl-4 border-l-2 border-slate-100' : '' }}">
+                                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">{{ $label }}</p>
                                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                                         @foreach($group as $member)
                                             @include('livewire.website.partials.staff-card', ['member' => $member, 'accentColor' => 'sky'])
@@ -480,14 +480,14 @@
                         'printer' => 'Printing',
                     ];
                 @endphp
-                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-amber-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-amber-100 bg-amber-50 hover:bg-amber-100 transition-colors">
+                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-amber-600">Section</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Section</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">Administrative Section</h2>
-                            <p class="text-xs text-slate-500 mt-0.5">Administrator as Team Lead</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Administrator as Team Lead</p>
                         </div>
-                        <svg class="w-5 h-5 text-amber-400 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
@@ -496,7 +496,7 @@
                             @php $group = $adminStaff->get($key, collect()); @endphp
                             @if($group->isNotEmpty())
                                 <div>
-                                    <p class="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4">{{ $label }}</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">{{ $label }}</p>
                                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                                         @foreach($group as $member)
                                             @include('livewire.website.partials.staff-card', ['member' => $member, 'accentColor' => 'amber'])

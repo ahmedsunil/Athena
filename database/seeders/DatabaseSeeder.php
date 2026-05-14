@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             AcademicsSeeder::class,
             StudentLifeSeeder::class,
+            StaffSeeder::class,
             AnnouncementSeeder::class,
             GallerySeeder::class,
             DigitalServicesSeeder::class,
