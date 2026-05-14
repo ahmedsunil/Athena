@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\DigitalServiceDocument;
 use App\Models\DigitalServiceResource;
+use App\Models\DigitalServiceCalendar;
 use App\Models\DigitalServiceCalendarEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,6 +33,37 @@ class DigitalServicesModuleTest extends TestCase
     public function test_cms_calendar_requires_auth(): void
     {
         $this->get('/cms/digital-services/calendar')->assertRedirect('/login');
+    }
+
+    public function test_cms_calendar_lists_calendars_before_entries(): void
+    {
+        $calendar = DigitalServiceCalendar::create([
+            'title'       => 'Academic Calendar 2026',
+            'year'        => 2026,
+            'description' => 'School year overview',
+            'is_active'   => true,
+        ]);
+
+        DigitalServiceCalendarEntry::factory()->create([
+            'calendar_id' => $calendar->id,
+            'title'       => 'First Term Begins',
+            'date'        => '2026-01-11',
+            'is_active'   => true,
+        ]);
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get('/cms/digital-services/calendar')
+            ->assertOk()
+            ->assertSee('Academic Calendar 2026')
+            ->assertDontSee('First Term Begins');
+
+        $this->actingAs($user)
+            ->get('/cms/digital-services/calendar?calendarId=' . $calendar->id)
+            ->assertOk()
+            ->assertSee('Academic Calendar 2026')
+            ->assertSee('First Term Begins');
     }
 
     public function test_downloads_tab_shows_active_document(): void
@@ -86,14 +118,22 @@ class DigitalServicesModuleTest extends TestCase
 
     public function test_calendar_tab_shows_active_entry(): void
     {
-        DigitalServiceCalendarEntry::factory()->create([
-            'title'     => 'Sports Day',
-            'type'      => 'event',
-            'date'      => '2025-05-16',
+        $calendar = DigitalServiceCalendar::create([
+            'title'     => 'Academic Calendar 2025',
+            'year'      => 2025,
             'is_active' => true,
         ]);
 
-        $response = $this->get('/digital-services?activeTab=calendar');
+        DigitalServiceCalendarEntry::factory()->create([
+            'calendar_id' => $calendar->id,
+            'title'       => 'Sports Day',
+            'type'        => 'event',
+            'date'        => '2025-05-16',
+            'is_active'   => true,
+        ]);
+
+        // calendarMonth=4 = May (0-indexed from Jan)
+        $response = $this->get('/digital-services?activeTab=calendar&calendarMonth=4');
         $response->assertSee('Sports Day');
     }
 
