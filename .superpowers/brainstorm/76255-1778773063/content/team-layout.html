@@ -1,0 +1,125 @@
+<h2>Team Page Layout</h2>
+<p class="subtitle">How should the org chart look on the website?</p>
+
+<div class="cards">
+
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:20px;font-family:sans-serif">
+      <!-- Tree mockup -->
+      <div style="text-align:center;margin-bottom:10px">
+        <div style="display:inline-block;background:#1e293b;color:#fff;padding:6px 16px;border-radius:8px;font-size:11px;font-weight:700">PRINCIPAL</div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:4px;margin-bottom:4px">
+        <div style="width:1px;height:16px;background:#cbd5e1;margin:0 auto"></div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:24px">
+        <div style="text-align:center">
+          <div style="width:1px;height:12px;background:#cbd5e1;margin:0 auto 4px"></div>
+          <div style="background:#0f172a;color:#fff;padding:5px 10px;border-radius:6px;font-size:10px;font-weight:600">ACADEMIC<br>SECTION</div>
+          <div style="display:flex;gap:6px;margin-top:6px">
+            <div style="background:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:9px;color:#475569">Leading<br>Teachers</div>
+            <div style="background:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:9px;color:#475569">Teachers</div>
+            <div style="background:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:9px;color:#475569">Support</div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div style="width:1px;height:12px;background:#cbd5e1;margin:0 auto 4px"></div>
+          <div style="background:#0f172a;color:#fff;padding:5px 10px;border-radius:6px;font-size:10px;font-weight:600">ADMIN<br>SECTION</div>
+          <div style="display:flex;gap:6px;margin-top:6px">
+            <div style="background:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:9px;color:#475569">HR</div>
+            <div style="background:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:9px;color:#475569">IT</div>
+            <div style="background:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:9px;color:#475569">Budget</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Tree / Org Chart</h3>
+      <p>Classic top-down hierarchy with connecting lines. Shows relationships visually. Hard to display on mobile, staff details shown on click/hover.</p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:20px;font-family:sans-serif">
+      <!-- Grouped cards mockup -->
+      <div style="margin-bottom:8px">
+        <div style="font-size:9px;font-weight:800;color:#e11d48;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Senior Management</div>
+        <div style="display:flex;gap:6px">
+          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px">
+            <div style="width:24px;height:24px;border-radius:50%;background:#cbd5e1"></div>
+            <div><div style="font-size:9px;font-weight:700;color:#0f172a">Principal</div><div style="font-size:8px;color:#94a3b8">Leadership</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div>
+          <div style="font-size:9px;font-weight:800;color:#0ea5e9;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Academic</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:4px">
+              <div style="width:18px;height:18px;border-radius:50%;background:#bae6fd"></div>
+              <div style="font-size:8px;color:#0f172a;font-weight:600">Staff Name</div>
+            </div>
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:4px">
+              <div style="width:18px;height:18px;border-radius:50%;background:#bae6fd"></div>
+              <div style="font-size:8px;color:#0f172a;font-weight:600">Staff Name</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-weight:800;color:#f59e0b;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Admin</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:4px">
+              <div style="width:18px;height:18px;border-radius:50%;background:#fde68a"></div>
+              <div style="font-size:8px;color:#0f172a;font-weight:600">Staff Name</div>
+            </div>
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:4px">
+              <div style="width:18px;height:18px;border-radius:50%;background:#fde68a"></div>
+              <div style="font-size:8px;color:#0f172a;font-weight:600">Staff Name</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Section Cards (grouped)</h3>
+      <p>Staff grouped by section. Color-coded per section. Click a card to see full details (name, designation, education, experience). Works great on mobile.</p>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:20px;font-family:sans-serif">
+      <!-- Accordion mockup -->
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="background:#1e293b;color:#fff;padding:8px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700">▼ SENIOR MANAGEMENT</span>
+          <span style="font-size:8px;background:#334155;padding:2px 6px;border-radius:999px">1 member</span>
+        </div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:32px;height:32px;border-radius:50%;background:#cbd5e1;flex-shrink:0"></div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:#0f172a">Principal Name</div>
+              <div style="font-size:8px;color:#64748b">Principal · M.Ed Leadership</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#e2e8f0;color:#475569;padding:8px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700">▶ ACADEMIC SECTION</span>
+          <span style="font-size:8px;background:#cbd5e1;padding:2px 6px;border-radius:999px">12 members</span>
+        </div>
+        <div style="background:#e2e8f0;color:#475569;padding:8px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700">▶ ADMIN SECTION</span>
+          <span style="font-size:8px;background:#cbd5e1;padding:2px 6px;border-radius:999px">6 members</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Collapsible Sections</h3>
+      <p>Each section expands to show its staff. Compact by default, good for large teams. Sub-sections nest inside. Click staff card for full details.</p>
+    </div>
+  </div>
+
+</div>

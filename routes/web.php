@@ -6,6 +6,7 @@ use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
 use App\Livewire\Cms\FooterLinks\FooterLinksIndex;
+use App\Livewire\Cms\Announcements\AnnouncementsIndex;
 use App\Livewire\Cms\HomeQuickAccess\HomeQuickAccessIndex;
 use App\Livewire\Cms\HomeSlides\HomeSlidesIndex;
 use App\Livewire\Cms\HomeStats\HomeStatsIndex;
@@ -22,6 +23,8 @@ use App\Livewire\Users\UserForm;
 use App\Livewire\Users\UserShow;
 use App\Livewire\Users\UsersList;
 use App\Livewire\Website\Home;
+use App\Livewire\Website\Announcements;
+use App\Livewire\Website\AnnouncementShow;
 use App\Livewire\Cms\Events\EventsIndex;
 use App\Livewire\Website\Events;
 use App\Livewire\Website\EventShow;
@@ -79,6 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
     Route::get('/cms/home/quick-access', HomeQuickAccessIndex::class)->name('cms.home.quick-access');
     Route::get('/cms/home/testimonials', HomeTestimonialsIndex::class)->name('cms.home.testimonials');
+    Route::get('/cms/announcements', AnnouncementsIndex::class)->name('cms.announcements.index');
 
     // CMS — about module
     Route::get('/cms/about/mission', MissionEdit::class)->name('cms.about.mission');
@@ -123,6 +127,8 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
 
 // Public website
 Route::get('/', Home::class)->name('home');
+Route::get('/announcements', Announcements::class)->name('announcements.index');
+Route::get('/announcements/{slug}', AnnouncementShow::class)->name('announcements.show');
 Route::get('/about', About::class)->name('about');
 Route::get('/events', Events::class)->name('events.index');
 Route::get('/events/{slug}', EventShow::class)->name('events.show');

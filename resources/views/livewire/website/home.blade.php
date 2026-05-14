@@ -142,15 +142,21 @@
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     @foreach($quickAccess as $item)
-                        <a href="{{ $item->link_key }}" data-reveal="scale"
+                        @php
+                            $isAdmissions = $item->link_key === '/admissions' || strcasecmp($item->title, 'Admissions') === 0;
+                            $quickAccessTitle = $isAdmissions ? 'Announcements' : $item->title;
+                            $quickAccessHref = $isAdmissions ? route('announcements.index') : $item->link_key;
+                            $quickAccessIcon = $isAdmissions ? 'Bell' : $item->icon_key;
+                        @endphp
+                        <a href="{{ $quickAccessHref }}" data-reveal="scale"
                            style="--reveal-delay: {{ $loop->index * 55 }}ms"
                            class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-200 hover:shadow-md transition-all text-center">
                             <div
                                 class="w-10 h-10 rounded-xl bg-rose-50 group-hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors">
-                                <x-icon :key="$item->icon_key"/>
+                                <x-icon :key="$quickAccessIcon"/>
                             </div>
                             <span
-                                class="text-sm font-semibold text-slate-700 group-hover:text-slate-900">{{ $item->title }}</span>
+                                class="text-sm font-semibold text-slate-700 group-hover:text-slate-900">{{ $quickAccessTitle }}</span>
                         </a>
                     @endforeach
                 </div>

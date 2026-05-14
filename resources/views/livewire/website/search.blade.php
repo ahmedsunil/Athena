@@ -74,6 +74,7 @@
                     'Events'    => ['bg' => 'bg-sky-100',    'text' => 'text-sky-700'],
                     'Gallery'   => ['bg' => 'bg-violet-100', 'text' => 'text-violet-700'],
                     'Downloads' => ['bg' => 'bg-amber-100',  'text' => 'text-amber-700'],
+                    'Announcements' => ['bg' => 'bg-rose-100', 'text' => 'text-rose-700'],
                 ];
             @endphp
 

@@ -5,6 +5,7 @@ namespace App\Livewire\Website;
 use App\Models\DigitalServiceDocument;
 use App\Models\Event;
 use App\Models\GalleryAlbum;
+use App\Models\Announcement;
 use Livewire\Component;
 
 class Search extends Component
@@ -70,6 +71,26 @@ class Search extends Component
                     'title'   => $doc->title,
                     'snippet' => $doc->category,
                     'url'     => route('digital-services.index'),
+                ];
+            });
+
+        Announcement::where('is_active', true)
+            ->where(function ($builder) use ($like) {
+                $builder->where('title', 'like', $like)
+                    ->orWhere('category', 'like', $like)
+                    ->orWhere('description', 'like', $like);
+            })
+            ->orderBy('sort_order')
+            ->orderByDesc('created_at')
+            ->limit(4)
+            ->get(['title', 'category', 'description'])
+            ->each(function ($announcement) use (&$results) {
+                $results[] = [
+                    'section' => 'Announcements',
+                    'color'   => 'rose',
+                    'title'   => $announcement->title,
+                    'snippet' => $announcement->category ?: $announcement->description,
+                    'url'     => route('announcements.index'),
                 ];
             });
 

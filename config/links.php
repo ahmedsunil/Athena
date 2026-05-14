@@ -4,6 +4,7 @@ return [
     '/'                 => 'Home',
     '/about'            => 'About',
     '/academics'        => 'Academics',
+    '/announcements'    => 'Announcements',
     '/admissions'       => 'Admissions',
     '/events'           => 'Events',
     '/student-life'     => 'Student Life',

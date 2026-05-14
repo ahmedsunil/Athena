@@ -1,0 +1,91 @@
+<h2>Staff Detail — How shown?</h2>
+<p class="subtitle">When you click a staff card, how do their full details appear?</p>
+
+<div class="cards">
+
+  <!-- Option A: Inline expand -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:16px;font-family:sans-serif">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="background:#e2e8f0;color:#475569;padding:7px 12px;border-radius:8px;font-size:10px;font-weight:700">▶ ACADEMIC SECTION — 12 members</div>
+        <!-- expanded sub-group -->
+        <div style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden">
+          <div style="background:#f1f5f9;padding:6px 12px;font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em">Leading Teachers</div>
+          <!-- normal card -->
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f1f5f9">
+            <div style="width:28px;height:28px;border-radius:50%;background:#bae6fd;flex-shrink:0"></div>
+            <div style="flex:1"><div style="font-size:9px;font-weight:700;color:#0f172a">Ahmed Ali</div><div style="font-size:8px;color:#94a3b8">Head of Mathematics</div></div>
+            <div style="font-size:8px;color:#94a3b8">▼</div>
+          </div>
+          <!-- expanded card inline -->
+          <div style="background:#eff6ff;border-top:2px solid #3b82f6;padding:10px 12px">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div style="width:40px;height:40px;border-radius:50%;background:#bae6fd;flex-shrink:0"></div>
+              <div>
+                <div style="font-size:11px;font-weight:800;color:#0f172a">Ahmed Ali</div>
+                <div style="font-size:9px;color:#3b82f6;font-weight:600">Head of Mathematics</div>
+                <div style="font-size:8px;color:#64748b;margin-top:2px">B.Sc Mathematics · M.Ed Curriculum</div>
+              </div>
+            </div>
+            <div style="font-size:8px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Experience</div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div style="background:#fff;border-radius:4px;padding:4px 6px">
+                <div style="font-size:8px;font-weight:600;color:#0f172a">Senior Teacher — Hulhudhuffaaru School</div>
+                <div style="font-size:7px;color:#94a3b8">2018 – Present</div>
+              </div>
+              <div style="background:#fff;border-radius:4px;padding:4px 6px">
+                <div style="font-size:8px;font-weight:600;color:#0f172a">Teacher — Raa Atoll Education Centre</div>
+                <div style="font-size:7px;color:#94a3b8">2014 – 2018</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Inline Expand</h3>
+      <p>Card expands in-place below the row. No overlay. Stays on the same page. Simple and accessible.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Modal -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:16px;font-family:sans-serif;position:relative;min-height:160px">
+      <!-- dimmed background -->
+      <div style="opacity:.4;display:flex;flex-direction:column;gap:5px">
+        <div style="background:#e2e8f0;padding:7px 12px;border-radius:8px;font-size:10px;color:#475569;font-weight:700">▶ ACADEMIC SECTION</div>
+        <div style="background:#e2e8f0;padding:7px 12px;border-radius:8px;font-size:10px;color:#475569;font-weight:700">▶ ADMIN SECTION</div>
+      </div>
+      <!-- modal overlay -->
+      <div style="position:absolute;inset:8px;background:#fff;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,.18);padding:12px;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:44px;height:44px;border-radius:50%;background:#bae6fd;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="font-size:11px;font-weight:800;color:#0f172a">Ahmed Ali</div>
+            <div style="font-size:9px;color:#3b82f6;font-weight:600">Head of Mathematics</div>
+            <div style="font-size:8px;color:#64748b">B.Sc Mathematics · M.Ed Curriculum</div>
+          </div>
+          <div style="font-size:12px;color:#94a3b8;cursor:pointer">✕</div>
+        </div>
+        <div style="border-top:1px solid #f1f5f9;padding-top:6px">
+          <div style="font-size:8px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Work Experience</div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div style="background:#f8fafc;border-radius:4px;padding:4px 6px">
+              <div style="font-size:8px;font-weight:600;color:#0f172a">Senior Teacher — Hulhudhuffaaru School</div>
+              <div style="font-size:7px;color:#94a3b8">2018 – Present</div>
+            </div>
+            <div style="background:#f8fafc;border-radius:4px;padding:4px 6px">
+              <div style="font-size:8px;font-weight:600;color:#0f172a">Teacher — Raa Atoll Education Centre</div>
+              <div style="font-size:7px;color:#94a3b8">2014 – 2018</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Modal Popup</h3>
+      <p>Clicking a staff card opens a centered modal with full details. Background dimmed. Dismisses with ✕ or ESC.</p>
+    </div>
+  </div>
+
+</div>

@@ -11,8 +11,7 @@
         [
             'label' => 'Manage',
             'items' => [
-                // Add your resource routes here
-                // ['label' => 'Orders', 'route' => 'orders', 'href' => route('orders.index'), 'icon' => 'orders'],
+                ['label' => 'Announcements', 'route' => 'cms.announcements', 'href' => route('cms.announcements.index'), 'icon' => 'announcements'],
             ],
         ],
     ];
