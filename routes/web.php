@@ -39,6 +39,8 @@ use App\Livewire\Cms\StudentLife\PrefectsIndex;
 use App\Livewire\Cms\StudentLife\HousesIndex;
 use App\Livewire\Cms\StudentLife\UniformBodiesIndex;
 use App\Livewire\Website\StudentLife;
+use App\Livewire\Cms\Gallery\GalleryIndex;
+use App\Livewire\Website\Gallery;
 use Illuminate\Support\Facades\Route;
 
 // Protected routes
@@ -94,6 +96,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/student-life/houses',         HousesIndex::class)->name('cms.student-life.houses');
     Route::get('/cms/student-life/uniform-bodies', UniformBodiesIndex::class)->name('cms.student-life.uniform-bodies');
 
+    // CMS — gallery module
+    Route::get('/cms/gallery', GalleryIndex::class)->name('cms.gallery.index');
+
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
@@ -113,7 +118,7 @@ Route::get('/events', Events::class)->name('events.index');
 Route::get('/events/{slug}', EventShow::class)->name('events.show');
 Route::get('/academics', Academics::class)->name('academics.index');
 Route::get('/student-life', StudentLife::class)->name('student-life.index');
-Route::get('/gallery', fn () => 'Gallery')->name('gallery');
+Route::get('/gallery', Gallery::class)->name('gallery.index');
 Route::get('/downloads', fn () => 'Downloads')->name('downloads');
 Route::get('/digital-services', fn () => 'Digital Services')->name('digital-services');
 Route::get('/admissions', fn () => 'Admissions')->name('admissions');
