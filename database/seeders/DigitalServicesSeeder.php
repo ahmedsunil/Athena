@@ -56,25 +56,61 @@ class DigitalServicesSeeder extends Seeder
             );
         }
 
+        // Replace all calendar entries with Ministry of Education Academic Calendar 2026 (TENTATIVE 10.08.2025)
+        DigitalServiceCalendarEntry::truncate();
+
         $calendarEntries = [
-            ['title' => 'Second Term Begins', 'date' => '2025-01-06', 'end_date' => null, 'type' => 'term', 'description' => 'Students resume for the second term of the 2024/2025 academic session.', 'sort_order' => 1],
-            ['title' => 'Mock WAEC Examinations', 'date' => '2025-01-20', 'end_date' => '2025-01-31', 'type' => 'exam', 'description' => 'Internal mock examinations for SSS 3 students in preparation for WAEC.', 'sort_order' => 2],
-            ['title' => 'Mid-Term Break', 'date' => '2025-02-21', 'end_date' => '2025-02-28', 'type' => 'holiday', 'description' => 'One-week mid-term break for all students.', 'sort_order' => 3],
-            ['title' => 'Parents\' Visiting Day', 'date' => '2025-03-08', 'end_date' => null, 'type' => 'event', 'description' => 'Annual parents\' day — parents are invited to meet teachers and review progress reports.', 'sort_order' => 4],
-            ['title' => 'Second Term Examinations', 'date' => '2025-03-17', 'end_date' => '2025-03-28', 'type' => 'exam', 'description' => 'End-of-term examinations for all classes.', 'sort_order' => 5],
-            ['title' => 'Second Term Ends', 'date' => '2025-04-04', 'end_date' => null, 'type' => 'term', 'description' => 'Last day of the second term. Long vacation begins.', 'sort_order' => 6],
-            ['title' => 'Third Term Begins', 'date' => '2025-04-28', 'end_date' => null, 'type' => 'term', 'description' => 'Students resume for the third and final term of the 2024/2025 session.', 'sort_order' => 7],
-            ['title' => 'WAEC/NECO Examinations Begin', 'date' => '2025-05-05', 'end_date' => '2025-06-20', 'type' => 'exam', 'description' => 'West African Senior School Certificate Examination (WASSCE) for SSS 3 students.', 'sort_order' => 8],
-            ['title' => 'Annual Sports Day', 'date' => '2025-05-16', 'end_date' => null, 'type' => 'event', 'description' => 'Inter-house sports competition held on the school field. All students participate.', 'sort_order' => 9],
-            ['title' => 'Graduation & Prize Giving Ceremony', 'date' => '2025-06-27', 'end_date' => null, 'type' => 'event', 'description' => 'Annual graduation ceremony for the SSS 3 graduating class.', 'sort_order' => 10],
-            ['title' => 'Third Term Ends — Long Vacation', 'date' => '2025-07-18', 'end_date' => null, 'type' => 'term', 'description' => 'End of the 2024/2025 academic session. Long vacation begins.', 'sort_order' => 11],
+            // January
+            ['title' => 'New Year 2026',                          'date' => '2026-01-01', 'end_date' => null,         'type' => 'holiday', 'description' => 'Public holiday.',                                                                        'sort_order' => 1],
+            ['title' => 'Teachers\' Reporting Day',               'date' => '2026-01-25', 'end_date' => null,         'type' => 'event',   'description' => 'Teachers report for the start of the 2026 academic year.',                                 'sort_order' => 2],
+            ['title' => 'Beginning of Academic Year 2026',        'date' => '2026-01-27', 'end_date' => null,         'type' => 'term',    'description' => 'First day of Term 1, Academic Year 2026.',                                                'sort_order' => 3],
+            // February
+            ['title' => 'First of Ramadan',                       'date' => '2026-02-18', 'end_date' => null,         'type' => 'holiday', 'description' => 'First day of the holy month of Ramadan.',                                                 'sort_order' => 4],
+            // March
+            ['title' => 'Professional Development Days',          'date' => '2026-03-01', 'end_date' => '2026-03-08', 'type' => 'event',   'description' => 'School-wide professional development days for teaching staff.',                           'sort_order' => 5],
+            ['title' => 'Last 10 Days of Ramadan',                'date' => '2026-03-09', 'end_date' => '2026-03-19', 'type' => 'holiday', 'description' => 'School closed for the last 10 days of Ramadan.',                                          'sort_order' => 6],
+            ['title' => 'Eid-al-Fitr',                            'date' => '2026-03-20', 'end_date' => null,         'type' => 'holiday', 'description' => 'Eid-al-Fitr public holiday.',                                                             'sort_order' => 7],
+            ['title' => 'Eid-al-Fitr Holiday',                    'date' => '2026-03-21', 'end_date' => '2026-03-22', 'type' => 'holiday', 'description' => 'School closed on the occasion of Eid-al-Fitr.',                                           'sort_order' => 8],
+            // May
+            ['title' => 'Labour Day',                             'date' => '2026-05-01', 'end_date' => null,         'type' => 'holiday', 'description' => 'International Labour Day — public holiday.',                                              'sort_order' => 9],
+            ['title' => 'Children\'s Day',                        'date' => '2026-05-10', 'end_date' => null,         'type' => 'event',   'description' => 'Children\'s Day — half-day of teaching.',                                                'sort_order' => 10],
+            ['title' => 'School Transfer Period 1',                'date' => '2026-05-17', 'end_date' => '2026-06-15', 'type' => 'event',   'description' => 'First school transfer period of the academic year.',                                      'sort_order' => 11],
+            ['title' => 'First Term Mid-Break',                   'date' => '2026-05-24', 'end_date' => '2026-05-30', 'type' => 'holiday', 'description' => 'One-week mid-term break for Term 1.',                                                      'sort_order' => 12],
+            ['title' => 'Hajj Day',                               'date' => '2026-05-26', 'end_date' => null,         'type' => 'holiday', 'description' => 'Hajj Day — public holiday.',                                                              'sort_order' => 13],
+            ['title' => 'Eid-al-Adha',                            'date' => '2026-05-27', 'end_date' => null,         'type' => 'holiday', 'description' => 'Eid-al-Adha public holiday.',                                                             'sort_order' => 14],
+            ['title' => 'Eid-al-Adha Holiday',                    'date' => '2026-05-28', 'end_date' => '2026-05-30', 'type' => 'holiday', 'description' => 'School closed on the occasion of Eid-al-Adha.',                                           'sort_order' => 15],
+            // June
+            ['title' => 'Beginning of AL Batch 2026',             'date' => '2026-06-07', 'end_date' => null,         'type' => 'event',   'description' => 'Advanced Level (AL) Batch 2026 begins their studies.',                                    'sort_order' => 16],
+            ['title' => 'Islamic New Year 1448',                  'date' => '2026-06-16', 'end_date' => null,         'type' => 'holiday', 'description' => 'Islamic New Year 1448 — public holiday.',                                                 'sort_order' => 17],
+            // July
+            ['title' => 'First Term Examinations',                'date' => '2026-06-30', 'end_date' => '2026-07-09', 'type' => 'exam',    'description' => 'End-of-term examinations for all classes — Term 1, Academic Year 2026.',                  'sort_order' => 18],
+            ['title' => 'End of First Term 2026',                 'date' => '2026-07-16', 'end_date' => null,         'type' => 'term',    'description' => 'Last day of Term 1, Academic Year 2026.',                                                 'sort_order' => 19],
+            ['title' => 'First Term Holidays',                    'date' => '2026-07-17', 'end_date' => '2026-08-01', 'type' => 'holiday', 'description' => 'Term 1 vacation — 16 days.',                                                              'sort_order' => 20],
+            ['title' => 'Independence Day',                       'date' => '2026-07-26', 'end_date' => null,         'type' => 'holiday', 'description' => 'Independence Day of the Republic of Maldives — public holiday.',                          'sort_order' => 21],
+            ['title' => 'Independence Day Holiday',               'date' => '2026-07-27', 'end_date' => null,         'type' => 'holiday', 'description' => 'Public holiday on the occasion of Independence Day.',                                      'sort_order' => 22],
+            // August
+            ['title' => 'Beginning of Second Term 2026',          'date' => '2026-08-02', 'end_date' => null,         'type' => 'term',    'description' => 'First day of Term 2, Academic Year 2026.',                                                'sort_order' => 23],
+            ['title' => 'National Day',                           'date' => '2026-08-14', 'end_date' => null,         'type' => 'holiday', 'description' => 'National Day — public holiday.',                                                          'sort_order' => 24],
+            ['title' => 'Camps and Activities (KS1–KS4)',         'date' => '2026-08-22', 'end_date' => '2026-08-25', 'type' => 'event',   'description' => 'School camps and extracurricular activities for Key Stage 1 to Key Stage 4 students.',   'sort_order' => 25],
+            ['title' => 'Prophet Muhammad\'s (ﷺ) Birthday',      'date' => '2026-08-25', 'end_date' => null,         'type' => 'holiday', 'description' => 'Prophet Muhammad\'s (ﷺ) Birthday — public holiday.',                                     'sort_order' => 26],
+            // September
+            ['title' => 'Second Term Mid-Break',                  'date' => '2026-09-13', 'end_date' => '2026-09-19', 'type' => 'holiday', 'description' => 'One-week mid-term break for Term 2.',                                                     'sort_order' => 27],
+            ['title' => 'The Day Maldives Embraced Islam',        'date' => '2026-09-13', 'end_date' => null,         'type' => 'holiday', 'description' => 'Public holiday celebrating the day Maldives embraced Islam.',                              'sort_order' => 28],
+            // October
+            ['title' => 'Teachers\' Day',                         'date' => '2026-10-05', 'end_date' => null,         'type' => 'event',   'description' => 'Teachers\' Day — half-day of teaching.',                                                 'sort_order' => 29],
+            ['title' => 'School Transfer Period 2',               'date' => '2026-10-18', 'end_date' => '2026-11-17', 'type' => 'event',   'description' => 'Second school transfer period of the academic year.',                                     'sort_order' => 30],
+            // November
+            ['title' => 'Victory Day',                            'date' => '2026-11-03', 'end_date' => null,         'type' => 'holiday', 'description' => 'Victory Day — public holiday.',                                                           'sort_order' => 31],
+            ['title' => 'Republic Day',                           'date' => '2026-11-11', 'end_date' => null,         'type' => 'holiday', 'description' => 'Republic Day — public holiday.',                                                          'sort_order' => 32],
+            ['title' => 'Professional Development Day',           'date' => '2026-11-12', 'end_date' => null,         'type' => 'event',   'description' => 'Professional development day for teaching staff.',                                         'sort_order' => 33],
+            // December
+            ['title' => 'Second Term Examinations',               'date' => '2026-12-01', 'end_date' => '2026-12-10', 'type' => 'exam',    'description' => 'End-of-term examinations for all classes — Term 2, Academic Year 2026.',                  'sort_order' => 34],
+            ['title' => 'End of Second Term 2026',                'date' => '2026-12-17', 'end_date' => null,         'type' => 'term',    'description' => 'Last day of Term 2, Academic Year 2026.',                                                 'sort_order' => 35],
+            ['title' => 'Second Term Holidays',                   'date' => '2026-12-18', 'end_date' => '2027-01-12', 'type' => 'holiday', 'description' => 'Term 2 vacation — 26 days.',                                                              'sort_order' => 36],
         ];
 
         foreach ($calendarEntries as $data) {
-            DigitalServiceCalendarEntry::updateOrCreate(
-                ['title' => $data['title'], 'date' => $data['date']],
-                array_merge($data, ['is_active' => true])
-            );
+            DigitalServiceCalendarEntry::create(array_merge($data, ['is_active' => true]));
         }
     }
 }
