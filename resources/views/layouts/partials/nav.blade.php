@@ -22,7 +22,7 @@
           <button id="lang-en" onclick="setLang('en')" class="px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'en' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 hover:bg-slate-50' }}">EN</button>
           <button id="lang-dv" onclick="setLang('dv')" class="px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'dv' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 hover:bg-slate-50' }}">DV</button>
         </div>
-        <button class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
+        <button onclick="window.dispatchEvent(new CustomEvent('open-search'))" class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
         </button>
         <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600">

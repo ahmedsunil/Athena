@@ -74,6 +74,7 @@
 </head>
 <body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen pt-16">
 @include('layouts.partials.nav')
+@livewire('website.search')
 
 <main class="flex-1">
     {{ $slot }}
