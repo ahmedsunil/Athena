@@ -19,7 +19,7 @@ class StaffIndex extends Component
     public int     $sortOrder   = 0;
     public bool    $isActive    = true;
     public         $photo       = null;
-    public ?string $existingPhotoPath = null;
+    public ?string $existing_photo = null;
     public bool    $photoRemoved = false;
     public ?int    $editingId   = null;
     public array   $workExperiences = [];
@@ -58,13 +58,13 @@ class StaffIndex extends Component
         ];
 
         if ($this->photo) {
-            if ($this->existingPhotoPath) {
-                Storage::disk('public')->delete($this->existingPhotoPath);
+            if ($this->existing_photo) {
+                Storage::disk('public')->delete($this->existing_photo);
             }
             $data['photo_path'] = $this->photo->store('staff-photos', 'public');
         } elseif ($this->photoRemoved) {
-            if ($this->existingPhotoPath) {
-                Storage::disk('public')->delete($this->existingPhotoPath);
+            if ($this->existing_photo) {
+                Storage::disk('public')->delete($this->existing_photo);
             }
             $data['photo_path'] = null;
         }
@@ -91,7 +91,7 @@ class StaffIndex extends Component
         $this->subSection        = $item->sub_section ?? '';
         $this->sortOrder         = $item->sort_order;
         $this->isActive          = $item->is_active;
-        $this->existingPhotoPath = $item->photo_path;
+        $this->existing_photo = $item->photo_path;
         $this->photoRemoved      = false;
         $this->photo             = null;
         $this->workExperiences   = $item->work_experiences ?? [];
@@ -110,7 +110,7 @@ class StaffIndex extends Component
     public function removePhoto(): void
     {
         $this->photo             = null;
-        $this->existingPhotoPath = null;
+        $this->existing_photo = null;
         $this->photoRemoved      = true;
     }
 
@@ -139,7 +139,7 @@ class StaffIndex extends Component
     {
         $this->reset([
             'name', 'designation', 'education', 'subSection',
-            'sortOrder', 'photo', 'existingPhotoPath', 'photoRemoved',
+            'sortOrder', 'photo', 'existing_photo', 'photoRemoved',
             'editingId', 'workExperiences',
         ]);
         $this->section   = 'academic';
