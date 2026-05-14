@@ -15,6 +15,14 @@ class CalendarEntriesIndex extends Component
     #[Url]
     public ?int $calendarId = null;
 
+    public string $calendarTitle = '';
+    public int $calendarYear = 2026;
+    public string $calendarDescription = '';
+    public int $calendarSortOrder = 0;
+    public bool $calendarIsActive = false;
+    public ?int $calendarEditingId = null;
+    public bool $showCalendarForm = false;
+
     public string $title = '';
     public string $date = '';
     public string $end_date = '';
@@ -23,22 +31,105 @@ class CalendarEntriesIndex extends Component
     public int $sort_order = 0;
     public bool $is_active = true;
     public ?int $editingId = null;
+    public bool $showEntryForm = false;
 
     public array $types = ['event', 'term', 'holiday', 'exam'];
 
-    public function mount(): void
+    public function selectCalendar(int $id): void
     {
-        if ($this->calendarId === null) {
-            $active = DigitalServiceCalendar::where('is_active', true)->first()
-                   ?? DigitalServiceCalendar::orderBy('year', 'desc')->first();
-            $this->calendarId = $active?->id;
-        }
+        $this->calendarId = $id;
+        $this->showCalendarForm = false;
+        $this->resetCalendarForm();
+        $this->resetForm();
+        $this->resetPage();
     }
 
-    public function updatedCalendarId(): void
+    public function backToCalendars(): void
     {
-        $this->resetPage();
+        $this->calendarId = null;
+        $this->showEntryForm = false;
         $this->resetForm();
+        $this->resetPage();
+    }
+
+    public function newCalendar(): void
+    {
+        $this->resetCalendarForm();
+        $this->showCalendarForm = true;
+    }
+
+    public function editCalendar(int $id): void
+    {
+        $calendar = DigitalServiceCalendar::findOrFail($id);
+
+        $this->calendarEditingId = $calendar->id;
+        $this->calendarTitle = $calendar->title;
+        $this->calendarYear = $calendar->year ?? (int) date('Y');
+        $this->calendarDescription = $calendar->description ?? '';
+        $this->calendarSortOrder = $calendar->sort_order;
+        $this->calendarIsActive = $calendar->is_active;
+        $this->showCalendarForm = true;
+    }
+
+    public function saveCalendar(): void
+    {
+        $this->validate($this->calendarRules());
+
+        if ($this->calendarIsActive) {
+            DigitalServiceCalendar::where('id', '!=', $this->calendarEditingId ?? 0)->update(['is_active' => false]);
+        }
+
+        $data = [
+            'title' => $this->calendarTitle,
+            'year' => $this->calendarYear,
+            'description' => $this->calendarDescription ?: null,
+            'sort_order' => $this->calendarSortOrder,
+            'is_active' => $this->calendarIsActive,
+        ];
+
+        if ($this->calendarEditingId) {
+            DigitalServiceCalendar::findOrFail($this->calendarEditingId)->update($data);
+            $this->dispatch('toast', message: 'Calendar updated.');
+        } else {
+            $calendar = DigitalServiceCalendar::create($data);
+            $this->calendarId = $calendar->id;
+            $this->dispatch('toast', message: 'Calendar added.');
+        }
+
+        $this->resetCalendarForm();
+    }
+
+    public function deleteCalendar(int $id): void
+    {
+        DigitalServiceCalendar::findOrFail($id)->delete();
+
+        if ($this->calendarId === $id) {
+            $this->backToCalendars();
+        }
+
+        $this->dispatch('toast', message: 'Calendar deleted.');
+    }
+
+    public function cancelCalendar(): void
+    {
+        $this->resetCalendarForm();
+    }
+
+    public function newEntry(): void
+    {
+        $this->resetForm();
+        $this->showEntryForm = true;
+    }
+
+    protected function calendarRules(): array
+    {
+        return [
+            'calendarTitle'       => ['required', 'string', 'max:255'],
+            'calendarYear'        => ['required', 'integer', 'min:2000', 'max:2100'],
+            'calendarDescription' => ['nullable', 'string'],
+            'calendarSortOrder'   => ['integer', 'min:0'],
+            'calendarIsActive'    => ['boolean'],
+        ];
     }
 
     protected function rules(): array
@@ -56,6 +147,11 @@ class CalendarEntriesIndex extends Component
 
     public function save(): void
     {
+        if (! $this->calendarId) {
+            $this->addError('calendarId', 'Select a calendar before adding entries.');
+            return;
+        }
+
         $this->validate();
 
         $data = [
@@ -91,6 +187,7 @@ class CalendarEntriesIndex extends Component
         $this->description = $entry->description ?? '';
         $this->sort_order  = $entry->sort_order;
         $this->is_active   = $entry->is_active;
+        $this->showEntryForm = true;
     }
 
     public function delete(int $id): void
@@ -110,11 +207,21 @@ class CalendarEntriesIndex extends Component
         $this->type       = 'event';
         $this->is_active  = true;
         $this->sort_order = 0;
+        $this->showEntryForm = false;
+    }
+
+    private function resetCalendarForm(): void
+    {
+        $this->reset(['calendarTitle', 'calendarDescription', 'calendarEditingId']);
+        $this->calendarYear = (int) date('Y');
+        $this->calendarSortOrder = 0;
+        $this->calendarIsActive = false;
+        $this->showCalendarForm = false;
     }
 
     public function render()
     {
-        $calendars = DigitalServiceCalendar::orderBy('year', 'desc')->get();
+        $calendars = DigitalServiceCalendar::withCount('entries')->orderBy('sort_order')->orderBy('year', 'desc')->get();
         $currentCalendar = $this->calendarId
             ? DigitalServiceCalendar::find($this->calendarId)
             : null;
@@ -123,7 +230,7 @@ class CalendarEntriesIndex extends Component
             ? DigitalServiceCalendarEntry::where('calendar_id', $this->calendarId)
                 ->orderBy('date')->orderBy('id')
                 ->paginate(15)
-            : collect()->paginate(15);
+            : DigitalServiceCalendarEntry::whereRaw('1 = 0')->paginate(15);
 
         return view('livewire.cms.digital-services.calendar-entries-index', [
             'calendars'       => $calendars,

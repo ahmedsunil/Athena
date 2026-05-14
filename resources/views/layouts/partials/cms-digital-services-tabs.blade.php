@@ -3,8 +3,7 @@
     $digitalServicesTabs = [
         ['label' => 'Documents',         'route' => 'cms.digital-services.documents',  'href' => route('cms.digital-services.documents')],
         ['label' => 'Resources',         'route' => 'cms.digital-services.resources',  'href' => route('cms.digital-services.resources')],
-        ['label' => 'Academic Calendar', 'route' => 'cms.digital-services.calendar',   'href' => route('cms.digital-services.calendar')],
-        ['label' => 'Calendars',         'route' => 'cms.digital-services.calendars',  'href' => route('cms.digital-services.calendars')],
+        ['label' => 'Calendar',          'route' => 'cms.digital-services.calendar',   'href' => route('cms.digital-services.calendar')],
     ];
 @endphp
 
