@@ -10,8 +10,8 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        {{-- Category pills --}}
-        <div class="flex flex-wrap items-center gap-2 mb-4">
+        {{-- Filters row: category pills + selects + clear --}}
+        <div class="flex flex-wrap items-center gap-2 mb-8">
             <button wire:click="setCategory('All')"
                     class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                            {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
@@ -24,14 +24,7 @@
                     {{ $cat }}
                 </button>
             @endforeach
-        </div>
-
-        {{-- Year / month selects + result count + clear --}}
-        <div class="flex flex-wrap items-center gap-2 mb-8">
-            @if($albums->count() < $total)
-                <span class="text-xs text-slate-400">{{ $albums->count() }} album{{ $albums->count() !== 1 ? 's' : '' }}</span>
-            @endif
-            <div class="ml-auto flex items-center gap-2 flex-wrap">
+            <div class="ml-auto flex items-center gap-2">
                 <select wire:model.live="activeMonth"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
                     <option value="All">All Months</option>
