@@ -6,10 +6,12 @@ use App\Models\StudentLifeClub;
 use App\Models\StudentLifeHouse;
 use App\Models\StudentLifePrefect;
 use App\Models\StudentLifeUniformBody;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class StudentLife extends Component
 {
+    #[Url]
     public string $activeTab = 'clubs';
 
     public function setTab(string $tab): void
