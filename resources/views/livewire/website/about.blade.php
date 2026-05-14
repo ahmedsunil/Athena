@@ -26,6 +26,10 @@
                     wire:click="switchTab('achievements')"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'achievements' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
                 >Achievements</button>
+                <button
+                    wire:click="switchTab('team')"
+                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'team' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
+                >Team</button>
             </div>
         </div>
     </div>
@@ -397,6 +401,117 @@
                 @endif
 
             </div>
+        @endif
+
+        {{-- ===================== TAB: TEAM ===================== --}}
+        @if($activeTab === 'team')
+        <div class="py-12 sm:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+
+                {{-- Senior Management --}}
+                @php $seniorStaff = $staff->get('senior_management', collect()); @endphp
+                <div class="bg-white rounded-2xl border border-rose-200 overflow-hidden" data-reveal="scale">
+                    <div class="px-6 py-4 border-b border-rose-100 bg-rose-50">
+                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Leadership</p>
+                        <h2 class="text-xl font-black text-slate-900 mt-0.5">Senior Management Team</h2>
+                    </div>
+                    <div class="p-6">
+                        @if($seniorStaff->isEmpty())
+                            <p class="text-sm text-slate-400">No members added yet.</p>
+                        @else
+                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                @foreach($seniorStaff as $member)
+                                    @include('livewire.website.partials.staff-card', ['member' => $member, 'accentColor' => 'rose'])
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Academic Section --}}
+                @php
+                    $academicStaff = $staff->get('academic', collect())->groupBy('sub_section');
+                    $academicSubSections = [
+                        'leading_teachers' => 'Leading Teachers',
+                        'teachers'         => 'Teachers',
+                        'academic_support' => 'Academic Support Staff',
+                        'laboratory'       => 'Laboratory',
+                        'library'          => 'Library',
+                    ];
+                @endphp
+                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-sky-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-sky-100 bg-sky-50 hover:bg-sky-100 transition-colors">
+                        <div class="text-left">
+                            <p class="text-xs font-bold uppercase tracking-widest text-sky-600">Section</p>
+                            <h2 class="text-xl font-black text-slate-900 mt-0.5">Academic Section</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Principal as Team Lead</p>
+                        </div>
+                        <svg class="w-5 h-5 text-sky-400 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="p-6 space-y-8">
+                        @forelse($academicSubSections as $key => $label)
+                            @php $group = $academicStaff->get($key, collect()); @endphp
+                            @if($group->isNotEmpty())
+                                @php $isNested = in_array($key, ['laboratory', 'library']); @endphp
+                                <div class="{{ $isNested ? 'ml-6 pl-4 border-l-2 border-sky-100' : '' }}">
+                                    <p class="text-xs font-bold uppercase tracking-widest text-sky-500 mb-4">{{ $label }}</p>
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                        @foreach($group as $member)
+                                            @include('livewire.website.partials.staff-card', ['member' => $member, 'accentColor' => 'sky'])
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        @empty
+                            <p class="text-sm text-slate-400">No academic staff added yet.</p>
+                        @endforelse
+                    </div>
+                </div>
+
+                {{-- Administrative Section --}}
+                @php
+                    $adminStaff = $staff->get('administrative', collect())->groupBy('sub_section');
+                    $adminSubSections = [
+                        'hr'      => 'Human Resources',
+                        'budget'  => 'Budget',
+                        'it'      => 'IT',
+                        'printer' => 'Printing',
+                    ];
+                @endphp
+                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-amber-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-amber-100 bg-amber-50 hover:bg-amber-100 transition-colors">
+                        <div class="text-left">
+                            <p class="text-xs font-bold uppercase tracking-widest text-amber-600">Section</p>
+                            <h2 class="text-xl font-black text-slate-900 mt-0.5">Administrative Section</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Administrator as Team Lead</p>
+                        </div>
+                        <svg class="w-5 h-5 text-amber-400 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="p-6 space-y-8">
+                        @forelse($adminSubSections as $key => $label)
+                            @php $group = $adminStaff->get($key, collect()); @endphp
+                            @if($group->isNotEmpty())
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4">{{ $label }}</p>
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                        @foreach($group as $member)
+                                            @include('livewire.website.partials.staff-card', ['member' => $member, 'accentColor' => 'amber'])
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        @empty
+                            <p class="text-sm text-slate-400">No administrative staff added yet.</p>
+                        @endforelse
+                    </div>
+                </div>
+
+            </div>
+        </div>
         @endif
 
     </div>

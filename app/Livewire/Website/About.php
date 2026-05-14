@@ -8,6 +8,7 @@ use App\Models\HistorySection;
 use App\Models\LeadershipMember;
 use App\Models\Mission;
 use App\Models\SchoolProfile;
+use App\Models\StaffMember;
 use Livewire\Component;
 
 class About extends Component
@@ -53,6 +54,12 @@ class About extends Component
         $studentCount = Achievement::where('is_active', true)->where('category', 'students')->count();
         $schoolCount  = Achievement::where('is_active', true)->where('category', 'school')->count();
 
+        $staff = StaffMember::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get()
+            ->groupBy('section');
+
         return view('livewire.website.about', [
             'profile'          => $profile,
             'mission'          => $mission,
@@ -64,6 +71,7 @@ class About extends Component
             'totalCount'       => $totalCount,
             'studentCount'     => $studentCount,
             'schoolCount'      => $schoolCount,
+            'staff'            => $staff,
         ])->layout('layouts.web', ['title' => 'About']);
     }
 }
