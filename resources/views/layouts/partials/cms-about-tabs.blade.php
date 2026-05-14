@@ -6,6 +6,7 @@
         ['label' => 'Founding Teachers',  'route' => 'cms.about.founding-members',   'href' => route('cms.about.founding-members')],
         ['label' => 'History',            'route' => 'cms.about.history',            'href' => route('cms.about.history')],
         ['label' => 'Achievements',       'route' => 'cms.about.achievements',       'href' => route('cms.about.achievements')],
+        ['label' => 'Team',               'route' => 'cms.about.team',               'href' => route('cms.about.team')],
     ];
 @endphp
 

@@ -33,6 +33,7 @@ use App\Livewire\Cms\About\LeadershipIndex;
 use App\Livewire\Cms\About\FoundingMembersIndex;
 use App\Livewire\Cms\About\HistorySectionsIndex;
 use App\Livewire\Cms\About\AchievementsIndex;
+use App\Livewire\Cms\About\StaffIndex;
 use App\Livewire\Website\About;
 use App\Livewire\Cms\Academics\AcademicsOverviewEdit;
 use App\Livewire\Cms\Academics\AcademicLevelsIndex;
@@ -50,72 +51,72 @@ use App\Livewire\Cms\DigitalServices\CalendarEntriesIndex;
 use App\Livewire\Website\DigitalServices;
 use Illuminate\Support\Facades\Route;
 
-// Protected routes
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    // User management
-    Route::get('/users', UsersList::class)->name('users.index');
-    Route::get('/users/create', UserForm::class)->name('users.create');
-    Route::get('/users/{userId}', UserShow::class)->whereNumber('userId')->name('users.show');
-    Route::get('/users/{userId}/edit', UserForm::class)->name('users.edit');
-    // Roles management
-    Route::get('/roles', RolesList::class)->name('roles.index');
-    Route::get('/roles/create', RoleForm::class)->name('roles.create');
-    Route::get('/roles/{roleId}', RoleShow::class)->whereNumber('roleId')->name('roles.show');
-    Route::get('/roles/{roleId}/edit', RoleForm::class)->name('roles.edit');
-
-    // App Management
-    Route::get('/app/activity', ActivityLog::class)->name('app.activity');
-    Route::get('/app/activity/{activityId}', ActivityLogShow::class)
-        ->whereNumber('activityId')
-        ->name('app.activity.show');
-    Route::get('/app/settings', SystemSettings::class)->name('app.settings');
-
-    // CMS — config registries
-    Route::get('/cms/links', LinksIndex::class)->name('cms.links.index');
-    Route::get('/cms/icons', IconsIndex::class)->name('cms.icons.index');
-
-    // CMS — content modules
-    Route::get('/cms/school-profile', SchoolProfileEdit::class)->name('cms.school-profile');
-    Route::get('/cms/footer-links', FooterLinksIndex::class)->name('cms.footer-links');
-    Route::get('/cms/home/slides', HomeSlidesIndex::class)->name('cms.home.slides');
-    Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
-    Route::get('/cms/home/quick-access', HomeQuickAccessIndex::class)->name('cms.home.quick-access');
-    Route::get('/cms/home/testimonials', HomeTestimonialsIndex::class)->name('cms.home.testimonials');
-    Route::get('/cms/announcements', AnnouncementsIndex::class)->name('cms.announcements.index');
-
-    // CMS — about module
-    Route::get('/cms/about/mission', MissionEdit::class)->name('cms.about.mission');
-    Route::get('/cms/about/leadership', LeadershipIndex::class)->name('cms.about.leadership');
-    Route::get('/cms/about/founding-members', FoundingMembersIndex::class)->name('cms.about.founding-members');
-    Route::get('/cms/about/history', HistorySectionsIndex::class)->name('cms.about.history');
-    Route::get('/cms/about/achievements', AchievementsIndex::class)->name('cms.about.achievements');
-
-    // CMS — events module
-    Route::get('/cms/events', EventsIndex::class)->name('cms.events.index');
-
-    // CMS — academics module
-    Route::get('/cms/academics/overview', AcademicsOverviewEdit::class)->name('cms.academics.overview');
-    Route::get('/cms/academics/levels', AcademicLevelsIndex::class)->name('cms.academics.levels');
-
-    // CMS — student life module
-    Route::get('/cms/student-life/clubs',          ClubsIndex::class)->name('cms.student-life.clubs');
-    Route::get('/cms/student-life/prefects',       PrefectsIndex::class)->name('cms.student-life.prefects');
-    Route::get('/cms/student-life/houses',         HousesIndex::class)->name('cms.student-life.houses');
-    Route::get('/cms/student-life/uniform-bodies', UniformBodiesIndex::class)->name('cms.student-life.uniform-bodies');
-
-    // CMS — gallery module
-    Route::get('/cms/gallery', GalleryIndex::class)->name('cms.gallery.index');
-
-    // CMS — digital services module
-    Route::get('/cms/digital-services/documents',       DocumentsIndex::class)->name('cms.digital-services.documents');
-    Route::get('/cms/digital-services/resources',       ResourcesIndex::class)->name('cms.digital-services.resources');
-    Route::get('/cms/digital-services/calendar',        CalendarEntriesIndex::class)->name('cms.digital-services.calendar');
-    Route::redirect('/cms/digital-services/calendars',   '/cms/digital-services/calendar')->name('cms.digital-services.calendars');
-
-    // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
 
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/dashboard', Dashboard::class)->name('dashboard');
+        // User management
+        Route::get('/users', UsersList::class)->name('users.index');
+        Route::get('/users/create', UserForm::class)->name('users.create');
+        Route::get('/users/{userId}', UserShow::class)->whereNumber('userId')->name('users.show');
+        Route::get('/users/{userId}/edit', UserForm::class)->name('users.edit');
+        // Roles management
+        Route::get('/roles', RolesList::class)->name('roles.index');
+        Route::get('/roles/create', RoleForm::class)->name('roles.create');
+        Route::get('/roles/{roleId}', RoleShow::class)->whereNumber('roleId')->name('roles.show');
+        Route::get('/roles/{roleId}/edit', RoleForm::class)->name('roles.edit');
+
+        // App Management
+        Route::get('/app/activity', ActivityLog::class)->name('app.activity');
+        Route::get('/app/activity/{activityId}', ActivityLogShow::class)
+            ->whereNumber('activityId')
+            ->name('app.activity.show');
+        Route::get('/app/settings', SystemSettings::class)->name('app.settings');
+
+        // CMS — config registries
+        Route::get('/cms/links', LinksIndex::class)->name('cms.links.index');
+        Route::get('/cms/icons', IconsIndex::class)->name('cms.icons.index');
+
+        // CMS — content modules
+        Route::get('/cms/school-profile', SchoolProfileEdit::class)->name('cms.school-profile');
+        Route::get('/cms/footer-links', FooterLinksIndex::class)->name('cms.footer-links');
+        Route::get('/cms/home/slides', HomeSlidesIndex::class)->name('cms.home.slides');
+        Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
+        Route::get('/cms/home/quick-access', HomeQuickAccessIndex::class)->name('cms.home.quick-access');
+        Route::get('/cms/home/testimonials', HomeTestimonialsIndex::class)->name('cms.home.testimonials');
+        Route::get('/cms/announcements', AnnouncementsIndex::class)->name('cms.announcements.index');
+
+        // CMS — about module
+        Route::get('/cms/about/mission', MissionEdit::class)->name('cms.about.mission');
+        Route::get('/cms/about/leadership', LeadershipIndex::class)->name('cms.about.leadership');
+        Route::get('/cms/about/founding-members', FoundingMembersIndex::class)->name('cms.about.founding-members');
+        Route::get('/cms/about/history', HistorySectionsIndex::class)->name('cms.about.history');
+        Route::get('/cms/about/achievements', AchievementsIndex::class)->name('cms.about.achievements');
+        Route::get('/cms/about/team', StaffIndex::class)->name('cms.about.team');
+
+        // CMS — events module
+        Route::get('/cms/events', EventsIndex::class)->name('cms.events.index');
+
+        // CMS — academics module
+        Route::get('/cms/academics/overview', AcademicsOverviewEdit::class)->name('cms.academics.overview');
+        Route::get('/cms/academics/levels', AcademicLevelsIndex::class)->name('cms.academics.levels');
+
+        // CMS — student life module
+        Route::get('/cms/student-life/clubs',          ClubsIndex::class)->name('cms.student-life.clubs');
+        Route::get('/cms/student-life/prefects',       PrefectsIndex::class)->name('cms.student-life.prefects');
+        Route::get('/cms/student-life/houses',         HousesIndex::class)->name('cms.student-life.houses');
+        Route::get('/cms/student-life/uniform-bodies', UniformBodiesIndex::class)->name('cms.student-life.uniform-bodies');
+
+        // CMS — gallery module
+        Route::get('/cms/gallery', GalleryIndex::class)->name('cms.gallery.index');
+
+        // CMS — digital services module
+        Route::get('/cms/digital-services/documents',       DocumentsIndex::class)->name('cms.digital-services.documents');
+        Route::get('/cms/digital-services/resources',       ResourcesIndex::class)->name('cms.digital-services.resources');
+        Route::get('/cms/digital-services/calendar',        CalendarEntriesIndex::class)->name('cms.digital-services.calendar');
+        Route::redirect('/cms/digital-services/calendars',   '/cms/digital-services/calendar')->name('cms.digital-services.calendars');
+    });
 });
 
 // Locale
