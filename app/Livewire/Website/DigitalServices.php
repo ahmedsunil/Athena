@@ -205,7 +205,7 @@ class DigitalServices extends Component
             'documents', 'years', 'resources',
             'allCalendars', 'currentCalendar',
             'calendarMonthsArr', 'currentMonthCarbon',
-            'entriesByDate', 'stats'
+            'allCalendarEntries', 'entriesByDate', 'stats'
         ))->layout('layouts.web');
     }
 }

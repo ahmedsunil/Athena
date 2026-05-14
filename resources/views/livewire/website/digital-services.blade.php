@@ -220,141 +220,135 @@
             @php
                 $calTypeColors = [
                     'holiday' => 'bg-red-100 text-red-700',
-                    'term'    => 'bg-blue-100 text-blue-700',
+                    'term'    => 'bg-sky-100 text-sky-700',
                     'event'   => 'bg-emerald-100 text-emerald-700',
                     'exam'    => 'bg-amber-100 text-amber-700',
                 ];
             @endphp
 
-            {{-- Header --}}
-            <div class="mb-6">
-                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                    <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Ministry of Education</p>
-                        <div class="flex items-center gap-3 flex-wrap">
-                            <h2 class="text-2xl font-black text-slate-900">
-                                Academic Calendar {{ $currentCalendar?->year ?? date('Y') }}
-                            </h2>
-                            @if($currentCalendar && str_contains(strtolower($currentCalendar->description ?? ''), 'tentative'))
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200">
-                                    Tentative
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 flex-wrap">
-                        @if($allCalendars->count() > 1)
-                            @foreach($allCalendars as $cal)
-                                <button wire:click="setCalendar({{ $cal->id }})"
-                                        class="px-3 py-1.5 rounded-lg text-sm font-semibold border transition-colors
-                                               {{ $activeCalendarId === $cal->id ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-400' }}">
-                                    {{ $cal->year ?? $cal->title }}
-                                </button>
-                            @endforeach
-                        @endif
-                        <div class="flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
-                            <button wire:click="setTerm(1)"
-                                    class="px-4 py-1.5 rounded-md text-sm font-semibold transition-colors
-                                           {{ $selectedTerm === 1 ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700' }}">
-                                Term 1
-                            </button>
-                            <button wire:click="setTerm(2)"
-                                    class="px-4 py-1.5 rounded-md text-sm font-semibold transition-colors
-                                           {{ $selectedTerm === 2 ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700' }}">
-                                Term 2
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            {{-- Filters row: calendar selector + term toggle --}}
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                @if($allCalendars->count() > 1)
+                    @foreach($allCalendars as $cal)
+                        <button wire:click="setCalendar({{ $cal->id }})"
+                                class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
+                                       {{ $activeCalendarId === $cal->id ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                            {{ $cal->year ?? $cal->title }}
+                        </button>
+                    @endforeach
+                    <div class="w-px h-6 bg-slate-200 mx-1"></div>
+                @endif
+                <button wire:click="setTerm(1)"
+                        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
+                               {{ $selectedTerm === 1 ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                    Term 1
+                </button>
+                <button wire:click="setTerm(2)"
+                        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
+                               {{ $selectedTerm === 2 ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                    Term 2
+                </button>
+
+                @if($currentCalendar && str_contains(strtolower($currentCalendar->description ?? ''), 'tentative'))
+                    <span class="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                        </svg>
+                        Tentative — subject to change
+                    </span>
+                @endif
             </div>
 
             {{-- Stats row --}}
             @php
                 $statCards = [
-                    ['label' => 'Teaching Days',    'value' => $stats[$selectedTerm]['teaching'], 'color' => 'text-blue-600'],
-                    ['label' => 'Exam Days',         'value' => $stats[$selectedTerm]['exam'],     'color' => 'text-amber-600'],
-                    ['label' => 'Holiday Days',      'value' => $stats[$selectedTerm]['holiday'],  'color' => 'text-red-600'],
-                    ['label' => 'Total School Days', 'value' => $stats[$selectedTerm]['total'],    'color' => 'text-slate-700'],
+                    ['label' => 'Teaching Days',    'value' => $stats[$selectedTerm]['teaching']],
+                    ['label' => 'Exam Days',         'value' => $stats[$selectedTerm]['exam']],
+                    ['label' => 'Holiday Days',      'value' => $stats[$selectedTerm]['holiday']],
+                    ['label' => 'Total School Days', 'value' => $stats[$selectedTerm]['total']],
                 ];
             @endphp
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                 @foreach($statCards as $stat)
                     <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
-                        <p class="text-2xl sm:text-3xl font-black {{ $stat['color'] }}">{{ $stat['value'] }}</p>
-                        <p class="text-xs font-semibold text-slate-500 mt-1">{{ $stat['label'] }}</p>
+                        <p class="text-2xl sm:text-3xl font-black text-slate-900">{{ $stat['value'] }}</p>
+                        <p class="text-xs font-semibold text-slate-400 mt-1">{{ $stat['label'] }}</p>
                     </div>
                 @endforeach
             </div>
 
             {{-- Main area: calendar grid + side panel --}}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                 {{-- Monthly calendar grid (2/3 on lg) --}}
                 <div class="lg:col-span-2">
 
                     {{-- Month navigation --}}
-                    <div class="flex items-center justify-between mb-3">
+                    <div class="bg-white rounded-xl border border-slate-200 px-4 py-3 flex items-center justify-between mb-3">
                         <button wire:click="prevMonth" @disabled($calendarMonth <= 0)
-                                class="p-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
                         </button>
-                        <h3 class="text-lg font-black text-slate-900">{{ $currentMonthCarbon->format('F Y') }}</h3>
+                        <h3 class="text-base font-black text-slate-900">{{ $currentMonthCarbon->format('F Y') }}</h3>
                         <button wire:click="nextMonth" @disabled($calendarMonth >= 12)
-                                class="p-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                         </button>
                     </div>
 
-                    {{-- Weekday headers --}}
-                    <div class="grid grid-cols-7 mb-1">
-                        @foreach(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] as $dayLabel)
-                            <div class="text-center text-[10px] font-bold text-slate-400 uppercase py-1.5">{{ $dayLabel }}</div>
-                        @endforeach
-                    </div>
+                    {{-- Calendar card --}}
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
 
-                    {{-- Day grid --}}
-                    @php
-                        $gridFirstDay  = (int) $currentMonthCarbon->copy()->startOfMonth()->dayOfWeek;
-                        $gridDaysCount = (int) $currentMonthCarbon->daysInMonth;
-                        $gridCells     = (int) ceil(($gridFirstDay + $gridDaysCount) / 7) * 7;
-                        $todayStr      = now()->format('Y-m-d');
-                    @endphp
+                        {{-- Weekday headers --}}
+                        <div class="grid grid-cols-7 border-b border-slate-200">
+                            @foreach(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] as $dayLabel)
+                                <div class="text-center text-[10px] font-bold text-slate-400 uppercase py-2.5">{{ $dayLabel }}</div>
+                            @endforeach
+                        </div>
 
-                    <div class="grid grid-cols-7 gap-px bg-slate-200 rounded-xl overflow-hidden border border-slate-200">
-                        @for($cell = 0; $cell < $gridCells; $cell++)
-                            @php
-                                $dayNum    = $cell - $gridFirstDay + 1;
-                                $isValid   = $dayNum >= 1 && $dayNum <= $gridDaysCount;
-                                $dateStr   = $isValid ? $currentMonthCarbon->copy()->day($dayNum)->format('Y-m-d') : null;
-                                $dayEvents = ($dateStr && isset($entriesByDate[$dateStr])) ? $entriesByDate[$dateStr] : [];
-                                $isToday   = $dateStr === $todayStr;
-                                $isWeekend = in_array($cell % 7, [0, 6]);
-                            @endphp
-                            <div class="min-h-[70px] sm:min-h-[80px] p-1 sm:p-1.5 {{ !$isValid ? 'bg-slate-50' : ($isWeekend ? 'bg-slate-50/70' : 'bg-white') }}">
-                                @if($isValid)
-                                    <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full mb-1 mx-auto
-                                                {{ $isToday ? 'bg-rose-600 text-white font-black' : 'text-slate-600 font-semibold' }}
-                                                text-[10px] sm:text-xs">
-                                        {{ $dayNum }}
-                                    </div>
-                                    <div class="space-y-px">
-                                        @foreach(array_slice($dayEvents, 0, 2) as $ev)
-                                            <div class="text-[8px] sm:text-[9px] font-semibold px-1 py-px rounded truncate
-                                                        {{ $calTypeColors[$ev->type] ?? 'bg-slate-100 text-slate-600' }}">
-                                                {{ $ev->title }}
-                                            </div>
-                                        @endforeach
-                                        @if(count($dayEvents) > 2)
-                                            <div class="text-[8px] text-slate-400 px-1">+{{ count($dayEvents) - 2 }}</div>
-                                        @endif
-                                    </div>
-                                @endif
-                            </div>
-                        @endfor
+                        {{-- Day grid --}}
+                        @php
+                            $gridFirstDay  = (int) $currentMonthCarbon->copy()->startOfMonth()->dayOfWeek;
+                            $gridDaysCount = (int) $currentMonthCarbon->daysInMonth;
+                            $gridCells     = (int) ceil(($gridFirstDay + $gridDaysCount) / 7) * 7;
+                            $todayStr      = now()->format('Y-m-d');
+                        @endphp
+
+                        <div class="grid grid-cols-7 divide-x divide-y divide-slate-100">
+                            @for($cell = 0; $cell < $gridCells; $cell++)
+                                @php
+                                    $dayNum    = $cell - $gridFirstDay + 1;
+                                    $isValid   = $dayNum >= 1 && $dayNum <= $gridDaysCount;
+                                    $dateStr   = $isValid ? $currentMonthCarbon->copy()->day($dayNum)->format('Y-m-d') : null;
+                                    $dayEvents = ($dateStr && isset($entriesByDate[$dateStr])) ? $entriesByDate[$dateStr] : [];
+                                    $isToday   = $dateStr === $todayStr;
+                                    $isWeekend = in_array($cell % 7, [0, 6]);
+                                @endphp
+                                <div class="min-h-[72px] sm:min-h-[84px] p-1 sm:p-1.5 {{ !$isValid || $isWeekend ? 'bg-slate-50' : 'bg-white' }}">
+                                    @if($isValid)
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-full mb-1 mx-auto text-xs
+                                                    {{ $isToday ? 'bg-rose-600 text-white font-black' : 'text-slate-600 font-semibold' }}">
+                                            {{ $dayNum }}
+                                        </div>
+                                        <div class="space-y-px">
+                                            @foreach(array_slice($dayEvents, 0, 2) as $ev)
+                                                <div class="text-[8px] sm:text-[9px] font-semibold px-1 py-px rounded truncate
+                                                            {{ $calTypeColors[$ev->type] ?? 'bg-slate-100 text-slate-600' }}">
+                                                    {{ $ev->title }}
+                                                </div>
+                                            @endforeach
+                                            @if(count($dayEvents) > 2)
+                                                <div class="text-[8px] text-slate-400 px-1">+{{ count($dayEvents) - 2 }}</div>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            @endfor
+                        </div>
                     </div>
 
                     {{-- Legend --}}
@@ -369,21 +363,21 @@
                 </div>
 
                 {{-- Side panel (1/3 on lg) --}}
-                <div class="space-y-4">
+                <div class="space-y-3">
 
                     {{-- School Transfer Windows --}}
                     <div class="rounded-xl border border-slate-200 bg-white p-4">
-                        <h4 class="text-sm font-bold text-slate-900 mb-3">School Transfer Windows</h4>
+                        <h4 class="text-sm font-semibold text-slate-900 mb-3">School Transfer Windows</h4>
                         <div class="space-y-2">
                             <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-50">
-                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 flex-shrink-0"></div>
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
                                 <div>
                                     <p class="text-xs font-semibold text-slate-700">Period 1</p>
                                     <p class="text-xs text-slate-500">17 May – 15 Jun {{ $currentCalendar?->year ?? date('Y') }}</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-50">
-                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 flex-shrink-0"></div>
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
                                 <div>
                                     <p class="text-xs font-semibold text-slate-700">Period 2</p>
                                     <p class="text-xs text-slate-500">18 Oct – 17 Nov {{ $currentCalendar?->year ?? date('Y') }}</p>
@@ -392,34 +386,57 @@
                         </div>
                     </div>
 
-                    {{-- Notes & Reminders --}}
-                    <div class="rounded-xl border border-slate-200 bg-white p-4">
-                        <h4 class="text-sm font-bold text-slate-900 mb-3">Notes & Reminders</h4>
-                        <ul class="space-y-2">
-                            @foreach([
-                                'School transfers are only permitted during designated transfer windows.',
-                                'Exam schedules are subject to change — consult your school for updates.',
-                                'Public holidays follow the official Maldives government calendar.',
-                                'Weekend school activities may affect the schedule.',
-                            ] as $note)
-                                <li class="flex items-start gap-2 text-xs text-slate-600 leading-relaxed">
-                                    <span class="text-slate-300 mt-0.5 flex-shrink-0">•</span>
-                                    {{ $note }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    {{-- Current month entries list --}}
+                    @php
+                        $monthStart = $currentMonthCarbon->copy()->startOfMonth()->format('Y-m-d');
+                        $monthEnd   = $currentMonthCarbon->copy()->endOfMonth()->format('Y-m-d');
+                        $monthEntries = $allCalendarEntries->filter(
+                            fn($e) => $e->date->format('Y-m-d') >= $monthStart && $e->date->format('Y-m-d') <= $monthEnd
+                        )->values();
+                    @endphp
+                    @if($monthEntries->isNotEmpty())
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 px-0.5">
+                                {{ $currentMonthCarbon->format('F') }} Events
+                            </p>
+                            <div class="space-y-2">
+                                @foreach($monthEntries as $me)
+                                    <div class="bg-white rounded-xl border border-slate-200 p-3 flex items-start gap-3">
+                                        <div class="flex-shrink-0 text-center w-9 pt-0.5">
+                                            <p class="text-lg font-black text-rose-600 leading-none">{{ $me->date->format('d') }}</p>
+                                            <p class="text-[10px] text-slate-400 uppercase font-semibold">{{ $me->date->format('M') }}</p>
+                                            <p class="text-[10px] text-slate-300 font-semibold">{{ $me->date->format('Y') }}</p>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center gap-1.5 flex-wrap mb-0.5">
+                                                <p class="text-xs font-semibold text-slate-900">{{ $me->title }}</p>
+                                                <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded {{ $calTypeColors[$me->type] ?? 'bg-slate-100 text-slate-600' }}">
+                                                    {{ $me->type }}
+                                                </span>
+                                            </div>
+                                            @if($me->end_date)
+                                                <p class="text-[10px] text-slate-400 mb-0.5">Until {{ $me->end_date->format('d M Y') }}</p>
+                                            @endif
+                                            @if($me->description)
+                                                <p class="text-[10px] text-slate-500 leading-relaxed">{{ $me->description }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
 
                     {{-- Tentative notice --}}
-                    <div class="rounded-xl bg-slate-900 p-4 text-white">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
                             </svg>
-                            <p class="text-sm font-bold text-amber-400">Tentative Schedule</p>
+                            <p class="text-sm font-bold text-amber-800">Tentative Schedule</p>
                         </div>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            This academic calendar is tentative and was issued on 10 August 2025. All dates are subject to change by the Ministry of Education.
+                        <p class="text-xs text-amber-700 leading-relaxed">
+                            Issued 10 August 2025. All dates are subject to change by the Ministry of Education.
                         </p>
                     </div>
 
