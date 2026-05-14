@@ -35,8 +35,6 @@ class DigitalServices extends Component
     #[Url]
     public int $calendarMonth = 0;
 
-    public int $selectedTerm = 1;
-
     public string $search = '';
 
     public array $docCategories = [
@@ -62,15 +60,9 @@ class DigitalServices extends Component
         $this->activeAudience = $audience;
     }
 
-    public function setCalendar(int $id): void
+    public function updatedActiveCalendarId(): void
     {
-        $this->activeCalendarId = $id;
-        $this->calendarMonth    = 0;
-    }
-
-    public function setTerm(int $term): void
-    {
-        $this->selectedTerm = in_array($term, [1, 2]) ? $term : 1;
+        $this->calendarMonth = 0;
     }
 
     public function nextMonth(): void
@@ -145,7 +137,7 @@ class DigitalServices extends Component
         }
         $resources = $resourceQuery->orderBy('sort_order')->orderBy('id')->get();
 
-        $allCalendars = DigitalServiceCalendar::orderBy('year', 'desc')->get();
+        $allCalendars = DigitalServiceCalendar::orderBy('year', 'desc')->limit(5)->get();
 
         if ($this->activeCalendarId === null) {
             $defaultCal = $allCalendars->firstWhere('is_active', true) ?? $allCalendars->first();
@@ -185,81 +177,52 @@ class DigitalServices extends Component
             }
         }
 
-        // Derive term periods from sorted 'term' marker entries (pairs: start, end)
-        // Markers: [0]=Term1 start, [1]=Term1 end, [2]=Term2 start, [3]=Term2 end
+        // Derive total teaching/exam/holiday days across all term periods
         $termMarkers = $allCalendarEntries->where('type', 'term')->sortBy('date')->values();
 
-        $termPeriods = [];
-        for ($t = 1; $t <= 2; $t++) {
-            $startMarker = $termMarkers->get(($t - 1) * 2);
-            $endMarker   = $termMarkers->get(($t - 1) * 2 + 1);
-            if ($startMarker && $endMarker) {
-                $termPeriods[$t] = [
-                    'start' => $startMarker->date->copy(),
-                    'end'   => $endMarker->date->copy(),
-                ];
+        $countWeekdayDays = function (string $type) use ($allCalendarEntries): int {
+            $days = [];
+            foreach ($allCalendarEntries->where('type', $type) as $entry) {
+                $cur = $entry->date->copy();
+                $end = $entry->end_date ? $entry->end_date->copy() : $cur->copy();
+                while ($cur->lte($end)) {
+                    if (! $cur->isWeekend()) {
+                        $days[$cur->format('Y-m-d')] = true;
+                    }
+                    $cur->addDay();
+                }
             }
-        }
+            return count($days);
+        };
 
-        $stats = [];
-        foreach ([1, 2] as $term) {
-            if (! isset($termPeriods[$term])) {
-                $stats[$term] = ['teaching' => 0, 'exam' => 0, 'holiday' => 0, 'total' => 0, 'events' => 0];
+        // Sum weekdays across all term periods (marker pairs)
+        $totalTermWeekdays = 0;
+        for ($i = 0; $i < $termMarkers->count() - 1; $i += 2) {
+            $tStart = $termMarkers->get($i)?->date;
+            $tEnd   = $termMarkers->get($i + 1)?->date;
+            if (! $tStart || ! $tEnd) {
                 continue;
             }
-
-            $tStart = $termPeriods[$term]['start'];
-            $tEnd   = $termPeriods[$term]['end'];
-
-            // Count weekday-days covered by entries of a given type within the term window
-            $countWeekdayDays = function (string $type) use ($allCalendarEntries, $tStart, $tEnd): int {
-                $days = [];
-                foreach ($allCalendarEntries->where('type', $type) as $entry) {
-                    $s = $entry->date->copy()->max($tStart);
-                    $e = ($entry->end_date ?? $entry->date)->copy()->min($tEnd);
-                    if ($s->gt($e)) {
-                        continue;
-                    }
-                    $cur = $s->copy();
-                    while ($cur->lte($e)) {
-                        if (! $cur->isWeekend()) {
-                            $days[$cur->format('Y-m-d')] = true;
-                        }
-                        $cur->addDay();
-                    }
-                }
-                return count($days);
-            };
-
-            // Count total weekdays in term period
-            $totalWeekdays = 0;
             $cur = $tStart->copy();
             while ($cur->lte($tEnd)) {
                 if (! $cur->isWeekend()) {
-                    $totalWeekdays++;
+                    $totalTermWeekdays++;
                 }
                 $cur->addDay();
             }
-
-            $holidayDays  = $countWeekdayDays('holiday');
-            $examDays     = $countWeekdayDays('exam');
-            $teachingDays = max(0, $totalWeekdays - $holidayDays - $examDays);
-
-            $eventCount = $allCalendarEntries
-                ->where('type', 'event')
-                ->filter(fn ($e) => ! $e->date->isWeekend()
-                    && $e->date->gte($tStart)
-                    && $e->date->lte($tEnd))
-                ->count();
-
-            $stats[$term] = [
-                'teaching' => $teachingDays,
-                'exam'     => $examDays,
-                'holiday'  => $holidayDays,
-                'total'    => $teachingDays + $examDays,
-                'events'   => $eventCount,
-            ];
         }
+
+        $holidayDays  = $countWeekdayDays('holiday');
+        $examDays     = $countWeekdayDays('exam');
+        $teachingDays = max(0, $totalTermWeekdays - $holidayDays - $examDays);
+
+        $stats = [
+            'teaching' => $teachingDays,
+            'exam'     => $examDays,
+            'holiday'  => $holidayDays,
+            'total'    => $teachingDays + $examDays,
+            'events'   => $allCalendarEntries->where('type', 'event')->count(),
+        ];
 
         return view('livewire.website.digital-services', compact(
             'documents', 'years', 'resources',

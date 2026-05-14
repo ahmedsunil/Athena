@@ -158,6 +158,14 @@
                         @error('description') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
 
+                    <div>
+                        <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                            <input type="checkbox" wire:model="is_tentative"
+                                   class="w-4 h-4 rounded border-zinc-300 text-amber-600 focus:ring-amber-500">
+                            <span class="text-sm font-medium text-zinc-700">Tentative <span class="text-zinc-400 font-normal">— subject to change</span></span>
+                        </label>
+                    </div>
+
                     <div class="grid gap-4 sm:grid-cols-2">
                         <div>
                             <label class="mb-1.5 block admin-label">Sort order</label>
@@ -211,7 +219,12 @@
                     <tr>
                         <td class="admin-table-cell whitespace-nowrap text-xs text-zinc-500">{{ $entry->date->format('d M Y') }}</td>
                         <td class="admin-table-cell-primary">
-                            {{ $entry->title }}
+                            <span class="flex items-center gap-1.5">
+                                {{ $entry->title }}
+                                @if($entry->is_tentative)
+                                    <span class="inline-block rounded-full bg-amber-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-amber-700">Tentative</span>
+                                @endif
+                            </span>
                             @if($entry->description)
                                 <span class="block max-w-xs truncate text-xs font-normal text-zinc-400">{{ Str::limit($entry->description, 60) }}</span>
                             @endif

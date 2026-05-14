@@ -10,13 +10,14 @@ class DigitalServiceCalendarEntry extends Model
     use HasFactory;
 
     protected $fillable = [
-        'calendar_id', 'sort_order', 'title', 'date', 'end_date', 'type', 'description', 'is_active',
+        'calendar_id', 'sort_order', 'title', 'date', 'end_date', 'type', 'description', 'is_active', 'is_tentative',
     ];
 
     protected $casts = [
         'date'      => 'date',
         'end_date'  => 'date',
-        'is_active' => 'boolean',
+        'is_active'    => 'boolean',
+        'is_tentative' => 'boolean',
     ];
 
     public function calendar(): BelongsTo

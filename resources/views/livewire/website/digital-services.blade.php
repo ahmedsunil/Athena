@@ -232,31 +232,19 @@
                 ];
             @endphp
 
-            {{-- Filters row: calendar selector + term toggle --}}
-            <div class="flex flex-wrap items-center gap-2 mb-4">
+            {{-- Calendar selector + tentative badge --}}
+            <div class="flex flex-wrap items-center gap-3 mb-4">
                 @if($allCalendars->count() > 1)
-                    @foreach($allCalendars as $cal)
-                        <button wire:click="setCalendar({{ $cal->id }})"
-                                class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                                       {{ $activeCalendarId === $cal->id ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                            {{ $cal->year ?? $cal->title }}
-                        </button>
-                    @endforeach
-                    <div class="w-px h-6 bg-slate-200 mx-1"></div>
+                    <select wire:model.live="activeCalendarId"
+                            class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                        @foreach($allCalendars as $cal)
+                            <option value="{{ $cal->id }}">{{ $cal->title }}</option>
+                        @endforeach
+                    </select>
                 @endif
-                <button wire:click="setTerm(1)"
-                        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                               {{ $selectedTerm === 1 ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                    Term 1
-                </button>
-                <button wire:click="setTerm(2)"
-                        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                               {{ $selectedTerm === 2 ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                    Term 2
-                </button>
 
-                @if($currentCalendar && str_contains(strtolower($currentCalendar->description ?? ''), 'tentative'))
-                    <span class="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-700">
+                @if($allCalendarEntries->where('is_tentative', true)->isNotEmpty())
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
                         </svg>
@@ -268,12 +256,11 @@
             {{-- Stats row --}}
             @php
                 $statCards = [
-
-                    ['label' => 'Teaching Days',    'value' => $stats[$selectedTerm]['teaching']],
-                    ['label' => 'Exam Days',         'value' => $stats[$selectedTerm]['exam']],
-                    ['label' => 'Events',            'value' => $stats[$selectedTerm]['events']],
-                    ['label' => 'Holiday Days',      'value' => $stats[$selectedTerm]['holiday']],
-                    ['label' => 'Total School Days', 'value' => $stats[$selectedTerm]['total']],
+                    ['label' => 'Teaching Days',    'value' => $stats['teaching']],
+                    ['label' => 'Exam Days',         'value' => $stats['exam']],
+                    ['label' => 'Events',            'value' => $stats['events']],
+                    ['label' => 'Holiday Days',      'value' => $stats['holiday']],
+                    ['label' => 'Total School Days', 'value' => $stats['total']],
                 ];
             @endphp
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-4">
@@ -347,7 +334,7 @@
                                             @foreach(array_slice($dayEvents, 0, 2) as $ev)
                                                 <div class="text-[8px] sm:text-[9px] font-semibold px-1 py-px rounded truncate
                                                             {{ $calTypeColors[$ev->type] ?? 'bg-slate-100 text-slate-600' }}">
-                                                    {{ $ev->title }}
+                                                    @if($ev->is_tentative)<span class="opacity-60">~</span>@endif{{ $ev->title }}
                                                 </div>
                                             @endforeach
                                             @if(count($dayEvents) > 2)
@@ -401,6 +388,9 @@
                                                 <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded {{ $calTypeColors[$me->type] ?? 'bg-slate-100 text-slate-600' }}">
                                                     {{ $me->type }}
                                                 </span>
+                                                @if($me->is_tentative)
+                                                    <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">Tentative</span>
+                                                @endif
                                             </div>
                                             @if($me->end_date)
                                                 <p class="text-[10px] text-slate-400 mb-0.5">Until {{ $me->end_date->format('d M Y') }}</p>
@@ -415,18 +405,20 @@
                         </div>
                     @endif
 
-                    {{-- Tentative notice --}}
-                    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                        <div class="flex items-center gap-2 mb-1.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-                            </svg>
-                            <p class="text-sm font-bold text-amber-800">Tentative Schedule</p>
+                    {{-- Tentative notice (only if calendar has tentative entries) --}}
+                    @if($allCalendarEntries->where('is_tentative', true)->isNotEmpty())
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                </svg>
+                                <p class="text-sm font-bold text-amber-800">Some dates are tentative</p>
+                            </div>
+                            <p class="text-xs text-amber-700 leading-relaxed">
+                                Entries marked <span class="font-semibold">Tentative</span> are subject to change by the Ministry of Education.
+                            </p>
                         </div>
-                        <p class="text-xs text-amber-700 leading-relaxed">
-                            Issued 10 August 2025. All dates are subject to change by the Ministry of Education.
-                        </p>
-                    </div>
+                    @endif
 
                 </div>
             </div>

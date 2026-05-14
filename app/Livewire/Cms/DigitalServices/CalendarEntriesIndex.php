@@ -31,6 +31,7 @@ class CalendarEntriesIndex extends Component
     public string $description = '';
     public int $sort_order = 0;
     public bool $is_active = true;
+    public bool $is_tentative = false;
     public ?int $editingId = null;
     public bool $showEntryForm = false;
     public bool $showSyncModal = false;
@@ -181,7 +182,8 @@ class CalendarEntriesIndex extends Component
             'type'        => ['required', 'in:event,term,holiday,exam'],
             'description' => ['nullable', 'string'],
             'sort_order'  => ['integer', 'min:0'],
-            'is_active'   => ['boolean'],
+            'is_active'    => ['boolean'],
+            'is_tentative' => ['boolean'],
         ];
     }
 
@@ -201,8 +203,9 @@ class CalendarEntriesIndex extends Component
             'end_date'    => $this->end_date ?: null,
             'type'        => $this->type,
             'description' => $this->description ?: null,
-            'sort_order'  => $this->sort_order,
-            'is_active'   => $this->is_active,
+            'sort_order'   => $this->sort_order,
+            'is_active'    => $this->is_active,
+            'is_tentative' => $this->is_tentative,
         ];
 
         if ($this->editingId) {
@@ -225,8 +228,9 @@ class CalendarEntriesIndex extends Component
         $this->end_date    = $entry->end_date?->format('Y-m-d') ?? '';
         $this->type        = $entry->type;
         $this->description = $entry->description ?? '';
-        $this->sort_order  = $entry->sort_order;
-        $this->is_active   = $entry->is_active;
+        $this->sort_order   = $entry->sort_order;
+        $this->is_active    = $entry->is_active;
+        $this->is_tentative = $entry->is_tentative;
         $this->showEntryForm = true;
     }
 
@@ -244,9 +248,10 @@ class CalendarEntriesIndex extends Component
     private function resetForm(): void
     {
         $this->reset(['title', 'date', 'end_date', 'description', 'editingId']);
-        $this->type       = 'event';
-        $this->is_active  = true;
-        $this->sort_order = 0;
+        $this->type         = 'event';
+        $this->is_active    = true;
+        $this->is_tentative = false;
+        $this->sort_order   = 0;
         $this->showEntryForm = false;
     }
 
