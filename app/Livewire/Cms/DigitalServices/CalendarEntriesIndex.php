@@ -31,6 +31,25 @@ class CalendarEntriesIndex extends Component
     public string $statNonTeachingDays = '';
     public string $statTotalDays = '';
 
+    public string $term1Dates = '';
+    public string $term1TotalDays = '';
+    public string $term1TeachingDays = '';
+    public string $term1ExamDays = '';
+    public string $term2Dates = '';
+    public string $term2TotalDays = '';
+    public string $term2TeachingDays = '';
+    public string $term2ExamDays = '';
+
+    public string $examSeries1Title = '';
+    public string $examSeries1Sub = '';
+    public string $examSeries1Period = '';
+    public string $examSeries2Title = '';
+    public string $examSeries2Sub = '';
+    public string $examSeries2Period = '';
+    public string $examSeries3Title = '';
+    public string $examSeries3Sub = '';
+    public string $examSeries3Period = '';
+
     public string $title = '';
     public string $date = '';
     public string $end_date = '';
@@ -78,13 +97,34 @@ class CalendarEntriesIndex extends Component
         $this->calendarDescription  = $calendar->description ?? '';
         $this->calendarSortOrder    = $calendar->sort_order;
         $this->calendarIsActive     = $calendar->is_active;
-        $this->statTeachingDays     = $calendar->stat_teaching_days ?? '';
-        $this->statExamDays         = $calendar->stat_exam_days ?? '';
-        $this->statReportPrepDays   = $calendar->stat_report_prep_days ?? '';
-        $this->statTeacherPdDays    = $calendar->stat_teacher_pd_days ?? '';
-        $this->statNonTeachingDays  = $calendar->stat_non_teaching_days ?? '';
-        $this->statTotalDays        = $calendar->stat_total_days ?? '';
-        $this->showCalendarForm     = true;
+        $this->statTeachingDays    = $calendar->stat_teaching_days ?? '';
+        $this->statExamDays        = $calendar->stat_exam_days ?? '';
+        $this->statReportPrepDays  = $calendar->stat_report_prep_days ?? '';
+        $this->statTeacherPdDays   = $calendar->stat_teacher_pd_days ?? '';
+        $this->statNonTeachingDays = $calendar->stat_non_teaching_days ?? '';
+        $this->statTotalDays       = $calendar->stat_total_days ?? '';
+
+        $this->term1Dates        = $calendar->term1_dates ?? '';
+        $this->term1TotalDays    = $calendar->term1_total_days ?? '';
+        $this->term1TeachingDays = $calendar->term1_teaching_days ?? '';
+        $this->term1ExamDays     = $calendar->term1_exam_days ?? '';
+        $this->term2Dates        = $calendar->term2_dates ?? '';
+        $this->term2TotalDays    = $calendar->term2_total_days ?? '';
+        $this->term2TeachingDays = $calendar->term2_teaching_days ?? '';
+        $this->term2ExamDays     = $calendar->term2_exam_days ?? '';
+
+        $series = $calendar->exam_series ?? [];
+        $this->examSeries1Title  = $series[0]['title']  ?? '';
+        $this->examSeries1Sub    = $series[0]['sub']    ?? '';
+        $this->examSeries1Period = $series[0]['period'] ?? '';
+        $this->examSeries2Title  = $series[1]['title']  ?? '';
+        $this->examSeries2Sub    = $series[1]['sub']    ?? '';
+        $this->examSeries2Period = $series[1]['period'] ?? '';
+        $this->examSeries3Title  = $series[2]['title']  ?? '';
+        $this->examSeries3Sub    = $series[2]['sub']    ?? '';
+        $this->examSeries3Period = $series[2]['period'] ?? '';
+
+        $this->showCalendarForm = true;
     }
 
     public function saveCalendar(): void
@@ -107,6 +147,19 @@ class CalendarEntriesIndex extends Component
             'stat_teacher_pd_days'   => $this->statTeacherPdDays !== '' ? (float) $this->statTeacherPdDays : null,
             'stat_non_teaching_days' => $this->statNonTeachingDays !== '' ? (float) $this->statNonTeachingDays : null,
             'stat_total_days'        => $this->statTotalDays !== '' ? (float) $this->statTotalDays : null,
+            'term1_dates'            => $this->term1Dates ?: null,
+            'term1_total_days'       => $this->term1TotalDays !== '' ? (float) $this->term1TotalDays : null,
+            'term1_teaching_days'    => $this->term1TeachingDays !== '' ? (float) $this->term1TeachingDays : null,
+            'term1_exam_days'        => $this->term1ExamDays !== '' ? (float) $this->term1ExamDays : null,
+            'term2_dates'            => $this->term2Dates ?: null,
+            'term2_total_days'       => $this->term2TotalDays !== '' ? (float) $this->term2TotalDays : null,
+            'term2_teaching_days'    => $this->term2TeachingDays !== '' ? (float) $this->term2TeachingDays : null,
+            'term2_exam_days'        => $this->term2ExamDays !== '' ? (float) $this->term2ExamDays : null,
+            'exam_series'            => array_values(array_filter([
+                $this->examSeries1Title ? ['title' => $this->examSeries1Title, 'sub' => $this->examSeries1Sub, 'period' => $this->examSeries1Period] : null,
+                $this->examSeries2Title ? ['title' => $this->examSeries2Title, 'sub' => $this->examSeries2Sub, 'period' => $this->examSeries2Period] : null,
+                $this->examSeries3Title ? ['title' => $this->examSeries3Title, 'sub' => $this->examSeries3Sub, 'period' => $this->examSeries3Period] : null,
+            ])) ?: null,
         ];
 
         if ($this->calendarEditingId) {
@@ -189,12 +242,29 @@ class CalendarEntriesIndex extends Component
             'calendarDescription'  => ['nullable', 'string'],
             'calendarSortOrder'    => ['integer', 'min:0'],
             'calendarIsActive'     => ['boolean'],
-            'statTeachingDays'     => ['nullable', 'numeric', 'min:0'],
-            'statExamDays'         => ['nullable', 'numeric', 'min:0'],
-            'statReportPrepDays'   => ['nullable', 'numeric', 'min:0'],
-            'statTeacherPdDays'    => ['nullable', 'numeric', 'min:0'],
-            'statNonTeachingDays'  => ['nullable', 'numeric', 'min:0'],
-            'statTotalDays'        => ['nullable', 'numeric', 'min:0'],
+            'statTeachingDays'    => ['nullable', 'numeric', 'min:0'],
+            'statExamDays'        => ['nullable', 'numeric', 'min:0'],
+            'statReportPrepDays'  => ['nullable', 'numeric', 'min:0'],
+            'statTeacherPdDays'   => ['nullable', 'numeric', 'min:0'],
+            'statNonTeachingDays' => ['nullable', 'numeric', 'min:0'],
+            'statTotalDays'       => ['nullable', 'numeric', 'min:0'],
+            'term1Dates'          => ['nullable', 'string', 'max:100'],
+            'term1TotalDays'      => ['nullable', 'numeric', 'min:0'],
+            'term1TeachingDays'   => ['nullable', 'numeric', 'min:0'],
+            'term1ExamDays'       => ['nullable', 'numeric', 'min:0'],
+            'term2Dates'          => ['nullable', 'string', 'max:100'],
+            'term2TotalDays'      => ['nullable', 'numeric', 'min:0'],
+            'term2TeachingDays'   => ['nullable', 'numeric', 'min:0'],
+            'term2ExamDays'       => ['nullable', 'numeric', 'min:0'],
+            'examSeries1Title'    => ['nullable', 'string', 'max:100'],
+            'examSeries1Sub'      => ['nullable', 'string', 'max:100'],
+            'examSeries1Period'   => ['nullable', 'string', 'max:100'],
+            'examSeries2Title'    => ['nullable', 'string', 'max:100'],
+            'examSeries2Sub'      => ['nullable', 'string', 'max:100'],
+            'examSeries2Period'   => ['nullable', 'string', 'max:100'],
+            'examSeries3Title'    => ['nullable', 'string', 'max:100'],
+            'examSeries3Sub'      => ['nullable', 'string', 'max:100'],
+            'examSeries3Period'   => ['nullable', 'string', 'max:100'],
         ];
     }
 
@@ -284,7 +354,12 @@ class CalendarEntriesIndex extends Component
     {
         $this->reset(['calendarTitle', 'calendarDescription', 'calendarEditingId',
             'statTeachingDays', 'statExamDays', 'statReportPrepDays',
-            'statTeacherPdDays', 'statNonTeachingDays', 'statTotalDays']);
+            'statTeacherPdDays', 'statNonTeachingDays', 'statTotalDays',
+            'term1Dates', 'term1TotalDays', 'term1TeachingDays', 'term1ExamDays',
+            'term2Dates', 'term2TotalDays', 'term2TeachingDays', 'term2ExamDays',
+            'examSeries1Title', 'examSeries1Sub', 'examSeries1Period',
+            'examSeries2Title', 'examSeries2Sub', 'examSeries2Period',
+            'examSeries3Title', 'examSeries3Sub', 'examSeries3Period']);
         $this->calendarYear      = (int) date('Y');
         $this->calendarSortOrder = 0;
         $this->calendarIsActive  = false;
