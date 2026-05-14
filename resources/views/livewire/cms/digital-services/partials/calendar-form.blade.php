@@ -44,6 +44,48 @@
             </div>
         </div>
 
+        <div>
+            <p class="admin-label mb-3 border-t border-zinc-100 pt-4">Official Stats <span class="text-zinc-400 font-normal">(from MoE calendar — optional)</span></p>
+            <div class="grid gap-3 sm:grid-cols-3">
+                <div>
+                    <label class="mb-1.5 block admin-label">Teaching Days</label>
+                    <input type="number" step="0.5" wire:model="statTeachingDays" placeholder="e.g. 84.5"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('statTeachingDays') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">School Exams</label>
+                    <input type="number" step="0.5" wire:model="statExamDays" placeholder="e.g. 8"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('statExamDays') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Report Preparation</label>
+                    <input type="number" step="0.5" wire:model="statReportPrepDays" placeholder="e.g. 5"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('statReportPrepDays') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Teacher PD</label>
+                    <input type="number" step="0.5" wire:model="statTeacherPdDays" placeholder="e.g. 6"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('statTeacherPdDays') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Non-Teaching</label>
+                    <input type="number" step="0.5" wire:model="statNonTeachingDays" placeholder="e.g. 3.5"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('statNonTeachingDays') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Total School Days</label>
+                    <input type="number" step="0.5" wire:model="statTotalDays" placeholder="e.g. 107"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('statTotalDays') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+            </div>
+        </div>
+
         <div class="flex items-center gap-2">
             <button type="submit"
                     class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-3 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800">

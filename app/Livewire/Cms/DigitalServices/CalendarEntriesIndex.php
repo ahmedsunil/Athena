@@ -24,6 +24,13 @@ class CalendarEntriesIndex extends Component
     public ?int $calendarEditingId = null;
     public bool $showCalendarForm = false;
 
+    public string $statTeachingDays = '';
+    public string $statExamDays = '';
+    public string $statReportPrepDays = '';
+    public string $statTeacherPdDays = '';
+    public string $statNonTeachingDays = '';
+    public string $statTotalDays = '';
+
     public string $title = '';
     public string $date = '';
     public string $end_date = '';
@@ -65,13 +72,19 @@ class CalendarEntriesIndex extends Component
     {
         $calendar = DigitalServiceCalendar::findOrFail($id);
 
-        $this->calendarEditingId = $calendar->id;
-        $this->calendarTitle = $calendar->title;
-        $this->calendarYear = $calendar->year ?? (int) date('Y');
-        $this->calendarDescription = $calendar->description ?? '';
-        $this->calendarSortOrder = $calendar->sort_order;
-        $this->calendarIsActive = $calendar->is_active;
-        $this->showCalendarForm = true;
+        $this->calendarEditingId    = $calendar->id;
+        $this->calendarTitle        = $calendar->title;
+        $this->calendarYear         = $calendar->year ?? (int) date('Y');
+        $this->calendarDescription  = $calendar->description ?? '';
+        $this->calendarSortOrder    = $calendar->sort_order;
+        $this->calendarIsActive     = $calendar->is_active;
+        $this->statTeachingDays     = $calendar->stat_teaching_days ?? '';
+        $this->statExamDays         = $calendar->stat_exam_days ?? '';
+        $this->statReportPrepDays   = $calendar->stat_report_prep_days ?? '';
+        $this->statTeacherPdDays    = $calendar->stat_teacher_pd_days ?? '';
+        $this->statNonTeachingDays  = $calendar->stat_non_teaching_days ?? '';
+        $this->statTotalDays        = $calendar->stat_total_days ?? '';
+        $this->showCalendarForm     = true;
     }
 
     public function saveCalendar(): void
@@ -83,11 +96,17 @@ class CalendarEntriesIndex extends Component
         }
 
         $data = [
-            'title' => $this->calendarTitle,
-            'year' => $this->calendarYear,
-            'description' => $this->calendarDescription ?: null,
-            'sort_order' => $this->calendarSortOrder,
-            'is_active' => $this->calendarIsActive,
+            'title'                  => $this->calendarTitle,
+            'year'                   => $this->calendarYear,
+            'description'            => $this->calendarDescription ?: null,
+            'sort_order'             => $this->calendarSortOrder,
+            'is_active'              => $this->calendarIsActive,
+            'stat_teaching_days'     => $this->statTeachingDays !== '' ? (float) $this->statTeachingDays : null,
+            'stat_exam_days'         => $this->statExamDays !== '' ? (float) $this->statExamDays : null,
+            'stat_report_prep_days'  => $this->statReportPrepDays !== '' ? (float) $this->statReportPrepDays : null,
+            'stat_teacher_pd_days'   => $this->statTeacherPdDays !== '' ? (float) $this->statTeacherPdDays : null,
+            'stat_non_teaching_days' => $this->statNonTeachingDays !== '' ? (float) $this->statNonTeachingDays : null,
+            'stat_total_days'        => $this->statTotalDays !== '' ? (float) $this->statTotalDays : null,
         ];
 
         if ($this->calendarEditingId) {
@@ -165,11 +184,17 @@ class CalendarEntriesIndex extends Component
     protected function calendarRules(): array
     {
         return [
-            'calendarTitle'       => ['required', 'string', 'max:255'],
-            'calendarYear'        => ['required', 'integer', 'min:2000', 'max:2100'],
-            'calendarDescription' => ['nullable', 'string'],
-            'calendarSortOrder'   => ['integer', 'min:0'],
-            'calendarIsActive'    => ['boolean'],
+            'calendarTitle'        => ['required', 'string', 'max:255'],
+            'calendarYear'         => ['required', 'integer', 'min:2000', 'max:2100'],
+            'calendarDescription'  => ['nullable', 'string'],
+            'calendarSortOrder'    => ['integer', 'min:0'],
+            'calendarIsActive'     => ['boolean'],
+            'statTeachingDays'     => ['nullable', 'numeric', 'min:0'],
+            'statExamDays'         => ['nullable', 'numeric', 'min:0'],
+            'statReportPrepDays'   => ['nullable', 'numeric', 'min:0'],
+            'statTeacherPdDays'    => ['nullable', 'numeric', 'min:0'],
+            'statNonTeachingDays'  => ['nullable', 'numeric', 'min:0'],
+            'statTotalDays'        => ['nullable', 'numeric', 'min:0'],
         ];
     }
 
@@ -257,11 +282,13 @@ class CalendarEntriesIndex extends Component
 
     private function resetCalendarForm(): void
     {
-        $this->reset(['calendarTitle', 'calendarDescription', 'calendarEditingId']);
-        $this->calendarYear = (int) date('Y');
+        $this->reset(['calendarTitle', 'calendarDescription', 'calendarEditingId',
+            'statTeachingDays', 'statExamDays', 'statReportPrepDays',
+            'statTeacherPdDays', 'statNonTeachingDays', 'statTotalDays']);
+        $this->calendarYear      = (int) date('Y');
         $this->calendarSortOrder = 0;
-        $this->calendarIsActive = false;
-        $this->showCalendarForm = false;
+        $this->calendarIsActive  = false;
+        $this->showCalendarForm  = false;
     }
 
     public function render()
