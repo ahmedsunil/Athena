@@ -2,7 +2,7 @@
 
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
             <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Photo Albums</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Gallery</h1>
         </div>
@@ -11,7 +11,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {{-- Filters row: category pills + selects + clear --}}
-        <div class="flex flex-wrap items-center gap-2 mb-8">
+        <div class="flex flex-wrap items-center gap-2 mb-8" data-reveal="fade">
             <button wire:click="setCategory('All')"
                     class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                            {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
@@ -53,8 +53,9 @@
             </div>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                @foreach($albums as $album)
-                    <div class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-0.5">
+                @foreach($albums as $i => $album)
+                    <div class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-0.5"
+                         data-reveal="scale" style="--reveal-delay: {{ ($i % 8) * 55 }}ms">
                         {{-- Cover image --}}
                         <div class="relative h-44 overflow-hidden bg-slate-100">
                             @if($album->cover_image_path)

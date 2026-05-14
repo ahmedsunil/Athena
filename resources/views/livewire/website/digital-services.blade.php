@@ -2,7 +2,7 @@
 
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
             <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Online Hub</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Digital Services</h1>
         </div>
@@ -40,7 +40,7 @@
                 </div>
 
                 {{-- Filters row: category pills + selects + clear --}}
-                <div class="flex flex-wrap items-center gap-2 mb-4">
+                <div class="flex flex-wrap items-center gap-2 mb-4" data-reveal="fade">
                     <button wire:click="setCategory('All')"
                             class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                    {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
@@ -97,8 +97,9 @@
                     </div>
                 @else
                     <div class="space-y-2">
-                        @foreach($documents as $doc)
-                            <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center gap-4 hover:shadow-sm transition-shadow">
+                        @foreach($documents as $i => $doc)
+                            <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center gap-4 hover:shadow-sm transition-shadow"
+                                 data-reveal="fade" style="--reveal-delay: {{ ($i % 10) * 40 }}ms">
                                 <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
@@ -130,6 +131,10 @@
                         @endforeach
                     </div>
                 @endif
+
+                @if($documents->hasPages())
+                    <div class="mt-4">{{ $documents->links() }}</div>
+                @endif
             </div>
         @endif
 
@@ -153,9 +158,10 @@
                     </div>
                 @else
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        @foreach($resources as $resource)
+                        @foreach($resources as $i => $resource)
                             <a href="{{ $resource->url }}" target="_blank" rel="noopener noreferrer"
-                               class="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-rose-200 transition-all block">
+                               class="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-rose-200 transition-all block"
+                               data-reveal="scale" style="--reveal-delay: {{ ($i % 6) * 60 }}ms">
                                 <div class="flex items-start gap-3 mb-3">
                                     <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 {{ $resource->icon_color_classes }}">
                                         {{-- Icon rendered via icon name stored in DB --}}
@@ -262,15 +268,18 @@
             {{-- Stats row --}}
             @php
                 $statCards = [
+
                     ['label' => 'Teaching Days',    'value' => $stats[$selectedTerm]['teaching']],
                     ['label' => 'Exam Days',         'value' => $stats[$selectedTerm]['exam']],
+                    ['label' => 'Events',            'value' => $stats[$selectedTerm]['events']],
                     ['label' => 'Holiday Days',      'value' => $stats[$selectedTerm]['holiday']],
                     ['label' => 'Total School Days', 'value' => $stats[$selectedTerm]['total']],
                 ];
             @endphp
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-                @foreach($statCards as $stat)
-                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-4">
+                @foreach($statCards as $i => $stat)
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center"
+                         data-reveal="scale" style="--reveal-delay: {{ $i * 60 }}ms">
                         <p class="text-2xl sm:text-3xl font-black text-slate-900">{{ $stat['value'] }}</p>
                         <p class="text-xs font-semibold text-slate-400 mt-1">{{ $stat['label'] }}</p>
                     </div>
@@ -281,7 +290,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                 {{-- Monthly calendar grid (2/3 on lg) --}}
-                <div class="lg:col-span-2">
+                <div class="lg:col-span-2" data-reveal="fade">
 
                     {{-- Month navigation --}}
                     <div class="bg-white rounded-xl border border-slate-200 px-4 py-3 flex items-center justify-between mb-3">
@@ -363,28 +372,7 @@
                 </div>
 
                 {{-- Side panel (1/3 on lg) --}}
-                <div class="space-y-3">
-
-                    {{-- School Transfer Windows --}}
-                    <div class="rounded-xl border border-slate-200 bg-white p-4">
-                        <h4 class="text-sm font-semibold text-slate-900 mb-3">School Transfer Windows</h4>
-                        <div class="space-y-2">
-                            <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-50">
-                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-xs font-semibold text-slate-700">Period 1</p>
-                                    <p class="text-xs text-slate-500">17 May – 15 Jun {{ $currentCalendar?->year ?? date('Y') }}</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-50">
-                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-xs font-semibold text-slate-700">Period 2</p>
-                                    <p class="text-xs text-slate-500">18 Oct – 17 Nov {{ $currentCalendar?->year ?? date('Y') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="space-y-3" data-reveal="fade" style="--reveal-delay: 120ms">
 
                     {{-- Current month entries list --}}
                     @php

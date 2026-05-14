@@ -9,9 +9,11 @@ use App\Models\DigitalServiceCalendarEntry;
 use Carbon\Carbon;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DigitalServices extends Component
 {
+    use WithPagination;
     #[Url]
     public string $activeTab = 'downloads';
 
@@ -52,6 +54,7 @@ class DigitalServices extends Component
     public function setCategory(string $category): void
     {
         $this->activeCategory = $category;
+        $this->resetPage();
     }
 
     public function setAudience(string $audience): void
@@ -84,12 +87,28 @@ class DigitalServices extends Component
         }
     }
 
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatedActiveYear(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatedActiveMonth(): void
+    {
+        $this->resetPage();
+    }
+
     public function clearFilters(): void
     {
         $this->activeCategory = 'All';
         $this->activeYear     = 'All';
         $this->activeMonth    = 'All';
         $this->search         = '';
+        $this->resetPage();
     }
 
     public function render()
@@ -109,7 +128,7 @@ class DigitalServices extends Component
             $docQuery->where('title', 'like', '%' . $this->search . '%');
         }
 
-        $documents = $docQuery->orderBy('sort_order')->orderBy('published_at', 'desc')->orderBy('id', 'desc')->get();
+        $documents = $docQuery->orderBy('sort_order')->orderBy('published_at', 'desc')->orderBy('id', 'desc')->paginate(10);
 
         $years = DigitalServiceDocument::where('is_active', true)
             ->pluck('published_at')
@@ -166,38 +185,79 @@ class DigitalServices extends Component
             }
         }
 
-        // Compute stats per half-year term (Term 1 = Jan–Jun, Term 2 = Jul–Dec)
+        // Derive term periods from sorted 'term' marker entries (pairs: start, end)
+        // Markers: [0]=Term1 start, [1]=Term1 end, [2]=Term2 start, [3]=Term2 end
+        $termMarkers = $allCalendarEntries->where('type', 'term')->sortBy('date')->values();
+
+        $termPeriods = [];
+        for ($t = 1; $t <= 2; $t++) {
+            $startMarker = $termMarkers->get(($t - 1) * 2);
+            $endMarker   = $termMarkers->get(($t - 1) * 2 + 1);
+            if ($startMarker && $endMarker) {
+                $termPeriods[$t] = [
+                    'start' => $startMarker->date->copy(),
+                    'end'   => $endMarker->date->copy(),
+                ];
+            }
+        }
+
         $stats = [];
         foreach ([1, 2] as $term) {
-            $termStart = Carbon::create($calYear, $term === 1 ? 1 : 7, 1);
-            $termEnd   = Carbon::create($calYear, $term === 1 ? 6 : 12, 1)->endOfMonth();
+            if (! isset($termPeriods[$term])) {
+                $stats[$term] = ['teaching' => 0, 'exam' => 0, 'holiday' => 0, 'total' => 0, 'events' => 0];
+                continue;
+            }
 
-            $countDays = function (string $type) use ($allCalendarEntries, $termStart, $termEnd): int {
+            $tStart = $termPeriods[$term]['start'];
+            $tEnd   = $termPeriods[$term]['end'];
+
+            // Count weekday-days covered by entries of a given type within the term window
+            $countWeekdayDays = function (string $type) use ($allCalendarEntries, $tStart, $tEnd): int {
                 $days = [];
                 foreach ($allCalendarEntries->where('type', $type) as $entry) {
-                    $s = $entry->date->copy()->max($termStart);
-                    $e = ($entry->end_date ?? $entry->date)->copy()->min($termEnd);
+                    $s = $entry->date->copy()->max($tStart);
+                    $e = ($entry->end_date ?? $entry->date)->copy()->min($tEnd);
                     if ($s->gt($e)) {
                         continue;
                     }
                     $cur = $s->copy();
                     while ($cur->lte($e)) {
-                        $days[$cur->format('Y-m-d')] = true;
+                        if (! $cur->isWeekend()) {
+                            $days[$cur->format('Y-m-d')] = true;
+                        }
                         $cur->addDay();
                     }
                 }
                 return count($days);
             };
 
-            $holidayDays = $countDays('holiday');
-            $examDays    = $countDays('exam');
-            $termDays    = $countDays('term');
+            // Count total weekdays in term period
+            $totalWeekdays = 0;
+            $cur = $tStart->copy();
+            while ($cur->lte($tEnd)) {
+                if (! $cur->isWeekend()) {
+                    $totalWeekdays++;
+                }
+                $cur->addDay();
+            }
+
+            $holidayDays  = $countWeekdayDays('holiday');
+            $examDays     = $countWeekdayDays('exam');
+            $teachingDays = max(0, $totalWeekdays - $holidayDays - $examDays);
+
+            $eventCount = $allCalendarEntries
+                ->where('type', 'event')
+                ->filter(fn ($e) => ! $e->date->isWeekend()
+                    && $e->date->gte($tStart)
+                    && $e->date->lte($tEnd))
+                ->count();
 
             $stats[$term] = [
-                'teaching' => max(0, $termDays - $holidayDays),
+                'teaching' => $teachingDays,
                 'exam'     => $examDays,
                 'holiday'  => $holidayDays,
-                'total'    => max(0, $termDays - $holidayDays) + $examDays,
+                'total'    => $teachingDays + $examDays,
+                'events'   => $eventCount,
             ];
         }
 

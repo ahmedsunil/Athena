@@ -4,6 +4,7 @@ namespace App\Livewire\Cms\DigitalServices;
 
 use App\Models\DigitalServiceCalendar;
 use App\Models\DigitalServiceCalendarEntry;
+use App\Models\Event;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -32,6 +33,7 @@ class CalendarEntriesIndex extends Component
     public bool $is_active = true;
     public ?int $editingId = null;
     public bool $showEntryForm = false;
+    public bool $showSyncModal = false;
 
     public array $types = ['event', 'term', 'holiday', 'exam'];
 
@@ -113,6 +115,44 @@ class CalendarEntriesIndex extends Component
     public function cancelCalendar(): void
     {
         $this->resetCalendarForm();
+    }
+
+    public function syncEvents(): void
+    {
+        if (! $this->calendarId) {
+            return;
+        }
+
+        $calendar = DigitalServiceCalendar::find($this->calendarId);
+        if (! $calendar?->year) {
+            $this->dispatch('toast', message: 'Calendar has no year set — cannot sync.');
+            return;
+        }
+
+        $events = Event::where('is_active', true)
+            ->whereYear('date_start', $calendar->year)
+            ->get();
+
+        foreach ($events as $event) {
+            DigitalServiceCalendarEntry::updateOrCreate(
+                [
+                    'calendar_id' => $this->calendarId,
+                    'title'       => $event->title,
+                    'date'        => $event->date_start->format('Y-m-d'),
+                ],
+                [
+                    'end_date'    => $event->date_end?->format('Y-m-d'),
+                    'type'        => 'event',
+                    'description' => $event->short_description,
+                    'is_active'   => true,
+                    'sort_order'  => 0,
+                ]
+            );
+        }
+
+        $this->showSyncModal = false;
+        $this->dispatch('toast', message: "Synced {$events->count()} event(s) from Events.");
+        $this->resetPage();
     }
 
     public function newEntry(): void

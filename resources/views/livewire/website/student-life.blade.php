@@ -2,7 +2,7 @@
 
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
             <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Beyond the Classroom</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Student Life</h1>
         </div>
@@ -41,7 +41,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($clubs as $i => $club)
                     @php $colour = $clubPalette[$i % count($clubPalette)]; @endphp
-                    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-md transition-shadow"
+                         data-reveal="scale" style="--reveal-delay: {{ ($i % 6) * 60 }}ms">
                         <div class="w-20 h-20 rounded-2xl flex items-center justify-center mb-5 bg-white shadow-sm ring-1 ring-inset ring-slate-200 overflow-hidden">
                             @if($club->logo_path)
                                 <img src="{{ $club->logo_url }}" alt="{{ $club->name }}" class="w-full h-full object-contain p-2">
@@ -86,8 +87,9 @@
         {{-- Prefects tab --}}
         @if($activeTab === 'prefects')
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                @forelse($prefects as $prefect)
-                    <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center">
+                @forelse($prefects as $i => $prefect)
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center"
+                         data-reveal="scale" style="--reveal-delay: {{ ($i % 8) * 55 }}ms">
                         @if($prefect->photo_path)
                             <img src="{{ $prefect->photo_url }}" alt="{{ $prefect->name }}"
                                  class="w-20 h-20 rounded-full mx-auto mb-4 object-cover ring-4 {{ $prefect->role_colour }}">
@@ -126,9 +128,10 @@
         {{-- Houses tab --}}
         @if($activeTab === 'houses')
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                @forelse($houses as $house)
+                @forelse($houses as $i => $house)
                     @php $cc = $house->colour_classes; @endphp
-                    <div class="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                    <div class="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                         data-reveal="scale" style="--reveal-delay: {{ $i * 80 }}ms">
                         {{-- Left colour bar --}}
                         <div class="absolute inset-y-0 left-0 w-1.5 {{ $cc['bg'] }}"></div>
                         {{-- Shield watermark --}}
@@ -190,12 +193,13 @@
             ];
             @endphp
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                @forelse($uniformBodies as $body)
+                @forelse($uniformBodies as $i => $body)
                     @php
                     $ubg = $uniformBg[$body->colour] ?? 'bg-slate-100';
                     $ufg = $uniformFg[$body->colour] ?? 'text-slate-600';
                     @endphp
-                    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-md transition-shadow"
+                         data-reveal="scale" style="--reveal-delay: {{ ($i % 3) * 70 }}ms">
                         <div class="flex items-center gap-3 mb-4">
                             @if($body->logo_path)
                                 <img src="{{ $body->logo_url }}" alt="{{ $body->name }}" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">

@@ -94,6 +94,10 @@
                 @endif
             </div>
             <div class="flex items-center gap-2">
+                <button type="button" wire:click="$set('showSyncModal', true)"
+                        class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm transition-colors hover:bg-zinc-50">
+                    Sync Events
+                </button>
                 <button type="button" wire:click="editCalendar({{ $currentCalendar->id }})"
                         class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm transition-colors hover:bg-zinc-50">
                     Edit Calendar
@@ -259,6 +263,32 @@
         @if($entries->hasPages())
             <div class="px-1">{{ $entries->links() }}</div>
         @endif
+    @endif
+
+    {{-- Sync Events modal --}}
+    @if($showSyncModal)
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-zinc-950/40" wire:click="$set('showSyncModal', false)"></div>
+            <div class="relative z-10 w-full max-w-md rounded-xl bg-white shadow-xl ring-1 ring-zinc-200">
+                <div class="p-6">
+                    <h3 class="text-base font-semibold text-zinc-950 mb-1">Sync Events into Calendar</h3>
+                    <p class="text-sm text-zinc-500 mb-1">
+                        Pull all active Events for <span class="font-semibold text-zinc-700">{{ $currentCalendar->year }}</span> and add them as entries in this calendar.
+                    </p>
+                    <p class="text-xs text-zinc-400">Entries with a matching title and date will be updated, not duplicated.</p>
+                </div>
+                <div class="flex items-center justify-end gap-2 border-t border-zinc-100 px-6 py-4">
+                    <button type="button" wire:click="$set('showSyncModal', false)"
+                            class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-4 admin-label shadow-sm transition-colors hover:bg-zinc-50">
+                        Cancel
+                    </button>
+                    <button type="button" wire:click="syncEvents"
+                            class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-4 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800">
+                        Sync Events
+                    </button>
+                </div>
+            </div>
+        </div>
     @endif
 
 </div>
