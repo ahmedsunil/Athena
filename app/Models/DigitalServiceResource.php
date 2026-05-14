@@ -1,10 +1,12 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DigitalServiceResource extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'sort_order', 'title', 'description', 'audience',
         'icon', 'icon_color', 'url', 'is_active',

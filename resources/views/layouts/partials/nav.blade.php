@@ -15,8 +15,7 @@
         <a href="{{ route('academics.index') }}" class="text-sm font-medium {{ request()->routeIs('academics*') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_academics" data-en="Academics">{{ __('nav_academics') }}</span></a>
         <a href="{{ route('student-life.index') }}" class="text-sm font-medium {{ request()->routeIs('student-life*') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_student_life" data-en="Student Life">{{ __('nav_student_life') }}</span></a>
         <a href="{{ route('gallery.index') }}" class="text-sm font-medium {{ request()->routeIs('gallery*') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_gallery" data-en="Gallery">{{ __('nav_gallery') }}</span></a>
-        <a href="{{ route('downloads') }}" class="text-sm font-medium {{ request()->routeIs('downloads') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_downloads" data-en="Downloads">{{ __('nav_downloads') }}</span></a>
-        <a href="{{ route('digital-services') }}" class="text-sm font-medium {{ request()->routeIs('digital-services') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_digital_services" data-en="Digital Services">{{ __('nav_digital_services') }}</span></a>
+        <a href="{{ route('digital-services.index') }}" class="text-sm font-medium {{ request()->routeIs('digital-services*') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_digital_services" data-en="Digital Services">{{ __('nav_digital_services') }}</span></a>
       </nav>
       <div class="flex items-center gap-2">
         <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
@@ -39,8 +38,7 @@
     <a href="{{ route('academics.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('academics*') ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_academics" data-en="Academics">{{ __('nav_academics') }}</span></a>
     <a href="{{ route('student-life.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('student-life*') ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_student_life" data-en="Student Life">{{ __('nav_student_life') }}</span></a>
     <a href="{{ route('gallery.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('gallery*') ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_gallery" data-en="Gallery">{{ __('nav_gallery') }}</span></a>
-    <a href="{{ route('downloads') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('downloads') ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_downloads" data-en="Downloads">{{ __('nav_downloads') }}</span></a>
-    <a href="{{ route('digital-services') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('digital-services') ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_digital_services" data-en="Digital Services">{{ __('nav_digital_services') }}</span></a>
+    <a href="{{ route('digital-services.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('digital-services*') ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_digital_services" data-en="Digital Services">{{ __('nav_digital_services') }}</span></a>
   </div>
 </header>
 

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             AcademicsSeeder::class,
             StudentLifeSeeder::class,
             GallerySeeder::class,
+            DigitalServicesSeeder::class,
         ]);
 
         $admin = User::firstOrCreate(

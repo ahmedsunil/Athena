@@ -1,11 +1,13 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class DigitalServiceDocument extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'sort_order', 'title', 'category', 'file_type', 'file_size',
         'audience', 'published_at', 'file_path', 'is_active',
