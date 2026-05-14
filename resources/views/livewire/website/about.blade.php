@@ -1,15 +1,12 @@
 <div>
-    {{-- Hero --}}
-    <section class="relative h-72 sm:h-96 overflow-hidden bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900">
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
-        <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-10">
-            <div>
-                <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-2">About Our School</p>
-                <h1 class="text-3xl sm:text-5xl font-black text-white">{{ $profile->school_name }}</h1>
-                @if($profile->motto)
-                    <p class="text-slate-300 italic mt-1">"{{ $profile->motto }}"</p>
-                @endif
-            </div>
+    {{-- Page header --}}
+    <section class="bg-white border-b border-slate-200 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">About Our School</p>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ $profile->school_name }}</h1>
+            @if($profile->motto)
+                <p class="text-sm text-slate-500 italic mt-1" data-reveal="fade">"{{ $profile->motto }}"</p>
+            @endif
         </div>
     </section>
 
