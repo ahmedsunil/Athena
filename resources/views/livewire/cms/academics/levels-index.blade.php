@@ -1,9 +1,6 @@
 <div class="space-y-4">
 
-    <div>
-        <h1 class="admin-page-title">Academic Levels</h1>
-        <p class="admin-muted">Manage key stage cards shown on the public Academics page.</p>
-    </div>
+    @include('layouts.partials.cms-academics-tabs')
 
     <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
         <div class="mb-4">

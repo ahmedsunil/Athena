@@ -1,9 +1,6 @@
 <div class="space-y-4">
 
-    <div>
-        <h1 class="admin-page-title">Academics</h1>
-        <p class="admin-muted">Manage the overview text and curriculum line shown at the top of the Academics page.</p>
-    </div>
+    @include('layouts.partials.cms-academics-tabs')
 
     <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
         <h3 class="admin-section-title mb-4">Overview</h3>
