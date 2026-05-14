@@ -18,6 +18,7 @@ class AnnouncementShow extends Component
     {
         return view('livewire.website.announcement-show', [
             'announcement' => Announcement::where('slug', $this->slug)
+                ->where('is_active', true)
                 ->firstOrFail(),
         ])->layout('layouts.web');
     }

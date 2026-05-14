@@ -83,14 +83,14 @@ class Search extends Component
             ->orderBy('sort_order')
             ->orderByDesc('created_at')
             ->limit(4)
-            ->get(['title', 'category', 'description'])
+            ->get(['title', 'slug', 'category', 'description'])
             ->each(function ($announcement) use (&$results) {
                 $results[] = [
                     'section' => 'Announcements',
                     'color'   => 'rose',
                     'title'   => $announcement->title,
                     'snippet' => $announcement->category ?: $announcement->description,
-                    'url'     => route('announcements.index'),
+                    'url'     => route('announcements.show', $announcement->slug),
                 ];
             });
 
