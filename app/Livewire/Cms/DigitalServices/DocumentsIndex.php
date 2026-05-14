@@ -42,7 +42,7 @@ class DocumentsIndex extends Component
             'file_size'    => ['nullable', 'string', 'max:50'],
             'audience'     => ['required', 'in:All,Students,Parents,Staff'],
             'published_at' => ['required', 'date'],
-            'file'         => ['nullable', 'file', 'max:10240'],
+            'file'         => ['nullable', 'file', 'mimes:pdf,doc,docx,xls,xlsx', 'max:10240'],
             'sort_order'   => ['integer', 'min:0'],
             'is_active'    => ['boolean'],
         ];

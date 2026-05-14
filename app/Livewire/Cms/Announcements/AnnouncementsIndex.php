@@ -35,9 +35,9 @@ class AnnouncementsIndex extends Component
             'attachments' => ['nullable', 'array'],
             'attachments.*.label' => ['nullable', 'string', 'max:255'],
             'attachments.*.path' => ['nullable', 'string'],
-            'attachments.*.url' => ['nullable', 'url'],
+            'attachments.*.url' => ['nullable', 'url:http,https'],
             'uploaded_files' => ['nullable', 'array'],
-            'uploaded_files.*' => ['file', 'max:10240'],
+            'uploaded_files.*' => ['file', 'mimes:pdf,doc,docx,xls,xlsx,jpg,jpeg,png', 'max:10240'],
             'is_active' => ['boolean'],
             'sort_order' => ['integer', 'min:0'],
         ];

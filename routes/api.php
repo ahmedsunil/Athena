@@ -8,4 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/contact', [ContactMessageController::class, 'store'])->name('api.contact.store');
+Route::post('/contact', [ContactMessageController::class, 'store'])
+    ->middleware('throttle:contact')
+    ->name('api.contact.store');
