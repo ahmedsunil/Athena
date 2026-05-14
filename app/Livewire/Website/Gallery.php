@@ -48,10 +48,11 @@ class Gallery extends Component
         $albums = $query->orderBy('date', 'desc')->orderBy('id', 'desc')->get();
 
         $years = GalleryAlbum::where('is_active', true)
-            ->selectRaw('YEAR(date) as year')
-            ->distinct()
-            ->orderByDesc('year')
-            ->pluck('year');
+            ->pluck('date')
+            ->map(fn ($d) => date('Y', strtotime((string) $d)))
+            ->unique()
+            ->sortDesc()
+            ->values();
 
         $total = GalleryAlbum::where('is_active', true)->count();
 
