@@ -3,12 +3,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DigitalServiceCalendarEntry extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'sort_order', 'title', 'date', 'end_date', 'type', 'description', 'is_active',
+        'calendar_id', 'sort_order', 'title', 'date', 'end_date', 'type', 'description', 'is_active',
     ];
 
     protected $casts = [
@@ -16,6 +18,11 @@ class DigitalServiceCalendarEntry extends Model
         'end_date'  => 'date',
         'is_active' => 'boolean',
     ];
+
+    public function calendar(): BelongsTo
+    {
+        return $this->belongsTo(DigitalServiceCalendar::class, 'calendar_id');
+    }
 
     public function getTypeBadgeClassesAttribute(): string
     {

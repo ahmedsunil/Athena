@@ -217,34 +217,73 @@
 
         {{-- Academic Calendar tab --}}
         @if($activeTab === 'calendar')
-            <div class="max-w-2xl space-y-3">
-                @forelse($calendarEntries as $entry)
-                    <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-4">
-                        <div class="flex-shrink-0 text-center w-10 pt-0.5">
-                            <p class="text-xl font-black text-rose-600 leading-none">{{ $entry->date->format('d') }}</p>
-                            <p class="text-[10px] text-slate-400 uppercase font-semibold">{{ $entry->date->format('M') }}</p>
-                            <p class="text-[10px] text-slate-300 font-semibold">{{ $entry->date->format('Y') }}</p>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-2 flex-wrap mb-1">
-                                <p class="text-sm font-semibold text-slate-900">{{ $entry->title }}</p>
-                                <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded {{ $entry->type_badge_classes }}">
-                                    {{ $entry->type }}
-                                </span>
+            <div class="max-w-2xl">
+                {{-- Calendar selector --}}
+                @if($allCalendars->count() > 1)
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        @foreach($allCalendars as $cal)
+                            <button wire:click="setCalendar({{ $cal->id }})"
+                                    class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
+                                           {{ $activeCalendarId === $cal->id ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                                {{ $cal->year ?? $cal->title }}
+                            </button>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if($currentCalendar)
+                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
+                        {{ $currentCalendar->title }}
+                        @if($currentCalendar->is_active)
+                            <span class="ml-2 text-rose-500">● Current</span>
+                        @endif
+                    </p>
+                @endif
+
+                <div class="space-y-3">
+                    @forelse($calendarEntries as $entry)
+                        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-4">
+                            <div class="flex-shrink-0 text-center w-10 pt-0.5">
+                                <p class="text-xl font-black text-rose-600 leading-none">{{ $entry->date->format('d') }}</p>
+                                <p class="text-[10px] text-slate-400 uppercase font-semibold">{{ $entry->date->format('M') }}</p>
+                                <p class="text-[10px] text-slate-300 font-semibold">{{ $entry->date->format('Y') }}</p>
                             </div>
-                            @if($entry->end_date)
-                                <p class="text-xs text-slate-400 mb-0.5">Until {{ $entry->end_date->format('d M Y') }}</p>
-                            @endif
-                            @if($entry->description)
-                                <p class="text-xs text-slate-500 leading-relaxed">{{ $entry->description }}</p>
-                            @endif
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 flex-wrap mb-1">
+                                    <p class="text-sm font-semibold text-slate-900">{{ $entry->title }}</p>
+                                    <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded {{ $entry->type_badge_classes }}">
+                                        {{ $entry->type }}
+                                    </span>
+                                </div>
+                                @if($entry->end_date)
+                                    <p class="text-xs text-slate-400 mb-0.5">Until {{ $entry->end_date->format('d M Y') }}</p>
+                                @endif
+                                @if($entry->description)
+                                    <p class="text-xs text-slate-500 leading-relaxed">{{ $entry->description }}</p>
+                                @endif
+                            </div>
                         </div>
+                    @empty
+                        <div class="text-center py-16 text-slate-400">
+                            <p class="font-semibold">No calendar entries found</p>
+                        </div>
+                    @endforelse
+                </div>
+
+                {{-- Pagination --}}
+                @if($calendarTotalPages > 1)
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-200">
+                        <button wire:click="calendarPrevPage" @disabled($calendarPage <= 1)
+                                class="px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                            ← Previous
+                        </button>
+                        <span class="text-xs text-slate-400">Page {{ $calendarPage }} of {{ $calendarTotalPages }}</span>
+                        <button wire:click="calendarNextPage" @disabled($calendarPage >= $calendarTotalPages)
+                                class="px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                            Next →
+                        </button>
                     </div>
-                @empty
-                    <div class="text-center py-16 text-slate-400">
-                        <p class="font-semibold">No calendar entries found</p>
-                    </div>
-                @endforelse
+                @endif
             </div>
         @endif
 

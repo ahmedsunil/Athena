@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DigitalServiceCalendar;
 use App\Models\DigitalServiceDocument;
 use App\Models\DigitalServiceResource;
 use App\Models\DigitalServiceCalendarEntry;
@@ -56,8 +57,13 @@ class DigitalServicesSeeder extends Seeder
             );
         }
 
-        // Replace all calendar entries with Ministry of Education Academic Calendar 2026 (TENTATIVE 10.08.2025)
-        DigitalServiceCalendarEntry::truncate();
+        // Academic Calendar 2026 — Ministry of Education (TENTATIVE 10.08.2025)
+        $calendar = DigitalServiceCalendar::updateOrCreate(
+            ['title' => 'Academic Calendar 2026'],
+            ['year' => 2026, 'description' => 'Maldives Ministry of Education Academic Calendar 2026 (Tentative, issued 10.08.2025).', 'sort_order' => 1, 'is_active' => true]
+        );
+
+        DigitalServiceCalendarEntry::where('calendar_id', $calendar->id)->delete();
 
         $calendarEntries = [
             // January
@@ -110,7 +116,7 @@ class DigitalServicesSeeder extends Seeder
         ];
 
         foreach ($calendarEntries as $data) {
-            DigitalServiceCalendarEntry::create(array_merge($data, ['is_active' => true]));
+            DigitalServiceCalendarEntry::create(array_merge($data, ['calendar_id' => $calendar->id, 'is_active' => true]));
         }
     }
 }

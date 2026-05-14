@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Website;
 
+use App\Models\DigitalServiceCalendar;
 use App\Models\DigitalServiceDocument;
 use App\Models\DigitalServiceResource;
 use App\Models\DigitalServiceCalendarEntry;
@@ -25,6 +26,12 @@ class DigitalServices extends Component
     #[Url]
     public string $activeAudience = 'All';
 
+    #[Url]
+    public ?int $activeCalendarId = null;
+
+    public int $calendarPage = 1;
+    public int $calendarPerPage = 15;
+
     public string $search = '';
 
     public array $docCategories = [
@@ -47,6 +54,24 @@ class DigitalServices extends Component
     public function setAudience(string $audience): void
     {
         $this->activeAudience = $audience;
+    }
+
+    public function setCalendar(int $id): void
+    {
+        $this->activeCalendarId = $id;
+        $this->calendarPage = 1;
+    }
+
+    public function calendarNextPage(): void
+    {
+        $this->calendarPage++;
+    }
+
+    public function calendarPrevPage(): void
+    {
+        if ($this->calendarPage > 1) {
+            $this->calendarPage--;
+        }
     }
 
     public function clearFilters(): void
@@ -91,13 +116,30 @@ class DigitalServices extends Component
         }
         $resources = $resourceQuery->orderBy('sort_order')->orderBy('id')->get();
 
-        $calendarEntries = DigitalServiceCalendarEntry::where('is_active', true)
-            ->orderBy('date')
-            ->orderBy('id')
+        $allCalendars = DigitalServiceCalendar::orderBy('year', 'desc')->get();
+
+        if ($this->activeCalendarId === null) {
+            $defaultCal = $allCalendars->firstWhere('is_active', true) ?? $allCalendars->first();
+            $this->activeCalendarId = $defaultCal?->id;
+        }
+
+        $currentCalendar = $allCalendars->firstWhere('id', $this->activeCalendarId);
+
+        $calendarEntriesQuery = DigitalServiceCalendarEntry::where('is_active', true)
+            ->where('calendar_id', $this->activeCalendarId)
+            ->orderBy('date')->orderBy('id');
+
+        $totalCalendarEntries = $calendarEntriesQuery->count();
+        $calendarEntries = $calendarEntriesQuery
+            ->skip(($this->calendarPage - 1) * $this->calendarPerPage)
+            ->take($this->calendarPerPage)
             ->get();
 
+        $calendarTotalPages = (int) ceil($totalCalendarEntries / $this->calendarPerPage);
+
         return view('livewire.website.digital-services', compact(
-            'documents', 'years', 'resources', 'calendarEntries'
+            'documents', 'years', 'resources',
+            'allCalendars', 'currentCalendar', 'calendarEntries', 'calendarTotalPages'
         ))->layout('layouts.web');
     }
 }

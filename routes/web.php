@@ -44,6 +44,7 @@ use App\Livewire\Website\Gallery;
 use App\Livewire\Cms\DigitalServices\DocumentsIndex;
 use App\Livewire\Cms\DigitalServices\ResourcesIndex;
 use App\Livewire\Cms\DigitalServices\CalendarEntriesIndex;
+use App\Livewire\Cms\DigitalServices\CalendarsIndex;
 use App\Livewire\Website\DigitalServices;
 use Illuminate\Support\Facades\Route;
 
@@ -107,6 +108,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cms/digital-services/documents',       DocumentsIndex::class)->name('cms.digital-services.documents');
     Route::get('/cms/digital-services/resources',       ResourcesIndex::class)->name('cms.digital-services.resources');
     Route::get('/cms/digital-services/calendar',        CalendarEntriesIndex::class)->name('cms.digital-services.calendar');
+    Route::get('/cms/digital-services/calendars',       CalendarsIndex::class)->name('cms.digital-services.calendars');
 
     // Profile & settings
     Route::get('/profile', ProfileSettings::class)->name('profile.index');
