@@ -64,10 +64,7 @@ function setLang(l) {
   document.getElementById('lang-en').className = isDv ? inactive : active;
   document.getElementById('lang-dv').className = isDv ? active : inactive;
 
-  // persist session in background
-  fetch(window.__langUrl + '/' + l);
   localStorage.setItem('lang', l);
-
-  window.__locale = l;
+  window.location.href = window.__langUrl + '/' + l;
 }
 </script>
