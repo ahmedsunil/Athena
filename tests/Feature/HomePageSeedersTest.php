@@ -26,38 +26,36 @@ class HomePageSeedersTest extends TestCase
             HomeTestimonialSeeder::class,
         ]);
 
-        $this->assertDatabaseHas('school_profiles', [
-            'id' => 1,
-            'principal_name' => 'Dr. Patricia Nwachukwu',
-            'email' => 'info@schoolportal.edu.ng',
-        ]);
+        $profile = SchoolProfile::firstOrFail();
+        $this->assertSame(1, $profile->id);
+        $this->assertSame('Dr. Patricia Nwachukwu', $profile->principal_name);
+        $this->assertSame('info@schoolportal.edu.ng', $profile->email);
+        $this->assertSame(
+            'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
+            $profile->principal_photo_url
+        );
 
-        $this->assertDatabaseHas('home_stats', [
-            'title' => 'Students Enrolled',
-            'value' => '1,200+',
-            'sort_order' => 0,
-        ]);
+        $stat = HomeStat::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === 'Students Enrolled');
+        $this->assertNotNull($stat);
+        $this->assertSame('1,200+', $stat->value);
+        $this->assertSame(0, $stat->sort_order);
 
-        $this->assertDatabaseHas('home_quick_access', [
-            'title' => 'Admissions',
-            'icon_key' => 'ClipboardList',
-            'link_key' => '/admissions',
-        ]);
+        $qa = HomeQuickAccess::all()->first(fn ($q) => $q->getTranslation('title', 'en', false) === 'Admissions');
+        $this->assertNotNull($qa);
+        $this->assertSame('ClipboardList', $qa->icon_key);
+        $this->assertSame('/admissions', $qa->link_key);
 
-        $this->assertDatabaseHas('home_testimonials', [
-            'name' => 'Mrs. Adaeze Okonkwo',
-            'current_designation' => 'Parent of Year 9 Student',
-        ]);
+        $testimonial = HomeTestimonial::all()->first(fn ($t) => $t->name === 'Mrs. Adaeze Okonkwo');
+        $this->assertNotNull($testimonial);
+        $this->assertSame('Parent of Year 9 Student', $testimonial->getTranslation('current_designation', 'en', false));
+        $this->assertSame(
+            'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80',
+            $testimonial->photo_url
+        );
 
         $this->assertSame(4, HomeStat::count());
         $this->assertSame(8, HomeQuickAccess::count());
         $this->assertSame(4, HomeTestimonial::count());
-
-        $profile = SchoolProfile::firstOrFail();
-        $testimonial = HomeTestimonial::where('name', 'Mrs. Adaeze Okonkwo')->firstOrFail();
-
-        $this->assertSame('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80', $profile->principal_photo_url);
-        $this->assertSame('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80', $testimonial->photo_url);
     }
 
     public function test_home_page_supporting_seeders_are_idempotent(): void

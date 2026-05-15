@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Spatie\Translatable\HasTranslations;
 class StaffMember extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['designation', 'education'];
+
     protected $fillable = [
         'name', 'designation', 'education', 'photo_path',
         'section', 'sub_section', 'work_experiences',

@@ -10,12 +10,16 @@ class AchievementsIndex extends Component
 {
     use WithFileUploads;
 
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $category = 'school';
     public string $year = '';
-    public string $description = '';
-    public string $award = '';
-    public string $event_name = '';
+    public string $description_en = '';
+    public string $description_dv = '';
+    public string $award_en = '';
+    public string $award_dv = '';
+    public string $event_name_en = '';
+    public string $event_name_dv = '';
     public string $person_name = '';
     public bool $is_active = true;
     public int $sort_order = 0;
@@ -27,16 +31,20 @@ class AchievementsIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'       => ['required', 'string', 'max:255'],
-            'category'    => ['required', 'in:school,students,staff'],
-            'year'        => ['required', 'integer', 'min:1900', 'max:2100'],
-            'description' => ['nullable', 'string'],
-            'award'       => ['nullable', 'string', 'max:255'],
-            'event_name'  => ['nullable', 'string', 'max:255'],
-            'person_name' => ['nullable', 'string', 'max:255'],
-            'is_active'   => ['boolean'],
-            'sort_order'  => ['integer', 'min:0'],
-            'photo'       => ['nullable', 'image', 'max:2048'],
+            'title_en'       => ['required', 'string', 'max:255'],
+            'title_dv'       => ['nullable', 'string', 'max:255'],
+            'category'       => ['required', 'in:school,students,staff'],
+            'year'           => ['required', 'integer', 'min:1900', 'max:2100'],
+            'description_en' => ['nullable', 'string'],
+            'description_dv' => ['nullable', 'string'],
+            'award_en'       => ['nullable', 'string', 'max:255'],
+            'award_dv'       => ['nullable', 'string', 'max:255'],
+            'event_name_en'  => ['nullable', 'string', 'max:255'],
+            'event_name_dv'  => ['nullable', 'string', 'max:255'],
+            'person_name'    => ['nullable', 'string', 'max:255'],
+            'is_active'      => ['boolean'],
+            'sort_order'     => ['integer', 'min:0'],
+            'photo'          => ['nullable', 'image', 'max:2048'],
         ];
     }
 
@@ -45,12 +53,12 @@ class AchievementsIndex extends Component
         $this->validate();
 
         $data = [
-            'title'       => $this->title,
+            'title'       => ['en' => $this->title_en, 'dv' => $this->title_dv],
             'category'    => $this->category,
             'year'        => (int) $this->year,
-            'description' => $this->description,
-            'award'       => $this->award,
-            'event_name'  => $this->event_name,
+            'description' => ['en' => $this->description_en, 'dv' => $this->description_dv],
+            'award'       => ['en' => $this->award_en, 'dv' => $this->award_dv],
+            'event_name'  => ['en' => $this->event_name_en, 'dv' => $this->event_name_dv],
             'person_name' => $this->person_name,
             'is_active'   => $this->is_active,
             'sort_order'  => $this->sort_order,
@@ -77,12 +85,16 @@ class AchievementsIndex extends Component
     {
         $item = Achievement::findOrFail($id);
         $this->editingId      = $item->id;
-        $this->title          = $item->title;
+        $this->title_en       = $item->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv       = $item->getTranslation('title', 'dv', false) ?? '';
         $this->category       = $item->category;
         $this->year           = (string) $item->year;
-        $this->description    = $item->description ?? '';
-        $this->award          = $item->award ?? '';
-        $this->event_name     = $item->event_name ?? '';
+        $this->description_en = $item->getTranslation('description', 'en', false) ?? '';
+        $this->description_dv = $item->getTranslation('description', 'dv', false) ?? '';
+        $this->award_en       = $item->getTranslation('award', 'en', false) ?? '';
+        $this->award_dv       = $item->getTranslation('award', 'dv', false) ?? '';
+        $this->event_name_en  = $item->getTranslation('event_name', 'en', false) ?? '';
+        $this->event_name_dv  = $item->getTranslation('event_name', 'dv', false) ?? '';
         $this->person_name    = $item->person_name ?? '';
         $this->is_active      = $item->is_active;
         $this->sort_order     = $item->sort_order;
@@ -110,9 +122,13 @@ class AchievementsIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['title', 'category', 'year', 'description', 'award',
-            'event_name', 'person_name', 'is_active', 'sort_order',
-            'photo', 'existing_photo', 'photoRemoved', 'editingId']);
+        $this->reset([
+            'title_en', 'title_dv', 'category', 'year',
+            'description_en', 'description_dv',
+            'award_en', 'award_dv', 'event_name_en', 'event_name_dv',
+            'person_name', 'is_active', 'sort_order',
+            'photo', 'existing_photo', 'photoRemoved', 'editingId',
+        ]);
         $this->category  = 'school';
         $this->is_active = true;
         $this->year      = (string) now()->year;

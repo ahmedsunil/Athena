@@ -10,10 +10,16 @@
                 <p class="admin-caption">Displayed on the About page, Mission & Vision section.</p>
             </div>
             <div>
-                <label class="mb-1.5 block admin-label">Mission</label>
-                <textarea wire:model="mission" rows="4"
+                <label class="mb-1.5 block admin-label">Mission (English)</label>
+                <textarea wire:model="mission_en" rows="4"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('mission') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('mission_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="mt-2">
+                <label class="mb-1.5 block admin-label">Mission (ދިވެހި)</label>
+                <textarea wire:model="mission_dv" rows="4" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('mission_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
         </div>
 
@@ -22,10 +28,16 @@
                 <h3 class="admin-section-title">Vision Statement</h3>
             </div>
             <div>
-                <label class="mb-1.5 block admin-label">Vision</label>
-                <textarea wire:model="vision" rows="4"
+                <label class="mb-1.5 block admin-label">Vision (English)</label>
+                <textarea wire:model="vision_en" rows="4"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('vision') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('vision_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="mt-2">
+                <label class="mb-1.5 block admin-label">Vision (ދިވެހި)</label>
+                <textarea wire:model="vision_dv" rows="4" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('vision_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
         </div>
 

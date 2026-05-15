@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Spatie\Translatable\HasTranslations;
 class Achievement extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description', 'award', 'event_name'];
+
     protected $fillable = [
         'title', 'category', 'year', 'description',
         'award', 'event_name', 'person_name', 'photo_path',

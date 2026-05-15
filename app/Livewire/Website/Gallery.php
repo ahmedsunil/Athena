@@ -36,7 +36,7 @@ class Gallery extends Component
         $query = GalleryAlbum::where('is_active', true);
 
         if ($this->activeCategory !== 'All') {
-            $query->where('category', $this->activeCategory);
+            $query->where('category->' . app()->getLocale(), $this->activeCategory);
         }
         if ($this->activeYear !== 'All') {
             $query->whereYear('date', (int) $this->activeYear);

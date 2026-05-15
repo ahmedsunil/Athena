@@ -11,17 +11,21 @@ class EventsIndex extends Component
 {
     use WithFileUploads;
 
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $slug = '';
     public string $status = 'upcoming';
     public string $date_start = '';
     public string $date_end = '';
-    public string $location = '';
+    public string $location_en = '';
+    public string $location_dv = '';
     public $cover_image = null;
     public ?string $existing_cover_image = null;
     public bool $coverImageRemoved = false;
-    public string $short_description = '';
-    public string $full_description = '';
+    public string $short_description_en = '';
+    public string $short_description_dv = '';
+    public string $full_description_en = '';
+    public string $full_description_dv = '';
     public string $contact = '';
     public array $attachments = [];
     public bool $is_featured = false;
@@ -32,15 +36,19 @@ class EventsIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'                => ['required', 'string', 'max:255'],
+            'title_en'             => ['required', 'string', 'max:255'],
+            'title_dv'             => ['nullable', 'string', 'max:255'],
             'slug'                 => ['required', 'string', 'max:255'],
             'status'               => ['required', 'in:ongoing,upcoming,completed'],
             'date_start'           => ['required', 'date'],
             'date_end'             => ['nullable', 'date', 'after_or_equal:date_start'],
-            'location'             => ['required', 'string', 'max:255'],
+            'location_en'          => ['required', 'string', 'max:255'],
+            'location_dv'          => ['nullable', 'string', 'max:255'],
             'cover_image'          => ['nullable', 'image', 'max:4096'],
-            'short_description'    => ['required', 'string'],
-            'full_description'     => ['nullable', 'string'],
+            'short_description_en' => ['required', 'string'],
+            'short_description_dv' => ['nullable', 'string'],
+            'full_description_en'  => ['nullable', 'string'],
+            'full_description_dv'  => ['nullable', 'string'],
             'contact'              => ['nullable', 'string', 'max:255'],
             'attachments'          => ['nullable', 'array'],
             'attachments.*.label'  => ['nullable', 'string', 'max:255'],
@@ -51,7 +59,7 @@ class EventsIndex extends Component
         ];
     }
 
-    public function updatedTitle(string $value): void
+    public function updatedTitleEn(string $value): void
     {
         if ($this->slug === '') {
             $this->slug = Str::slug($value);
@@ -63,16 +71,18 @@ class EventsIndex extends Component
         $this->validate();
 
         $data = [
-            'title'               => $this->title,
-            'slug'                => Str::slug($this->slug),
-            'status'              => $this->status,
-            'date_start'          => $this->date_start,
-            'date_end'            => $this->date_end ?: null,
-            'location'            => $this->location,
-            'short_description'   => $this->short_description,
-            'full_description'    => $this->full_description ?: null,
-            'contact'             => $this->contact ?: null,
-            'attachments'         => array_values(array_filter(
+            'title'             => ['en' => $this->title_en, 'dv' => $this->title_dv],
+            'slug'              => Str::slug($this->slug),
+            'status'            => $this->status,
+            'date_start'        => $this->date_start,
+            'date_end'          => $this->date_end ?: null,
+            'location'          => ['en' => $this->location_en, 'dv' => $this->location_dv],
+            'short_description' => ['en' => $this->short_description_en, 'dv' => $this->short_description_dv],
+            'full_description'  => ($this->full_description_en || $this->full_description_dv)
+                                    ? ['en' => $this->full_description_en, 'dv' => $this->full_description_dv]
+                                    : null,
+            'contact'           => $this->contact ?: null,
+            'attachments'       => array_values(array_filter(
                 $this->attachments,
                 fn($a) => ! empty($a['label']) || ! empty($a['url'])
             )) ?: null,
@@ -101,22 +111,26 @@ class EventsIndex extends Component
     public function edit(int $id): void
     {
         $event = Event::findOrFail($id);
-        $this->editingId            = $event->id;
-        $this->title                = $event->title;
-        $this->slug                 = $event->slug;
-        $this->status               = $event->status;
-        $this->date_start           = $event->date_start->format('Y-m-d');
-        $this->date_end             = $event->date_end?->format('Y-m-d') ?? '';
-        $this->location             = $event->location;
-        $this->existing_cover_image = $event->cover_image_path;
-        $this->coverImageRemoved    = false;
-        $this->short_description    = $event->short_description;
-        $this->full_description     = $event->full_description ?? '';
-        $this->contact              = $event->contact ?? '';
-        $this->attachments          = $event->attachments ?? [];
-        $this->is_featured          = $event->is_featured;
-        $this->featured_sort_order  = $event->featured_sort_order;
-        $this->is_active            = $event->is_active;
+        $this->editingId              = $event->id;
+        $this->title_en               = $event->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv               = $event->getTranslation('title', 'dv', false) ?? '';
+        $this->slug                   = $event->slug;
+        $this->status                 = $event->status;
+        $this->date_start             = $event->date_start->format('Y-m-d');
+        $this->date_end               = $event->date_end?->format('Y-m-d') ?? '';
+        $this->location_en            = $event->getTranslation('location', 'en', false) ?? '';
+        $this->location_dv            = $event->getTranslation('location', 'dv', false) ?? '';
+        $this->existing_cover_image   = $event->cover_image_path;
+        $this->coverImageRemoved      = false;
+        $this->short_description_en   = $event->getTranslation('short_description', 'en', false) ?? '';
+        $this->short_description_dv   = $event->getTranslation('short_description', 'dv', false) ?? '';
+        $this->full_description_en    = $event->getTranslation('full_description', 'en', false) ?? '';
+        $this->full_description_dv    = $event->getTranslation('full_description', 'dv', false) ?? '';
+        $this->contact                = $event->contact ?? '';
+        $this->attachments            = $event->attachments ?? [];
+        $this->is_featured            = $event->is_featured;
+        $this->featured_sort_order    = $event->featured_sort_order;
+        $this->is_active              = $event->is_active;
     }
 
     public function delete(int $id): void
@@ -150,11 +164,12 @@ class EventsIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'title', 'slug', 'date_start', 'date_end', 'location',
+            'title_en', 'title_dv', 'slug', 'date_start', 'date_end',
+            'location_en', 'location_dv',
             'cover_image', 'existing_cover_image', 'coverImageRemoved',
-            'short_description', 'full_description', 'contact',
-            'attachments', 'is_featured', 'featured_sort_order',
-            'editingId',
+            'short_description_en', 'short_description_dv',
+            'full_description_en', 'full_description_dv',
+            'contact', 'attachments', 'is_featured', 'featured_sort_order', 'editingId',
         ]);
         $this->status    = 'upcoming';
         $this->is_active = true;

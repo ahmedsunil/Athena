@@ -5,8 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+use Spatie\Translatable\HasTranslations;
 class Announcement extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'category', 'description'];
+
     protected $fillable = [
         'sort_order',
         'icon_key',

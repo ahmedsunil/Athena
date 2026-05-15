@@ -11,8 +11,10 @@ class FoundingMembersIndex extends Component
     use WithFileUploads;
 
     public string $name = '';
-    public string $subject = '';
-    public string $tribute = '';
+    public string $subject_en = '';
+    public string $subject_dv = '';
+    public string $tribute_en = '';
+    public string $tribute_dv = '';
     public int $sort_order = 0;
     public $photo = null;
     public ?string $existing_photo = null;
@@ -23,8 +25,10 @@ class FoundingMembersIndex extends Component
     {
         return [
             'name'       => ['required', 'string', 'max:255'],
-            'subject'    => ['nullable', 'string', 'max:255'],
-            'tribute'    => ['nullable', 'string'],
+            'subject_en' => ['nullable', 'string', 'max:255'],
+            'subject_dv' => ['nullable', 'string', 'max:255'],
+            'tribute_en' => ['nullable', 'string'],
+            'tribute_dv' => ['nullable', 'string'],
             'sort_order' => ['integer', 'min:0'],
             'photo'      => ['nullable', 'image', 'max:2048'],
         ];
@@ -36,8 +40,8 @@ class FoundingMembersIndex extends Component
 
         $data = [
             'name'       => $this->name,
-            'subject'    => $this->subject,
-            'tribute'    => $this->tribute,
+            'subject'    => ['en' => $this->subject_en, 'dv' => $this->subject_dv],
+            'tribute'    => ['en' => $this->tribute_en, 'dv' => $this->tribute_dv],
             'sort_order' => $this->sort_order,
         ];
 
@@ -63,8 +67,10 @@ class FoundingMembersIndex extends Component
         $item = FoundingMember::findOrFail($id);
         $this->editingId      = $item->id;
         $this->name           = $item->name;
-        $this->subject        = $item->subject ?? '';
-        $this->tribute        = $item->tribute ?? '';
+        $this->subject_en     = $item->getTranslation('subject', 'en', false) ?? '';
+        $this->subject_dv     = $item->getTranslation('subject', 'dv', false) ?? '';
+        $this->tribute_en     = $item->getTranslation('tribute', 'en', false) ?? '';
+        $this->tribute_dv     = $item->getTranslation('tribute', 'dv', false) ?? '';
         $this->sort_order     = $item->sort_order;
         $this->existing_photo = $item->photo_path;
         $this->photoRemoved   = false;
@@ -90,7 +96,7 @@ class FoundingMembersIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['name', 'subject', 'tribute', 'sort_order',
+        $this->reset(['name', 'subject_en', 'subject_dv', 'tribute_en', 'tribute_dv', 'sort_order',
             'photo', 'existing_photo', 'photoRemoved', 'editingId']);
     }
 

@@ -3,8 +3,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Translatable\HasTranslations;
 class StudentLifeHouse extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['name', 'motto', 'description', 'house_master_role'];
+
     protected $table = 'student_life_houses';
 
     protected $fillable = [

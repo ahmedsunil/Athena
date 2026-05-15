@@ -10,11 +10,15 @@ class HomeSlidesIndex extends Component
 {
     use WithFileUploads;
 
-    public string $title = '';
-    public string $description = '';
-    public string $button_1_label = '';
+    public string $title_en = '';
+    public string $title_dv = '';
+    public string $description_en = '';
+    public string $description_dv = '';
+    public string $button_1_label_en = '';
+    public string $button_1_label_dv = '';
     public string $button_1_link_key = '';
-    public string $button_2_label = '';
+    public string $button_2_label_en = '';
+    public string $button_2_label_dv = '';
     public string $button_2_link_key = '';
     public bool $is_active = true;
     public int $sort_order = 0;
@@ -26,15 +30,19 @@ class HomeSlidesIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'            => ['required', 'string', 'max:255'],
-            'description'      => ['nullable', 'string'],
-            'button_1_label'   => ['nullable', 'string', 'max:100'],
+            'title_en'          => ['required', 'string', 'max:255'],
+            'title_dv'          => ['nullable', 'string', 'max:255'],
+            'description_en'    => ['nullable', 'string'],
+            'description_dv'    => ['nullable', 'string'],
+            'button_1_label_en' => ['nullable', 'string', 'max:100'],
+            'button_1_label_dv' => ['nullable', 'string', 'max:100'],
             'button_1_link_key' => ['nullable', 'string'],
-            'button_2_label'   => ['nullable', 'string', 'max:100'],
+            'button_2_label_en' => ['nullable', 'string', 'max:100'],
+            'button_2_label_dv' => ['nullable', 'string', 'max:100'],
             'button_2_link_key' => ['nullable', 'string'],
-            'is_active'        => ['boolean'],
-            'sort_order'       => ['integer', 'min:0'],
-            'image'            => ['nullable', 'image', 'max:4096'],
+            'is_active'         => ['boolean'],
+            'sort_order'        => ['integer', 'min:0'],
+            'image'             => ['nullable', 'image', 'max:4096'],
         ];
     }
 
@@ -43,14 +51,14 @@ class HomeSlidesIndex extends Component
         $this->validate();
 
         $data = [
-            'title'             => $this->title,
-            'description'       => $this->description,
-            'button_1_label'    => $this->button_1_label,
+            'title'          => ['en' => $this->title_en, 'dv' => $this->title_dv],
+            'description'    => ['en' => $this->description_en, 'dv' => $this->description_dv],
+            'button_1_label' => ['en' => $this->button_1_label_en, 'dv' => $this->button_1_label_dv],
             'button_1_link_key' => $this->button_1_link_key,
-            'button_2_label'    => $this->button_2_label,
+            'button_2_label' => ['en' => $this->button_2_label_en, 'dv' => $this->button_2_label_dv],
             'button_2_link_key' => $this->button_2_link_key,
-            'is_active'         => $this->is_active,
-            'sort_order'        => $this->sort_order,
+            'is_active'      => $this->is_active,
+            'sort_order'     => $this->sort_order,
         ];
 
         if ($this->image) {
@@ -74,11 +82,15 @@ class HomeSlidesIndex extends Component
     {
         $slide = HomeSlide::findOrFail($id);
         $this->editingId         = $slide->id;
-        $this->title             = $slide->title;
-        $this->description       = $slide->description ?? '';
-        $this->button_1_label    = $slide->button_1_label ?? '';
+        $this->title_en          = $slide->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv          = $slide->getTranslation('title', 'dv', false) ?? '';
+        $this->description_en    = $slide->getTranslation('description', 'en', false) ?? '';
+        $this->description_dv    = $slide->getTranslation('description', 'dv', false) ?? '';
+        $this->button_1_label_en = $slide->getTranslation('button_1_label', 'en', false) ?? '';
+        $this->button_1_label_dv = $slide->getTranslation('button_1_label', 'dv', false) ?? '';
         $this->button_1_link_key = $slide->button_1_link_key ?? '';
-        $this->button_2_label    = $slide->button_2_label ?? '';
+        $this->button_2_label_en = $slide->getTranslation('button_2_label', 'en', false) ?? '';
+        $this->button_2_label_dv = $slide->getTranslation('button_2_label', 'dv', false) ?? '';
         $this->button_2_link_key = $slide->button_2_link_key ?? '';
         $this->is_active         = $slide->is_active;
         $this->sort_order        = $slide->sort_order;
@@ -105,9 +117,12 @@ class HomeSlidesIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['title', 'description', 'button_1_label', 'button_1_link_key',
-            'button_2_label', 'button_2_link_key', 'is_active', 'sort_order',
-            'image', 'existing_image', 'imageRemoved', 'editingId']);
+        $this->reset([
+            'title_en', 'title_dv', 'description_en', 'description_dv',
+            'button_1_label_en', 'button_1_label_dv', 'button_1_link_key',
+            'button_2_label_en', 'button_2_label_dv', 'button_2_link_key',
+            'is_active', 'sort_order', 'image', 'existing_image', 'imageRemoved', 'editingId',
+        ]);
         $this->is_active = true;
     }
 

@@ -7,8 +7,10 @@ use Livewire\Component;
 
 class ResourcesIndex extends Component
 {
-    public string $title = '';
-    public string $description = '';
+    public string $title_en = '';
+    public string $title_dv = '';
+    public string $description_en = '';
+    public string $description_dv = '';
     public string $audience = 'All';
     public string $icon = 'BookOpen';
     public string $icon_color = 'sky';
@@ -29,9 +31,11 @@ class ResourcesIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'       => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'audience'    => ['required', 'in:All,Students,Parents,Staff'],
+            'title_en'       => ['required', 'string', 'max:255'],
+            'title_dv'       => ['nullable', 'string', 'max:255'],
+            'description_en' => ['nullable', 'string'],
+            'description_dv' => ['nullable', 'string'],
+            'audience'       => ['required', 'in:All,Students,Parents,Staff'],
             'icon'        => ['required', 'string', 'max:50'],
             'icon_color'  => ['required', 'in:sky,rose,emerald,amber,violet,slate'],
             'url'         => ['required', 'url', 'max:500'],
@@ -45,8 +49,10 @@ class ResourcesIndex extends Component
         $this->validate();
 
         $data = [
-            'title'       => $this->title,
-            'description' => $this->description ?: null,
+            'title'       => ['en' => $this->title_en, 'dv' => $this->title_dv],
+            'description' => ($this->description_en || $this->description_dv)
+                              ? ['en' => $this->description_en, 'dv' => $this->description_dv]
+                              : null,
             'audience'    => $this->audience,
             'icon'        => $this->icon,
             'icon_color'  => $this->icon_color,
@@ -69,10 +75,12 @@ class ResourcesIndex extends Component
     public function edit(int $id): void
     {
         $resource = DigitalServiceResource::findOrFail($id);
-        $this->editingId    = $resource->id;
-        $this->title        = $resource->title;
-        $this->description  = $resource->description ?? '';
-        $this->audience     = $resource->audience;
+        $this->editingId      = $resource->id;
+        $this->title_en       = $resource->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv       = $resource->getTranslation('title', 'dv', false) ?? '';
+        $this->description_en = $resource->getTranslation('description', 'en', false) ?? '';
+        $this->description_dv = $resource->getTranslation('description', 'dv', false) ?? '';
+        $this->audience       = $resource->audience;
         $this->icon         = $resource->icon;
         $this->icon_color   = $resource->icon_color;
         $this->url          = $resource->url;
@@ -93,7 +101,7 @@ class ResourcesIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['title', 'description', 'url', 'editingId']);
+        $this->reset(['title_en', 'title_dv', 'description_en', 'description_dv', 'url', 'editingId']);
         $this->audience   = 'All';
         $this->icon       = 'BookOpen';
         $this->icon_color = 'sky';

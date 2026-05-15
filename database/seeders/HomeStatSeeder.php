@@ -19,19 +19,27 @@ class HomeStatSeeder extends Seeder
         $homeJson = json_decode(File::get($homePath), true, flags: JSON_THROW_ON_ERROR);
         $stats = $homeJson['stats'] ?? [];
 
-        $titles = collect($stats)->pluck('label');
-        $existingMaxSortOrder = HomeStat::whereNotIn('title', $titles)->max('sort_order');
+        $existing = HomeStat::all()->keyBy(fn ($s) => $s->getTranslation('title', 'en', false));
+
+        $seededLabels = collect($stats)->pluck('label');
+        $existingMaxSortOrder = HomeStat::all()
+            ->filter(fn ($s) => ! $seededLabels->contains($s->getTranslation('title', 'en', false)))
+            ->max('sort_order');
         $baseSortOrder = $existingMaxSortOrder === null ? 0 : $existingMaxSortOrder + 1;
 
         foreach ($stats as $index => $stat) {
-            HomeStat::updateOrCreate(
-                ['title' => $stat['label']],
-                [
-                    'value' => $stat['value'],
-                    'is_active' => true,
-                    'sort_order' => $baseSortOrder + $index,
-                ]
-            );
+            $data = [
+                'title'      => ['en' => $stat['label']],
+                'value'      => $stat['value'],
+                'is_active'  => true,
+                'sort_order' => $baseSortOrder + $index,
+            ];
+
+            if ($match = $existing->get($stat['label'])) {
+                $match->update($data);
+            } else {
+                HomeStat::create($data);
+            }
         }
     }
 }

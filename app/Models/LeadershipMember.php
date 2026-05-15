@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Spatie\Translatable\HasTranslations;
 class LeadershipMember extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['role', 'bio'];
+
     protected $fillable = [
         'name', 'role', 'bio', 'photo_path', 'is_active', 'sort_order',
     ];

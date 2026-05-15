@@ -5,8 +5,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+use Spatie\Translatable\HasTranslations;
 class DigitalServiceDocument extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'category'];
+
     use HasFactory;
     protected $fillable = [
         'sort_order', 'title', 'category', 'file_type', 'file_size',

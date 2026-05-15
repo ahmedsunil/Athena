@@ -7,7 +7,8 @@ use Livewire\Component;
 
 class HomeStatsIndex extends Component
 {
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $value = '';
     public bool $is_active = true;
     public int $sort_order = 0;
@@ -16,7 +17,8 @@ class HomeStatsIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'      => ['required', 'string', 'max:255'],
+            'title_en'   => ['required', 'string', 'max:255'],
+            'title_dv'   => ['nullable', 'string', 'max:255'],
             'value'      => ['required', 'string', 'max:100'],
             'is_active'  => ['boolean'],
             'sort_order' => ['integer', 'min:0'],
@@ -28,7 +30,7 @@ class HomeStatsIndex extends Component
         $this->validate();
 
         $data = [
-            'title'      => $this->title,
+            'title'      => ['en' => $this->title_en, 'dv' => $this->title_dv],
             'value'      => $this->value,
             'is_active'  => $this->is_active,
             'sort_order' => $this->sort_order,
@@ -42,7 +44,7 @@ class HomeStatsIndex extends Component
             $this->dispatch('toast', message: 'Stat created.');
         }
 
-        $this->reset(['title', 'value', 'is_active', 'sort_order', 'editingId']);
+        $this->reset(['title_en', 'title_dv', 'value', 'is_active', 'sort_order', 'editingId']);
         $this->is_active = true;
     }
 
@@ -50,7 +52,8 @@ class HomeStatsIndex extends Component
     {
         $stat = HomeStat::findOrFail($id);
         $this->editingId  = $stat->id;
-        $this->title      = $stat->title;
+        $this->title_en   = $stat->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv   = $stat->getTranslation('title', 'dv', false) ?? '';
         $this->value      = $stat->value;
         $this->is_active  = $stat->is_active;
         $this->sort_order = $stat->sort_order;
@@ -58,7 +61,7 @@ class HomeStatsIndex extends Component
 
     public function cancel(): void
     {
-        $this->reset(['title', 'value', 'is_active', 'sort_order', 'editingId']);
+        $this->reset(['title_en', 'title_dv', 'value', 'is_active', 'sort_order', 'editingId']);
         $this->is_active = true;
     }
 

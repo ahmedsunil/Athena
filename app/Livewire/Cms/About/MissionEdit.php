@@ -7,21 +7,27 @@ use Livewire\Component;
 
 class MissionEdit extends Component
 {
-    public string $mission = '';
-    public string $vision = '';
+    public string $mission_en = '';
+    public string $mission_dv = '';
+    public string $vision_en = '';
+    public string $vision_dv = '';
 
     public function mount(): void
     {
         $record = Mission::singleton();
-        $this->mission = $record->mission ?? '';
-        $this->vision  = $record->vision ?? '';
+        $this->mission_en = $record->getTranslation('mission', 'en', false) ?? '';
+        $this->mission_dv = $record->getTranslation('mission', 'dv', false) ?? '';
+        $this->vision_en  = $record->getTranslation('vision', 'en', false) ?? '';
+        $this->vision_dv  = $record->getTranslation('vision', 'dv', false) ?? '';
     }
 
     protected function rules(): array
     {
         return [
-            'mission' => ['nullable', 'string'],
-            'vision'  => ['nullable', 'string'],
+            'mission_en' => ['nullable', 'string'],
+            'mission_dv' => ['nullable', 'string'],
+            'vision_en'  => ['nullable', 'string'],
+            'vision_dv'  => ['nullable', 'string'],
         ];
     }
 
@@ -29,8 +35,8 @@ class MissionEdit extends Component
     {
         $this->validate();
         Mission::singleton()->update([
-            'mission' => $this->mission,
-            'vision'  => $this->vision,
+            'mission' => ['en' => $this->mission_en, 'dv' => $this->mission_dv],
+            'vision'  => ['en' => $this->vision_en, 'dv' => $this->vision_dv],
         ]);
         $this->dispatch('toast', message: 'Mission & Vision saved.');
     }

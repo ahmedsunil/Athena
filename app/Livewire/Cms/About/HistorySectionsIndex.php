@@ -7,18 +7,22 @@ use Livewire\Component;
 
 class HistorySectionsIndex extends Component
 {
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $year_label = '';
-    public string $body = '';
+    public string $body_en = '';
+    public string $body_dv = '';
     public int $sort_order = 0;
     public ?int $editingId = null;
 
     protected function rules(): array
     {
         return [
-            'title'      => ['required', 'string', 'max:255'],
+            'title_en'   => ['required', 'string', 'max:255'],
+            'title_dv'   => ['nullable', 'string', 'max:255'],
             'year_label' => ['nullable', 'string', 'max:50'],
-            'body'       => ['required', 'string'],
+            'body_en'    => ['required', 'string'],
+            'body_dv'    => ['nullable', 'string'],
             'sort_order' => ['integer', 'min:0'],
         ];
     }
@@ -28,9 +32,9 @@ class HistorySectionsIndex extends Component
         $this->validate();
 
         $data = [
-            'title'      => $this->title,
+            'title'      => ['en' => $this->title_en, 'dv' => $this->title_dv],
             'year_label' => $this->year_label,
-            'body'       => $this->body,
+            'body'       => ['en' => $this->body_en, 'dv' => $this->body_dv],
             'sort_order' => $this->sort_order,
         ];
 
@@ -49,9 +53,11 @@ class HistorySectionsIndex extends Component
     {
         $item = HistorySection::findOrFail($id);
         $this->editingId  = $item->id;
-        $this->title      = $item->title;
+        $this->title_en   = $item->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv   = $item->getTranslation('title', 'dv', false) ?? '';
         $this->year_label = $item->year_label ?? '';
-        $this->body       = $item->body;
+        $this->body_en    = $item->getTranslation('body', 'en', false) ?? '';
+        $this->body_dv    = $item->getTranslation('body', 'dv', false) ?? '';
         $this->sort_order = $item->sort_order;
     }
 
@@ -68,7 +74,7 @@ class HistorySectionsIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['title', 'year_label', 'body', 'sort_order', 'editingId']);
+        $this->reset(['title_en', 'title_dv', 'year_label', 'body_en', 'body_dv', 'sort_order', 'editingId']);
     }
 
     public function render()

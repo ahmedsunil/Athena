@@ -108,7 +108,7 @@ class DigitalServices extends Component
         $docQuery = DigitalServiceDocument::where('is_active', true);
 
         if ($this->activeCategory !== 'All') {
-            $docQuery->where('category', $this->activeCategory);
+            $docQuery->where('category->' . app()->getLocale(), $this->activeCategory);
         }
         if ($this->activeYear !== 'All') {
             $docQuery->whereYear('published_at', (int) $this->activeYear);
@@ -117,7 +117,7 @@ class DigitalServices extends Component
             $docQuery->whereMonth('published_at', (int) $this->activeMonth);
         }
         if ($this->search !== '') {
-            $docQuery->where('title', 'like', '%' . $this->search . '%');
+            $docQuery->where('title->' . app()->getLocale(), 'like', '%' . $this->search . '%');
         }
 
         $documents = $docQuery->orderBy('sort_order')->orderBy('published_at', 'desc')->orderBy('id', 'desc')->paginate(10);

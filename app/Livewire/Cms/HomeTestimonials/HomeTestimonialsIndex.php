@@ -11,9 +11,12 @@ class HomeTestimonialsIndex extends Component
     use WithFileUploads;
 
     public string $name = '';
-    public string $previous_designation = '';
-    public string $current_designation = '';
-    public string $message = '';
+    public string $previous_designation_en = '';
+    public string $previous_designation_dv = '';
+    public string $current_designation_en = '';
+    public string $current_designation_dv = '';
+    public string $message_en = '';
+    public string $message_dv = '';
     public bool $is_active = true;
     public int $sort_order = 0;
     public $photo = null;
@@ -23,13 +26,16 @@ class HomeTestimonialsIndex extends Component
     protected function rules(): array
     {
         return [
-            'name'                  => ['required', 'string', 'max:255'],
-            'previous_designation'  => ['nullable', 'string', 'max:255'],
-            'current_designation'   => ['nullable', 'string', 'max:255'],
-            'message'               => ['required', 'string'],
-            'is_active'             => ['boolean'],
-            'sort_order'            => ['integer', 'min:0'],
-            'photo'                 => ['nullable', 'image', 'max:2048'],
+            'name'                       => ['required', 'string', 'max:255'],
+            'previous_designation_en'    => ['nullable', 'string', 'max:255'],
+            'previous_designation_dv'    => ['nullable', 'string', 'max:255'],
+            'current_designation_en'     => ['nullable', 'string', 'max:255'],
+            'current_designation_dv'     => ['nullable', 'string', 'max:255'],
+            'message_en'                 => ['required', 'string'],
+            'message_dv'                 => ['nullable', 'string'],
+            'is_active'                  => ['boolean'],
+            'sort_order'                 => ['integer', 'min:0'],
+            'photo'                      => ['nullable', 'image', 'max:2048'],
         ];
     }
 
@@ -38,12 +44,12 @@ class HomeTestimonialsIndex extends Component
         $this->validate();
 
         $data = [
-            'name'                  => $this->name,
-            'previous_designation'  => $this->previous_designation,
-            'current_designation'   => $this->current_designation,
-            'message'               => $this->message,
-            'is_active'             => $this->is_active,
-            'sort_order'            => $this->sort_order,
+            'name'                 => $this->name,
+            'previous_designation' => ['en' => $this->previous_designation_en, 'dv' => $this->previous_designation_dv],
+            'current_designation'  => ['en' => $this->current_designation_en, 'dv' => $this->current_designation_dv],
+            'message'              => ['en' => $this->message_en, 'dv' => $this->message_dv],
+            'is_active'            => $this->is_active,
+            'sort_order'           => $this->sort_order,
         ];
 
         if ($this->photo) {
@@ -64,14 +70,17 @@ class HomeTestimonialsIndex extends Component
     public function edit(int $id): void
     {
         $item = HomeTestimonial::findOrFail($id);
-        $this->editingId              = $item->id;
-        $this->name                   = $item->name;
-        $this->previous_designation   = $item->previous_designation ?? '';
-        $this->current_designation    = $item->current_designation ?? '';
-        $this->message                = $item->message;
-        $this->is_active              = $item->is_active;
-        $this->sort_order             = $item->sort_order;
-        $this->existing_photo         = $item->photo_path;
+        $this->editingId                  = $item->id;
+        $this->name                       = $item->name;
+        $this->previous_designation_en    = $item->getTranslation('previous_designation', 'en', false) ?? '';
+        $this->previous_designation_dv    = $item->getTranslation('previous_designation', 'dv', false) ?? '';
+        $this->current_designation_en     = $item->getTranslation('current_designation', 'en', false) ?? '';
+        $this->current_designation_dv     = $item->getTranslation('current_designation', 'dv', false) ?? '';
+        $this->message_en                 = $item->getTranslation('message', 'en', false) ?? '';
+        $this->message_dv                 = $item->getTranslation('message', 'dv', false) ?? '';
+        $this->is_active                  = $item->is_active;
+        $this->sort_order                 = $item->sort_order;
+        $this->existing_photo             = $item->photo_path;
     }
 
     public function cancel(): void
@@ -87,8 +96,12 @@ class HomeTestimonialsIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['name', 'previous_designation', 'current_designation', 'message',
-            'is_active', 'sort_order', 'photo', 'existing_photo', 'editingId']);
+        $this->reset([
+            'name', 'previous_designation_en', 'previous_designation_dv',
+            'current_designation_en', 'current_designation_dv',
+            'message_en', 'message_dv',
+            'is_active', 'sort_order', 'photo', 'existing_photo', 'editingId',
+        ]);
         $this->is_active = true;
     }
 

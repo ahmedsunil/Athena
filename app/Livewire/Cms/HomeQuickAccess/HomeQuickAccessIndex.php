@@ -8,7 +8,8 @@ use Livewire\Component;
 class HomeQuickAccessIndex extends Component
 {
     public string $icon_key = '';
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $link_key = '';
     public bool $is_active = true;
     public int $sort_order = 0;
@@ -18,7 +19,8 @@ class HomeQuickAccessIndex extends Component
     {
         return [
             'icon_key'   => ['required', 'string'],
-            'title'      => ['required', 'string', 'max:255'],
+            'title_en'   => ['required', 'string', 'max:255'],
+            'title_dv'   => ['nullable', 'string', 'max:255'],
             'link_key'   => ['required', 'string'],
             'is_active'  => ['boolean'],
             'sort_order' => ['integer', 'min:0'],
@@ -31,7 +33,7 @@ class HomeQuickAccessIndex extends Component
 
         $data = [
             'icon_key'   => $this->icon_key,
-            'title'      => $this->title,
+            'title'      => ['en' => $this->title_en, 'dv' => $this->title_dv],
             'link_key'   => $this->link_key,
             'is_active'  => $this->is_active,
             'sort_order' => $this->sort_order,
@@ -45,7 +47,7 @@ class HomeQuickAccessIndex extends Component
             $this->dispatch('toast', message: 'Quick access item created.');
         }
 
-        $this->reset(['icon_key', 'title', 'link_key', 'is_active', 'sort_order', 'editingId']);
+        $this->reset(['icon_key', 'title_en', 'title_dv', 'link_key', 'is_active', 'sort_order', 'editingId']);
         $this->is_active = true;
     }
 
@@ -54,7 +56,8 @@ class HomeQuickAccessIndex extends Component
         $item = HomeQuickAccess::findOrFail($id);
         $this->editingId  = $item->id;
         $this->icon_key   = $item->icon_key;
-        $this->title      = $item->title;
+        $this->title_en   = $item->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv   = $item->getTranslation('title', 'dv', false) ?? '';
         $this->link_key   = $item->link_key;
         $this->is_active  = $item->is_active;
         $this->sort_order = $item->sort_order;
@@ -62,7 +65,7 @@ class HomeQuickAccessIndex extends Component
 
     public function cancel(): void
     {
-        $this->reset(['icon_key', 'title', 'link_key', 'is_active', 'sort_order', 'editingId']);
+        $this->reset(['icon_key', 'title_en', 'title_dv', 'link_key', 'is_active', 'sort_order', 'editingId']);
         $this->is_active = true;
     }
 

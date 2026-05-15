@@ -11,9 +11,11 @@ class PrefectsIndex extends Component
     use WithFileUploads;
 
     public string $name = '';
-    public string $role = '';
+    public string $role_en = '';
+    public string $role_dv = '';
     public string $class_name = '';
-    public string $quote = '';
+    public string $quote_en = '';
+    public string $quote_dv = '';
     public $photo = null;
     public ?string $existing_photo = null;
     public bool $photoRemoved = false;
@@ -25,9 +27,11 @@ class PrefectsIndex extends Component
     {
         return [
             'name'       => ['required', 'string', 'max:255'],
-            'role'       => ['required', 'string', 'max:100'],
+            'role_en'    => ['required', 'string', 'max:100'],
+            'role_dv'    => ['nullable', 'string', 'max:100'],
             'class_name' => ['nullable', 'string', 'max:100'],
-            'quote'      => ['nullable', 'string'],
+            'quote_en'   => ['nullable', 'string'],
+            'quote_dv'   => ['nullable', 'string'],
             'photo'      => ['nullable', 'image', 'max:2048'],
             'sort_order' => ['integer', 'min:0'],
             'is_active'  => ['boolean'],
@@ -40,9 +44,11 @@ class PrefectsIndex extends Component
 
         $data = [
             'name'       => $this->name,
-            'role'       => $this->role,
+            'role'       => ['en' => $this->role_en, 'dv' => $this->role_dv],
             'class_name' => $this->class_name ?: null,
-            'quote'      => $this->quote ?: null,
+            'quote'      => ($this->quote_en || $this->quote_dv)
+                             ? ['en' => $this->quote_en, 'dv' => $this->quote_dv]
+                             : null,
             'sort_order' => $this->sort_order,
             'is_active'  => $this->is_active,
         ];
@@ -69,9 +75,11 @@ class PrefectsIndex extends Component
         $prefect = StudentLifePrefect::findOrFail($id);
         $this->editingId      = $prefect->id;
         $this->name           = $prefect->name;
-        $this->role           = $prefect->role;
+        $this->role_en        = $prefect->getTranslation('role', 'en', false) ?? '';
+        $this->role_dv        = $prefect->getTranslation('role', 'dv', false) ?? '';
         $this->class_name     = $prefect->class_name ?? '';
-        $this->quote          = $prefect->quote ?? '';
+        $this->quote_en       = $prefect->getTranslation('quote', 'en', false) ?? '';
+        $this->quote_dv       = $prefect->getTranslation('quote', 'dv', false) ?? '';
         $this->existing_photo = $prefect->photo_path;
         $this->photoRemoved   = false;
         $this->sort_order     = $prefect->sort_order;
@@ -99,7 +107,7 @@ class PrefectsIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'name', 'role', 'class_name', 'quote',
+            'name', 'role_en', 'role_dv', 'class_name', 'quote_en', 'quote_dv',
             'photo', 'existing_photo', 'photoRemoved', 'editingId',
         ]);
         $this->is_active  = true;

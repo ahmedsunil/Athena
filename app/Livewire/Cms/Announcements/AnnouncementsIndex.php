@@ -13,9 +13,11 @@ class AnnouncementsIndex extends Component
 
     public string $icon_key = 'Bell';
     public string $category = 'Announcement';
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $slug = '';
-    public string $description = '';
+    public string $description_en = '';
+    public string $description_dv = '';
     public string $deadline = '';
     public array $attachments = [];
     public array $uploaded_files = [];
@@ -26,20 +28,22 @@ class AnnouncementsIndex extends Component
     protected function rules(): array
     {
         return [
-            'icon_key' => ['required', 'string', 'max:50'],
-            'category' => ['required', 'string', 'max:80'],
-            'title' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:announcements,slug,' . ($this->editingId ?? 'NULL')],
-            'description' => ['nullable', 'string'],
-            'deadline' => ['nullable', 'date'],
-            'attachments' => ['nullable', 'array'],
+            'icon_key'        => ['required', 'string', 'max:50'],
+            'category'        => ['required', 'string', 'max:80'],
+            'title_en'        => ['required', 'string', 'max:255'],
+            'title_dv'        => ['nullable', 'string', 'max:255'],
+            'slug'            => ['required', 'string', 'max:255', 'unique:announcements,slug,' . ($this->editingId ?? 'NULL')],
+            'description_en'  => ['nullable', 'string'],
+            'description_dv'  => ['nullable', 'string'],
+            'deadline'        => ['nullable', 'date'],
+            'attachments'     => ['nullable', 'array'],
             'attachments.*.label' => ['nullable', 'string', 'max:255'],
             'attachments.*.path' => ['nullable', 'string'],
             'attachments.*.url' => ['nullable', 'url:http,https'],
-            'uploaded_files' => ['nullable', 'array'],
+            'uploaded_files'  => ['nullable', 'array'],
             'uploaded_files.*' => ['file', 'mimes:pdf,doc,docx,xls,xlsx,jpg,jpeg,png', 'max:10240'],
-            'is_active' => ['boolean'],
-            'sort_order' => ['integer', 'min:0'],
+            'is_active'       => ['boolean'],
+            'sort_order'      => ['integer', 'min:0'],
         ];
     }
 
@@ -61,15 +65,17 @@ class AnnouncementsIndex extends Component
         }
 
         $data = [
-            'icon_key' => $this->icon_key,
-            'category' => $this->category,
-            'title' => $this->title,
-            'slug' => Str::slug($this->slug) ?: Str::slug($this->title),
-            'description' => $this->description ?: null,
-            'deadline' => $this->deadline ?: null,
+            'icon_key'    => $this->icon_key,
+            'category'    => $this->category,
+            'title'       => ['en' => $this->title_en, 'dv' => $this->title_dv],
+            'slug'        => Str::slug($this->slug) ?: Str::slug($this->title_en),
+            'description' => ($this->description_en || $this->description_dv)
+                              ? ['en' => $this->description_en, 'dv' => $this->description_dv]
+                              : null,
+            'deadline'    => $this->deadline ?: null,
             'attachments' => $attachments ?: null,
-            'is_active' => $this->is_active,
-            'sort_order' => $this->sort_order,
+            'is_active'   => $this->is_active,
+            'sort_order'  => $this->sort_order,
         ];
 
         if ($this->editingId) {
@@ -87,17 +93,19 @@ class AnnouncementsIndex extends Component
     {
         $announcement = Announcement::findOrFail($id);
 
-        $this->editingId = $announcement->id;
-        $this->icon_key = $announcement->icon_key;
-        $this->category = $announcement->category;
-        $this->title = $announcement->title;
-        $this->slug = $announcement->slug;
-        $this->description = $announcement->description ?? '';
-        $this->deadline = $announcement->deadline?->format('Y-m-d') ?? '';
-        $this->attachments = $announcement->attachments ?? [];
-        $this->uploaded_files = [];
-        $this->is_active = $announcement->is_active;
-        $this->sort_order = $announcement->sort_order;
+        $this->editingId       = $announcement->id;
+        $this->icon_key        = $announcement->icon_key;
+        $this->category        = $announcement->category;
+        $this->title_en        = $announcement->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv        = $announcement->getTranslation('title', 'dv', false) ?? '';
+        $this->slug            = $announcement->slug;
+        $this->description_en  = $announcement->getTranslation('description', 'en', false) ?? '';
+        $this->description_dv  = $announcement->getTranslation('description', 'dv', false) ?? '';
+        $this->deadline        = $announcement->deadline?->format('Y-m-d') ?? '';
+        $this->attachments     = $announcement->attachments ?? [];
+        $this->uploaded_files  = [];
+        $this->is_active       = $announcement->is_active;
+        $this->sort_order      = $announcement->sort_order;
     }
 
     public function removeAttachment(int $index): void
@@ -124,9 +132,11 @@ class AnnouncementsIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'title',
+            'title_en',
+            'title_dv',
             'slug',
-            'description',
+            'description_en',
+            'description_dv',
             'deadline',
             'attachments',
             'uploaded_files',
@@ -138,7 +148,7 @@ class AnnouncementsIndex extends Component
         $this->sort_order = 0;
     }
 
-    public function updatedTitle(string $value): void
+    public function updatedTitleEn(string $value): void
     {
         if ($this->slug === '') {
             $this->slug = Str::slug($value);

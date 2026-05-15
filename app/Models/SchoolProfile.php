@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Spatie\Translatable\HasTranslations;
 class SchoolProfile extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['school_name', 'motto', 'short_description', 'principal_designation', 'principal_message'];
+
     protected $fillable = [
         'school_name', 'motto', 'short_description', 'logo_path',
         'email', 'phone', 'address', 'island', 'atoll', 'country',

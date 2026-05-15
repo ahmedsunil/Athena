@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Spatie\Translatable\HasTranslations;
 class Event extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'short_description', 'full_description', 'location'];
+
     protected $fillable = [
         'public_id', 'status', 'title', 'slug',
         'date_start', 'date_end', 'location',

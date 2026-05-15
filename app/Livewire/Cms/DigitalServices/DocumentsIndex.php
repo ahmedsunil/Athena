@@ -10,7 +10,8 @@ class DocumentsIndex extends Component
 {
     use WithFileUploads;
 
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $category = 'Forms & Applications';
     public string $file_type = 'PDF';
     public string $file_size = '';
@@ -36,7 +37,8 @@ class DocumentsIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'        => ['required', 'string', 'max:255'],
+            'title_en'     => ['required', 'string', 'max:255'],
+            'title_dv'     => ['nullable', 'string', 'max:255'],
             'category'     => ['required', 'in:Forms & Applications,Policies & Handbooks,Timetables & Schedules,Academic Resources'],
             'file_type'    => ['required', 'in:PDF,DOCX,XLS,XLSX'],
             'file_size'    => ['nullable', 'string', 'max:50'],
@@ -53,7 +55,7 @@ class DocumentsIndex extends Component
         $this->validate();
 
         $data = [
-            'title'        => $this->title,
+            'title'        => ['en' => $this->title_en, 'dv' => $this->title_dv],
             'category'     => $this->category,
             'file_type'    => $this->file_type,
             'file_size'    => $this->file_size ?: null,
@@ -84,7 +86,8 @@ class DocumentsIndex extends Component
     {
         $doc = DigitalServiceDocument::findOrFail($id);
         $this->editingId    = $doc->id;
-        $this->title        = $doc->title;
+        $this->title_en     = $doc->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv     = $doc->getTranslation('title', 'dv', false) ?? '';
         $this->category     = $doc->category;
         $this->file_type    = $doc->file_type;
         $this->file_size    = $doc->file_size ?? '';
@@ -116,7 +119,7 @@ class DocumentsIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['title', 'file_size', 'published_at', 'file', 'existing_file', 'fileRemoved', 'editingId']);
+        $this->reset(['title_en', 'title_dv', 'file_size', 'published_at', 'file', 'existing_file', 'fileRemoved', 'editingId']);
         $this->category  = 'Forms & Applications';
         $this->file_type = 'PDF';
         $this->audience  = 'All';

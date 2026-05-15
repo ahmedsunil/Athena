@@ -11,8 +11,10 @@ class LeadershipIndex extends Component
     use WithFileUploads;
 
     public string $name = '';
-    public string $role = '';
-    public string $bio = '';
+    public string $role_en = '';
+    public string $role_dv = '';
+    public string $bio_en = '';
+    public string $bio_dv = '';
     public bool $is_active = true;
     public int $sort_order = 0;
     public $photo = null;
@@ -24,8 +26,10 @@ class LeadershipIndex extends Component
     {
         return [
             'name'       => ['required', 'string', 'max:255'],
-            'role'       => ['required', 'string', 'max:255'],
-            'bio'        => ['nullable', 'string'],
+            'role_en'    => ['required', 'string', 'max:255'],
+            'role_dv'    => ['nullable', 'string', 'max:255'],
+            'bio_en'     => ['nullable', 'string'],
+            'bio_dv'     => ['nullable', 'string'],
             'is_active'  => ['boolean'],
             'sort_order' => ['integer', 'min:0'],
             'photo'      => ['nullable', 'image', 'max:2048'],
@@ -38,8 +42,8 @@ class LeadershipIndex extends Component
 
         $data = [
             'name'       => $this->name,
-            'role'       => $this->role,
-            'bio'        => $this->bio,
+            'role'       => ['en' => $this->role_en, 'dv' => $this->role_dv],
+            'bio'        => ['en' => $this->bio_en, 'dv' => $this->bio_dv],
             'is_active'  => $this->is_active,
             'sort_order' => $this->sort_order,
         ];
@@ -66,8 +70,10 @@ class LeadershipIndex extends Component
         $item = LeadershipMember::findOrFail($id);
         $this->editingId      = $item->id;
         $this->name           = $item->name;
-        $this->role           = $item->role;
-        $this->bio            = $item->bio ?? '';
+        $this->role_en        = $item->getTranslation('role', 'en', false) ?? '';
+        $this->role_dv        = $item->getTranslation('role', 'dv', false) ?? '';
+        $this->bio_en         = $item->getTranslation('bio', 'en', false) ?? '';
+        $this->bio_dv         = $item->getTranslation('bio', 'dv', false) ?? '';
         $this->is_active      = $item->is_active;
         $this->sort_order     = $item->sort_order;
         $this->existing_photo = $item->photo_path;
@@ -94,7 +100,7 @@ class LeadershipIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['name', 'role', 'bio', 'is_active', 'sort_order',
+        $this->reset(['name', 'role_en', 'role_dv', 'bio_en', 'bio_dv', 'is_active', 'sort_order',
             'photo', 'existing_photo', 'photoRemoved', 'editingId']);
         $this->is_active = true;
     }

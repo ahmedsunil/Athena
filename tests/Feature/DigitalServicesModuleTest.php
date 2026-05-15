@@ -8,6 +8,7 @@ use App\Models\DigitalServiceCalendar;
 use App\Models\DigitalServiceCalendarEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class DigitalServicesModuleTest extends TestCase
@@ -51,7 +52,9 @@ class DigitalServicesModuleTest extends TestCase
             'is_active'   => true,
         ]);
 
+        $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
         $user = User::factory()->create();
+        $user->assignRole($admin);
 
         $this->actingAs($user)
             ->get('/cms/digital-services/calendar')

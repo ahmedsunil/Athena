@@ -19,20 +19,28 @@ class HomeQuickAccessSeeder extends Seeder
         $homeJson = json_decode(File::get($homePath), true, flags: JSON_THROW_ON_ERROR);
         $quickLinks = $homeJson['quickLinks'] ?? [];
 
-        $titles = collect($quickLinks)->pluck('label');
-        $existingMaxSortOrder = HomeQuickAccess::whereNotIn('title', $titles)->max('sort_order');
+        $existing = HomeQuickAccess::all()->keyBy(fn ($q) => $q->getTranslation('title', 'en', false));
+
+        $seededLabels = collect($quickLinks)->pluck('label');
+        $existingMaxSortOrder = HomeQuickAccess::all()
+            ->filter(fn ($q) => ! $seededLabels->contains($q->getTranslation('title', 'en', false)))
+            ->max('sort_order');
         $baseSortOrder = $existingMaxSortOrder === null ? 0 : $existingMaxSortOrder + 1;
 
         foreach ($quickLinks as $index => $quickLink) {
-            HomeQuickAccess::updateOrCreate(
-                ['title' => $quickLink['label']],
-                [
-                    'icon_key' => $quickLink['icon'],
-                    'link_key' => $quickLink['href'],
-                    'is_active' => true,
-                    'sort_order' => $baseSortOrder + $index,
-                ]
-            );
+            $data = [
+                'title'      => ['en' => $quickLink['label']],
+                'icon_key'   => $quickLink['icon'],
+                'link_key'   => $quickLink['href'],
+                'is_active'  => true,
+                'sort_order' => $baseSortOrder + $index,
+            ];
+
+            if ($match = $existing->get($quickLink['label'])) {
+                $match->update($data);
+            } else {
+                HomeQuickAccess::create($data);
+            }
         }
     }
 }

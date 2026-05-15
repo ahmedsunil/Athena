@@ -4,8 +4,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+use Spatie\Translatable\HasTranslations;
 class StudentLifePrefect extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['role', 'quote'];
+
     protected $table = 'student_life_prefects';
 
     protected $fillable = [

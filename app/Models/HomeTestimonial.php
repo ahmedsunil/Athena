@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Translatable\HasTranslations;
 
 class HomeTestimonial extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['previous_designation', 'current_designation', 'message'];
+
     protected $fillable = [
         'photo_path', 'name', 'previous_designation',
         'current_designation', 'message', 'is_active', 'sort_order',

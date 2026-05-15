@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Spatie\Translatable\HasTranslations;
 class DigitalServiceCalendar extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description'];
+
     use HasFactory;
 
     protected $fillable = [

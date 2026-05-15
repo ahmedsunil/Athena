@@ -10,7 +10,8 @@ class GalleryIndex extends Component
 {
     use WithFileUploads;
 
-    public string $title = '';
+    public string $title_en = '';
+    public string $title_dv = '';
     public string $category = 'Events';
     public string $date = '';
     public int $photo_count = 0;
@@ -27,7 +28,8 @@ class GalleryIndex extends Component
     protected function rules(): array
     {
         return [
-            'title'       => ['required', 'string', 'max:255'],
+            'title_en'    => ['required', 'string', 'max:255'],
+            'title_dv'    => ['nullable', 'string', 'max:255'],
             'category'    => ['required', 'in:Events,Sports,Graduation,Cultural,Academic,Trips'],
             'date'        => ['required', 'date'],
             'photo_count' => ['integer', 'min:0'],
@@ -43,7 +45,7 @@ class GalleryIndex extends Component
         $this->validate();
 
         $data = [
-            'title'        => $this->title,
+            'title'        => ['en' => $this->title_en, 'dv' => $this->title_dv],
             'category'     => $this->category,
             'date'         => $this->date,
             'photo_count'  => $this->photo_count,
@@ -73,7 +75,8 @@ class GalleryIndex extends Component
     {
         $album = GalleryAlbum::findOrFail($id);
         $this->editingId      = $album->id;
-        $this->title          = $album->title;
+        $this->title_en       = $album->getTranslation('title', 'en', false) ?? '';
+        $this->title_dv       = $album->getTranslation('title', 'dv', false) ?? '';
         $this->category       = $album->category;
         $this->date           = $album->date->format('Y-m-d');
         $this->photo_count    = $album->photo_count;
@@ -105,7 +108,7 @@ class GalleryIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'title', 'date', 'facebook_url',
+            'title_en', 'title_dv', 'date', 'facebook_url',
             'cover_image', 'existing_cover', 'coverRemoved', 'editingId',
         ]);
         $this->category    = 'Events';

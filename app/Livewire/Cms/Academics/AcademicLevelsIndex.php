@@ -11,9 +11,12 @@ class AcademicLevelsIndex extends Component
     use WithFileUploads;
 
     public string $abbreviation = '';
-    public string $label = '';
-    public string $age_range = '';
-    public string $year_groups = '';
+    public string $label_en = '';
+    public string $label_dv = '';
+    public string $age_range_en = '';
+    public string $age_range_dv = '';
+    public string $year_groups_en = '';
+    public string $year_groups_dv = '';
     public string $lead_teacher = '';
     public $lead_teacher_photo = null;
     public ?string $existing_photo = null;
@@ -29,9 +32,12 @@ class AcademicLevelsIndex extends Component
     {
         return [
             'abbreviation'       => ['required', 'string', 'max:10'],
-            'label'              => ['required', 'string', 'max:255'],
-            'age_range'          => ['required', 'string', 'max:100'],
-            'year_groups'        => ['required', 'string', 'max:255'],
+            'label_en'           => ['required', 'string', 'max:255'],
+            'label_dv'           => ['nullable', 'string', 'max:255'],
+            'age_range_en'       => ['required', 'string', 'max:100'],
+            'age_range_dv'       => ['nullable', 'string', 'max:100'],
+            'year_groups_en'     => ['required', 'string', 'max:255'],
+            'year_groups_dv'     => ['nullable', 'string', 'max:255'],
             'lead_teacher'       => ['required', 'string', 'max:255'],
             'lead_teacher_photo' => ['nullable', 'image', 'max:2048'],
             'subjects'           => ['nullable', 'array'],
@@ -51,9 +57,9 @@ class AcademicLevelsIndex extends Component
 
         $data = [
             'abbreviation' => strtoupper(trim($this->abbreviation)),
-            'label'        => $this->label,
-            'age_range'    => $this->age_range,
-            'year_groups'  => $this->year_groups,
+            'label'        => ['en' => $this->label_en, 'dv' => $this->label_dv],
+            'age_range'    => ['en' => $this->age_range_en, 'dv' => $this->age_range_dv],
+            'year_groups'  => ['en' => $this->year_groups_en, 'dv' => $this->year_groups_dv],
             'lead_teacher' => $this->lead_teacher,
             'subjects'     => array_values(array_filter($this->subjects, fn ($s) => trim($s) !== '')) ?: null,
             'targets'      => array_values(array_filter($this->targets,  fn ($t) => trim($t) !== '')) ?: null,
@@ -84,9 +90,12 @@ class AcademicLevelsIndex extends Component
         $level = AcademicLevel::findOrFail($id);
         $this->editingId      = $level->id;
         $this->abbreviation   = $level->abbreviation;
-        $this->label          = $level->label;
-        $this->age_range      = $level->age_range;
-        $this->year_groups    = $level->year_groups;
+        $this->label_en       = $level->getTranslation('label', 'en', false) ?? '';
+        $this->label_dv       = $level->getTranslation('label', 'dv', false) ?? '';
+        $this->age_range_en   = $level->getTranslation('age_range', 'en', false) ?? '';
+        $this->age_range_dv   = $level->getTranslation('age_range', 'dv', false) ?? '';
+        $this->year_groups_en = $level->getTranslation('year_groups', 'en', false) ?? '';
+        $this->year_groups_dv = $level->getTranslation('year_groups', 'dv', false) ?? '';
         $this->lead_teacher   = $level->lead_teacher;
         $this->existing_photo = $level->lead_teacher_photo_path;
         $this->photoRemoved   = false;
@@ -127,8 +136,9 @@ class AcademicLevelsIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'abbreviation', 'label', 'age_range', 'year_groups', 'lead_teacher',
-            'lead_teacher_photo', 'existing_photo', 'photoRemoved',
+            'abbreviation', 'label_en', 'label_dv',
+            'age_range_en', 'age_range_dv', 'year_groups_en', 'year_groups_dv',
+            'lead_teacher', 'lead_teacher_photo', 'existing_photo', 'photoRemoved',
             'subjects', 'targets', 'streams', 'sort_order', 'editingId',
         ]);
         $this->is_active  = true;

@@ -12,8 +12,10 @@ class StaffIndex extends Component
     use WithFileUploads;
 
     public string  $name        = '';
-    public string  $designation = '';
-    public string  $education   = '';
+    public string  $designation_en = '';
+    public string  $designation_dv = '';
+    public string  $education_en   = '';
+    public string  $education_dv   = '';
     public string  $section     = 'academic';
     public string  $subSection  = '';
     public int     $sortOrder   = 0;
@@ -28,8 +30,10 @@ class StaffIndex extends Component
     {
         return [
             'name'                          => ['required', 'string', 'max:255'],
-            'designation'                   => ['required', 'string', 'max:255'],
-            'education'                     => ['nullable', 'string', 'max:255'],
+            'designation_en'                => ['required', 'string', 'max:255'],
+            'designation_dv'                => ['nullable', 'string', 'max:255'],
+            'education_en'                  => ['nullable', 'string', 'max:255'],
+            'education_dv'                  => ['nullable', 'string', 'max:255'],
             'section'                       => ['required', 'in:senior_management,academic,administrative'],
             'subSection'                    => ['nullable', 'string', 'max:50'],
             'sortOrder'                     => ['integer', 'min:0'],
@@ -48,8 +52,10 @@ class StaffIndex extends Component
 
         $data = [
             'name'             => $this->name,
-            'designation'      => $this->designation,
-            'education'        => $this->education ?: null,
+            'designation'      => ['en' => $this->designation_en, 'dv' => $this->designation_dv],
+            'education'        => ($this->education_en || $this->education_dv)
+                                    ? ['en' => $this->education_en, 'dv' => $this->education_dv]
+                                    : null,
             'section'          => $this->section,
             'sub_section'      => $this->section === 'senior_management' ? null : ($this->subSection ?: null),
             'sort_order'       => $this->sortOrder,
@@ -85,8 +91,10 @@ class StaffIndex extends Component
         $item = StaffMember::findOrFail($id);
         $this->editingId         = $item->id;
         $this->name              = $item->name;
-        $this->designation       = $item->designation;
-        $this->education         = $item->education ?? '';
+        $this->designation_en    = $item->getTranslation('designation', 'en', false) ?? '';
+        $this->designation_dv    = $item->getTranslation('designation', 'dv', false) ?? '';
+        $this->education_en      = $item->getTranslation('education', 'en', false) ?? '';
+        $this->education_dv      = $item->getTranslation('education', 'dv', false) ?? '';
         $this->section           = $item->section;
         $this->subSection        = $item->sub_section ?? '';
         $this->sortOrder         = $item->sort_order;
@@ -138,8 +146,8 @@ class StaffIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'name', 'designation', 'education', 'subSection',
-            'sortOrder', 'photo', 'existing_photo', 'photoRemoved',
+            'name', 'designation_en', 'designation_dv', 'education_en', 'education_dv',
+            'subSection', 'sortOrder', 'photo', 'existing_photo', 'photoRemoved',
             'editingId', 'workExperiences',
         ]);
         $this->section   = 'academic';

@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Translatable\HasTranslations;
 
 class HomeSlide extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description', 'button_1_label', 'button_2_label'];
+
     protected $fillable = [
         'title', 'description', 'image_path',
         'button_1_label', 'button_1_link_key',

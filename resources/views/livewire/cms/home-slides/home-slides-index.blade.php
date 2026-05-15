@@ -13,16 +13,28 @@
         </div>
         <form wire:submit="save" class="space-y-4">
             <div>
-                <label class="mb-1.5 block admin-label">Title</label>
-                <input type="text" wire:model="title"
+                <label class="mb-1.5 block admin-label">Title (English)</label>
+                <input type="text" wire:model="title_en"
                        class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                @error('title') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('title_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div>
-                <label class="mb-1.5 block admin-label">Description</label>
-                <textarea wire:model="description" rows="2"
+                <label class="mb-1.5 block admin-label">Title (ދިވެހި)</label>
+                <input type="text" wire:model="title_dv" dir="rtl"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('title_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+            <div>
+                <label class="mb-1.5 block admin-label">Description (English)</label>
+                <textarea wire:model="description_en" rows="2"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('description') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('description_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+            <div>
+                <label class="mb-1.5 block admin-label">Description (ދިވެހި)</label>
+                <textarea wire:model="description_dv" rows="2" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('description_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div>
                 <label class="mb-1.5 block admin-label">Image</label>
@@ -49,10 +61,16 @@
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Button 1 label</label>
-                    <input type="text" wire:model="button_1_label"
+                    <label class="mb-1.5 block admin-label">Button 1 label (English)</label>
+                    <input type="text" wire:model="button_1_label_en"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('button_1_label') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('button_1_label_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <div class="mt-2">
+                        <label class="mb-1.5 block admin-label">Button 1 label (ދިވެހި)</label>
+                        <input type="text" wire:model="button_1_label_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('button_1_label_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    </div>
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Button 1 link</label>

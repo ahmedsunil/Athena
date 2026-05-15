@@ -15,16 +15,13 @@ class HomeSlideSeederTest extends TestCase
     {
         $this->seed(HomeSlideSeeder::class);
 
-        $this->assertDatabaseHas('home_slides', [
-            'title' => "Shaping Tomorrow's Leaders",
-            'button_1_label' => 'Apply for Admission',
-            'button_1_link_key' => '/admissions',
-            'sort_order' => 0,
-            'is_active' => true,
-        ]);
+        $slide = HomeSlide::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === "Shaping Tomorrow's Leaders");
 
-        $slide = HomeSlide::where('title', "Shaping Tomorrow's Leaders")->firstOrFail();
-
+        $this->assertNotNull($slide);
+        $this->assertSame('Apply for Admission', $slide->getTranslation('button_1_label', 'en', false));
+        $this->assertSame('/admissions', $slide->button_1_link_key);
+        $this->assertSame(0, $slide->sort_order);
+        $this->assertTrue($slide->is_active);
         $this->assertSame(
             'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80',
             $slide->image_url

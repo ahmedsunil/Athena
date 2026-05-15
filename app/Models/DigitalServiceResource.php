@@ -4,8 +4,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Translatable\HasTranslations;
 class DigitalServiceResource extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description'];
+
     use HasFactory;
     protected $fillable = [
         'sort_order', 'title', 'description', 'audience',

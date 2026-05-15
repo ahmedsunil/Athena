@@ -75,7 +75,7 @@ class AnnouncementsModuleTest extends TestCase
             ->assertSee('Competition details');
     }
 
-    public function test_inactive_closed_announcement_detail_page_renders(): void
+    public function test_inactive_announcement_detail_page_returns_404(): void
     {
         Announcement::create([
             'title' => 'Closed Notice',
@@ -85,10 +85,7 @@ class AnnouncementsModuleTest extends TestCase
             'is_active' => false,
         ]);
 
-        $this->get('/announcements/closed-notice')
-            ->assertOk()
-            ->assertSee('Closed Notice')
-            ->assertSee('Closed details');
+        $this->get('/announcements/closed-notice')->assertNotFound();
     }
 
     public function test_home_quick_access_replaces_admissions_with_announcements(): void

@@ -5,8 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+use Spatie\Translatable\HasTranslations;
 class AcademicLevel extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['label', 'age_range', 'year_groups'];
+
     protected $fillable = [
         'sort_order', 'abbreviation', 'label', 'age_range', 'year_groups',
         'lead_teacher', 'lead_teacher_photo_path',
