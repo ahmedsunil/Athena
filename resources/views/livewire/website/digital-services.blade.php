@@ -3,8 +3,8 @@
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Online Hub</p>
-            <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Digital Services</h1>
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('digital_services_page_label') }}</p>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('digital_services_heading') }}</h1>
         </div>
     </div>
 
@@ -12,11 +12,11 @@
     <div class="bg-white border-b border-slate-200 sticky top-16 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex gap-0 overflow-x-auto">
-                @foreach([['downloads','Downloads'],['resources','Resources'],['calendar','Academic Calendar']] as [$id,$label])
+                @foreach([['downloads','digital_services_tab_downloads'],['resources','digital_services_tab_resources'],['calendar','digital_services_tab_calendar']] as [$id,$labelKey])
                     <button wire:click="setTab('{{ $id }}')"
                             class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap
                                    {{ $activeTab === $id ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300' }}">
-                        {{ $label }}
+                        {{ __($labelKey) }}
                     </button>
                 @endforeach
             </div>
@@ -35,7 +35,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </span>
-                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search documents..."
+                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="{{ __('digital_services_search_placeholder') }}"
                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm bg-white">
                 </div>
 
@@ -44,7 +44,7 @@
                     <button wire:click="setCategory('All')"
                             class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                    {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                        All
+                        {{ __('common_all') }}
                     </button>
                     @foreach($docCategories as $cat)
                         <button wire:click="setCategory('{{ $cat }}')"
@@ -56,21 +56,21 @@
                     <div class="ml-auto flex items-center gap-2">
                         <select wire:model.live="activeMonth"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
-                            <option value="All">All Months</option>
+                            <option value="All">{{ __('common_all_months') }}</option>
                             @foreach(['January','February','March','April','May','June','July','August','September','October','November','December'] as $i => $month)
                                 <option value="{{ $i + 1 }}">{{ $month }}</option>
                             @endforeach
                         </select>
                         <select wire:model.live="activeYear"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
-                            <option value="All">All Years</option>
+                            <option value="All">{{ __('common_all_years') }}</option>
                             @foreach($years as $year)
                                 <option value="{{ $year }}">{{ $year }}</option>
                             @endforeach
                         </select>
                         <button wire:click="clearFilters"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">
-                            Clear
+                            {{ __('common_clear') }}
                         </button>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
 
                 @if($documents->isEmpty())
                     <div class="text-center py-12 text-slate-400">
-                        <p class="font-semibold">No documents found</p>
+                        <p class="font-semibold">{{ __('digital_services_no_documents') }}</p>
                     </div>
                 @else
                     <div class="space-y-2">
@@ -122,10 +122,10 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                                         </svg>
-                                        Download
+                                        {{ __('digital_services_download') }}
                                     </a>
                                 @else
-                                    <span class="flex-shrink-0 text-xs text-slate-300 px-3 py-2">No file</span>
+                                    <span class="flex-shrink-0 text-xs text-slate-300 px-3 py-2">{{ __('digital_services_no_file') }}</span>
                                 @endif
                             </div>
                         @endforeach
@@ -154,7 +154,7 @@
 
                 @if($resources->isEmpty())
                     <div class="text-center py-16 text-slate-400">
-                        <p class="font-semibold">No resources found</p>
+                        <p class="font-semibold">{{ __('digital_services_no_resources') }}</p>
                     </div>
                 @else
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -248,7 +248,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
                         </svg>
-                        Tentative — subject to change
+                        {{ __('calendar_tentative_badge') }}
                     </span>
                 @endif
             </div>
@@ -257,42 +257,42 @@
             @php
                 $statCards = [
                     [
-                        'label' => 'Teaching Days',
+                        'label' => __('calendar_stat_teaching_days'),
                         'value' => $currentCalendar?->stat_teaching_days,
                         'color' => 'text-sky-600',
                         'bg'    => 'bg-sky-50',
                         'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>',
                     ],
                     [
-                        'label' => 'School Exams',
+                        'label' => __('calendar_stat_school_exams'),
                         'value' => $currentCalendar?->stat_exam_days,
                         'color' => 'text-amber-600',
                         'bg'    => 'bg-amber-50',
                         'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>',
                     ],
                     [
-                        'label' => 'Report Prep',
+                        'label' => __('calendar_stat_report_prep'),
                         'value' => $currentCalendar?->stat_report_prep_days,
                         'color' => 'text-violet-600',
                         'bg'    => 'bg-violet-50',
                         'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>',
                     ],
                     [
-                        'label' => 'Teacher PD',
+                        'label' => __('calendar_stat_teacher_pd'),
                         'value' => $currentCalendar?->stat_teacher_pd_days,
                         'color' => 'text-emerald-600',
                         'bg'    => 'bg-emerald-50',
                         'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>',
                     ],
                     [
-                        'label' => 'Non-Teaching',
+                        'label' => __('calendar_stat_non_teaching'),
                         'value' => $currentCalendar?->stat_non_teaching_days,
                         'color' => 'text-slate-500',
                         'bg'    => 'bg-slate-50',
                         'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"/></svg>',
                     ],
                     [
-                        'label' => 'Total School Days',
+                        'label' => __('calendar_stat_total_days'),
                         'value' => $currentCalendar?->stat_total_days,
                         'color' => 'text-rose-600',
                         'bg'    => 'bg-rose-50',
@@ -391,10 +391,10 @@
 
                     {{-- Legend --}}
                     <div class="flex flex-wrap gap-3 mt-3">
-                        @foreach(['holiday' => 'Holiday', 'term' => 'Academic', 'exam' => 'Exam', 'event' => 'Event'] as $type => $label)
+                        @foreach(['holiday' => 'calendar_legend_holiday', 'term' => 'calendar_legend_academic', 'exam' => 'calendar_legend_exam', 'event' => 'calendar_legend_event'] as $type => $labelKey)
                             <div class="flex items-center gap-1.5">
                                 <span class="w-2.5 h-2.5 rounded-sm {{ $calTypeColors[$type] }}"></span>
-                                <span class="text-xs text-slate-500 font-medium">{{ $label }}</span>
+                                <span class="text-xs text-slate-500 font-medium">{{ __($labelKey) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -414,7 +414,7 @@
                     @if($monthEntries->isNotEmpty())
                         <div>
                             <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 px-0.5">
-                                {{ $currentMonthCarbon->format('F') }} Events
+                                {{ $currentMonthCarbon->format('F') }} {{ __('calendar_legend_event') }}s
                             </p>
                             <div class="space-y-2">
                                 @foreach($monthEntries as $me)
@@ -431,7 +431,7 @@
                                                     {{ $me->type }}
                                                 </span>
                                                 @if($me->is_tentative)
-                                                    <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">Tentative</span>
+                                                    <span class="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">{{ __('calendar_tentative_keyword') }}</span>
                                                 @endif
                                             </div>
                                             @if($me->end_date)
@@ -454,10 +454,10 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
                                 </svg>
-                                <p class="text-sm font-bold text-amber-800">Some dates are tentative</p>
+                                <p class="text-sm font-bold text-amber-800">{{ __('calendar_tentative_heading') }}</p>
                             </div>
                             <p class="text-xs text-amber-700 leading-relaxed">
-                                Entries marked <span class="font-semibold">Tentative</span> are subject to change by the Ministry of Education.
+                                {{ __('calendar_tentative_body') }}
                             </p>
                         </div>
                     @endif
@@ -487,7 +487,7 @@
                             </div>
                             <div class="text-right flex-shrink-0">
                                 <p class="text-3xl font-black text-slate-900 leading-none">{{ $fmt($t['total']) }}</p>
-                                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide mt-0.5">Total Days</p>
+                                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide mt-0.5">{{ __('calendar_term_total_days') }}</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
@@ -497,7 +497,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm font-black text-slate-900">{{ $fmt($t['teaching']) }}</p>
-                                    <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide leading-none">Teaching</p>
+                                    <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide leading-none">{{ __('calendar_term_teaching') }}</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2.5">
@@ -506,7 +506,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm font-black text-slate-900">{{ $fmt($t['exam']) }}</p>
-                                    <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide leading-none">Exam Days</p>
+                                    <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide leading-none">{{ __('calendar_term_exam_days') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -526,8 +526,8 @@
             @endphp
             <div class="mt-4 bg-white rounded-2xl border border-slate-200 p-6" data-reveal="fade">
                 <div class="mb-5">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-1">Examinations</p>
-                    <h3 class="text-lg font-black text-slate-900">International Examination Series</h3>
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-1">{{ __('calendar_exams_eyebrow') }}</p>
+                    <h3 class="text-lg font-black text-slate-900">{{ __('calendar_exams_heading') }}</h3>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     @foreach($currentCalendar->exam_series as $i => $series)
@@ -544,7 +544,7 @@
                 </div>
                 <div class="mt-5 pt-4 border-t border-slate-100 flex items-start gap-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <p class="text-xs text-slate-400">Exact dates follow the official examination timetable provided by the Department of Public Examinations (DPE).</p>
+                    <p class="text-xs text-slate-400">{{ __('calendar_exams_dpe_note') }}</p>
                 </div>
             </div>
             @endif

@@ -3,8 +3,8 @@
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Beyond the Classroom</p>
-            <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Student Life</h1>
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('student_life_page_label') }}</p>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('student_life_heading') }}</h1>
         </div>
     </div>
 
@@ -13,15 +13,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex gap-0 overflow-x-auto">
                 @foreach([
-                    ['key' => 'clubs',         'label' => 'Clubs'],
-                    ['key' => 'prefects',       'label' => 'Prefects'],
-                    ['key' => 'houses',         'label' => 'Houses'],
-                    ['key' => 'uniform-bodies', 'label' => 'Uniform Bodies'],
+                    ['key' => 'clubs',         'label_key' => 'student_life_tab_clubs'],
+                    ['key' => 'prefects',       'label_key' => 'student_life_tab_prefects'],
+                    ['key' => 'houses',         'label_key' => 'student_life_tab_houses'],
+                    ['key' => 'uniform-bodies', 'label_key' => 'student_life_tab_uniform_bodies'],
                 ] as $tab)
                     <button wire:click="setTab('{{ $tab['key'] }}')"
                             class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors
                                    {{ $activeTab === $tab['key'] ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}">
-                        {{ $tab['label'] }}
+                        {{ __($tab['label_key']) }}
                     </button>
                 @endforeach
             </div>
@@ -64,11 +64,11 @@
                         @endif
                         <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                             <div>
-                                <p class="text-xs text-slate-400">Teacher in charge</p>
+                                <p class="text-xs text-slate-400">{{ __('student_life_clubs_teacher_in_charge') }}</p>
                                 <p class="text-xs font-semibold text-slate-700">{{ $club->patron_name ?? '—' }}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-xs text-slate-400">President</p>
+                                <p class="text-xs text-slate-400">{{ __('student_life_clubs_president') }}</p>
                                 <p class="text-xs font-semibold text-slate-700">
                                     {{ $club->president_name ?? '—' }}
                                     @if($club->president_class)
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-slate-400 col-span-3">No clubs yet.</p>
+                    <p class="text-slate-400 col-span-3">{{ __('student_life_clubs_empty') }}</p>
                 @endforelse
             </div>
         @endif
@@ -120,7 +120,7 @@
                         @endif
                     </div>
                 @empty
-                    <p class="text-slate-400 col-span-4">No prefects yet.</p>
+                    <p class="text-slate-400 col-span-4">{{ __('student_life_prefects_empty') }}</p>
                 @endforelse
             </div>
         @endif
@@ -157,11 +157,11 @@
                             @endif
                             <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                                 <div>
-                                    <p class="text-xs text-slate-400">House Master/Mistress</p>
+                                    <p class="text-xs text-slate-400">{{ __('student_life_houses_master') }}</p>
                                     <p class="text-xs font-semibold text-slate-700">{{ $house->house_master_name ?? '—' }}</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-xs text-slate-400">Captain</p>
+                                    <p class="text-xs text-slate-400">{{ __('student_life_houses_captain') }}</p>
                                     <p class="text-xs font-semibold text-slate-700">
                                         {{ $house->captain_name ?? '—' }}
                                         @if($house->captain_class)
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-slate-400 col-span-2">No houses yet.</p>
+                    <p class="text-slate-400 col-span-2">{{ __('student_life_houses_empty') }}</p>
                 @endforelse
             </div>
         @endif
@@ -226,11 +226,11 @@
                         @endif
                         <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                             <div>
-                                <p class="text-xs text-slate-400">Patron</p>
+                                <p class="text-xs text-slate-400">{{ __('student_life_uniform_patron') }}</p>
                                 <p class="text-xs font-semibold text-slate-700">{{ $body->patron_name ?? '—' }}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-xs text-slate-400">Leader</p>
+                                <p class="text-xs text-slate-400">{{ __('student_life_uniform_leader') }}</p>
                                 <p class="text-xs font-semibold text-slate-700">
                                     {{ $body->leader_name ?? '—' }}
                                     @if($body->leader_class)
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-slate-400 col-span-3">No uniform bodies yet.</p>
+                    <p class="text-slate-400 col-span-3">{{ __('student_life_uniform_empty') }}</p>
                 @endforelse
             </div>
         @endif

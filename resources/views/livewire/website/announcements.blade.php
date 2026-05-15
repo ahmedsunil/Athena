@@ -2,8 +2,8 @@
 
     <section class="border-b border-slate-200 bg-white py-6">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p class="mb-2 text-xs font-bold uppercase tracking-widest text-rose-600" data-reveal="fade">Public Notices</p>
-            <h1 class="text-3xl font-black text-slate-900 sm:text-4xl" data-reveal="left">Announcements</h1>
+            <p class="mb-2 text-xs font-bold uppercase tracking-widest text-rose-600" data-reveal="fade">{{ __('announcements_page_label') }}</p>
+            <h1 class="text-3xl font-black text-slate-900 sm:text-4xl" data-reveal="left">{{ __('announcements_heading') }}</h1>
         </div>
     </section>
 
@@ -13,19 +13,19 @@
                     wire:key="announcement-filter-active"
                     wire:click="setFilter('active')"
                     class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'active' ? 'border-rose-600 bg-rose-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
-                Active
+                {{ __('announcements_filter_active') }}
             </button>
             <button type="button"
                     wire:key="announcement-filter-closed"
                     wire:click="setFilter('closed')"
                     class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'closed' ? 'border-rose-600 bg-rose-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
-                Closed
+                {{ __('announcements_filter_closed') }}
             </button>
         </div>
 
         @if($announcements->isEmpty())
             <div class="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-6 py-16 text-center">
-                <p class="text-lg font-semibold text-slate-500">No announcements at the moment.</p>
+                <p class="text-lg font-semibold text-slate-500">{{ __('announcements_empty') }}</p>
             </div>
         @else
             <div class="grid gap-4 lg:grid-cols-2">
@@ -47,7 +47,7 @@
                                     <span class="text-xs font-bold uppercase tracking-wide text-rose-600">{{ $announcement->category }}</span>
                                     <span class="text-xs font-semibold text-slate-400">{{ $announcement->created_at->format('j M Y') }}</span>
                                     @if($announcement->deadline)
-                                        <span class="text-xs font-semibold text-slate-400">Deadline {{ $announcement->formatted_deadline }}</span>
+                                        <span class="text-xs font-semibold text-slate-400">{{ __('announcements_deadline') }} {{ $announcement->formatted_deadline }}</span>
                                     @endif
                                 </div>
                                 <h2 class="text-lg font-black text-slate-900">{{ $announcement->title }}</h2>
@@ -58,12 +58,12 @@
                                     <a href="{{ route('announcements.show', $announcement->slug) }}"
                                        onclick="event.stopPropagation()"
                                        class="inline-flex text-sm font-semibold text-rose-600 hover:text-rose-700">
-                                        View details
+                                        {{ __('announcements_view_details') }}
                                     </a>
                                     @if($announcement->attachment_links)
                                         <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400">
                                             <x-icon key="File" class="h-3.5 w-3.5" />
-                                            {{ count($announcement->attachment_links) }} {{ count($announcement->attachment_links) === 1 ? 'file' : 'files' }}
+                                            {{ count($announcement->attachment_links) }} {{ count($announcement->attachment_links) === 1 ? __('announcements_file_singular') : __('announcements_file_plural') }}
                                         </span>
                                     @endif
                                 </div>

@@ -33,8 +33,8 @@
         {{-- Expand hint --}}
         @if($member->education || !empty($member->work_experiences))
             <div class="mt-2.5 flex items-center justify-between">
-                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-show="!expanded">Details</span>
-                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-show="expanded" x-cloak>Close</span>
+                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-show="!expanded">{{ __('staff_card_details') }}</span>
+                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-show="expanded" x-cloak>{{ __('staff_card_close') }}</span>
                 <svg
                     class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200"
                     :class="expanded ? 'rotate-180' : ''"

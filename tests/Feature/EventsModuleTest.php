@@ -70,6 +70,14 @@ class EventsModuleTest extends TestCase
 
     public function test_home_page_hides_featured_section_when_no_featured_events(): void
     {
-        $this->get('/')->assertDontSee('Featured Events');
+        // The translation key value appears in the embedded JS translations on every page.
+        // We check that the featured-events section heading is not rendered in the HTML body.
+        $response = $this->get('/');
+        $html = $response->content();
+        $this->assertStringNotContainsString(
+            '<h2 class="text-2xl sm:text-3xl font-black text-slate-900">Featured Events</h2>',
+            $html,
+            'Featured Events heading should not appear when no featured events exist.'
+        );
     }
 }

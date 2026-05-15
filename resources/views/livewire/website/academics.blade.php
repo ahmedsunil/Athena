@@ -16,8 +16,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row lg:items-center gap-8">
                 <div class="flex-1 min-w-0">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">Our Curriculum</p>
-                    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3" data-reveal="left">Academics</h1>
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">{{ __('academics_page_label') }}</p>
+                    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3" data-reveal="left">{{ __('academics_heading') }}</h1>
                     @if($overview->text)
                         <p class="text-slate-500 max-w-2xl text-sm leading-relaxed" data-reveal="fade">{{ $overview->text }}</p>
                     @endif
@@ -41,7 +41,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         @if($levels->isEmpty())
             <div class="text-center py-20 text-slate-400">
-                <p class="text-lg font-semibold">No academic levels published yet.</p>
+                <p class="text-lg font-semibold">{{ __('academics_empty') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -55,7 +55,7 @@
                             <h2 class="text-xl font-black text-slate-900 mt-3">{{ $level->label }}</h2>
                         </div>
                         <div class="text-right flex-shrink-0">
-                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400">Age group</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400">{{ __('academics_age_group') }}</p>
                             <p class="text-xs font-semibold text-slate-700">{{ $level->age_range }}</p>
                         </div>
                     </div>
@@ -63,11 +63,11 @@
                     {{-- Grades + Lead teacher --}}
                     <div class="grid grid-cols-2 gap-3 mb-4">
                         <div class="rounded-xl bg-slate-50 p-3">
-                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">Grades</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">{{ __('academics_grades') }}</p>
                             <p class="text-sm font-semibold text-slate-900">{{ $level->year_groups }}</p>
                         </div>
                         <div class="rounded-xl bg-slate-50 p-3">
-                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">Leading teacher</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">{{ __('academics_leading_teacher') }}</p>
                             <div class="flex items-center gap-2">
                                 @if($level->lead_teacher_photo_path)
                                     <img src="{{ $level->lead_teacher_photo_url }}" alt="{{ $level->lead_teacher }}" class="w-8 h-8 rounded-full flex-shrink-0 object-cover">
@@ -93,7 +93,7 @@
                     {{-- Subjects --}}
                     @if($level->subjects && count($level->subjects) > 0)
                         <div class="mb-4">
-                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-2">Subjects</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-2">{{ __('academics_subjects') }}</p>
                             <div class="flex flex-wrap gap-1.5">
                                 @foreach($level->subjects as $subject)
                                     <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-lg">{{ $subject }}</span>
@@ -105,7 +105,7 @@
                     {{-- Targets --}}
                     @if($level->targets && count($level->targets) > 0)
                         <div class="border-t border-slate-100 pt-4">
-                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-2">Targets</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-2">{{ __('academics_targets') }}</p>
                             <ul class="space-y-1.5">
                                 @foreach($level->targets as $target)
                                     <li class="text-xs text-slate-600 flex gap-2">

@@ -2,7 +2,7 @@
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">About Our School</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">{{ __('about_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ $profile->school_name }}</h1>
             @if($profile->motto)
                 <p class="text-sm text-slate-500 italic mt-1" data-reveal="fade">"{{ $profile->motto }}"</p>
@@ -17,19 +17,19 @@
                 <button
                     wire:click="switchTab('about')"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'about' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >About Us</button>
+                >{{ __('about_tab_about') }}</button>
                 <button
                     wire:click="switchTab('history')"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'history' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >History</button>
+                >{{ __('about_tab_history') }}</button>
                 <button
                     wire:click="switchTab('achievements')"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'achievements' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >Achievements</button>
+                >{{ __('about_tab_achievements') }}</button>
                 <button
                     wire:click="switchTab('team')"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'team' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >Team</button>
+                >{{ __('about_tab_team') }}</button>
             </div>
         </div>
     </div>
@@ -44,8 +44,8 @@
             <section class="py-12 sm:py-16 bg-slate-50 border-b border-slate-200">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="mb-8">
-                        <span class="text-xs font-black uppercase tracking-widest text-rose-500">Our Purpose</span>
-                        <h2 class="text-3xl font-black text-slate-900 mt-1">Mission &amp; Vision</h2>
+                        <span class="text-xs font-black uppercase tracking-widest text-rose-500">{{ __('about_section_our_purpose') }}</span>
+                        <h2 class="text-3xl font-black text-slate-900 mt-1">{{ __('about_section_mission_vision') }}</h2>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                         {{-- Mission --}}
@@ -54,9 +54,9 @@
                                 <div class="w-8 h-8 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                                 </div>
-                                <p class="text-xs font-black uppercase tracking-widest text-rose-600">Mission</p>
+                                <p class="text-xs font-black uppercase tracking-widest text-rose-600">{{ __('about_label_mission') }}</p>
                             </div>
-                            <p class="text-slate-700 leading-relaxed">{{ $mission->mission ?? 'Mission not yet set.' }}</p>
+                            <p class="text-slate-700 leading-relaxed">{{ $mission->mission ?? __('about_mission_not_set') }}</p>
                         </div>
                         {{-- Vision --}}
                         <div class="bg-white rounded-2xl border border-sky-100 p-7">
@@ -64,9 +64,9 @@
                                 <div class="w-8 h-8 rounded-full bg-sky-50 border border-sky-200 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                 </div>
-                                <p class="text-xs font-black uppercase tracking-widest text-sky-600">Vision</p>
+                                <p class="text-xs font-black uppercase tracking-widest text-sky-600">{{ __('about_label_vision') }}</p>
                             </div>
-                            <p class="text-slate-700 leading-relaxed">{{ $mission->vision ?? 'Vision not yet set.' }}</p>
+                            <p class="text-slate-700 leading-relaxed">{{ $mission->vision ?? __('about_vision_not_set') }}</p>
                         </div>
                     </div>
                 </div>
@@ -76,8 +76,8 @@
             <section class="py-16 sm:py-20 bg-white">
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">A Word From Leadership</p>
-                        <h2 class="text-3xl font-black text-slate-900">Principal's Message</h2>
+                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('about_leadership_eyebrow') }}</p>
+                        <h2 class="text-3xl font-black text-slate-900">{{ __('about_principals_message') }}</h2>
                         <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
                     </div>
                     @if($profile->principal_name || $profile->principal_message)
@@ -95,12 +95,12 @@
                                     </div>
                                     <div class="text-center">
                                         <p class="font-bold text-slate-900">{{ $profile->principal_name }}</p>
-                                        <p class="text-xs text-rose-600 font-semibold mt-0.5">{{ $profile->principal_designation ?? 'Principal' }}</p>
+                                        <p class="text-xs text-rose-600 font-semibold mt-0.5">{{ $profile->principal_designation ?? __('about_label_principal') }}</p>
                                     </div>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="border-l-4 border-rose-500 pl-5 mb-6">
-                                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Open Letter</p>
+                                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_open_letter') }}</p>
                                     </div>
                                     <div class="space-y-4 text-slate-700 leading-relaxed text-sm">
                                         @foreach(array_filter(explode("\n\n", $profile->principal_message ?? '')) as $i => $para)
@@ -119,8 +119,8 @@
                 <section class="py-16 sm:py-20 bg-slate-50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center mb-12">
-                            <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">The People Behind the School</p>
-                            <h2 class="text-3xl font-black text-slate-900">Leadership Team</h2>
+                            <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">{{ __('about_leadership_eyebrow_2') }}</p>
+                            <h2 class="text-3xl font-black text-slate-900">{{ __('about_leadership_team') }}</h2>
                             <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -136,7 +136,7 @@
                                             @endif
                                         </div>
                                         @if($isFirst)
-                                            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">Principal</div>
+                                            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">{{ __('about_label_principal') }}</div>
                                         @endif
                                     </div>
                                     <p class="font-bold text-slate-900 {{ $isFirst ? 'mt-3' : 'mt-1' }}">{{ $member->name }}</p>
@@ -163,20 +163,20 @@
                         <div class="space-y-6">
                             @if($profile->motto)
                                 <div class="pb-5 border-b border-slate-100">
-                                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Motto</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{{ __('about_history_label_motto') }}</p>
                                     <p class="font-semibold text-slate-900 italic">"{{ $profile->motto }}"</p>
                                 </div>
                             @endif
                             @if($profile->island || $profile->atoll)
                                 <div class="pb-5 border-b border-slate-100">
-                                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Location</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{{ __('about_history_label_location') }}</p>
                                     <p class="font-medium text-slate-700">{{ implode(', ', array_filter([$profile->island, $profile->atoll])) }}</p>
                                 </div>
                             @endif
                         </div>
                         <div class="lg:col-span-2">
                             @if($profile->short_description)
-                                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">Who We Are</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">{{ __('about_history_who_we_are') }}</p>
                                 @foreach(array_filter(explode("\n\n", $profile->short_description)) as $i => $para)
                                     <p class="mb-4 leading-relaxed {{ $i === 0 ? 'text-lg font-medium text-slate-800' : 'text-slate-600' }}">{{ $para }}</p>
                                 @endforeach
@@ -190,8 +190,8 @@
             <section class="py-16 sm:py-24 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="mb-14 pb-10 border-b border-slate-100">
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">School History</p>
-                        <h2 class="text-4xl sm:text-5xl font-black text-slate-900 mb-5">Our Journey</h2>
+                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">{{ __('about_history_eyebrow') }}</p>
+                        <h2 class="text-4xl sm:text-5xl font-black text-slate-900 mb-5">{{ __('about_history_heading') }}</h2>
                     </div>
                     @if($historySections->isNotEmpty())
                         @php
@@ -231,7 +231,7 @@
                             </div>
                         </div>
                     @else
-                        <p class="text-slate-500">No history sections have been added yet.</p>
+                        <p class="text-slate-500">{{ __('about_history_empty') }}</p>
                     @endif
                 </div>
             </section>
@@ -244,11 +244,11 @@
                         <div class="text-center mb-14">
                             <div class="inline-flex items-center gap-3 mb-4">
                                 <span class="h-px w-10 bg-amber-600/50"></span>
-                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-500 border border-amber-700/30 px-3 py-1 rounded-sm">Founding Members</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-500 border border-amber-700/30 px-3 py-1 rounded-sm">{{ __('about_founding_eyebrow') }}</span>
                                 <span class="h-px w-10 bg-amber-600/50"></span>
                             </div>
-                            <h2 class="text-3xl font-black text-white">Our Founding Teachers</h2>
-                            <p class="mt-3 text-amber-200/50 text-sm max-w-md mx-auto">The educators who built this school from the ground up.</p>
+                            <h2 class="text-3xl font-black text-white">{{ __('about_founding_heading') }}</h2>
+                            <p class="mt-3 text-amber-200/50 text-sm max-w-md mx-auto">{{ __('about_founding_subtext') }}</p>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
                             @foreach($foundingMembers as $member)
@@ -261,7 +261,7 @@
                                         @endif
                                         <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>
                                         <div class="absolute top-2 left-2">
-                                            <span class="bg-amber-500 text-stone-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-sm">Founder</span>
+                                            <span class="bg-amber-500 text-stone-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-sm">{{ __('about_founding_badge') }}</span>
                                         </div>
                                     </div>
                                     <p class="font-bold text-white text-sm leading-tight">{{ $member->name }}</p>
@@ -284,23 +284,23 @@
 
                 {{-- Header --}}
                 <div class="mb-10">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Recognition &amp; Honours</p>
-                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Achievements</h2>
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('about_achievements_eyebrow') }}</p>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('about_achievements_heading') }}</h2>
                 </div>
 
                 {{-- Stats --}}
                 <div class="grid grid-cols-3 gap-4 mb-10">
                     <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center">
                         <p class="text-3xl font-black text-slate-900">{{ $totalCount }}</p>
-                        <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mt-1">Total</p>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mt-1">{{ __('about_achievements_stat_total') }}</p>
                     </div>
                     <div class="bg-sky-50 border border-sky-200 rounded-2xl p-5 text-center">
                         <p class="text-3xl font-black text-sky-700">{{ $studentCount }}</p>
-                        <p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-1">Students</p>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-1">{{ __('about_achievements_stat_students') }}</p>
                     </div>
                     <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 text-center">
                         <p class="text-3xl font-black text-rose-700">{{ $schoolCount }}</p>
-                        <p class="text-xs font-semibold uppercase tracking-wide text-rose-600 mt-1">School-wide</p>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-rose-600 mt-1">{{ __('about_achievements_stat_school') }}</p>
                     </div>
                 </div>
 
@@ -326,7 +326,7 @@
                         wire:model.live="activeYear"
                         class="sm:ml-auto px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-rose-400"
                     >
-                        <option value="all">All Years</option>
+                        <option value="all">{{ __('common_all_years') }}</option>
                         @foreach($achievementYears as $year)
                             <option value="{{ $year }}">{{ $year }}</option>
                         @endforeach
@@ -396,7 +396,7 @@
                         <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
                         </div>
-                        <p class="text-slate-500 font-medium">No achievements match this filter.</p>
+                        <p class="text-slate-500 font-medium">{{ __('about_achievements_empty') }}</p>
                     </div>
                 @endif
 
@@ -412,12 +412,12 @@
                 @php $seniorStaff = $staff->get('senior_management', collect()); @endphp
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale">
                     <div class="px-6 py-4 border-b border-slate-100">
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Leadership</p>
-                        <h2 class="text-xl font-black text-slate-900 mt-0.5">Senior Management Team</h2>
+                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_team_leadership_eyebrow') }}</p>
+                        <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_senior_management') }}</h2>
                     </div>
                     <div class="p-6">
                         @if($seniorStaff->isEmpty())
-                            <p class="text-sm text-slate-400">No members added yet.</p>
+                            <p class="text-sm text-slate-400">{{ __('about_team_no_members') }}</p>
                         @else
                             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                                 @foreach($seniorStaff as $member)
@@ -442,9 +442,9 @@
                 <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
                     <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Section</p>
-                            <h2 class="text-xl font-black text-slate-900 mt-0.5">Academic Section</h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Principal as Team Lead</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_team_section_eyebrow') }}</p>
+                            <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_academic_section') }}</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">{{ __('about_team_academic_lead') }}</p>
                         </div>
                         <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -465,7 +465,7 @@
                                 </div>
                             @endif
                         @empty
-                            <p class="text-sm text-slate-400">No academic staff added yet.</p>
+                            <p class="text-sm text-slate-400">{{ __('about_team_no_academic_staff') }}</p>
                         @endforelse
                     </div>
                 </div>
@@ -483,9 +483,9 @@
                 <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
                     <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">Section</p>
-                            <h2 class="text-xl font-black text-slate-900 mt-0.5">Administrative Section</h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Administrator as Team Lead</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_team_section_eyebrow') }}</p>
+                            <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_admin_section') }}</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">{{ __('about_team_admin_lead') }}</p>
                         </div>
                         <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -505,7 +505,7 @@
                                 </div>
                             @endif
                         @empty
-                            <p class="text-sm text-slate-400">No administrative staff added yet.</p>
+                            <p class="text-sm text-slate-400">{{ __('about_team_no_admin_staff') }}</p>
                         @endforelse
                     </div>
                 </div>

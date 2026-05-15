@@ -3,8 +3,8 @@
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Photo Albums</p>
-            <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Gallery</h1>
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('gallery_page_label') }}</p>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('gallery_heading') }}</h1>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
             <button wire:click="setCategory('All')"
                     class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                            {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                All
+                {{ __('common_all') }}
             </button>
             @foreach($categories as $cat)
                 <button wire:click="setCategory('{{ $cat }}')"
@@ -27,21 +27,21 @@
             <div class="ml-auto flex items-center gap-2">
                 <select wire:model.live="activeMonth"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
-                    <option value="All">All Months</option>
+                    <option value="All">{{ __('common_all_months') }}</option>
                     @foreach(['January','February','March','April','May','June','July','August','September','October','November','December'] as $i => $month)
                         <option value="{{ $i + 1 }}">{{ $month }}</option>
                     @endforeach
                 </select>
                 <select wire:model.live="activeYear"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
-                    <option value="All">All Years</option>
+                    <option value="All">{{ __('common_all_years') }}</option>
                     @foreach($years as $year)
                         <option value="{{ $year }}">{{ $year }}</option>
                     @endforeach
                 </select>
                 <button wire:click="clearFilters"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">
-                    Clear
+                    {{ __('common_clear') }}
                 </button>
             </div>
         </div>
@@ -49,7 +49,7 @@
         {{-- Albums grid --}}
         @if($albums->isEmpty())
             <div class="col-span-4 text-center py-16 text-slate-400">
-                <p class="font-semibold">No albums found</p>
+                <p class="font-semibold">{{ __('gallery_empty') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -90,13 +90,13 @@
                             @if($album->facebook_url)
                                 <a href="{{ $album->facebook_url }}" target="_blank" rel="noopener noreferrer"
                                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 hover:text-sky-700">
-                                    View on Facebook
+                                    {{ __('gallery_view_on_facebook') }}
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                     </svg>
                                 </a>
                             @else
-                                <span class="text-xs text-slate-300">No Facebook link</span>
+                                <span class="text-xs text-slate-300">{{ __('gallery_no_facebook_link') }}</span>
                             @endif
                         </div>
                     </div>

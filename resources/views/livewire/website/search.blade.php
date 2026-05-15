@@ -52,7 +52,7 @@
                     x-ref="searchInput"
                     wire:model.live.debounce.250ms="query"
                     type="text"
-                    placeholder="Search events, documents, gallery…"
+                    placeholder="{{ __('search_placeholder') }}"
                     class="flex-1 bg-transparent text-sm text-slate-900 placeholder-slate-400 outline-none"
                     autocomplete="off"
                     spellcheck="false"
@@ -112,14 +112,14 @@
                     </div>
                 @else
                     <div class="px-4 py-10 text-center">
-                        <p class="text-sm font-semibold text-slate-500">No results for "{{ $query }}"</p>
-                        <p class="text-xs text-slate-400 mt-1">Try a different term</p>
+                        <p class="text-sm font-semibold text-slate-500">{{ __('search_no_results') }} "{{ $query }}"</p>
+                        <p class="text-xs text-slate-400 mt-1">{{ __('search_try_different') }}</p>
                     </div>
                 @endif
             @else
                 {{-- Empty state — quick links --}}
                 <div class="p-4">
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 px-1">Quick links</p>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 px-1">{{ __('search_quick_links') }}</p>
                     <div class="grid grid-cols-2 gap-2">
                         @foreach([
                             ['label' => 'Events',          'url' => route('events.index'),          'color' => 'sky',    'icon' => 'calendar'],
@@ -145,7 +145,7 @@
                             </a>
                         @endforeach
                     </div>
-                    <p class="text-center text-[10px] text-slate-300 mt-3">⌘K to open · ESC to close</p>
+                    <p class="text-center text-[10px] text-slate-300 mt-3">{{ __('search_keyboard_hint') }}</p>
                 </div>
             @endif
         </div>

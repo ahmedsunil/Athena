@@ -3,8 +3,8 @@
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">School Events</p>
-            <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">Events</h1>
+            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">{{ __('events_page_label') }}</p>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ __('events_heading') }}</h1>
         </div>
     </section>
 
@@ -13,7 +13,7 @@
 
         {{-- Filter pills --}}
         <div class="flex gap-2 flex-wrap mb-8">
-            @foreach(['all' => 'All', 'ongoing' => 'Ongoing', 'upcoming' => 'Upcoming', 'completed' => 'Completed'] as $value => $label)
+            @foreach(['all' => 'events_filter_all', 'ongoing' => 'events_filter_ongoing', 'upcoming' => 'events_filter_upcoming', 'completed' => 'events_filter_completed'] as $value => $labelKey)
                 <button type="button"
                         wire:key="event-filter-{{ $value }}"
                         wire:click="setFilter('{{ $value }}')"
@@ -21,7 +21,7 @@
                                {{ $filter === $value
                                    ? 'bg-rose-600 border-rose-600 text-white'
                                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                    {{ $label }}
+                    {{ __($labelKey) }}
                 </button>
             @endforeach
         </div>
@@ -29,7 +29,7 @@
         {{-- Events grid --}}
         @if($events->isEmpty())
             <div class="text-center py-20 text-slate-400">
-                <p class="text-lg font-semibold">No {{ $filter !== 'all' ? $filter : '' }} events at the moment.</p>
+                <p class="text-lg font-semibold">{{ __('events_empty') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,7 +61,7 @@
                             <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">{{ $event->short_description }}</p>
                             <a href="{{ route('events.show', $event->slug) }}"
                                class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">
-                                View Details
+                                {{ __('events_view_details') }}
                             </a>
                         </div>
                     </div>

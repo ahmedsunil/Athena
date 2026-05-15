@@ -137,8 +137,8 @@
         <section class="py-16 sm:py-20 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10" data-reveal="fade">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Navigate the Portal</p>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Quick Access</h2>
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_portal_label') }}</p>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_quick_access') }}</h2>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     @foreach($quickAccess as $item)
@@ -170,12 +170,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-end justify-between mb-10" data-reveal="fade">
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">What's On</p>
-                        <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Featured Events</h2>
+                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_events_label') }}</p>
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_featured_events') }}</h2>
                     </div>
                     <a href="{{ route('events.index') }}"
                        class="text-sm font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1">
-                        All Events
+                        {{ __('home_all_events') }}
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -222,7 +222,7 @@
                                 <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">{{ $event->short_description }}</p>
                                 <a href="{{ route('events.show', $event->slug) }}"
                                    class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">
-                                    View Details
+                                    {{ __('events_view_details') }}
                                 </a>
                             </div>
                         </div>
@@ -245,8 +245,7 @@
                             </div>
                         @endif
                         <div class="flex-1 p-8 flex flex-col justify-center">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-4">Principal's
-                                Welcome</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-4">{{ __('home_principals_welcome') }}</p>
                             @if($profile->principal_message)
                                 <p class="text-slate-200 leading-relaxed italic text-lg">
                                     "{{ $profile->principal_message }}"</p>
@@ -262,7 +261,7 @@
                             </div>
                             <a href="{{ route('about') }}"
                                class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-400 hover:text-rose-300">
-                                Read full message
+                                {{ __('home_read_full_message') }}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -282,8 +281,8 @@
         <section class="py-16 sm:py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12" data-reveal="fade">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Community Voices</p>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">What People Say</h2>
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_community_label') }}</p>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_what_people_say') }}</h2>
                 </div>
 
                 @foreach($tChunks as $ci => $chunk)
@@ -349,8 +348,8 @@
     <section id="contact" class="py-16 sm:py-20 bg-slate-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-reveal="fade">
-                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">Get In Touch</p>
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Contact Us</h2>
+                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_contact_label') }}</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_contact_heading') }}</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-4" data-reveal="left">
@@ -360,7 +359,7 @@
                                 class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
                                 <x-icon key="Mail"/>
                             </div>
-                            <div><p class="font-semibold text-slate-900 text-sm">Email</p>
+                            <div><p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_email') }}</p>
                                 <p class="text-slate-600 text-sm">{{ $profile->email }}</p></div>
                         </div>
                     @endif
@@ -370,7 +369,7 @@
                                 class="w-9 h-9 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0">
                                 <x-icon key="Phone"/>
                             </div>
-                            <div><p class="font-semibold text-slate-900 text-sm">Phone</p>
+                            <div><p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_phone') }}</p>
                                 <p class="text-slate-600 text-sm">{{ $profile->phone }}</p></div>
                         </div>
                     @endif
@@ -381,7 +380,7 @@
                                 <x-icon key="MapPin"/>
                             </div>
                             <div>
-                                <p class="font-semibold text-slate-900 text-sm">Address</p>
+                                <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_address') }}</p>
                                 <p class="text-slate-600 text-sm">{{ collect([$profile->island, $profile->atoll, $profile->country])->filter()->join(', ') }}</p>
                             </div>
                         </div>
@@ -389,15 +388,15 @@
                 </div>
                 <form action="#" method="post" class="space-y-4" data-reveal="right" style="--reveal-delay: 120ms">
                     @csrf
-                    <input type="text" name="name" placeholder="Your name"
+                    <input type="text" name="name" placeholder="{{ __('home_form_name_placeholder') }}"
                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
-                    <input type="email" name="email" placeholder="Email address"
+                    <input type="email" name="email" placeholder="{{ __('home_form_email_placeholder') }}"
                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
-                    <textarea name="message" rows="4" placeholder="Your message"
+                    <textarea name="message" rows="4" placeholder="{{ __('home_form_message_placeholder') }}"
                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm resize-none"></textarea>
                     <button type="submit"
                             class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
-                        Send Message
+                        {{ __('home_form_send') }}
                     </button>
                 </form>
             </div>
