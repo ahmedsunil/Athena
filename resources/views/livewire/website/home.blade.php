@@ -20,19 +20,28 @@
                                 <span data-lang-key="school_name"
                                       data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
                             </p>
-                            <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5">{{ $slide->title }}</h1>
+                            <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5"
+                                data-en="{{ $slide->getTranslation('title', 'en', false) }}"
+                                data-dv="{{ $slide->getTranslation('title', 'dv', false) ?: $slide->getTranslation('title', 'en', false) }}">{{ $slide->title }}</h1>
+                            @php $descEn = $slide->getTranslation('description', 'en', false); $descDv = $slide->getTranslation('description', 'dv', false) ?: $descEn; @endphp
                             @if($slide->description)
-                                <p class="text-slate-300 text-base mb-8 leading-relaxed">{{ $slide->description }}</p>
+                                <p class="text-slate-300 text-base mb-8 leading-relaxed"
+                                   data-en="{{ $descEn }}"
+                                   data-dv="{{ $descDv }}">{{ $slide->description }}</p>
                             @endif
                             @if($slide->button_1_label || $slide->button_2_label)
                                 <div class="flex flex-wrap gap-3">
                                     @if($slide->button_1_label)
                                         <a href="{{ $slide->button_1_link_key ?: '#' }}"
-                                           class="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm">{{ $slide->button_1_label }}</a>
+                                           class="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
+                                           data-en="{{ $slide->getTranslation('button_1_label', 'en', false) }}"
+                                           data-dv="{{ $slide->getTranslation('button_1_label', 'dv', false) ?: $slide->getTranslation('button_1_label', 'en', false) }}">{{ $slide->button_1_label }}</a>
                                     @endif
                                     @if($slide->button_2_label)
                                         <a href="{{ $slide->button_2_link_key ?: '#' }}"
-                                           class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm">{{ $slide->button_2_label }}</a>
+                                           class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm"
+                                           data-en="{{ $slide->getTranslation('button_2_label', 'en', false) }}"
+                                           data-dv="{{ $slide->getTranslation('button_2_label', 'dv', false) ?: $slide->getTranslation('button_2_label', 'en', false) }}">{{ $slide->button_2_label }}</a>
                                     @endif
                                 </div>
                             @endif

@@ -47,10 +47,15 @@ function setLang(l) {
   var translations = l === 'dv' ? window.__dv : window.__en;
   var isDv = l === 'dv';
 
-  // swap text
+  // swap static UI strings
   document.querySelectorAll('[data-lang-key]').forEach(function(el) {
     var key = el.dataset.langKey;
     el.textContent = translations[key] || el.dataset.en;
+  });
+
+  // swap dynamic content with embedded translations (e.g. slide overlay)
+  document.querySelectorAll('[data-en][data-dv]').forEach(function(el) {
+    el.textContent = isDv ? (el.dataset.dv || el.dataset.en) : el.dataset.en;
   });
 
   // rtl + font
