@@ -22,7 +22,7 @@
             src: url('{{ asset('fonts/Dhivehi.ttf') }}') format('truetype');
             font-display: swap;
         }
-        .locale-dv [data-lang-key] {
+        .locale-dv, .locale-dv * {
             font-family: 'Dhivehi', sans-serif !important;
             line-height: 2;
             word-spacing: 0.05em;
