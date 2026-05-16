@@ -63,6 +63,13 @@ function setLang(l) {
   document.documentElement.setAttribute('dir', isDv ? 'rtl' : 'ltr');
   document.documentElement.classList.toggle('locale-dv', isDv);
 
+  // flip hero slide gradient direction
+  var gradient = document.getElementById('slide-gradient');
+  if (gradient) {
+    gradient.classList.toggle('bg-gradient-to-r', !isDv);
+    gradient.classList.toggle('bg-gradient-to-l', isDv);
+  }
+
   // toggle buttons
   var active   = 'px-2.5 py-1.5 transition-colors bg-slate-900 text-white';
   var inactive = 'px-2.5 py-1.5 transition-colors bg-white text-slate-600 hover:bg-slate-50';

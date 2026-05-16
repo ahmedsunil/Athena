@@ -13,7 +13,7 @@
                         <div class="absolute inset-0 bg-slate-900"></div>
                     @endif
                     <div
-                        class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
+                        class="absolute inset-0 {{ app()->getLocale() === 'dv' ? 'bg-gradient-to-l' : 'bg-gradient-to-r' }} from-slate-950/80 via-slate-900/50 to-transparent" id="slide-gradient"></div>
                     <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center pt-16">
                         <div class="max-w-xl" data-reveal="left">
                             <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-3">
