@@ -139,7 +139,7 @@
                                             <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">{{ __('about_label_principal') }}</div>
                                         @endif
                                     </div>
-                                    <p class="font-bold text-slate-900 {{ $isFirst ? 'mt-3' : 'mt-1' }}">{{ $member->name }}</p>
+                                    <p class="font-bold text-slate-900 {{ $isFirst ? 'mt-3' : 'mt-1' }}">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
                                     <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 {{ $isFirst ? 'text-rose-600' : 'text-sky-600' }}">{{ $member->role }}</p>
                                     @if($member->bio)
                                         <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">{{ $member->bio }}</p>
@@ -264,7 +264,7 @@
                                             <span class="bg-amber-500 text-stone-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-sm">{{ __('about_founding_badge') }}</span>
                                         </div>
                                     </div>
-                                    <p class="font-bold text-white text-sm leading-tight">{{ $member->name }}</p>
+                                    <p class="font-bold text-white text-sm leading-tight">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
                                     <p class="text-amber-400 text-[11px] font-semibold uppercase tracking-wide mt-0.5">{{ $member->subject }}</p>
                                     @if($member->tribute)
                                         <p class="text-stone-400 text-xs mt-1.5 leading-relaxed line-clamp-3">{{ $member->tribute }}</p>
@@ -361,8 +361,8 @@
                                             <span class="text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full {{ $badgeCls }}">{{ $achievement->category }}</span>
                                             <span class="text-xs font-semibold text-slate-400 flex-shrink-0">{{ $achievement->year }}</span>
                                         </div>
-                                        @if($achievement->person_name)
-                                            <p class="text-sm font-semibold text-slate-700 mt-1">{{ $achievement->person_name }}</p>
+                                        @if($achievement->person_name || $achievement->person_name_dv)
+                                            <p class="text-sm font-semibold text-slate-700 mt-1">{{ app()->getLocale() === 'dv' && $achievement->person_name_dv ? $achievement->person_name_dv : $achievement->person_name }}</p>
                                         @endif
                                     </div>
                                 </div>
