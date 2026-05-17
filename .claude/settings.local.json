@@ -18,7 +18,8 @@
       "Bash(grep *)",
       "Bash(curl -s -b \"athena-session=\" http://athena.test/)",
       "Bash(git *)",
-      "Bash(xargs cat -n)"
+      "Bash(xargs cat -n)",
+      "Skill(superpowers:writing-plans)"
     ]
   }
 }

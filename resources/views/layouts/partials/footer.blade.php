@@ -23,7 +23,7 @@
                 <div class="space-y-1.5">
                     @foreach($footerLinks as $link)
                         <a href="{{ $link->link_key }}" class="block text-xs hover:text-white transition-colors">
-                            {{ $link->label }}
+                            {{ app()->getLocale() === 'dv' && $link->label_dv ? $link->label_dv : $link->label }}
                         </a>
                     @endforeach
                 </div>
