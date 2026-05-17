@@ -14,10 +14,14 @@
         <form wire:submit="save" class="space-y-4">
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Title</label>
-                    <input type="text" wire:model="title" placeholder="e.g. Students enrolled"
+                    <label class="mb-1.5 block admin-label">Title (English)</label>
+                    <input type="text" wire:model="title_en" placeholder="e.g. Students enrolled"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('title') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('title_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Title (ދިވެހި)</label>
+                    <input type="text" wire:model="title_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('title_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Value</label>

@@ -12,25 +12,31 @@
             <h3 class="admin-section-title">{{ $editingId ? 'Edit member' : 'Add member' }}</h3>
         </div>
         <form wire:submit="save" class="space-y-4">
-            <div class="grid gap-4 sm:grid-cols-2">
-                <div>
-                    <label class="mb-1.5 block admin-label">Name</label>
-                    <input type="text" wire:model="name"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
-                </div>
-                <div>
-                    <label class="mb-1.5 block admin-label">Role / Title</label>
-                    <input type="text" wire:model="role" placeholder="e.g. Vice Principal, Academics"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('role') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
-                </div>
+            <div>
+                <label class="mb-1.5 block admin-label">Name <span class="text-red-500">*</span></label>
+                <input type="text" wire:model="name" placeholder="e.g. Mr. Ahmed Ali"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div>
-                <label class="mb-1.5 block admin-label">Bio</label>
-                <textarea wire:model="bio" rows="3"
+                <label class="mb-1.5 block admin-label">Role / Title (English)</label>
+                <input type="text" wire:model="role_en" placeholder="e.g. Vice Principal, Academics"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('role_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Role / Title (ދިވެހި)</label>
+                <input type="text" wire:model="role_dv" dir="rtl"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('role_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+            <div>
+                <label class="mb-1.5 block admin-label">Bio (English)</label>
+                <textarea wire:model="bio_en" rows="3"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('bio') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('bio_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Bio (ދިވެހި)</label>
+                <textarea wire:model="bio_dv" rows="3" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('bio_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div>
                 <label class="mb-1.5 block admin-label">Photo</label>

@@ -7,19 +7,27 @@
         <form wire:submit="save" class="space-y-4">
 
             <div>
-                <label class="mb-1.5 block admin-label">Overview text</label>
-                <textarea wire:model="text" rows="5"
+                <label class="mb-1.5 block admin-label">Overview text (English)</label>
+                <textarea wire:model="text_en" rows="5"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"
                           placeholder="Describe the school's academic approach..."></textarea>
-                @error('text') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('text_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Overview text (ދިވެހި)</label>
+                <textarea wire:model="text_dv" rows="5" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('text_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="mb-1.5 block admin-label">Curriculum line <span class="text-zinc-400">(optional)</span></label>
-                <input type="text" wire:model="curriculum"
+                <label class="mb-1.5 block admin-label">Curriculum line (English) <span class="text-zinc-400">(optional)</span></label>
+                <input type="text" wire:model="curriculum_en"
                        placeholder="e.g. Maldives National Curriculum · Cambridge · Pearson Edexcel"
                        class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                @error('curriculum') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('curriculum_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Curriculum line (ދިވެހި)</label>
+                <input type="text" wire:model="curriculum_dv" dir="rtl"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('curriculum_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             <div>

@@ -14,10 +14,14 @@
             {{-- Title + Slug --}}
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Title</label>
-                    <input type="text" wire:model.live.debounce.400ms="title"
+                    <label class="mb-1.5 block admin-label">Title (English)</label>
+                    <input type="text" wire:model.live.debounce.400ms="title_en"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('title') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('title_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Title (ދިވެހި)</label>
+                    <input type="text" wire:model="title_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('title_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Slug</label>
@@ -55,10 +59,14 @@
 
             {{-- Location --}}
             <div>
-                <label class="mb-1.5 block admin-label">Location</label>
-                <input type="text" wire:model="location"
+                <label class="mb-1.5 block admin-label">Location (English)</label>
+                <input type="text" wire:model="location_en"
                        class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                @error('location') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('location_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Location (ދިވެހި)</label>
+                <input type="text" wire:model="location_dv" dir="rtl"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('location_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             {{-- Cover image --}}
@@ -88,18 +96,26 @@
 
             {{-- Short description --}}
             <div>
-                <label class="mb-1.5 block admin-label">Short description</label>
-                <textarea wire:model="short_description" rows="2"
+                <label class="mb-1.5 block admin-label">Short description (English)</label>
+                <textarea wire:model="short_description_en" rows="2"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('short_description') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('short_description_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Short description (ދިވެހި)</label>
+                <textarea wire:model="short_description_dv" rows="2" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('short_description_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             {{-- Full description --}}
             <div>
-                <label class="mb-1.5 block admin-label">Full description <span class="text-zinc-400">(optional, shown in modal)</span></label>
-                <textarea wire:model="full_description" rows="4"
+                <label class="mb-1.5 block admin-label">Full description (English) <span class="text-zinc-400">(optional, shown in modal)</span></label>
+                <textarea wire:model="full_description_en" rows="4"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('full_description') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('full_description_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Full description (ދިވެހި)</label>
+                <textarea wire:model="full_description_dv" rows="4" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('full_description_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             {{-- Contact --}}

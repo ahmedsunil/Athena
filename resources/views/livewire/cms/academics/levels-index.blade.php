@@ -17,26 +17,38 @@
                     @error('abbreviation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Label</label>
-                    <input type="text" wire:model="label" placeholder="e.g. Key Stage 1"
+                    <label class="mb-1.5 block admin-label">Label (English)</label>
+                    <input type="text" wire:model="label_en" placeholder="e.g. Key Stage 1"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('label') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('label_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Label (ދިވެހި)</label>
+                    <input type="text" wire:model="label_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('label_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
 
             {{-- Age range + Year groups --}}
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Age range</label>
-                    <input type="text" wire:model="age_range" placeholder="e.g. Ages 6 – 8"
+                    <label class="mb-1.5 block admin-label">Age range (English)</label>
+                    <input type="text" wire:model="age_range_en" placeholder="e.g. Ages 6 – 8"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('age_range') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('age_range_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Age range (ދިވެހި)</label>
+                    <input type="text" wire:model="age_range_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('age_range_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Year groups / Grades</label>
-                    <input type="text" wire:model="year_groups" placeholder="e.g. Grade 1 – Grade 3"
+                    <label class="mb-1.5 block admin-label">Year groups / Grades (English)</label>
+                    <input type="text" wire:model="year_groups_en" placeholder="e.g. Grade 1 – Grade 3"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('year_groups') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('year_groups_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Year groups / Grades (ދިވެހި)</label>
+                    <input type="text" wire:model="year_groups_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('year_groups_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
 

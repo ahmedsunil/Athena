@@ -31,23 +31,35 @@
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Previous designation</label>
-                    <input type="text" wire:model="previous_designation" placeholder="e.g. Student, Class of 2015"
+                    <label class="mb-1.5 block admin-label">Previous designation (English)</label>
+                    <input type="text" wire:model="previous_designation_en" placeholder="e.g. Student, Class of 2015"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('previous_designation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('previous_designation_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Previous designation (ދިވެހި)</label>
+                    <input type="text" wire:model="previous_designation_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('previous_designation_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Current designation</label>
-                    <input type="text" wire:model="current_designation" placeholder="e.g. Software Engineer"
+                    <label class="mb-1.5 block admin-label">Current designation (English)</label>
+                    <input type="text" wire:model="current_designation_en" placeholder="e.g. Software Engineer"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('current_designation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('current_designation_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Current designation (ދިވެހި)</label>
+                    <input type="text" wire:model="current_designation_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('current_designation_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
             <div>
-                <label class="mb-1.5 block admin-label">Message</label>
-                <textarea wire:model="message" rows="3"
+                <label class="mb-1.5 block admin-label">Message (English)</label>
+                <textarea wire:model="message_en" rows="3"
                           class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('message') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('message_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Message (ދިވެހި)</label>
+                <textarea wire:model="message_dv" rows="3" dir="rtl"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('message_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>

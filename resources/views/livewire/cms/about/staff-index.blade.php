@@ -23,19 +23,27 @@
                     @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Designation <span class="text-red-500">*</span></label>
-                    <input type="text" wire:model="designation" placeholder="e.g. Head of Mathematics"
+                    <label class="mb-1.5 block admin-label">Designation (English) <span class="text-red-500">*</span></label>
+                    <input type="text" wire:model="designation_en" placeholder="e.g. Head of Mathematics"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('designation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('designation_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Designation (ދިވެހި)</label>
+                    <input type="text" wire:model="designation_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('designation_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
 
             {{-- Education --}}
             <div>
-                <label class="mb-1.5 block admin-label">Education <span class="text-zinc-400">(optional)</span></label>
-                <input type="text" wire:model="education" placeholder="e.g. B.Sc Mathematics · M.Ed Curriculum"
+                <label class="mb-1.5 block admin-label">Education (English) <span class="text-zinc-400">(optional)</span></label>
+                <input type="text" wire:model="education_en" placeholder="e.g. B.Sc Mathematics · M.Ed Curriculum"
                        class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                @error('education') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                @error('education_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Education (ދިވެހި)</label>
+                <input type="text" wire:model="education_dv" dir="rtl"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('education_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
 
             {{-- Section + Sub-section --}}

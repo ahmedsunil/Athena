@@ -17,23 +17,35 @@
             <div class="space-y-4">
                 <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                        <label class="mb-1.5 block admin-label">School name</label>
-                        <input type="text" wire:model="school_name"
+                        <label class="mb-1.5 block admin-label">School name (English)</label>
+                        <input type="text" wire:model="school_name_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('school_name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('school_name_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">School name (ދިވެހި)</label>
+                        <input type="text" wire:model="school_name_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('school_name_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="mb-1.5 block admin-label">Motto</label>
-                        <input type="text" wire:model="motto"
+                        <label class="mb-1.5 block admin-label">Motto (English)</label>
+                        <input type="text" wire:model="motto_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('motto') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('motto_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">Motto (ދިވެހި)</label>
+                        <input type="text" wire:model="motto_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('motto_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Short description</label>
-                    <textarea wire:model="short_description" rows="3"
+                    <label class="mb-1.5 block admin-label">Short description (English)</label>
+                    <textarea wire:model="short_description_en" rows="3"
                               class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                    @error('short_description') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('short_description_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Short description (ދިވެހި)</label>
+                    <textarea wire:model="short_description_dv" rows="3" dir="rtl"
+                              class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                    @error('short_description_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Logo</label>
@@ -124,17 +136,25 @@
                         @error('principal_name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="mb-1.5 block admin-label">Designation</label>
-                        <input type="text" wire:model="principal_designation"
+                        <label class="mb-1.5 block admin-label">Designation (English)</label>
+                        <input type="text" wire:model="principal_designation_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('principal_designation') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('principal_designation_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">Designation (ދިވެހި)</label>
+                        <input type="text" wire:model="principal_designation_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('principal_designation_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Message</label>
-                    <textarea wire:model="principal_message" rows="4"
+                    <label class="mb-1.5 block admin-label">Message (English)</label>
+                    <textarea wire:model="principal_message_en" rows="4"
                               class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                    @error('principal_message') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('principal_message_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Message (ދިވެހި)</label>
+                    <textarea wire:model="principal_message_dv" rows="4" dir="rtl"
+                              class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                    @error('principal_message_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Photo</label>
