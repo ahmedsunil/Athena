@@ -27,7 +27,7 @@
         </div>
 
         {{-- Info --}}
-        <p class="font-bold text-slate-900 text-sm leading-snug">{{ $member->name }}</p>
+        <p class="font-bold text-slate-900 text-sm leading-snug">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
         <p class="text-xs text-rose-600 font-semibold mt-0.5 leading-snug">{{ $member->designation }}</p>
 
         {{-- Expand hint --}}
@@ -68,9 +68,9 @@
             <div class="space-y-2">
                 @foreach($member->work_experiences as $exp)
                     <div class="border-l-2 {{ $accentBorder }} pl-2.5">
-                        <p class="text-xs font-semibold text-slate-800 leading-snug">{{ $exp['title'] }}</p>
-                        <p class="text-[11px] text-slate-500 leading-snug">{{ $exp['institution'] }}</p>
-                        <p class="text-[10px] text-slate-400 mt-0.5">{{ $exp['period'] }}</p>
+                        <p class="text-xs font-semibold text-slate-800 leading-snug">{{ app()->getLocale() === 'dv' && !empty($exp['title_dv']) ? $exp['title_dv'] : $exp['title'] }}</p>
+                        <p class="text-[11px] text-slate-500 leading-snug">{{ app()->getLocale() === 'dv' && !empty($exp['institution_dv']) ? $exp['institution_dv'] : $exp['institution'] }}</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">{{ app()->getLocale() === 'dv' && !empty($exp['period_dv']) ? $exp['period_dv'] : $exp['period'] }}</p>
                     </div>
                 @endforeach
             </div>
