@@ -17,10 +17,14 @@
             {{-- Name + Designation --}}
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Name <span class="text-red-500">*</span></label>
-                    <input type="text" wire:model="name" placeholder="Full name"
+                    <label class="mb-1.5 block admin-label">Name (English) <span class="text-red-500">*</span></label>
+                    <input type="text" wire:model="name" placeholder="e.g. Ahmed Ali"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Name (ދިވެހި)</label>
+                    <input type="text" wire:model="name_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('name_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Designation (English) <span class="text-red-500">*</span></label>
@@ -130,27 +134,48 @@
                 <p class="admin-label mb-2 border-t border-zinc-100 pt-4">Work Experience <span class="text-zinc-400 font-normal">(optional)</span></p>
                 <div class="space-y-2">
                     @foreach($workExperiences as $i => $exp)
-                        <div class="grid gap-2 sm:grid-cols-3 items-start">
-                            <div>
-                                <input type="text" wire:model="workExperiences.{{ $i }}.title" placeholder="Job Title"
-                                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                                @error("workExperiences.{$i}.title") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
-                            </div>
-                            <div>
-                                <input type="text" wire:model="workExperiences.{{ $i }}.institution" placeholder="Institution"
-                                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                                @error("workExperiences.{$i}.institution") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
-                            </div>
-                            <div class="flex gap-2">
-                                <div class="flex-1">
-                                    <input type="text" wire:model="workExperiences.{{ $i }}.period" placeholder="e.g. 2018 – Present"
+                        <div class="space-y-1.5 border border-zinc-100 rounded-lg p-2">
+                            {{-- English row --}}
+                            <div class="grid gap-2 sm:grid-cols-3 items-start">
+                                <div>
+                                    <input type="text" wire:model="workExperiences.{{ $i }}.title" placeholder="Job Title (EN)"
                                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                                    @error("workExperiences.{$i}.period") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                                    @error("workExperiences.{$i}.title") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                                 </div>
-                                <button type="button" wire:click="removeExperience({{ $i }})"
-                                        class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md border border-zinc-200 text-zinc-400 hover:border-red-300 hover:text-red-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-                                </button>
+                                <div>
+                                    <input type="text" wire:model="workExperiences.{{ $i }}.institution" placeholder="Institution (EN)"
+                                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                    @error("workExperiences.{$i}.institution") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1">
+                                        <input type="text" wire:model="workExperiences.{{ $i }}.period" placeholder="e.g. 2018 – Present"
+                                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                        @error("workExperiences.{$i}.period") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                                    </div>
+                                    <button type="button" wire:click="removeExperience({{ $i }})"
+                                            class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md border border-zinc-200 text-zinc-400 hover:border-red-300 hover:text-red-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            {{-- Dhivehi row --}}
+                            <div class="grid gap-2 sm:grid-cols-3 items-start">
+                                <div>
+                                    <input type="text" wire:model="workExperiences.{{ $i }}.title_dv" placeholder="Job Title (ދިވެހި)" dir="rtl"
+                                           class="h-9 w-full rounded-md border border-zinc-100 bg-zinc-50 px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                    @error("workExperiences.{$i}.title_dv") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                                </div>
+                                <div>
+                                    <input type="text" wire:model="workExperiences.{{ $i }}.institution_dv" placeholder="Institution (ދިވެހި)" dir="rtl"
+                                           class="h-9 w-full rounded-md border border-zinc-100 bg-zinc-50 px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                    @error("workExperiences.{$i}.institution_dv") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                                </div>
+                                <div>
+                                    <input type="text" wire:model="workExperiences.{{ $i }}.period_dv" placeholder="މ.ދ. (ދިވެހި)" dir="rtl"
+                                           class="h-9 w-full rounded-md border border-zinc-100 bg-zinc-50 px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                    @error("workExperiences.{$i}.period_dv") <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                                </div>
                             </div>
                         </div>
                     @endforeach
