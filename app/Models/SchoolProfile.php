@@ -11,7 +11,7 @@ class SchoolProfile extends Model
 {
     use HasTranslations;
 
-    public array $translatable = ['school_name', 'motto', 'short_description', 'principal_designation', 'principal_message'];
+    public array $translatable = ['school_name', 'motto', 'short_description', 'address', 'island', 'atoll', 'country', 'principal_name', 'principal_designation', 'principal_message'];
 
     protected $fillable = [
         'school_name', 'motto', 'short_description', 'logo_path',

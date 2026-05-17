@@ -86,25 +86,6 @@
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Button 2 label</label>
-                    <input type="text" wire:model="button_2_label"
-                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('button_2_label') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
-                </div>
-                <div>
-                    <label class="mb-1.5 block admin-label">Button 2 link</label>
-                    <select wire:model="button_2_link_key"
-                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        <option value="">None</option>
-                        @foreach($linkKeys as $key => $label)
-                            <option value="{{ $key }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                    @error('button_2_link_key') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
-                </div>
-            </div>
-            <div class="grid gap-4 sm:grid-cols-2">
-                <div>
                     <label class="mb-1.5 block admin-label">Sort order</label>
                     <input type="number" wire:model="sort_order" min="0"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">

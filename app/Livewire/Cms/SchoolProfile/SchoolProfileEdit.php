@@ -18,11 +18,16 @@ class SchoolProfileEdit extends Component
     public string $short_description_dv = '';
     public string $email = '';
     public string $phone = '';
-    public string $address = '';
-    public string $school_island = '';
-    public string $atoll = '';
-    public string $country = '';
-    public string $principal_name = '';
+    public string $address_en = '';
+    public string $address_dv = '';
+    public string $school_island_en = '';
+    public string $school_island_dv = '';
+    public string $atoll_en = '';
+    public string $atoll_dv = '';
+    public string $country_en = '';
+    public string $country_dv = '';
+    public string $principal_name_en = '';
+    public string $principal_name_dv = '';
     public string $principal_designation_en = '';
     public string $principal_designation_dv = '';
     public string $principal_message_en = '';
@@ -45,11 +50,16 @@ class SchoolProfileEdit extends Component
         $this->short_description_dv    = $profile->getTranslation('short_description', 'dv', false) ?? '';
         $this->email                   = $profile->email ?? '';
         $this->phone                   = $profile->phone ?? '';
-        $this->address                 = $profile->address ?? '';
-        $this->school_island           = $profile->island ?? '';
-        $this->atoll                   = $profile->atoll ?? '';
-        $this->country                 = $profile->country ?? '';
-        $this->principal_name          = $profile->principal_name ?? '';
+        $this->address_en              = $profile->getTranslation('address', 'en', false) ?? '';
+        $this->address_dv              = $profile->getTranslation('address', 'dv', false) ?? '';
+        $this->school_island_en        = $profile->getTranslation('island', 'en', false) ?? '';
+        $this->school_island_dv        = $profile->getTranslation('island', 'dv', false) ?? '';
+        $this->atoll_en                = $profile->getTranslation('atoll', 'en', false) ?? '';
+        $this->atoll_dv                = $profile->getTranslation('atoll', 'dv', false) ?? '';
+        $this->country_en              = $profile->getTranslation('country', 'en', false) ?? '';
+        $this->country_dv              = $profile->getTranslation('country', 'dv', false) ?? '';
+        $this->principal_name_en       = $profile->getTranslation('principal_name', 'en', false) ?? '';
+        $this->principal_name_dv       = $profile->getTranslation('principal_name', 'dv', false) ?? '';
         $this->principal_designation_en = $profile->getTranslation('principal_designation', 'en', false) ?? '';
         $this->principal_designation_dv = $profile->getTranslation('principal_designation', 'dv', false) ?? '';
         $this->principal_message_en    = $profile->getTranslation('principal_message', 'en', false) ?? '';
@@ -69,11 +79,16 @@ class SchoolProfileEdit extends Component
             'short_description_dv'     => ['nullable', 'string'],
             'email'                    => ['nullable', 'email', 'max:255'],
             'phone'                    => ['nullable', 'string', 'max:50'],
-            'address'                  => ['nullable', 'string', 'max:500'],
-            'school_island'            => ['nullable', 'string', 'max:100'],
-            'atoll'                    => ['nullable', 'string', 'max:100'],
-            'country'                  => ['nullable', 'string', 'max:100'],
-            'principal_name'           => ['nullable', 'string', 'max:255'],
+            'address_en'               => ['nullable', 'string', 'max:500'],
+            'address_dv'               => ['nullable', 'string', 'max:500'],
+            'school_island_en'         => ['nullable', 'string', 'max:100'],
+            'school_island_dv'         => ['nullable', 'string', 'max:100'],
+            'atoll_en'                 => ['nullable', 'string', 'max:100'],
+            'atoll_dv'                 => ['nullable', 'string', 'max:100'],
+            'country_en'               => ['nullable', 'string', 'max:100'],
+            'country_dv'               => ['nullable', 'string', 'max:100'],
+            'principal_name_en'        => ['nullable', 'string', 'max:255'],
+            'principal_name_dv'        => ['nullable', 'string', 'max:255'],
             'principal_designation_en' => ['nullable', 'string', 'max:255'],
             'principal_designation_dv' => ['nullable', 'string', 'max:255'],
             'principal_message_en'     => ['nullable', 'string'],
@@ -108,11 +123,11 @@ class SchoolProfileEdit extends Component
             'short_description'     => ['en' => $this->short_description_en, 'dv' => $this->short_description_dv],
             'email'                 => $this->email,
             'phone'                 => $this->phone,
-            'address'               => $this->address,
-            'island'                => $this->school_island,
-            'atoll'                 => $this->atoll,
-            'country'               => $this->country,
-            'principal_name'        => $this->principal_name,
+            'address'               => ['en' => $this->address_en, 'dv' => $this->address_dv],
+            'island'                => ['en' => $this->school_island_en, 'dv' => $this->school_island_dv],
+            'atoll'                 => ['en' => $this->atoll_en, 'dv' => $this->atoll_dv],
+            'country'               => ['en' => $this->country_en, 'dv' => $this->country_dv],
+            'principal_name'        => ['en' => $this->principal_name_en, 'dv' => $this->principal_name_dv],
             'principal_designation' => ['en' => $this->principal_designation_en, 'dv' => $this->principal_designation_dv],
             'principal_message'     => ['en' => $this->principal_message_en, 'dv' => $this->principal_message_dv],
         ];

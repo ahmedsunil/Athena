@@ -94,29 +94,45 @@
                     </div>
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Address</label>
-                    <input type="text" wire:model="address"
+                    <label class="mb-1.5 block admin-label">Address (English)</label>
+                    <input type="text" wire:model="address_en"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                    @error('address') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('address_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Address (ދިވެހި)</label>
+                    <input type="text" wire:model="address_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('address_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div class="grid gap-4 sm:grid-cols-3">
                     <div>
-                        <label class="mb-1.5 block admin-label">Island</label>
-                        <input type="text" wire:model="school_island"
+                        <label class="mb-1.5 block admin-label">Island (English)</label>
+                        <input type="text" wire:model="school_island_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('school_island') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('school_island_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">Island (ދިވެހި)</label>
+                        <input type="text" wire:model="school_island_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('school_island_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="mb-1.5 block admin-label">Atoll</label>
-                        <input type="text" wire:model="atoll"
+                        <label class="mb-1.5 block admin-label">Atoll (English)</label>
+                        <input type="text" wire:model="atoll_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('atoll') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('atoll_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">Atoll (ދިވެހި)</label>
+                        <input type="text" wire:model="atoll_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('atoll_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="mb-1.5 block admin-label">Country</label>
-                        <input type="text" wire:model="country"
+                        <label class="mb-1.5 block admin-label">Country (English)</label>
+                        <input type="text" wire:model="country_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('country') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('country_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">Country (ދިވެހި)</label>
+                        <input type="text" wire:model="country_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('country_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                 </div>
             </div>
@@ -130,10 +146,14 @@
             <div class="space-y-4">
                 <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                        <label class="mb-1.5 block admin-label">Name</label>
-                        <input type="text" wire:model="principal_name"
+                        <label class="mb-1.5 block admin-label">Name (English)</label>
+                        <input type="text" wire:model="principal_name_en"
                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        @error('principal_name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        @error('principal_name_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                        <label class="mt-2 mb-1.5 block admin-label">Name (ދިވެހި)</label>
+                        <input type="text" wire:model="principal_name_dv" dir="rtl"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @error('principal_name_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     </div>
                     <div>
                         <label class="mb-1.5 block admin-label">Designation (English)</label>

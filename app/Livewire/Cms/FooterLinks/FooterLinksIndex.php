@@ -8,6 +8,7 @@ use Livewire\Component;
 class FooterLinksIndex extends Component
 {
     public string $label = '';
+    public string $label_dv = '';
     public string $link_key = '';
     public bool $is_active = true;
     public int $sort_order = 0;
@@ -17,6 +18,7 @@ class FooterLinksIndex extends Component
     {
         return [
             'label'      => ['required', 'string', 'max:255'],
+            'label_dv'   => ['nullable', 'string', 'max:255'],
             'link_key'   => ['required', 'string'],
             'is_active'  => ['boolean'],
             'sort_order' => ['integer', 'min:0'],
@@ -29,6 +31,7 @@ class FooterLinksIndex extends Component
 
         $data = [
             'label'      => $this->label,
+            'label_dv'   => $this->label_dv,
             'link_key'   => $this->link_key,
             'is_active'  => $this->is_active,
             'sort_order' => $this->sort_order,
@@ -42,7 +45,7 @@ class FooterLinksIndex extends Component
             $this->dispatch('toast', message: 'Footer link created.');
         }
 
-        $this->reset(['label', 'link_key', 'is_active', 'sort_order', 'editingId']);
+        $this->reset(['label', 'label_dv', 'link_key', 'is_active', 'sort_order', 'editingId']);
         $this->is_active = true;
     }
 
@@ -51,6 +54,7 @@ class FooterLinksIndex extends Component
         $link = FooterLink::findOrFail($id);
         $this->editingId  = $link->id;
         $this->label      = $link->label;
+        $this->label_dv   = $link->label_dv ?? '';
         $this->link_key   = $link->link_key;
         $this->is_active  = $link->is_active;
         $this->sort_order = $link->sort_order;
@@ -58,7 +62,7 @@ class FooterLinksIndex extends Component
 
     public function cancel(): void
     {
-        $this->reset(['label', 'link_key', 'is_active', 'sort_order', 'editingId']);
+        $this->reset(['label', 'label_dv', 'link_key', 'is_active', 'sort_order', 'editingId']);
         $this->is_active = true;
     }
 

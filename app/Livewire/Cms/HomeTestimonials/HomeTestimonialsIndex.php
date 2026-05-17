@@ -11,6 +11,7 @@ class HomeTestimonialsIndex extends Component
     use WithFileUploads;
 
     public string $name = '';
+    public string $name_dv = '';
     public string $previous_designation_en = '';
     public string $previous_designation_dv = '';
     public string $current_designation_en = '';
@@ -27,6 +28,7 @@ class HomeTestimonialsIndex extends Component
     {
         return [
             'name'                       => ['required', 'string', 'max:255'],
+            'name_dv'                    => ['nullable', 'string', 'max:255'],
             'previous_designation_en'    => ['nullable', 'string', 'max:255'],
             'previous_designation_dv'    => ['nullable', 'string', 'max:255'],
             'current_designation_en'     => ['nullable', 'string', 'max:255'],
@@ -45,6 +47,7 @@ class HomeTestimonialsIndex extends Component
 
         $data = [
             'name'                 => $this->name,
+            'name_dv'              => $this->name_dv,
             'previous_designation' => ['en' => $this->previous_designation_en, 'dv' => $this->previous_designation_dv],
             'current_designation'  => ['en' => $this->current_designation_en, 'dv' => $this->current_designation_dv],
             'message'              => ['en' => $this->message_en, 'dv' => $this->message_dv],
@@ -72,6 +75,7 @@ class HomeTestimonialsIndex extends Component
         $item = HomeTestimonial::findOrFail($id);
         $this->editingId                  = $item->id;
         $this->name                       = $item->name;
+        $this->name_dv                    = $item->name_dv ?? '';
         $this->previous_designation_en    = $item->getTranslation('previous_designation', 'en', false) ?? '';
         $this->previous_designation_dv    = $item->getTranslation('previous_designation', 'dv', false) ?? '';
         $this->current_designation_en     = $item->getTranslation('current_designation', 'en', false) ?? '';
@@ -97,7 +101,7 @@ class HomeTestimonialsIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'name', 'previous_designation_en', 'previous_designation_dv',
+            'name', 'name_dv', 'previous_designation_en', 'previous_designation_dv',
             'current_designation_en', 'current_designation_dv',
             'message_en', 'message_dv',
             'is_active', 'sort_order', 'photo', 'existing_photo', 'editingId',

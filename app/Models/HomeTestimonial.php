@@ -14,7 +14,7 @@ class HomeTestimonial extends Model
     public array $translatable = ['previous_designation', 'current_designation', 'message'];
 
     protected $fillable = [
-        'photo_path', 'name', 'previous_designation',
+        'photo_path', 'name', 'name_dv', 'previous_designation',
         'current_designation', 'message', 'is_active', 'sort_order',
     ];
 
