@@ -11,6 +11,7 @@ class FoundingMembersIndex extends Component
     use WithFileUploads;
 
     public string $name = '';
+    public string $name_dv = '';
     public string $subject_en = '';
     public string $subject_dv = '';
     public string $tribute_en = '';
@@ -25,6 +26,7 @@ class FoundingMembersIndex extends Component
     {
         return [
             'name'       => ['required', 'string', 'max:255'],
+            'name_dv'    => ['nullable', 'string', 'max:255'],
             'subject_en' => ['nullable', 'string', 'max:255'],
             'subject_dv' => ['nullable', 'string', 'max:255'],
             'tribute_en' => ['nullable', 'string'],
@@ -40,6 +42,7 @@ class FoundingMembersIndex extends Component
 
         $data = [
             'name'       => $this->name,
+            'name_dv'    => $this->name_dv ?: null,
             'subject'    => ['en' => $this->subject_en, 'dv' => $this->subject_dv],
             'tribute'    => ['en' => $this->tribute_en, 'dv' => $this->tribute_dv],
             'sort_order' => $this->sort_order,
@@ -67,6 +70,7 @@ class FoundingMembersIndex extends Component
         $item = FoundingMember::findOrFail($id);
         $this->editingId      = $item->id;
         $this->name           = $item->name;
+        $this->name_dv        = $item->name_dv ?? '';
         $this->subject_en     = $item->getTranslation('subject', 'en', false) ?? '';
         $this->subject_dv     = $item->getTranslation('subject', 'dv', false) ?? '';
         $this->tribute_en     = $item->getTranslation('tribute', 'en', false) ?? '';
@@ -96,7 +100,7 @@ class FoundingMembersIndex extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['name', 'subject_en', 'subject_dv', 'tribute_en', 'tribute_dv', 'sort_order',
+        $this->reset(['name', 'name_dv', 'subject_en', 'subject_dv', 'tribute_en', 'tribute_dv', 'sort_order',
             'photo', 'existing_photo', 'photoRemoved', 'editingId']);
     }
 
