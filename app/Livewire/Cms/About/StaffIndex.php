@@ -12,6 +12,7 @@ class StaffIndex extends Component
     use WithFileUploads;
 
     public string  $name        = '';
+    public string  $name_dv     = '';
     public string  $designation_en = '';
     public string  $designation_dv = '';
     public string  $education_en   = '';
@@ -30,6 +31,7 @@ class StaffIndex extends Component
     {
         return [
             'name'                          => ['required', 'string', 'max:255'],
+            'name_dv'                       => ['nullable', 'string', 'max:255'],
             'designation_en'                => ['required', 'string', 'max:255'],
             'designation_dv'                => ['nullable', 'string', 'max:255'],
             'education_en'                  => ['nullable', 'string', 'max:255'],
@@ -40,9 +42,12 @@ class StaffIndex extends Component
             'isActive'                      => ['boolean'],
             'photo'                         => ['nullable', 'image', 'max:2048'],
             'workExperiences'               => ['array'],
-            'workExperiences.*.title'       => ['required', 'string', 'max:255'],
-            'workExperiences.*.institution' => ['required', 'string', 'max:255'],
-            'workExperiences.*.period'      => ['required', 'string', 'max:100'],
+            'workExperiences.*.title'        => ['required', 'string', 'max:255'],
+            'workExperiences.*.institution'  => ['required', 'string', 'max:255'],
+            'workExperiences.*.period'       => ['required', 'string', 'max:100'],
+            'workExperiences.*.title_dv'        => ['nullable', 'string', 'max:255'],
+            'workExperiences.*.institution_dv'  => ['nullable', 'string', 'max:255'],
+            'workExperiences.*.period_dv'       => ['nullable', 'string', 'max:100'],
         ];
     }
 
@@ -52,6 +57,7 @@ class StaffIndex extends Component
 
         $data = [
             'name'             => $this->name,
+            'name_dv'          => $this->name_dv ?: null,
             'designation'      => ['en' => $this->designation_en, 'dv' => $this->designation_dv],
             'education'        => ($this->education_en || $this->education_dv)
                                     ? ['en' => $this->education_en, 'dv' => $this->education_dv]
@@ -91,6 +97,7 @@ class StaffIndex extends Component
         $item = StaffMember::findOrFail($id);
         $this->editingId         = $item->id;
         $this->name              = $item->name;
+        $this->name_dv           = $item->name_dv ?? '';
         $this->designation_en    = $item->getTranslation('designation', 'en', false) ?? '';
         $this->designation_dv    = $item->getTranslation('designation', 'dv', false) ?? '';
         $this->education_en      = $item->getTranslation('education', 'en', false) ?? '';
@@ -124,7 +131,10 @@ class StaffIndex extends Component
 
     public function addExperience(): void
     {
-        $this->workExperiences[] = ['title' => '', 'institution' => '', 'period' => ''];
+        $this->workExperiences[] = [
+            'title' => '', 'institution' => '', 'period' => '',
+            'title_dv' => '', 'institution_dv' => '', 'period_dv' => '',
+        ];
     }
 
     public function removeExperience(int $index): void
@@ -146,7 +156,7 @@ class StaffIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'name', 'designation_en', 'designation_dv', 'education_en', 'education_dv',
+            'name', 'name_dv', 'designation_en', 'designation_dv', 'education_en', 'education_dv',
             'subSection', 'sortOrder', 'photo', 'existing_photo', 'photoRemoved',
             'editingId', 'workExperiences',
         ]);
