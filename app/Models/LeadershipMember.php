@@ -14,7 +14,7 @@ class LeadershipMember extends Model
     public array $translatable = ['role', 'bio'];
 
     protected $fillable = [
-        'name', 'role', 'bio', 'photo_path', 'is_active', 'sort_order',
+        'name', 'name_dv', 'role', 'bio', 'photo_path', 'is_active', 'sort_order',
     ];
 
     protected $casts = ['is_active' => 'boolean'];

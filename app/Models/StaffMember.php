@@ -14,7 +14,7 @@ class StaffMember extends Model
     public array $translatable = ['designation', 'education'];
 
     protected $fillable = [
-        'name', 'designation', 'education', 'photo_path',
+        'name', 'name_dv', 'designation', 'education', 'photo_path',
         'section', 'sub_section', 'work_experiences',
         'sort_order', 'is_active',
     ];

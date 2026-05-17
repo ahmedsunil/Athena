@@ -15,7 +15,7 @@ class Achievement extends Model
 
     protected $fillable = [
         'title', 'category', 'year', 'description',
-        'award', 'event_name', 'person_name', 'photo_path',
+        'award', 'event_name', 'person_name', 'person_name_dv', 'photo_path',
         'is_active', 'sort_order',
     ];
 

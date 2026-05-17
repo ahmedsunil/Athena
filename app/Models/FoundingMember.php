@@ -14,7 +14,7 @@ class FoundingMember extends Model
     public array $translatable = ['subject', 'tribute'];
 
     protected $fillable = [
-        'name', 'subject', 'tribute', 'photo_path', 'sort_order',
+        'name', 'name_dv', 'subject', 'tribute', 'photo_path', 'sort_order',
     ];
 
     public static function resolvePhotoUrl(?string $path): ?string
