@@ -13,10 +13,14 @@
         </div>
         <form wire:submit="save" class="space-y-4">
             <div>
-                <label class="mb-1.5 block admin-label">Name <span class="text-red-500">*</span></label>
+                <label class="mb-1.5 block admin-label">Name (English) <span class="text-red-500">*</span></label>
                 <input type="text" wire:model="name" placeholder="e.g. Mr. Ahmed Ali"
                        class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                 @error('name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                <label class="mt-2 mb-1.5 block admin-label">Name (ދިވެހި)</label>
+                <input type="text" wire:model="name_dv" dir="rtl"
+                       class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                @error('name_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div>
                 <label class="mb-1.5 block admin-label">Role / Title (English)</label>
