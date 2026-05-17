@@ -21,6 +21,7 @@ class AchievementsIndex extends Component
     public string $event_name_en = '';
     public string $event_name_dv = '';
     public string $person_name = '';
+    public string $person_name_dv = '';
     public bool $is_active = true;
     public int $sort_order = 0;
     public $photo = null;
@@ -42,6 +43,7 @@ class AchievementsIndex extends Component
             'event_name_en'  => ['nullable', 'string', 'max:255'],
             'event_name_dv'  => ['nullable', 'string', 'max:255'],
             'person_name'    => ['nullable', 'string', 'max:255'],
+            'person_name_dv' => ['nullable', 'string', 'max:255'],
             'is_active'      => ['boolean'],
             'sort_order'     => ['integer', 'min:0'],
             'photo'          => ['nullable', 'image', 'max:2048'],
@@ -59,8 +61,9 @@ class AchievementsIndex extends Component
             'description' => ['en' => $this->description_en, 'dv' => $this->description_dv],
             'award'       => ['en' => $this->award_en, 'dv' => $this->award_dv],
             'event_name'  => ['en' => $this->event_name_en, 'dv' => $this->event_name_dv],
-            'person_name' => $this->person_name,
-            'is_active'   => $this->is_active,
+            'person_name'    => $this->person_name ?: null,
+            'person_name_dv' => $this->person_name_dv ?: null,
+            'is_active'      => $this->is_active,
             'sort_order'  => $this->sort_order,
         ];
 
@@ -96,6 +99,7 @@ class AchievementsIndex extends Component
         $this->event_name_en  = $item->getTranslation('event_name', 'en', false) ?? '';
         $this->event_name_dv  = $item->getTranslation('event_name', 'dv', false) ?? '';
         $this->person_name    = $item->person_name ?? '';
+        $this->person_name_dv = $item->person_name_dv ?? '';
         $this->is_active      = $item->is_active;
         $this->sort_order     = $item->sort_order;
         $this->existing_photo = $item->photo_path;
@@ -126,7 +130,7 @@ class AchievementsIndex extends Component
             'title_en', 'title_dv', 'category', 'year',
             'description_en', 'description_dv',
             'award_en', 'award_dv', 'event_name_en', 'event_name_dv',
-            'person_name', 'is_active', 'sort_order',
+            'person_name', 'person_name_dv', 'is_active', 'sort_order',
             'photo', 'existing_photo', 'photoRemoved', 'editingId',
         ]);
         $this->category  = 'school';
