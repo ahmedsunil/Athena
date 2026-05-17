@@ -64,10 +64,14 @@
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="mb-1.5 block admin-label">Person name <span class="text-zinc-400">(optional)</span></label>
+                    <label class="mb-1.5 block admin-label">Person name (English) <span class="text-zinc-400">(optional)</span></label>
                     <input type="text" wire:model="person_name" placeholder="Leave blank for school-wide"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     @error('person_name') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    <label class="mt-2 mb-1.5 block admin-label">Person name (ދިވެހި)</label>
+                    <input type="text" wire:model="person_name_dv" dir="rtl"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('person_name_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="mb-1.5 block admin-label">Photo <span class="text-zinc-400">(optional)</span></label>
