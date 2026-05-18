@@ -109,4 +109,17 @@ class HomeApiTest extends TestCase
             ->assertDontSee('10 May 2026')
             ->assertDontSee('1 Jun 2026');
     }
+
+    public function test_about_achievement_category_pills_render_in_dhivehi(): void
+    {
+        $this->withSession(['locale' => 'dv'])
+            ->get('/about')
+            ->assertOk()
+            ->assertSee('ދަރިވަރުން')
+            ->assertSee('ސްޓާފް')
+            ->assertSee('ސްކޫލް')
+            ->assertDontSee('>Students<', false)
+            ->assertDontSee('>Staff<', false)
+            ->assertDontSee('>School<', false);
+    }
 }

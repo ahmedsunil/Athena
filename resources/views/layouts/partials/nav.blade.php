@@ -1,11 +1,13 @@
 <header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="{{ route('home') }}" class="flex items-center gap-2.5 flex-shrink-0">
-        <img src="{{ asset('logo.png') }}" alt="{{ __('school_name') }}" class="w-8 h-8 object-contain">
-        <span class="font-bold text-slate-900 text-sm leading-tight">
-          <span data-lang-key="school_name" data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span><br>
-          <span class="font-normal text-slate-500 text-xs" data-lang-key="school_label" data-en="School">{{ __('school_label') }}</span>
+      <a href="{{ route('home') }}" class="brand-mark flex h-16 items-center gap-2.5 flex-shrink-0">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center -translate-y-0.5">
+          <img src="{{ asset('logo.png') }}" alt="{{ __('school_name') }}" class="block h-8 w-8 object-contain">
+        </span>
+        <span class="brand-text flex min-w-0 flex-col justify-center">
+          <span class="brand-title block truncate font-bold text-slate-900 text-sm" data-lang-key="school_name" data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
+          <span class="brand-label block truncate font-normal text-slate-500 text-xs" data-lang-key="school_label" data-en="School">{{ __('school_label') }}</span>
         </span>
       </a>
       <nav class="hidden lg:flex items-center gap-5">

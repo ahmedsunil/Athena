@@ -33,6 +33,20 @@
             line-height: 1 !important;
             word-spacing: normal !important;
         }
+        .brand-mark,
+        .brand-mark * {
+            line-height: 1.15 !important;
+        }
+        .brand-title,
+        .brand-label {
+            padding-block: 1px;
+        }
+        .locale-dv .brand-mark .brand-title {
+            line-height: 1.45 !important;
+        }
+        .locale-dv .brand-mark .brand-label {
+            line-height: 1.35 !important;
+        }
         [data-reveal] {
             opacity: 0;
             transform: translate3d(0, 22px, 0);

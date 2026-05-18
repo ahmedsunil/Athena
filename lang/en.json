@@ -95,6 +95,10 @@
     "about_achievements_stat_total": "Total",
     "about_achievements_stat_students": "Students",
     "about_achievements_stat_school": "School-wide",
+    "about_achievements_filter_all": "All",
+    "about_achievements_filter_students": "Students",
+    "about_achievements_filter_staff": "Staff",
+    "about_achievements_filter_school": "School",
     "about_achievements_empty": "No achievements match this filter.",
 
     "about_team_leadership_eyebrow": "Leadership",

@@ -315,17 +315,17 @@
                     <div class="flex gap-2 flex-wrap">
                         @php
                             $categoryBtns = [
-                                'all'      => ['label' => 'All',      'active' => 'bg-slate-900 border-slate-900 text-white'],
-                                'students' => ['label' => 'Students', 'active' => 'bg-sky-600 border-sky-600 text-white'],
-                                'staff'    => ['label' => 'Staff',    'active' => 'bg-violet-600 border-violet-600 text-white'],
-                                'school'   => ['label' => 'School',   'active' => 'bg-rose-600 border-rose-600 text-white'],
+                                'all'      => ['label' => 'about_achievements_filter_all',      'active' => 'bg-slate-900 border-slate-900 text-white'],
+                                'students' => ['label' => 'about_achievements_filter_students', 'active' => 'bg-sky-600 border-sky-600 text-white'],
+                                'staff'    => ['label' => 'about_achievements_filter_staff',    'active' => 'bg-violet-600 border-violet-600 text-white'],
+                                'school'   => ['label' => 'about_achievements_filter_school',   'active' => 'bg-rose-600 border-rose-600 text-white'],
                             ];
                         @endphp
                         @foreach($categoryBtns as $catKey => $catInfo)
                             <button
                                 wire:click="switchCategory('{{ $catKey }}')"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors {{ $activeCategory === $catKey ? $catInfo['active'] : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}"
-                            >{{ $catInfo['label'] }}</button>
+                            >{{ __($catInfo['label']) }}</button>
                         @endforeach
                     </div>
                     <select
@@ -364,7 +364,7 @@
                                     @endif
                                     <div class="flex-1 min-w-0 pt-1">
                                         <div class="flex items-center justify-between gap-2 mb-1">
-                                            <span class="text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full {{ $badgeCls }}">{{ $achievement->category }}</span>
+                                            <span class="text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full {{ $badgeCls }}">{{ __($categoryBtns[$achievement->category]['label'] ?? $achievement->category) }}</span>
                                             <span class="text-xs font-semibold text-slate-400 flex-shrink-0">{{ $achievement->year }}</span>
                                         </div>
                                         @if($achievement->person_name || $achievement->person_name_dv)
