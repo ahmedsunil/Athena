@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Announcement;
 use App\Models\Event;
 use Database\Seeders\SchoolProfileSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -50,5 +51,62 @@ class HomeApiTest extends TestCase
             ->assertSee('Hulhudhuffaaru, Raa Atoll')
             ->assertDontSee('{"en":"Hulhudhuffaaru"', false)
             ->assertDontSee('{&quot;en&quot;:&quot;Hulhudhuffaaru&quot;', false);
+    }
+
+    public function test_gallery_and_digital_services_filter_pills_render_in_dhivehi(): void
+    {
+        $this->withSession(['locale' => 'dv'])
+            ->get('/gallery')
+            ->assertOk()
+            ->assertSee('ހަރަކާތްތައް')
+            ->assertSee('ކުޅިވަރު')
+            ->assertSee('މޭ')
+            ->assertDontSee('>Events<', false)
+            ->assertDontSee('>Sports<', false)
+            ->assertDontSee('>May<', false);
+
+        $this->withSession(['locale' => 'dv'])
+            ->get('/digital-services')
+            ->assertOk()
+            ->assertSee('ފޯމްތަކާއި އެޕްލިކޭޝަންތައް')
+            ->assertSee('ޕޮލިސީތަކާއި ހޭންޑްބުކްތައް')
+            ->assertSee('ދަރިވަރުން')
+            ->assertSee('މޭ')
+            ->assertDontSee('>Forms &amp; Applications<', false)
+            ->assertDontSee('>Students<', false)
+            ->assertDontSee('>May<', false);
+    }
+
+    public function test_announcement_dates_render_months_in_dhivehi(): void
+    {
+        Announcement::forceCreate([
+            'sort_order' => 1,
+            'icon_key' => 'Bell',
+            'category' => ['en' => 'Announcement', 'dv' => 'އިއުލާން'],
+            'title' => ['en' => 'Parent Meeting', 'dv' => 'ބަލިވެރިންގެ ބައްދަލުވުން'],
+            'slug' => 'parent-meeting',
+            'description' => ['en' => 'Meeting details', 'dv' => 'ބައްދަލުވުމުގެ ތަފްސީލް'],
+            'deadline' => '2026-06-01',
+            'attachments' => [],
+            'is_active' => true,
+            'created_at' => '2026-05-10 09:00:00',
+            'updated_at' => '2026-05-10 09:00:00',
+        ]);
+
+        $this->withSession(['locale' => 'dv'])
+            ->get('/announcements')
+            ->assertOk()
+            ->assertSee('10 މޭ 2026')
+            ->assertSee('1 ޖޫން 2026')
+            ->assertDontSee('10 May 2026')
+            ->assertDontSee('1 Jun 2026');
+
+        $this->withSession(['locale' => 'dv'])
+            ->get('/announcements/parent-meeting')
+            ->assertOk()
+            ->assertSee('10 މޭ 2026')
+            ->assertSee('1 ޖޫން 2026')
+            ->assertDontSee('10 May 2026')
+            ->assertDontSee('1 Jun 2026');
     }
 }

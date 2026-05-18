@@ -108,7 +108,7 @@ class DigitalServices extends Component
         $docQuery = DigitalServiceDocument::where('is_active', true);
 
         if ($this->activeCategory !== 'All') {
-            $docQuery->where('category->' . app()->getLocale(), $this->activeCategory);
+            $docQuery->where('category->en', $this->activeCategory);
         }
         if ($this->activeYear !== 'All') {
             $docQuery->whereYear('published_at', (int) $this->activeYear);

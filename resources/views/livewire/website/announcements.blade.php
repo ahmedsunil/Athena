@@ -8,6 +8,9 @@
     </section>
 
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        @php
+            $localizedDate = fn ($date) => $date->format('j') . ' ' . __('common_month_short_' . $date->month) . ' ' . $date->format('Y');
+        @endphp
         <div class="mb-8 flex flex-wrap gap-2">
             <button type="button"
                     wire:key="announcement-filter-active"
@@ -45,9 +48,9 @@
                             <div class="min-w-0 flex-1">
                                 <div class="mb-2 flex flex-wrap items-center gap-2">
                                     <span class="text-xs font-bold uppercase tracking-wide text-rose-600">{{ $announcement->category }}</span>
-                                    <span class="text-xs font-semibold text-slate-400">{{ $announcement->created_at->format('j M Y') }}</span>
+                                    <span class="text-xs font-semibold text-slate-400">{{ $localizedDate($announcement->created_at) }}</span>
                                     @if($announcement->deadline)
-                                        <span class="text-xs font-semibold text-slate-400">{{ __('announcements_deadline') }} {{ $announcement->formatted_deadline }}</span>
+                                        <span class="text-xs font-semibold text-slate-400">{{ __('announcements_deadline') }} {{ $localizedDate($announcement->deadline) }}</span>
                                     @endif
                                 </div>
                                 <h2 class="text-lg font-black text-slate-900">{{ $announcement->title }}</h2>

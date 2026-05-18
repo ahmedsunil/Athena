@@ -24,6 +24,22 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        @php
+            $docCategoryLabels = [
+                'Forms & Applications' => 'digital_services_category_forms_applications',
+                'Policies & Handbooks' => 'digital_services_category_policies_handbooks',
+                'Timetables & Schedules' => 'digital_services_category_timetables_schedules',
+                'Academic Resources' => 'digital_services_category_academic_resources',
+            ];
+            $audienceLabels = [
+                'All' => 'digital_services_audience_all',
+                'Students' => 'digital_services_audience_students',
+                'Parents' => 'digital_services_audience_parents',
+                'Staff' => 'digital_services_audience_staff',
+            ];
+            $localizedDate = fn ($date) => $date->format('d') . ' ' . __('common_month_short_' . $date->month) . ' ' . $date->format('Y');
+            $localizedMonthYear = fn ($date) => __('common_month_' . $date->month) . ' ' . $date->format('Y');
+        @endphp
 
         {{-- Downloads tab --}}
         @if($activeTab === 'downloads')
@@ -50,15 +66,15 @@
                         <button wire:click="setCategory('{{ $cat }}')"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                        {{ $activeCategory === $cat ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                            {{ $cat }}
+                            {{ __($docCategoryLabels[$cat] ?? $cat) }}
                         </button>
                     @endforeach
                     <div class="ml-auto flex items-center gap-2">
                         <select wire:model.live="activeMonth"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
                             <option value="All">{{ __('common_all_months') }}</option>
-                            @foreach(['January','February','March','April','May','June','July','August','September','October','November','December'] as $i => $month)
-                                <option value="{{ $i + 1 }}">{{ $month }}</option>
+                            @foreach(range(1, 12) as $month)
+                                <option value="{{ $month }}">{{ __('common_month_' . $month) }}</option>
                             @endforeach
                         </select>
                         <select wire:model.live="activeYear"
@@ -109,11 +125,11 @@
                                     <p class="font-semibold text-slate-900 text-sm truncate">{{ $doc->title }}</p>
                                     <div class="flex items-center gap-2 mt-1 flex-wrap">
                                         <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded {{ $ftColors[$doc->file_type] ?? 'bg-slate-100 text-slate-600' }}">{{ $doc->file_type }}</span>
-                                        <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded {{ $audColors[$doc->audience] ?? 'bg-slate-100 text-slate-600' }}">{{ $doc->audience }}</span>
+                                        <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded {{ $audColors[$doc->audience] ?? 'bg-slate-100 text-slate-600' }}">{{ __($audienceLabels[$doc->audience] ?? $doc->audience) }}</span>
                                         @if($doc->file_size)
                                             <span class="text-xs text-slate-400">{{ $doc->file_size }}</span>
                                         @endif
-                                        <span class="text-xs text-slate-400">{{ $doc->published_at->format('d M Y') }}</span>
+                                        <span class="text-xs text-slate-400">{{ $localizedDate($doc->published_at) }}</span>
                                     </div>
                                 </div>
                                 @if($doc->file_path)
@@ -147,7 +163,7 @@
                         <button wire:click="setAudience('{{ $aud }}')"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                        {{ $activeAudience === $aud ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                            {{ $aud }}
+                            {{ __($audienceLabels[$aud] ?? $aud) }}
                         </button>
                     @endforeach
                 </div>
@@ -208,7 +224,7 @@
                                                 </svg>
                                             </span>
                                         </div>
-                                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">{{ $resource->audience }}</span>
+                                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">{{ __($audienceLabels[$resource->audience] ?? $resource->audience) }}</span>
                                     </div>
                                 </div>
                                 @if($resource->description)
@@ -329,7 +345,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
                         </button>
-                        <h3 class="text-base font-black text-slate-900">{{ $currentMonthCarbon->format('F Y') }}</h3>
+                        <h3 class="text-base font-black text-slate-900">{{ $localizedMonthYear($currentMonthCarbon) }}</h3>
                         <button wire:click="nextMonth" @disabled($calendarMonth >= 12)
                                 class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -414,14 +430,14 @@
                     @if($monthEntries->isNotEmpty())
                         <div>
                             <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 px-0.5">
-                                {{ $currentMonthCarbon->format('F') }} {{ __('calendar_legend_event') }}s
+                                {{ __('calendar_month_events_heading', ['month' => __('common_month_' . $currentMonthCarbon->month)]) }}
                             </p>
                             <div class="space-y-2">
                                 @foreach($monthEntries as $me)
                                     <div class="bg-white rounded-xl border border-slate-200 p-3 flex items-start gap-3">
                                         <div class="flex-shrink-0 text-center w-9 pt-0.5">
                                             <p class="text-lg font-black text-rose-600 leading-none">{{ $me->date->format('d') }}</p>
-                                            <p class="text-[10px] text-slate-400 uppercase font-semibold">{{ $me->date->format('M') }}</p>
+                                            <p class="text-[10px] text-slate-400 uppercase font-semibold">{{ __('common_month_short_' . $me->date->month) }}</p>
                                             <p class="text-[10px] text-slate-300 font-semibold">{{ $me->date->format('Y') }}</p>
                                         </div>
                                         <div class="flex-1 min-w-0">
@@ -435,7 +451,7 @@
                                                 @endif
                                             </div>
                                             @if($me->end_date)
-                                                <p class="text-[10px] text-slate-400 mb-0.5">Until {{ $me->end_date->format('d M Y') }}</p>
+                                                <p class="text-[10px] text-slate-400 mb-0.5">{{ __('calendar_until') }} {{ $localizedDate($me->end_date) }}</p>
                                             @endif
                                             @if($me->description)
                                                 <p class="text-[10px] text-slate-500 leading-relaxed">{{ $me->description }}</p>

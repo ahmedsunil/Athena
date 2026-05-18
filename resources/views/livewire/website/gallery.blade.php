@@ -9,6 +9,17 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        @php
+            $categoryLabels = [
+                'Events' => 'gallery_category_events',
+                'Sports' => 'gallery_category_sports',
+                'Graduation' => 'gallery_category_graduation',
+                'Cultural' => 'gallery_category_cultural',
+                'Academic' => 'gallery_category_academic',
+                'Trips' => 'gallery_category_trips',
+            ];
+            $localizedDate = fn ($date) => $date->format('d') . ' ' . __('common_month_short_' . $date->month) . ' ' . $date->format('Y');
+        @endphp
 
         {{-- Filters row: category pills + selects + clear --}}
         <div class="flex flex-wrap items-center gap-2 mb-8" data-reveal="fade">
@@ -21,15 +32,15 @@
                 <button wire:click="setCategory('{{ $cat }}')"
                         class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                {{ $activeCategory === $cat ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
-                    {{ $cat }}
+                    {{ __($categoryLabels[$cat] ?? $cat) }}
                 </button>
             @endforeach
             <div class="ml-auto flex items-center gap-2">
                 <select wire:model.live="activeMonth"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
                     <option value="All">{{ __('common_all_months') }}</option>
-                    @foreach(['January','February','March','April','May','June','July','August','September','October','November','December'] as $i => $month)
-                        <option value="{{ $i + 1 }}">{{ $month }}</option>
+                    @foreach(range(1, 12) as $month)
+                        <option value="{{ $month }}">{{ __('common_month_' . $month) }}</option>
                     @endforeach
                 </select>
                 <select wire:model.live="activeYear"
@@ -71,7 +82,7 @@
                             @endif
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                             <span class="absolute bottom-2 left-2 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-700 px-2 py-0.5 rounded">
-                                {{ $album->category }}
+                                {{ __($categoryLabels[$album->getTranslation('category', 'en', false)] ?? $album->category) }}
                             </span>
                             @if($album->photo_count > 0)
                                 <span class="absolute bottom-2 right-2 text-[10px] text-white/80 flex items-center gap-0.5">
@@ -86,7 +97,7 @@
                         {{-- Card body --}}
                         <div class="p-4">
                             <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">{{ $album->title }}</h3>
-                            <p class="text-xs text-slate-400 mb-3">{{ $album->date->format('d M Y') }}</p>
+                            <p class="text-xs text-slate-400 mb-3">{{ $localizedDate($album->date) }}</p>
                             @if($album->facebook_url)
                                 <a href="{{ $album->facebook_url }}" target="_blank" rel="noopener noreferrer"
                                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 hover:text-sky-700">

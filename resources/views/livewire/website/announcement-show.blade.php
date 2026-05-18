@@ -1,4 +1,7 @@
 <div>
+    @php
+        $localizedDate = fn ($date) => $date->format('j') . ' ' . __('common_month_short_' . $date->month) . ' ' . $date->format('Y');
+    @endphp
     <section class="border-b border-slate-200 bg-white py-6">
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <a href="{{ route('announcements.index') }}"
@@ -15,9 +18,9 @@
                 <div class="min-w-0">
                     <div class="mb-2 flex flex-wrap items-center gap-2">
                         <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">{{ $announcement->category }}</span>
-                        <span class="text-xs font-medium text-slate-400">{{ __('announcement_show_created') }} {{ $announcement->created_at->format('j M Y') }}</span>
+                        <span class="text-xs font-medium text-slate-400">{{ __('announcement_show_created') }} {{ $localizedDate($announcement->created_at) }}</span>
                         @if($announcement->deadline)
-                            <span class="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700">{{ __('announcement_show_deadline') }} {{ $announcement->formatted_deadline }}</span>
+                            <span class="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700">{{ __('announcement_show_deadline') }} {{ $localizedDate($announcement->deadline) }}</span>
                         @endif
                     </div>
                     <h1 class="text-3xl font-black leading-tight text-slate-900 sm:text-4xl">{{ $announcement->title }}</h1>
