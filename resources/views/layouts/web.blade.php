@@ -27,6 +27,12 @@
             line-height: 2;
             word-spacing: 0.05em;
         }
+        .locale-dv .lang-toggle,
+        .locale-dv .lang-toggle * {
+            font-family: 'DM Sans', system-ui, sans-serif !important;
+            line-height: 1 !important;
+            word-spacing: normal !important;
+        }
         [data-reveal] {
             opacity: 0;
             transform: translate3d(0, 22px, 0);

@@ -18,9 +18,9 @@
         <a href="{{ route('digital-services.index') }}" class="text-sm font-medium {{ request()->routeIs('digital-services*') ? 'text-rose-600' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_digital_services" data-en="Digital Services">{{ __('nav_digital_services') }}</span></a>
       </nav>
       <div class="flex items-center gap-2">
-        <div class="flex items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
-          <button id="lang-en" onclick="setLang('en')" class="px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'en' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 hover:bg-slate-50' }}">EN</button>
-          <button id="lang-dv" onclick="setLang('dv')" class="px-2.5 py-1.5 transition-colors {{ app()->getLocale() === 'dv' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 hover:bg-slate-50' }}">DV</button>
+        <div class="lang-toggle flex h-8 items-center rounded-lg border border-slate-200 text-xs font-semibold overflow-hidden">
+          <button id="lang-en" onclick="setLang('en')" class="h-8 w-9 inline-flex items-center justify-center transition-colors {{ app()->getLocale() === 'en' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 hover:bg-slate-50' }}">EN</button>
+          <button id="lang-dv" onclick="setLang('dv')" class="h-8 w-9 inline-flex items-center justify-center transition-colors {{ app()->getLocale() === 'dv' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 hover:bg-slate-50' }}">DV</button>
         </div>
         <button onclick="window.dispatchEvent(new CustomEvent('open-search'))" class="p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
@@ -71,8 +71,8 @@ function setLang(l) {
   }
 
   // toggle buttons
-  var active   = 'px-2.5 py-1.5 transition-colors bg-slate-900 text-white';
-  var inactive = 'px-2.5 py-1.5 transition-colors bg-white text-slate-600 hover:bg-slate-50';
+  var active   = 'h-8 w-9 inline-flex items-center justify-center transition-colors bg-slate-900 text-white';
+  var inactive = 'h-8 w-9 inline-flex items-center justify-center transition-colors bg-white text-slate-600 hover:bg-slate-50';
   document.getElementById('lang-en').className = isDv ? inactive : active;
   document.getElementById('lang-dv').className = isDv ? active : inactive;
 
