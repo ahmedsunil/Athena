@@ -167,10 +167,16 @@
                                     <p class="font-semibold text-slate-900 italic">"{{ $profile->motto }}"</p>
                                 </div>
                             @endif
-                            @if($profile->island || $profile->atoll)
+                            @php
+                                $location = collect([
+                                    $profile->getTranslation('island', app()->getLocale(), false),
+                                    $profile->getTranslation('atoll', app()->getLocale(), false),
+                                ])->filter()->join(', ');
+                            @endphp
+                            @if($location)
                                 <div class="pb-5 border-b border-slate-100">
                                     <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{{ __('about_history_label_location') }}</p>
-                                    <p class="font-medium text-slate-700">{{ implode(', ', array_filter([$profile->island, $profile->atoll])) }}</p>
+                                    <p class="font-medium text-slate-700">{{ $location }}</p>
                                 </div>
                             @endif
                         </div>

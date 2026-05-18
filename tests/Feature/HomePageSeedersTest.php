@@ -28,26 +28,31 @@ class HomePageSeedersTest extends TestCase
 
         $profile = SchoolProfile::firstOrFail();
         $this->assertSame(1, $profile->id);
-        $this->assertSame('Dr. Patricia Nwachukwu', $profile->principal_name);
-        $this->assertSame('info@schoolportal.edu.ng', $profile->email);
+        $this->assertSame('Mr. Mohamed Rasheed', $profile->getTranslation('principal_name', 'en', false));
+        $this->assertSame('މުޙައްމަދު ރަޝީދު', $profile->getTranslation('principal_name', 'dv', false));
+        $this->assertSame('info@hulhudhuffaaruschool.edu.mv', $profile->email);
         $this->assertSame(
-            'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80',
             $profile->principal_photo_url
         );
 
         $stat = HomeStat::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === 'Students Enrolled');
         $this->assertNotNull($stat);
-        $this->assertSame('1,200+', $stat->value);
+        $this->assertSame('850+', $stat->value);
+        $this->assertSame('ކިޔަވާ ދަރިވަރުން', $stat->getTranslation('title', 'dv', false));
         $this->assertSame(0, $stat->sort_order);
 
         $qa = HomeQuickAccess::all()->first(fn ($q) => $q->getTranslation('title', 'en', false) === 'Admissions');
         $this->assertNotNull($qa);
+        $this->assertSame('އެޑްމިޝަން', $qa->getTranslation('title', 'dv', false));
         $this->assertSame('ClipboardList', $qa->icon_key);
         $this->assertSame('/admissions', $qa->link_key);
 
-        $testimonial = HomeTestimonial::all()->first(fn ($t) => $t->name === 'Mrs. Adaeze Okonkwo');
+        $testimonial = HomeTestimonial::all()->first(fn ($t) => $t->name === 'Mrs. Aminath Shazna');
         $this->assertNotNull($testimonial);
-        $this->assertSame('Parent of Year 9 Student', $testimonial->getTranslation('current_designation', 'en', false));
+        $this->assertSame('އަމީނަތު ޝަޒްނާ', $testimonial->name_dv);
+        $this->assertSame('Parent of Grade 7 Student', $testimonial->getTranslation('current_designation', 'en', false));
+        $this->assertSame('ގްރޭޑް 7 ދަރިވަރެއްގެ ބަލިވެރިޔާ', $testimonial->getTranslation('current_designation', 'dv', false));
         $this->assertSame(
             'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80',
             $testimonial->photo_url
@@ -74,5 +79,45 @@ class HomePageSeedersTest extends TestCase
         $this->assertSame(4, HomeStat::count());
         $this->assertSame(8, HomeQuickAccess::count());
         $this->assertSame(4, HomeTestimonial::count());
+    }
+
+    public function test_home_page_supporting_seeders_overwrite_existing_rows(): void
+    {
+        HomeStat::create([
+            'title' => ['en' => 'Old Stat', 'dv' => 'ކުރީގެ ސްޓެޓް'],
+            'value' => '0',
+            'is_active' => true,
+            'sort_order' => 99,
+        ]);
+
+        HomeQuickAccess::create([
+            'title' => ['en' => 'Old Link', 'dv' => 'ކުރީގެ ލިންކް'],
+            'icon_key' => 'Old',
+            'link_key' => '/old',
+            'is_active' => true,
+            'sort_order' => 99,
+        ]);
+
+        HomeTestimonial::create([
+            'name' => 'Old Person',
+            'previous_designation' => ['en' => '', 'dv' => ''],
+            'current_designation' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
+            'message' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
+            'is_active' => true,
+            'sort_order' => 99,
+        ]);
+
+        $this->seed([
+            HomeStatSeeder::class,
+            HomeQuickAccessSeeder::class,
+            HomeTestimonialSeeder::class,
+        ]);
+
+        $this->assertSame(4, HomeStat::count());
+        $this->assertSame(8, HomeQuickAccess::count());
+        $this->assertSame(4, HomeTestimonial::count());
+        $this->assertNull(HomeStat::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === 'Old Stat'));
+        $this->assertNull(HomeQuickAccess::all()->first(fn ($q) => $q->getTranslation('title', 'en', false) === 'Old Link'));
+        $this->assertNull(HomeTestimonial::where('name', 'Old Person')->first());
     }
 }

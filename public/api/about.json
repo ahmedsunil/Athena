@@ -1,8 +1,8 @@
 {
   "_meta": {
     "models": {
-      "school": "Core identity information about the school — name, motto, founding year, and a rich overview description.",
-      "principal": "The school principal's full profile including a detailed letter-style welcome message.",
+      "school": "Core identity information about the school - name, motto, founding year, and a rich overview description.",
+      "principal": "The school principal's full profile including a detailed welcome message.",
       "mission": "The school's formal mission statement and vision statement.",
       "historyMilestone": "A key moment or achievement in the school's history, used to build the timeline.",
       "leadershipMember": "A senior school leader shown on the About page with their name, role, bio, and photo."
@@ -14,90 +14,91 @@
       "leadershipMembers are ordered by seniority"
     ]
   },
-
   "school": {
     "name": "Hulhudhuffaaru School",
-    "foundedYear": 1987,
+    "name_dv": "ހުޅުދުއްފާރު ސްކޫލް",
+    "foundedYear": 1995,
     "motto": "Knowledge, Character, Service",
-    "tagline": "Shaping Tomorrow's Leaders Since 1987",
-    "description": "Hulhudhuffaaru School is a premier co-educational institution committed to academic excellence, character development, and community service. Founded in 1987 on the belief that every child deserves a world-class education, we have grown from a modest campus of 120 students to a thriving learning community of over 1,200. Our graduates go on to lead in medicine, law, engineering, the arts, and public service across Nigeria and the world.\n\nWe believe that education is not simply the acquisition of knowledge — it is the formation of the whole person. Our curriculum is rigorous and internationally benchmarked, while our pastoral care ensures every student feels known, valued, and supported. From the classroom to the playing field, from the debate stage to the science laboratory, we challenge our students to discover and develop their unique gifts.",
+    "motto_dv": "ޢިލްމު، އަޚްލާޤު، ޚިދުމަތް",
+    "tagline": "Serving Hulhudhuffaaru Since 1995",
+    "tagline_dv": "1995 އިން ހުޅުދުއްފާރަށް ޚިދުމަތްކުރަން",
+    "description": "Hulhudhuffaaru School is a community school in Raa Atoll, Maldives, committed to academic excellence, Islamic values, Maldivian identity, and service. The school grew from the determination of families and teachers who kept education moving during the relocation of the people of Ungulu and Undoodhoo to Hulhudhuffaaru.\n\nToday, the school serves students from primary grades through higher secondary streams. We work to ensure that every learner is known, supported, challenged, and prepared to contribute to the island, the nation, and the wider world.",
+    "description_dv": "ހުޅުދުއްފާރު ސްކޫލަކީ ރ އަތޮޅުގެ ހުޅުދުއްފާރުގައި ހުންނަ މުޖުތަމައީ ސްކޫލެއްކަމަށާއި، ތަޢުލީމީ ފެންވަރާއި، އިސްލާމީ އަގުތަކާއި، ދިވެހި ހުވިޔަތާއި، ޚިދުމަތަށް އަމާޒުކޮށްގެން ހިންގާ ތަނެކެވެ. އުނގުލޫއާއި އުނދޫދޫގެ މީހުން ހުޅުދުއްފާރަށް ނަގާލުމުގެ ދައުރުގައި ތަޢުލީމް ކުރިއަށް ގެންދިއުމަށް ބަލިވެރިންނާއި މުދައްރިސުން ކުރި ބާރުގަދަ މަސައްކަތުން މި ސްކޫލް ކުރިއަރިއެވެ.\n\nމިއަދު ސްކޫލުން ޕްރައިމަރީ ގްރޭޑްތަކުން ހަޔަރ ސެކަންޑަރީ ދަރަޖައަށް ދަރިވަރުންނަށް ޚިދުމަތް ދެއެވެ. ކޮންމެ ދަރިވަރަކަށް ދަނެގެން، އެހީތެރިކޮށް، ދައްކާލުމާއެކު ރަށަށާއި، ޤައުމަށާއި، އައްދުނިޔެއަށް ބޭނުންތެރި މީހަކަށް ތައްޔާރުކުރުމަކީ އަހަރެމެންގެ އަމާޒެވެ.",
     "logoUrl": null,
     "heroImageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80"
   },
-
   "principal": {
-    "name": "Dr. Patricia Nwachukwu",
+    "name": "Mr. Mohamed Rasheed",
+    "name_dv": "މުޙައްމަދު ރަޝީދު",
     "title": "Principal",
-    "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80",
-    "message": "Dear Parents, Students, and Friends of Hulhudhuffaaru School,\n\nIt is my profound honour to serve as the Principal of this exceptional institution. When I joined this school 12 years ago, I was struck by one thing above all else: the unwavering belief, shared by staff, students, and parents alike, that every child is capable of greatness.\n\nThat belief is the foundation of everything we do here. Our teachers do not simply deliver content — they build relationships, nurture curiosity, and hold every student to the highest expectations of character and intellect. Our students do not simply attend school — they belong to a community that challenges them, celebrates them, and holds them accountable.\n\nOver the past decade, we have expanded our facilities, launched our digital services platform, deepened our extracurricular programmes, and achieved some of our best examination results in the school's history. But numbers alone do not capture what makes this place special. What makes this school extraordinary is the young person who walks in on their first day uncertain of themselves, and graduates four or six years later with the confidence, skills, and values to change the world.\n\nTo prospective families: we warmly invite you to visit us. See our classrooms, meet our teachers, speak to our students. I am confident that what you find will exceed your expectations.\n\nTo our current families: thank you for your continued trust and partnership. Together, we are raising the next generation of Nigeria's leaders.\n\nWith warmest regards,\n\nDr. Patricia Nwachukwu\nPrincipal, Hulhudhuffaaru School"
+    "title_dv": "ޕްރިންސިޕަލް",
+    "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80",
+    "message": "Dear parents, students, and friends of Hulhudhuffaaru School,\n\nOur school exists because this community has always believed in education. From the first temporary classrooms to our modern learning spaces, generations of families, teachers, and students have built a culture of hard work and care.\n\nWe want every student to leave this school with strong academic foundations, sound Islamic character, respect for Maldivian identity, and the confidence to serve others. Thank you for being part of this shared work.",
+    "message_dv": "ހުޅުދުއްފާރު ސްކޫލްގެ ބަލިވެރިންނާއި، ދަރިވަރުންނާއި، މިތުރުންނަށް،\n\nމި ސްކޫލް ޤާއިމުވެފައިވަނީ މި މުޖުތަމައުން ތަޢުލީމަށް އެކުވެރި ކަމުގައި ބަރޯސާ ކުރާތީއެވެ. ފުރަތަމަ ވަގުތީ ކުލާހުތަކުން މިއަދުގެ ދަސްކުރުމުގެ މާހައުލަށް، ބަލިވެރިންނާއި މުދައްރިސުންނާއި ދަރިވަރުން ބާރުގަދަ މަސައްކަތާއި ކެއްތެރިކަމުގެ ސަގާފަތެއް ބިނާކޮށްދިނެވެ.\n\nކޮންމެ ދަރިވަރަކަށް ބާރުގަދަ ތަޢުލީމީ ބިނާ، ރަނގަޅު އިސްލާމީ އަޚްލާޤު، ދިވެހި ހުވިޔަތަށް އިޙްތިރާމް، އަދި އެހެންނަށް ޚިދުމަތްކުރުމުގެ ބަރޯސާ ލިބިގެން ނިމުން އަހަރެމެން ބޭނުންވެއެވެ. މި އެއްބާރުލުމުގެ މަސައްކަތުގައި ބައިވެރިވާތީ ޝުކުރިއްޔާ."
   },
-
   "mission": {
-    "missionStatement": "To provide a holistic, values-driven education that equips every student with the knowledge, character, and confidence to lead purposeful lives and contribute meaningfully to society.",
-    "visionStatement": "To be a leading institution of learning in West Africa, recognised for academic excellence, character formation, and the development of global citizens who serve their communities with integrity and compassion."
+    "missionStatement": "To provide a safe, inclusive, and values-driven education that helps every student achieve academic success, strong character, and a commitment to serve.",
+    "missionStatement_dv": "ކޮންމެ ދަރިވަރަކަށް ތަޢުލީމީ ކާމިޔާބީ، ބާރުގަދަ އަޚްލާޤު، އަދި ޚިދުމަތަށް އަމާޒުވުން ލިބޭނެ އަމާން، ހިމެނޭ، އަދި އަގުތަކަށް ބިނާވެފައިވާ ތަޢުލީމެއް ދިނުން.",
+    "visionStatement": "To be a leading island school that nurtures proud Maldivians, lifelong learners, and responsible citizens.",
+    "visionStatement_dv": "ޤައުމީ ފަޚުރު ހުރި މާލިޑިވިއަންތަކަށާއި، ދާއިމީ ދަސްކުރާ މީހުންނަށާއި، ޒިންމާދާރު ރައްޔިތުންނަށް ބިނާކުރާ މަތީ ފެންވަރުގެ ރަށް ސްކޫލަކަށް ވުން."
   },
-
   "schoolHistory": {
-    "intro": "The story of Hulhudhuffaaru School is a testament to a community's unwavering commitment to its children. Established during a pivotal moment in the history of Raa Atoll, our school has grown from humble beginnings into a leading institution for higher secondary education. The development and success we see today are the direct result of the grit, vision, and tireless hard work of our founding educators and the pioneer community.",
+    "intro": "The story of Hulhudhuffaaru School is tied to the relocation of families from Ungulu and Undoodhoo and the community's commitment to keeping education alive.",
+    "intro_dv": "ހުޅުދުއްފާރު ސްކޫލްގެ ތާރީޚަކީ އުނގުލޫއާއި އުނދޫދޫއިން ބަލިވެރި އާއިލާތައް ހުޅުދުއްފާރަށް ނަގާލުމާއި، ތަޢުލީމް ދިރުވާލުމަށް މުޖުތަމައުން ކުރި އަޒުމާއި ގުޅިފައިވާ ތާރީޚެކެވެ.",
     "sections": [
       {
         "id": "sh-1",
-        "title": "Our Foundations: The Great Migration (1993–1995)",
+        "title": "Our Foundations: The Great Migration (1993-1995)",
+        "title_dv": "އަސާސް: ބޮޑު ނަގާލުން (1993-1995)",
         "blocks": [
           {
             "type": "paragraph",
-            "text": "The roots of our school are deeply connected to the relocation of the people from the islands of Ungulu and Undoodhoo. In 1993, families began their migration to Hulhudhuffaaru, seeking better facilities and a brighter future. By 1995, the migration was complete, and the island was officially declared inhabited."
+            "text": "The roots of the school are connected to the relocation of the people from Ungulu and Undoodhoo. Families moved to Hulhudhuffaaru seeking better services and a stronger future for their children.",
+            "text_dv": "ސްކޫލްގެ އަސާސް އުނގުލޫއާއި އުނދޫދޫގެ މީހުން ހުޅުދުއްފާރަށް ނަގާލުމާ ގުޅިފައިވެއެވެ. އާއިލާތައް ހުޅުދުއްފާރަށް ނަގާލީ ރަނގަޅު ޚިދުމަތްތަކާއި ކުދިންނަށް ބާރުގަދަ މާދަމާއެއް ހޯދުމަށެވެ."
           },
           {
             "type": "paragraph",
-            "text": "During these early transition years, education never faltered. Before a dedicated school building existed, teaching was conducted in temporary spaces. In 1994, classes were held within the Magistrate Court, later moving to the Island Office (now the Island Council). These early days were marked by simple conditions — legend has it the office didn't even have a door at the time — but the passion for learning was boundless."
+            "text": "Before a dedicated school building was ready, teaching continued in temporary spaces, including community offices. The conditions were simple, but the commitment to learning was strong.",
+            "text_dv": "ޚާއްޞަ ސްކޫލް ބިލްޑިންގެއް ތައްޔާރުވުމުގެ ކުރިން، މުޖުތަމައީ އޮފީސްތަކަށްފަހު ވަގުތީ ތަންތަނުގައި ކިޔަވައިދިނުން ކުރިއަށް ދިޔައެވެ. ހާލަތުތައް ސާދާ ކަމަށްވެސް، ދަސްކުރުމަށް އަޒުމު ބާރުގަދަ ކަމެއްކަމަށް ހުރިއެވެ."
           }
         ]
       },
       {
         "id": "sh-2",
-        "title": "The Three Pillars: Honoring Our Pioneers",
+        "title": "Honouring Our Pioneers",
+        "title_dv": "ޕައިނިއަރުންނަށް އިޙްތިރާމް",
         "blocks": [
           {
             "type": "paragraph",
-            "text": "The success of Hulhudhuffaaru School was carried on the shoulders of dedicated teachers who sacrificed much to ensure no student was left behind. Before the migration was finalized, these educators traveled between islands, exchanging places and traveling from Ungulu or Undoodhoo to Hulhudhuffaaru to keep the classrooms running."
-          },
-          {
-            "type": "paragraph",
-            "text": "We honor the \"Three Pillars\" whose tireless work laid our academic foundation:"
+            "text": "The early success of the school was carried by teachers who travelled, exchanged places, and kept classes running through difficult circumstances.",
+            "text_dv": "ސްކޫލްގެ ފުރަތަމަ ކާމިޔާބީ އުފުލާލީ ދަތުރުކޮށް، ތަންބަދަލުކޮށް، ދަތި ހާލަތުތަކުގައި ކުލާސްތައް ހިންގައިދިން މުދައްރިސުންނެވެ."
           },
           {
             "type": "founderList",
             "items": [
-              { "name": "Mr. Mohamed Rasheed", "subject": "Mathematics" },
-              { "name": "Mr. Ahmed Niyaz", "subject": "Mathematics & Dhivehi" },
-              { "name": "Mr. Abdul Latheef Umar", "subject": "Practical Arts & Physical Education" }
+              { "name": "Mr. Mohamed Rasheed", "name_dv": "މުޙައްމަދު ރަޝީދު", "subject": "Mathematics", "subject_dv": "މެތުމެޓިކްސް" },
+              { "name": "Mr. Ahmed Niyaz", "name_dv": "އަޙްމަދު ނިޔާޒް", "subject": "Mathematics and Dhivehi", "subject_dv": "މެތުމެޓިކްސް އަދި ދިވެހި" },
+              { "name": "Mr. Abdul Latheef Umar", "name_dv": "އަބްދުލް ލަތީފް ޢުމަރު", "subject": "Practical Arts and Physical Education", "subject_dv": "ޕްރެކްޓިކަލް އާޓްސް އަދި ފިޒިކަލް އެޑިއުކޭޝަން" }
             ]
-          },
-          {
-            "type": "paragraph",
-            "text": "Following the full relocation in 1995, they were joined by Mr. Saeed (Islam), completing the core team that shaped our school's identity. The standard of excellence we strive for today was set by their hands."
           }
         ]
       },
       {
         "id": "sh-3",
         "title": "Growth and the Modern Era",
+        "title_dv": "ކުރިއެރުން އަދި މިއަދުގެ ދައުރު",
         "blocks": [
           {
             "type": "paragraph",
-            "text": "On May 17, 1995, Hulhudhuffaaru School was formally inaugurated by the then Minister of Education, Dr. Mohamed Latheef. The original \"Main School\" consisted of just three buildings and six classrooms."
-          },
-          {
-            "type": "paragraph",
-            "text": "From those six original classrooms, we have expanded into a comprehensive educational center:"
+            "text": "Hulhudhuffaaru School was formally inaugurated on May 17, 1995. From a small beginning, the school has grown into a centre for primary, secondary, and higher secondary education.",
+            "text_dv": "ހުޅުދުއްފާރު ސްކޫލް ރަސްމީކޮށް ހުޅުވާލެވުނީ 1995 މެއި 17 ވަނަ ދުވަހުއެވެ. ކުޑަ ފެށުމަކުން، ސްކޫލް ޕްރައިމަރީ، ސެކަންޑަރީ، އަދި ހަޔަރ ސެކަންޑަރީ ތަޢުލީމުގެ މަރުކަޒަކަށް ކުރިއަރިއެވެ."
           },
           {
             "type": "highlightList",
             "items": [
-              { "label": "Academic Range", "text": "We now serve students from Grade 1 through Grade 12." },
-              { "label": "Higher Secondary", "text": "We offer specialized streams in both Science and Commerce." },
-              { "label": "Our Vision", "text": "To be the premier higher secondary school in the North Central Province, producing graduates who are both proud Maldivians and global citizens." }
+              { "label": "Academic Range", "label_dv": "ތަޢުލީމީ ދާއިރާ", "text": "Classes from Grade 1 through Grade 12.", "text_dv": "ގްރޭޑް 1 އިން ގްރޭޑް 12 އަށް ކުލާސްތައް." },
+              { "label": "Higher Secondary", "label_dv": "ހަޔަރ ސެކަންޑަރީ", "text": "Science and commerce pathways for senior students.", "text_dv": "ސީނިއަރ ދަރިވަރުންނަށް ސައިންސް އަދި ކޮމަރސް ދިރާސާތައް." },
+              { "label": "Community", "label_dv": "މުޖުތަމައު", "text": "A school shaped by parents, teachers, students, and island leadership.", "text_dv": "ބަލިވެރިންނާއި، މުދައްރިސުންނާއި، ދަރިވަރުންނާއި، ރަށު ލީޑަރޝިޕާއި ބިނާވެފައިވާ ސްކޫލެއް." }
             ]
           }
         ]
@@ -105,192 +106,165 @@
       {
         "id": "sh-4",
         "title": "A Legacy Continued",
+        "title_dv": "އުފުލާލެވޭ ލެގަސީ",
         "blocks": [
           {
             "type": "paragraph",
-            "text": "At Hulhudhuffaaru School, we pride ourselves on a holistic education system rooted in Islamic Maldivian identity. As we look toward the future, we remain forever grateful to the pioneer families and teachers from Ungulu and Undoodhoo. Every modern classroom and academic achievement is a tribute to their struggle. We continue to build upon their hard work, ensuring that Hulhudhuffaaru School remains a beacon of hope and opportunity for generations to come."
+            "text": "The school continues to build on the dedication of its pioneers. Each achievement belongs to the whole community and strengthens our responsibility to future generations.",
+            "text_dv": "ސްކޫލުން ޕައިނިއަރުންގެ އަޒުމުގެ މަތީގައި އަދިވެސް ބިނާކުރައެވެ. ކޮންމެ ކާމިޔާބީއަކީ މުޅި މުޖުތަމައުގެ ކާމިޔާބީއެކެވެ، އަދި މާދަމާގެ ޖީލުތަކަށް އަހަރެމެންގެ ޒިންމާ ބާރުކުރައެވެ."
           }
         ]
       }
     ]
   },
-
   "foundingMembers": [
     {
       "id": "fm-1",
-      "name": "Mrs. Funke Adeleke",
-      "subject": "English Language & Literature",
-      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-      "tribute": "A gifted storyteller and grammarian who instilled a love of language in every student she taught. Retired in 2012 after 25 years of distinguished service."
+      "name": "Mr. Mohamed Rasheed",
+      "name_dv": "މުޙައްމަދު ރަޝީދު",
+      "subject": "Mathematics",
+      "subject_dv": "މެތުމެޓިކްސް",
+      "photoUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+      "tribute": "A pioneer teacher whose commitment helped keep learning alive during the earliest years of the school.",
+      "tribute_dv": "ސްކޫލްގެ ފުރަތަމަ އަހަރުތަކުގައި ދަސްކުރުން ދިރުވާލުމަށް އަޒުމުން ޚިދުމަތްކުރި ޕައިނިއަރ މުދައްރިސެއް."
     },
     {
       "id": "fm-2",
-      "name": "Mr. Silas Chukwu",
-      "subject": "Mathematics & Further Maths",
-      "photoUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-      "tribute": "Known for his patient, methodical teaching style, Mr. Chukwu produced dozens of science and engineering graduates. He served as Head of Mathematics until 2005."
+      "name": "Mr. Ahmed Niyaz",
+      "name_dv": "އަޙްމަދު ނިޔާޒް",
+      "subject": "Mathematics and Dhivehi",
+      "subject_dv": "މެތުމެޓިކްސް އަދި ދިވެހި",
+      "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+      "tribute": "Remembered for patience, consistency, and service to students across two core subjects.",
+      "tribute_dv": "ދެ މުހިންމު މާއްދާއެއްގައި ދަރިވަރުންނަށް ކެއްތެރިކަމާއި ދެމިހުރުމާއެކު ޚިދުމަތްކުރި މުދައްރިސެއް."
     },
     {
       "id": "fm-3",
-      "name": "Mrs. Adaeze Nwosu",
-      "subject": "Biology & Health Science",
-      "photoUrl": "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&q=80",
-      "tribute": "Built the first biology laboratory from scratch. Many of our medical alumni credit her as the reason they pursued medicine. A founding pillar of STEM at this school."
-    },
-    {
-      "id": "fm-4",
-      "name": "Mr. Rasheed Balogun",
-      "subject": "History & Civics",
-      "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
-      "tribute": "Passionate about Nigeria's story and civic responsibility. His classroom was always alive with debate. Retired in 2018 as Senior Teacher after three decades of service."
-    },
-    {
-      "id": "fm-5",
-      "name": "Mr. Kingsley Eze",
-      "subject": "Physical Education & Sports",
-      "photoUrl": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&q=80",
-      "tribute": "Built the school's first athletics programme from nothing. Under his coaching, the school won its first inter-school championships in 1991 — a titan of school spirit."
+      "name": "Mr. Abdul Latheef Umar",
+      "name_dv": "އަބްދުލް ލަތީފް ޢުމަރު",
+      "subject": "Practical Arts and Physical Education",
+      "subject_dv": "ޕްރެކްޓިކަލް އާޓްސް އަދި ފިޒިކަލް އެޑިއުކޭޝަން",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+      "tribute": "Helped shape the practical, creative, and physical development of early students.",
+      "tribute_dv": "ފުރަތަމަ ދަރިވަރުންގެ ޕްރެކްޓިކަލް، ފަންނީ، އަދި ޖިސްމާނީ ކުރިއެރުން ބިނާކުރުމަށް ޚިދުމަތްކުރި މުދައްރިސެއް."
     }
   ],
-
   "leadership": [
     {
       "id": "ldr-1",
-      "name": "Dr. Patricia Nwachukwu",
+      "name": "Mr. Mohamed Rasheed",
+      "name_dv": "މުޙައްމަދު ރަޝީދު",
       "role": "Principal",
-      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
-      "bio": "Dr. Nwachukwu holds a PhD in Educational Leadership from the University of Lagos. With over 25 years in education, she has led the school through its most transformative decade."
+      "role_dv": "ޕްރިންސިޕަލް",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
+      "bio": "Leads whole-school improvement, community partnership, and student achievement.",
+      "bio_dv": "ސްކޫލްގެ މުޅި ކުރިއެރުމާއި، މުޖުތަމައީ ޝަރާކާތާއި، ދަރިވަރުންގެ ކާމިޔާބީ ލީޑްކުރައެވެ."
     },
     {
       "id": "ldr-2",
-      "name": "Mr. Babatunde Adeyemi",
-      "role": "Vice Principal, Academics",
-      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-      "bio": "Mr. Adeyemi oversees curriculum design, examination coordination, and teacher development. He joined the school in 2008 and holds an MSc in Mathematics Education."
+      "name": "Mrs. Fathimath Shazna",
+      "name_dv": "ފާތިމަތު ޝަޒްނާ",
+      "role": "Deputy Principal, Academics",
+      "role_dv": "ޑެޕިއުޓީ ޕްރިންސިޕަލް، ތަޢުލީމީ ބައި",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+      "bio": "Oversees curriculum planning, assessment, and teacher development.",
+      "bio_dv": "ކަރިކިއުލަމް ޕްލޭނިންގާއި، އެސެސްމަންޓާއި، މުދައްރިސުންގެ ކުރިއެރުން ބަލަހައްޓައެވެ."
     },
     {
       "id": "ldr-3",
-      "name": "Mrs. Chioma Okafor",
-      "role": "Vice Principal, Student Affairs",
-      "photoUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80",
-      "bio": "Mrs. Okafor manages student welfare, discipline, and co-curricular activities. She is deeply committed to pastoral care and has pioneered the school's counselling programme."
+      "name": "Mr. Ali Shareef",
+      "name_dv": "ޢަލީ ޝަރީފް",
+      "role": "Deputy Principal, Student Affairs",
+      "role_dv": "ޑެޕިއުޓީ ޕްރިންސިޕަލް، ދަރިވަރު ކަންކަން",
+      "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+      "bio": "Coordinates student wellbeing, discipline, clubs, and co-curricular activities.",
+      "bio_dv": "ދަރިވަރުންގެ ހެޔޮފަދަކަމާއި، ތަރުތީބާއި، ކްލަބްތަކާއި، ކޯ-ކަރިކިއުލަރ ޙަރަކާތްތައް ކޯޑިނޭޓްކުރައެވެ."
     },
     {
       "id": "ldr-4",
-      "name": "Mr. Oluwaseun Fashola",
+      "name": "Ms. Mariyam Niuma",
+      "name_dv": "މަރްޔަމް ނިއުމާ",
       "role": "Head of Administration",
-      "photoUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80",
-      "bio": "Mr. Fashola leads finance, facilities, and operational management. His background in public administration has brought structure and efficiency to the school's operations."
-    },
-    {
-      "id": "ldr-5",
-      "name": "Dr. Amaka Eze",
-      "role": "Director of Admissions",
-      "photoUrl": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80",
-      "bio": "Dr. Eze manages the admissions process from enquiry through enrolment. She works closely with families to ensure a smooth and transparent transition into the school community."
-    },
-    {
-      "id": "ldr-6",
-      "name": "Mr. Emeka Nweke",
-      "role": "Head of ICT & Digital Services",
-      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
-      "bio": "Mr. Nweke leads the school's digital transformation, overseeing the portal, e-learning platforms, and classroom technology. He holds a BSc in Computer Science."
+      "role_dv": "އިދާރީ ބައިގެ ސަރުބަރާހު",
+      "photoUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80",
+      "bio": "Supports school operations, communication, records, and parent services.",
+      "bio_dv": "ސްކޫލްގެ ހިންގުމާއި، ގުޅުންތަކާއި، ރެކޯޑްތަކާއި، ބަލިވެރިންގެ ޚިދުމަތްތައް އެހީތެރިކުރައެވެ."
     }
   ],
-
   "achievements": [
     {
       "id": "ach-1",
-      "title": "National Top 10 Schools",
+      "title": "Best Higher Secondary School in the Atoll",
+      "title_dv": "އަތޮޅުގެ އެންމެ ރަނގަޅު ހަޔަރ ސެކަންޑަރީ ސްކޫލް",
       "category": "school",
       "year": 2025,
-      "description": "Ranked among top 10 schools nationally in O-Level results.",
-      "award": "Top 10",
-      "event": "National Education Rankings"
+      "description": "Recognised for strong student results and whole-school improvement.",
+      "description_dv": "ދަރިވަރުންގެ ރަނގަޅު ނަތީޖާތަކާއި މުޅި ސްކޫލްގެ ކުރިއެރުމަށް ފަހުރުވެރިކޮށް ބަލާލެވުނު.",
+      "award": "Best School",
+      "award_dv": "އެންމެ ރަނގަޅު ސްކޫލް",
+      "event": "Raa Atoll Education Awards 2025",
+      "event_dv": "ރ އަތޮޅު ތަޢުލީމީ އެވޯޑްސް 2025"
     },
     {
       "id": "ach-2",
-      "title": "1st Place — Inter-School Science Quiz",
+      "title": "1st Place - Inter-School Science Quiz",
+      "title_dv": "އިންޓަރ ސްކޫލް ސައިންސް ކުއިޒްގައި 1 ވަނަ",
       "category": "students",
       "year": 2025,
-      "description": "Grade 10 team took first place at the North Central Province science quiz competition.",
+      "description": "Senior students won first place in the atoll science quiz.",
+      "description_dv": "ސީނިއަރ ދަރިވަރުން އަތޮޅު ސައިންސް ކުއިޒްގައި 1 ވަނަ ހޯދިއެވެ.",
       "award": "1st Place",
+      "award_dv": "1 ވަނަ",
       "event": "Inter-School Science Quiz 2025",
+      "event_dv": "އިންޓަރ ސްކޫލް ސައިންސް ކުއިޒް 2025",
       "personName": "Aminath Rifa",
+      "personName_dv": "އަމީނަތު ރިފާ",
       "photoUrl": "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80"
     },
     {
       "id": "ach-3",
-      "title": "Best Teacher Award",
+      "title": "Outstanding Teacher Award",
+      "title_dv": "އައުޓްސްޓޭންޑިންގ ޓީޗަރ އެވޯޑް",
       "category": "staff",
       "year": 2025,
-      "description": "Mr. Ahmed Niyaz recognised as Best Teacher at the Raa Atoll Education Awards.",
-      "award": "Best Teacher",
-      "event": "Raa Atoll Education Awards 2025",
+      "description": "A staff member was recognised for excellence in classroom practice and student support.",
+      "description_dv": "ކުލާހުގެ މަސައްކަތާއި ދަރިވަރު އެހީގައި ފެންވަރުމަތި ޚިދުމަތަށް ސްޓާފް މެމްބަރަކަށް ފަހުރުވެރިކޮށް ބަލާލެވުނު.",
+      "award": "Outstanding Teacher",
+      "award_dv": "އައުޓްސްޓޭންޑިންގ ޓީޗަރ",
+      "event": "National Teachers' Day 2025",
+      "event_dv": "ޤައުމީ ޓީޗަރުންގެ ދުވަސް 2025",
       "personName": "Mr. Ahmed Niyaz",
+      "personName_dv": "އަޙްމަދު ނިޔާޒް",
       "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
     },
     {
       "id": "ach-4",
-      "title": "Best School in Maldives — Higher Secondary",
-      "category": "school",
-      "year": 2024,
-      "description": "Awarded best higher secondary school in the Maldives at the national education ceremony.",
-      "award": "Best School",
-      "event": "Maldives National Education Awards 2024"
-    },
-    {
-      "id": "ach-5",
-      "title": "1st Place — National Debate Championship",
+      "title": "1st Place - Quran Recitation",
+      "title_dv": "ޤުރްއާން ކިޔުމުގައި 1 ވަނަ",
       "category": "students",
       "year": 2024,
-      "description": "School debate team won the national championship, defeating 24 schools.",
+      "description": "A student earned first place in the regional Quran recitation competition.",
+      "description_dv": "ރީޖަނަލް ޤުރްއާން ކިޔުމުގެ މުބާރާތުގައި ދަރިވަރަކު 1 ވަނަ ހޯދިއެވެ.",
       "award": "1st Place",
-      "event": "National Debate Championship 2024",
+      "award_dv": "1 ވަނަ",
+      "event": "Regional Quran Competition 2024",
+      "event_dv": "ރީޖަނަލް ޤުރްއާން މުބާރާތް 2024",
       "personName": "Hassan Zayan",
+      "personName_dv": "ޙަސަން ޒަޔާން",
       "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80"
     },
     {
-      "id": "ach-6",
-      "title": "Outstanding Staff Member",
-      "category": "staff",
-      "year": 2024,
-      "description": "Mrs. Fathimath Shazna honoured as Outstanding Staff Member at the school's annual awards night.",
-      "award": "Outstanding Staff",
-      "event": "Annual Awards Night 2024",
-      "personName": "Mrs. Fathimath Shazna",
-      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80"
-    },
-    {
-      "id": "ach-7",
-      "title": "Top Performers — Cambridge O-Level",
-      "category": "students",
-      "year": 2023,
-      "description": "School produced 3 students in the national top 10 for O-Level results.",
-      "award": "Top 10 National",
-      "event": "Cambridge O-Level 2023",
-      "personName": "Mariyam Sana",
-      "photoUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80"
-    },
-    {
-      "id": "ach-8",
-      "title": "1st Place — Atoll Sports Meet",
+      "id": "ach-5",
+      "title": "Atoll Sports Meet Champions",
+      "title_dv": "އަތޮޅު ސްޕޯޓްސް މީޓް ޗެމްޕިއަންސް",
       "category": "school",
-      "year": 2023,
-      "description": "Overall champions at the Raa Atoll inter-school sports meet.",
-      "award": "1st Place",
-      "event": "Raa Atoll Sports Meet 2023"
-    },
-    {
-      "id": "ach-9",
-      "title": "Best ICT Teacher — National",
-      "category": "staff",
-      "year": 2023,
-      "description": "Mr. Ali Shareef awarded Best ICT Teacher at the national teachers' day ceremony.",
-      "award": "Best ICT Teacher",
-      "event": "National Teachers' Day 2023",
-      "personName": "Mr. Ali Shareef",
-      "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80"
+      "year": 2024,
+      "description": "The school team became overall champions at the atoll sports meet.",
+      "description_dv": "ސްކޫލް ޓީމުން އަތޮޅު ސްޕޯޓްސް މީޓްގައި އޯވަރޯލް ޗެމްޕިއަންސް ހޯދިއެވެ.",
+      "award": "Champions",
+      "award_dv": "ޗެމްޕިއަންސް",
+      "event": "Raa Atoll Sports Meet 2024",
+      "event_dv": "ރ އަތޮޅު ސްޕޯޓްސް މީޓް 2024"
     }
   ]
 }

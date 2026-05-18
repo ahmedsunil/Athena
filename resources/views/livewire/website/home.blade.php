@@ -382,7 +382,14 @@
                                 <p class="text-slate-600 text-sm">{{ $profile->phone }}</p></div>
                         </div>
                     @endif
-                    @if($profile->island || $profile->atoll)
+                    @php
+                        $locationParts = collect([
+                            $profile->getTranslation('island', app()->getLocale(), false),
+                            $profile->getTranslation('atoll', app()->getLocale(), false),
+                            $profile->getTranslation('country', app()->getLocale(), false),
+                        ])->filter()->join(', ');
+                    @endphp
+                    @if($locationParts)
                         <div class="flex items-start gap-3">
                             <div
                                 class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
@@ -390,7 +397,7 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_address') }}</p>
-                                <p class="text-slate-600 text-sm">{{ collect([$profile->island, $profile->atoll, $profile->country])->filter()->join(', ') }}</p>
+                                <p class="text-slate-600 text-sm">{{ $locationParts }}</p>
                             </div>
                         </div>
                     @endif

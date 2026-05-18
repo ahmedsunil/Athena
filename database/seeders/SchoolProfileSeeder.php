@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\SchoolProfile;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -23,25 +24,32 @@ class SchoolProfileSeeder extends Seeder
         $contact = $homeJson['contact'] ?? [];
         $addressParts = collect(explode(',', $contact['address'] ?? ''))->map(fn ($part) => trim($part))->filter()->values();
 
-        SchoolProfile::updateOrCreate(
-            ['id' => 1],
-            [
-                'school_name' => $school['name'] ?? $this->schoolNameFromPrincipalTitle($principal['title'] ?? null),
-                'motto' => $school['motto'] ?? null,
-                'short_description' => $school['description'] ?? null,
-                'logo_path' => null,
-                'email' => $contact['email'] ?? null,
-                'phone' => $contact['phone'] ?? null,
-                'address' => $contact['address'] ?? null,
-                'island' => $addressParts->get(1),
-                'atoll' => $addressParts->get(2),
-                'country' => $addressParts->last(),
-                'principal_name' => $principal['name'] ?? null,
-                'principal_designation' => Str::before($principal['title'] ?? 'Principal', ','),
-                'principal_message' => $principal['message'] ?? null,
-                'principal_photo_path' => $principal['photoUrl'] ?? null,
-            ]
-        );
+        DB::transaction(function () use ($school, $principal, $contact, $addressParts) {
+            SchoolProfile::whereKeyNot(1)->delete();
+
+            SchoolProfile::updateOrCreate(
+                ['id' => 1],
+                [
+                    'school_name' => $this->translation($school, 'name', $this->schoolNameFromPrincipalTitle($principal['title'] ?? null)),
+                    'motto' => $this->translation($school, 'motto'),
+                    'short_description' => $this->translation($school, 'description'),
+                    'logo_path' => null,
+                    'email' => $contact['email'] ?? null,
+                    'phone' => $contact['phone'] ?? null,
+                    'address' => $this->translation($contact, 'address'),
+                    'island' => ['en' => $addressParts->get(1), 'dv' => $contact['island_dv'] ?? $addressParts->get(1)],
+                    'atoll' => ['en' => $addressParts->get(2), 'dv' => $contact['atoll_dv'] ?? $addressParts->get(2)],
+                    'country' => ['en' => $addressParts->last(), 'dv' => $contact['country_dv'] ?? $addressParts->last()],
+                    'principal_name' => $this->translation($principal, 'name'),
+                    'principal_designation' => [
+                        'en' => Str::before($principal['title'] ?? 'Principal', ','),
+                        'dv' => $principal['title_dv'] ?? Str::before($principal['title'] ?? 'Principal', ','),
+                    ],
+                    'principal_message' => $this->translation($principal, 'message'),
+                    'principal_photo_path' => $principal['photoUrl'] ?? null,
+                ]
+            );
+        });
     }
 
     private function readJson(string $path): array
@@ -60,5 +68,15 @@ class SchoolProfileSeeder extends Seeder
         }
 
         return trim(Str::after($title, ','));
+    }
+
+    private function translation(array $item, string $key, ?string $fallback = null): array
+    {
+        $english = $item[$key] ?? $fallback;
+
+        return [
+            'en' => $english,
+            'dv' => $item["{$key}_dv"] ?? $english,
+        ];
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\HomeQuickAccess;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class HomeQuickAccessSeeder extends Seeder
@@ -19,28 +20,26 @@ class HomeQuickAccessSeeder extends Seeder
         $homeJson = json_decode(File::get($homePath), true, flags: JSON_THROW_ON_ERROR);
         $quickLinks = $homeJson['quickLinks'] ?? [];
 
-        $existing = HomeQuickAccess::all()->keyBy(fn ($q) => $q->getTranslation('title', 'en', false));
+        DB::transaction(function () use ($quickLinks) {
+            HomeQuickAccess::query()->delete();
 
-        $seededLabels = collect($quickLinks)->pluck('label');
-        $existingMaxSortOrder = HomeQuickAccess::all()
-            ->filter(fn ($q) => ! $seededLabels->contains($q->getTranslation('title', 'en', false)))
-            ->max('sort_order');
-        $baseSortOrder = $existingMaxSortOrder === null ? 0 : $existingMaxSortOrder + 1;
-
-        foreach ($quickLinks as $index => $quickLink) {
-            $data = [
-                'title'      => ['en' => $quickLink['label']],
-                'icon_key'   => $quickLink['icon'],
-                'link_key'   => $quickLink['href'],
-                'is_active'  => true,
-                'sort_order' => $baseSortOrder + $index,
-            ];
-
-            if ($match = $existing->get($quickLink['label'])) {
-                $match->update($data);
-            } else {
-                HomeQuickAccess::create($data);
+            foreach ($quickLinks as $index => $quickLink) {
+                HomeQuickAccess::create([
+                    'title'      => $this->translation($quickLink, 'label'),
+                    'icon_key'   => $quickLink['icon'],
+                    'link_key'   => $quickLink['href'],
+                    'is_active'  => true,
+                    'sort_order' => $index,
+                ]);
             }
-        }
+        });
+    }
+
+    private function translation(array $item, string $key): array
+    {
+        return [
+            'en' => $item[$key] ?? '',
+            'dv' => $item["{$key}_dv"] ?? ($item[$key] ?? ''),
+        ];
     }
 }

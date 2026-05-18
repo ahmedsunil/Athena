@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
                     'logo_url' => $profile->logo_url,
                     'email' => $profile->email,
                     'phone' => $profile->phone,
-                    'island' => $profile->getRawOriginal('island'),
-                    'atoll' => $profile->getRawOriginal('atoll'),
-                    'country' => $profile->getRawOriginal('country'),
+                    'island' => $profile->island,
+                    'atoll' => $profile->atoll,
+                    'country' => $profile->country,
                 ],
                 'footerLinks' => FooterLink::where('is_active', true)->orderBy('sort_order')->get(),
             ]);

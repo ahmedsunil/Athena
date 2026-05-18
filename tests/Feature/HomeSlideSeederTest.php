@@ -18,7 +18,9 @@ class HomeSlideSeederTest extends TestCase
         $slide = HomeSlide::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === "Shaping Tomorrow's Leaders");
 
         $this->assertNotNull($slide);
+        $this->assertSame('މާދަމާގެ ލީޑަރުން ބިނާކުރުން', $slide->getTranslation('title', 'dv', false));
         $this->assertSame('Apply for Admission', $slide->getTranslation('button_1_label', 'en', false));
+        $this->assertSame('އެޑްމިޝަންއަށް އެދޭ', $slide->getTranslation('button_1_label', 'dv', false));
         $this->assertSame('/admissions', $slide->button_1_link_key);
         $this->assertSame(0, $slide->sort_order);
         $this->assertTrue($slide->is_active);
@@ -34,5 +36,22 @@ class HomeSlideSeederTest extends TestCase
         $this->seed(HomeSlideSeeder::class);
 
         $this->assertSame(3, HomeSlide::count());
+    }
+
+    public function test_home_slide_seeder_overwrites_existing_rows(): void
+    {
+        HomeSlide::create([
+            'title' => ['en' => 'Old Slide', 'dv' => 'ކުރީގެ ސްލައިޑް'],
+            'description' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
+            'button_1_label' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
+            'button_2_label' => ['en' => '', 'dv' => ''],
+            'is_active' => true,
+            'sort_order' => 99,
+        ]);
+
+        $this->seed(HomeSlideSeeder::class);
+
+        $this->assertSame(3, HomeSlide::count());
+        $this->assertNull(HomeSlide::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === 'Old Slide'));
     }
 }

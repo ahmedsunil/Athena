@@ -19,7 +19,8 @@
       "Bash(curl -s -b \"athena-session=\" http://athena.test/)",
       "Bash(git *)",
       "Bash(xargs cat -n)",
-      "Skill(superpowers:writing-plans)"
+      "Skill(superpowers:writing-plans)",
+      "Read(//Users/shaan/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/subagent-driven-development/**)"
     ]
   }
 }
