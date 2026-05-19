@@ -36,7 +36,7 @@ class StudentLifePrefect extends Model
     public function getRoleColourAttribute(): string
     {
         return match($this->role) {
-            'Head Boy', 'Head Girl'   => 'bg-rose-100 text-rose-700 ring-rose-200',
+            'Head Boy', 'Head Girl'   => 'bg-[#002366]/10 text-[#002366] ring-[#002366]/20',
             'Senior Prefect'          => 'bg-violet-100 text-violet-700 ring-violet-200',
             'Sports Prefect'          => 'bg-emerald-100 text-emerald-700 ring-emerald-200',
             'Library Prefect'         => 'bg-sky-100 text-sky-700 ring-sky-200',

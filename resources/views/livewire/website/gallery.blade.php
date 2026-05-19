@@ -3,7 +3,7 @@
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('gallery_page_label') }}</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('gallery_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('gallery_heading') }}</h1>
         </div>
     </div>
@@ -25,26 +25,26 @@
         <div class="flex flex-wrap items-center gap-2 mb-8" data-reveal="fade">
             <button wire:click="setCategory('All')"
                     class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                           {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                           {{ $activeCategory === 'All' ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                 {{ __('common_all') }}
             </button>
             @foreach($categories as $cat)
                 <button wire:click="setCategory('{{ $cat }}')"
                         class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                               {{ $activeCategory === $cat ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                               {{ $activeCategory === $cat ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                     {{ __($categoryLabels[$cat] ?? $cat) }}
                 </button>
             @endforeach
             <div class="ml-auto flex items-center gap-2">
                 <select wire:model.live="activeMonth"
-                        class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+                        class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                     <option value="All">{{ __('common_all_months') }}</option>
                     @foreach(range(1, 12) as $month)
                         <option value="{{ $month }}">{{ __('common_month_' . $month) }}</option>
                     @endforeach
                 </select>
                 <select wire:model.live="activeYear"
-                        class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+                        class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                     <option value="All">{{ __('common_all_years') }}</option>
                     @foreach($years as $year)
                         <option value="{{ $year }}">{{ $year }}</option>

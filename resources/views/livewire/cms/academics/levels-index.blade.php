@@ -193,7 +193,7 @@
     {{-- Levels list --}}
     @php
     $stageColors = [
-        'FS'  => 'bg-rose-100 text-rose-700',
+        'FS'  => 'bg-[#002366]/10 text-[#002366]',
         'KS1' => 'bg-sky-100 text-sky-700',
         'KS2' => 'bg-emerald-100 text-emerald-700',
         'KS3' => 'bg-violet-100 text-violet-700',

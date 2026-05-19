@@ -78,7 +78,7 @@ const App = {
 
     loading() {
         return `<div class="flex items-center justify-center min-h-[60vh]">
-      <div class="w-8 h-8 border-2 border-rose-600 border-t-transparent rounded-full animate-spin"></div>
+      <div class="w-8 h-8 border-2 border-[#002366] border-t-transparent rounded-full animate-spin"></div>
     </div>`;
     },
 
@@ -87,8 +87,8 @@ const App = {
     ) {
         document.getElementById("main").innerHTML = `
       <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-        <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-4">
-          <svg class="w-6 h-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        <div class="w-12 h-12 bg-[#002366]/10 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
         </div>
         <p class="text-slate-900 font-semibold mb-1">Could not load data</p>
         <p class="text-slate-500 text-sm max-w-xs">${msg}</p>
@@ -105,13 +105,13 @@ const App = {
         const links = this.navLinks
             .map(
                 (l) =>
-                    `<a href="${l.href}" class="text-sm font-medium transition-colors ${l.id === active ? "text-rose-600" : "text-slate-600 hover:text-slate-900"}">${l.label}</a>`,
+                    `<a href="${l.href}" class="text-sm font-medium transition-colors ${l.id === active ? "text-[#002366]" : "text-slate-600 hover:text-slate-900"}">${l.label}</a>`,
             )
             .join("");
         const mobileLinks = this.navLinks
             .map(
                 (l) =>
-                    `<a href="${l.href}" class="block px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${l.id === active ? "bg-rose-50 text-rose-600" : "text-slate-700 hover:bg-slate-50"}">${l.label}</a>`,
+                    `<a href="${l.href}" class="block px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${l.id === active ? "bg-[#002366]/5 text-[#002366]" : "text-slate-700 hover:bg-slate-50"}">${l.label}</a>`,
             )
             .join("");
 
@@ -125,7 +125,7 @@ const App = {
             </a>
             <nav class="hidden lg:flex items-center gap-6">${links}</nav>
             <div class="flex items-center gap-1">
-              <button onclick="App.openSearch()" title="Search  ⌘K" class="p-2 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-rose-600 transition-colors">${this.icon("Search")}</button>
+              <button onclick="App.openSearch()" title="Search  ⌘K" class="p-2 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-[#001a4d] transition-colors">${this.icon("Search")}</button>
               <button id="menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600">${this.icon("Menu")}</button>
             </div>
           </div>
@@ -240,7 +240,7 @@ const App = {
             Events: "bg-sky-100 text-sky-700",
             Academics: "bg-emerald-100 text-emerald-700",
             Downloads: "bg-amber-100 text-amber-700",
-            News: "bg-rose-100 text-rose-700",
+            News: "bg-[#002366]/10 text-[#002366]",
         };
 
         if (!q) {
@@ -253,9 +253,9 @@ const App = {
                 .map(
                     (s) => `
             <a href="${s.url.replace("/", "")}.html"
-               class="spotlight-item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-rose-50 hover:text-rose-700 transition-colors group">
-              <div class="w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-rose-100 text-slate-500 group-hover:text-rose-600 flex items-center justify-center flex-shrink-0 transition-colors">${this.icon(s.icon)}</div>
-              <div><p class="text-sm font-semibold text-slate-800 group-hover:text-rose-700">${s.label}</p><p class="text-xs text-slate-400">${s.description}</p></div>
+               class="spotlight-item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#002366]/5 hover:text-[#001a4d] transition-colors group">
+              <div class="w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-[#002366]/10 text-slate-500 group-hover:text-[#001a4d] flex items-center justify-center flex-shrink-0 transition-colors">${this.icon(s.icon)}</div>
+              <div><p class="text-sm font-semibold text-slate-800 group-hover:text-[#001a4d]">${s.label}</p><p class="text-xs text-slate-400">${s.description}</p></div>
             </a>`,
                 )
                 .join("")}
@@ -317,7 +317,7 @@ const App = {
         if (idx < 0) idx = items.length - 1;
         if (idx >= items.length) idx = 0;
         items.forEach((el) =>
-            el.classList.remove("spotlight-active", "bg-slate-100", "bg-rose-50"),
+            el.classList.remove("spotlight-active", "bg-slate-100", "bg-[#002366]/5"),
         );
         items[idx].classList.add("spotlight-active", "bg-slate-100");
         items[idx].scrollIntoView({block: "nearest"});

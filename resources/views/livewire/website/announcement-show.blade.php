@@ -5,14 +5,14 @@
     <section class="border-b border-slate-200 bg-white py-6">
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <a href="{{ route('announcements.index') }}"
-               class="mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-rose-600">
+               class="mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#002366]">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                 </svg>
                 {{ __('announcement_show_back') }}
             </a>
             <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-600">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#002366]/5 text-[#002366]">
                     <x-icon :key="$announcement->icon_key" class="h-6 w-6" />
                 </div>
                 <div class="min-w-0">
@@ -45,7 +45,7 @@
                     <div class="grid gap-2 sm:grid-cols-2">
                         @foreach($announcement->attachment_links as $attachment)
                             <a href="{{ $attachment['url'] }}" target="_blank" rel="noopener"
-                               class="flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-rose-200 hover:text-rose-600">
+                               class="flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#002366]/20 hover:text-[#002366]">
                                 <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
                                     <x-icon key="File" class="h-4 w-4" />
                                 </span>

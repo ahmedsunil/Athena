@@ -1,4 +1,4 @@
-<footer class="bg-slate-900 text-slate-400">
+<footer class="bg-[#002366] text-white/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
             <div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="border-t border-slate-800 pt-6 text-xs text-center">
+        <div class="border-t border-white/10 pt-6 text-xs text-center">
             &copy; {{ now()->year }} <span data-lang-key="footer_copyright_suffix" data-en="{{ ($footerProfile['school_name'] ?: 'Hulhudhuffaaru School') . '. All rights reserved.' }}">{{ ($footerProfile['school_name'] ?: __('school_name')) . '. ' . __('footer_copyright_suffix') }}</span>
         </div>
     </div>

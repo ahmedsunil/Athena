@@ -199,7 +199,7 @@
 
         @php
             $typeColors = [
-                'term'    => 'bg-rose-100 text-rose-700',
+                'term'    => 'bg-[#002366]/10 text-[#002366]',
                 'holiday' => 'bg-emerald-100 text-emerald-700',
                 'exam'    => 'bg-amber-100 text-amber-700',
                 'event'   => 'bg-sky-100 text-sky-700',
@@ -255,7 +255,7 @@
                 @forelse($entries as $entry)
                     <li class="flex items-center gap-3 px-4 py-3">
                         <div class="w-10 flex-shrink-0 text-center">
-                            <p class="text-base font-black leading-none text-rose-600">{{ $entry->date->format('d') }}</p>
+                            <p class="text-base font-black leading-none text-[#002366]">{{ $entry->date->format('d') }}</p>
                             <p class="text-[10px] font-semibold uppercase text-zinc-400">{{ $entry->date->format('M') }}</p>
                         </div>
                         <div class="min-w-0 flex-1">

@@ -123,7 +123,7 @@
     {{-- Albums list --}}
     @php
     $catColors = [
-        'Events'     => 'bg-rose-100 text-rose-700',
+        'Events'     => 'bg-[#002366]/10 text-[#002366]',
         'Sports'     => 'bg-emerald-100 text-emerald-700',
         'Graduation' => 'bg-violet-100 text-violet-700',
         'Cultural'   => 'bg-amber-100 text-amber-700',

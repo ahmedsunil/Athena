@@ -24,7 +24,7 @@ class StudentLifeHouse extends Model
     public function getColourClassesAttribute(): array
     {
         return match($this->colour) {
-            'rose'    => ['bg' => 'bg-rose-500',    'text' => 'text-rose-600',    'bg_light' => 'bg-rose-50'],
+            'rose'    => ['bg' => 'bg-[#002366]',    'text' => 'text-[#002366]',    'bg_light' => 'bg-[#002366]/5'],
             'sky'     => ['bg' => 'bg-sky-500',     'text' => 'text-sky-600',     'bg_light' => 'bg-sky-50'],
             'emerald' => ['bg' => 'bg-emerald-500', 'text' => 'text-emerald-600', 'bg_light' => 'bg-emerald-50'],
             'amber'   => ['bg' => 'bg-amber-500',   'text' => 'text-amber-600',   'bg_light' => 'bg-amber-50'],

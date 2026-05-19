@@ -1,7 +1,7 @@
 {{-- Variables: $member (StaffMember), $accentColor ('rose'|'sky'|'amber') --}}
 @php
     $borderMap = [
-        'rose'  => 'border-rose-300',
+        'rose'  => 'border-[#002366]/40',
         'sky'   => 'border-sky-300',
         'amber' => 'border-amber-300',
     ];
@@ -28,7 +28,7 @@
 
         {{-- Info --}}
         <p class="font-bold text-slate-900 text-sm leading-snug">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
-        <p class="text-xs text-rose-600 font-semibold mt-0.5 leading-snug">{{ $member->designation }}</p>
+        <p class="text-xs text-[#002366] font-semibold mt-0.5 leading-snug">{{ $member->designation }}</p>
 
         {{-- Expand hint --}}
         @if($member->education || !empty($member->work_experiences))

@@ -228,7 +228,7 @@
                     <td class="admin-table-cell text-zinc-500 text-xs">{{ $s->designation }}</td>
                     <td class="admin-table-cell">
                         <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
-                            {{ $s->section === 'senior_management' ? 'bg-rose-100 text-rose-700' : ($s->section === 'academic' ? 'bg-sky-100 text-sky-700' : 'bg-amber-100 text-amber-700') }}">
+                            {{ $s->section === 'senior_management' ? 'bg-[#002366]/10 text-[#002366]' : ($s->section === 'academic' ? 'bg-sky-100 text-sky-700' : 'bg-amber-100 text-amber-700') }}">
                             {{ match($s->section) { 'senior_management' => 'Senior Mgmt', 'academic' => 'Academic', 'administrative' => 'Admin' } }}
                         </span>
                     </td>

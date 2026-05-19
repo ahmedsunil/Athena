@@ -155,7 +155,7 @@
                     <td class="admin-table-cell text-zinc-500 whitespace-nowrap">{{ $a->year }}</td>
                     <td class="admin-table-cell">
                         <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
-                            {{ $a->category === 'students' ? 'bg-sky-100 text-sky-700' : ($a->category === 'staff' ? 'bg-violet-100 text-violet-700' : 'bg-rose-100 text-rose-700') }}">
+                            {{ $a->category === 'students' ? 'bg-sky-100 text-sky-700' : ($a->category === 'staff' ? 'bg-violet-100 text-violet-700' : 'bg-[#002366]/10 text-[#002366]') }}">
                             {{ ucfirst($a->category) }}
                         </span>
                     </td>

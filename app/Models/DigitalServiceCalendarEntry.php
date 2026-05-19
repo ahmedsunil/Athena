@@ -28,7 +28,7 @@ class DigitalServiceCalendarEntry extends Model
     public function getTypeBadgeClassesAttribute(): string
     {
         return match($this->type) {
-            'term'    => 'bg-rose-100 text-rose-700',
+            'term'    => 'bg-[#002366]/10 text-[#002366]',
             'holiday' => 'bg-emerald-100 text-emerald-700',
             'exam'    => 'bg-amber-100 text-amber-700',
             'event'   => 'bg-sky-100 text-sky-700',

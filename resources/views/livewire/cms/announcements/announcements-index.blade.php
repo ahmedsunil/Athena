@@ -173,7 +173,7 @@
         <x-slot name="mobile">
             @forelse($announcements as $announcement)
                 <li class="flex items-center gap-3 px-4 py-3">
-                    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-rose-600">
+                    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#002366]/5 text-[#002366]">
                         <x-icon :key="$announcement->icon_key" class="h-4 w-4" />
                     </div>
                     <div class="min-w-0 flex-1">

@@ -3,7 +3,7 @@
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('student_life_page_label') }}</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('student_life_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('student_life_heading') }}</h1>
         </div>
     </div>
@@ -20,7 +20,7 @@
                 ] as $tab)
                     <button wire:click="setTab('{{ $tab['key'] }}')"
                             class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors
-                                   {{ $activeTab === $tab['key'] ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}">
+                                   {{ $activeTab === $tab['key'] ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}">
                         {{ __($tab['label_key']) }}
                     </button>
                 @endforeach
@@ -101,7 +101,7 @@
                         <p class="font-bold text-slate-900 text-sm">{{ $prefect->name }}</p>
                         @php
                         $roleTextClass = match(true) {
-                            str_contains($prefect->role_colour, 'rose')    => 'text-rose-600',
+                            str_contains($prefect->role_colour, 'rose')    => 'text-[#002366]',
                             str_contains($prefect->role_colour, 'violet')  => 'text-violet-600',
                             str_contains($prefect->role_colour, 'emerald') => 'text-emerald-600',
                             str_contains($prefect->role_colour, 'sky')     => 'text-sky-600',
@@ -182,12 +182,12 @@
         @if($activeTab === 'uniform-bodies')
             @php
             $uniformBg = [
-                'rose'    => 'bg-rose-100',    'sky'     => 'bg-sky-100',
+                'rose'    => 'bg-[#002366]/10',    'sky'     => 'bg-sky-100',
                 'emerald' => 'bg-emerald-100', 'amber'   => 'bg-amber-100',
                 'violet'  => 'bg-violet-100',  'teal'    => 'bg-teal-100',
             ];
             $uniformFg = [
-                'rose'    => 'text-rose-700',  'sky'     => 'text-sky-700',
+                'rose'    => 'text-[#002366]',  'sky'     => 'text-sky-700',
                 'emerald' => 'text-emerald-700','amber'  => 'text-amber-700',
                 'violet'  => 'text-violet-700','teal'    => 'text-teal-700',
             ];

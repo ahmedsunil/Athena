@@ -25,7 +25,7 @@ class DigitalServiceResource extends Model
     {
         return match($this->icon_color) {
             'sky'     => 'bg-sky-100 text-sky-600',
-            'rose'    => 'bg-rose-100 text-rose-600',
+            'rose'    => 'bg-[#002366]/10 text-[#002366]',
             'emerald' => 'bg-emerald-100 text-emerald-600',
             'amber'   => 'bg-amber-100 text-amber-600',
             'violet'  => 'bg-violet-100 text-violet-600',

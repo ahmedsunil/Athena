@@ -2,7 +2,7 @@
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">{{ __('about_page_label') }}</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('about_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ $profile->school_name }}</h1>
             @if($profile->motto)
                 <p class="text-sm text-slate-500 italic mt-1" data-reveal="fade">"{{ $profile->motto }}"</p>
@@ -16,19 +16,19 @@
             <div class="flex gap-0 overflow-x-auto">
                 <button
                     wire:click="switchTab('about')"
-                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'about' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
+                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'about' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
                 >{{ __('about_tab_about') }}</button>
                 <button
                     wire:click="switchTab('history')"
-                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'history' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
+                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'history' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
                 >{{ __('about_tab_history') }}</button>
                 <button
                     wire:click="switchTab('achievements')"
-                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'achievements' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
+                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'achievements' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
                 >{{ __('about_tab_achievements') }}</button>
                 <button
                     wire:click="switchTab('team')"
-                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'team' ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
+                    class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'team' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
                 >{{ __('about_tab_team') }}</button>
             </div>
         </div>
@@ -44,17 +44,17 @@
             <section class="py-12 sm:py-16 bg-slate-50 border-b border-slate-200">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="mb-8">
-                        <span class="text-xs font-black uppercase tracking-widest text-rose-500">{{ __('about_section_our_purpose') }}</span>
+                        <span class="text-xs font-black uppercase tracking-widest text-[#002366]">{{ __('about_section_our_purpose') }}</span>
                         <h2 class="text-3xl font-black text-slate-900 mt-1">{{ __('about_section_mission_vision') }}</h2>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                         {{-- Mission --}}
-                        <div class="bg-white rounded-2xl border border-rose-100 p-7">
+                        <div class="bg-white rounded-2xl border border-[#002366]/10 p-7">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="w-8 h-8 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                <div class="w-8 h-8 rounded-full bg-[#002366]/5 border border-[#002366]/20 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-[#002366]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                                 </div>
-                                <p class="text-xs font-black uppercase tracking-widest text-rose-600">{{ __('about_label_mission') }}</p>
+                                <p class="text-xs font-black uppercase tracking-widest text-[#002366]">{{ __('about_label_mission') }}</p>
                             </div>
                             <p class="text-slate-700 leading-relaxed">{{ $mission->mission ?? __('about_mission_not_set') }}</p>
                         </div>
@@ -76,9 +76,9 @@
             <section class="py-16 sm:py-20 bg-white">
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('about_leadership_eyebrow') }}</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('about_leadership_eyebrow') }}</p>
                         <h2 class="text-3xl font-black text-slate-900">{{ __('about_principals_message') }}</h2>
-                        <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
+                        <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-[#002366]"></div>
                     </div>
                     @if($profile->principal_name || $profile->principal_message)
                         <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 sm:p-10">
@@ -95,12 +95,12 @@
                                     </div>
                                     <div class="text-center">
                                         <p class="font-bold text-slate-900">{{ $profile->principal_name }}</p>
-                                        <p class="text-xs text-rose-600 font-semibold mt-0.5">{{ $profile->principal_designation ?? __('about_label_principal') }}</p>
+                                        <p class="text-xs text-[#002366] font-semibold mt-0.5">{{ $profile->principal_designation ?? __('about_label_principal') }}</p>
                                     </div>
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <div class="border-l-4 border-rose-500 pl-5 mb-6">
-                                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_open_letter') }}</p>
+                                    <div class="border-l-4 border-[#002366] pl-5 mb-6">
+                                        <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_open_letter') }}</p>
                                     </div>
                                     <div class="space-y-4 text-slate-700 leading-relaxed text-sm">
                                         @foreach(array_filter(explode("\n\n", $profile->principal_message ?? '')) as $i => $para)
@@ -121,14 +121,14 @@
                         <div class="text-center mb-12">
                             <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">{{ __('about_leadership_eyebrow_2') }}</p>
                             <h2 class="text-3xl font-black text-slate-900">{{ __('about_leadership_team') }}</h2>
-                            <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-rose-500"></div>
+                            <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-[#002366]"></div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             @foreach($leadership as $member)
                                 @php $isFirst = $loop->first; @endphp
-                                <div class="rounded-2xl border {{ $isFirst ? 'border-rose-200 hover:border-rose-400' : 'border-slate-200 hover:border-slate-300' }} bg-white p-6 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center">
+                                <div class="rounded-2xl border {{ $isFirst ? 'border-[#002366]/20 hover:border-[#002366]' : 'border-slate-200 hover:border-slate-300' }} bg-white p-6 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center">
                                     <div class="relative mb-4">
-                                        <div class="w-24 h-24 rounded-full overflow-hidden ring-4 {{ $isFirst ? 'ring-rose-100' : 'ring-slate-100' }}">
+                                        <div class="w-24 h-24 rounded-full overflow-hidden ring-4 {{ $isFirst ? 'ring-[#002366]/10' : 'ring-slate-100' }}">
                                             @if($member->photo_url)
                                                 <img src="{{ $member->photo_url }}" alt="{{ $member->name }}" class="w-full h-full object-cover object-top">
                                             @else
@@ -136,11 +136,11 @@
                                             @endif
                                         </div>
                                         @if($isFirst)
-                                            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">{{ __('about_label_principal') }}</div>
+                                            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-[#002366] text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">{{ __('about_label_principal') }}</div>
                                         @endif
                                     </div>
                                     <p class="font-bold text-slate-900 {{ $isFirst ? 'mt-3' : 'mt-1' }}">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
-                                    <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 {{ $isFirst ? 'text-rose-600' : 'text-sky-600' }}">{{ $member->role }}</p>
+                                    <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 {{ $isFirst ? 'text-[#002366]' : 'text-sky-600' }}">{{ $member->role }}</p>
                                     @if($member->bio)
                                         <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">{{ $member->bio }}</p>
                                     @endif
@@ -182,7 +182,7 @@
                         </div>
                         <div class="lg:col-span-2">
                             @if($profile->short_description)
-                                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">{{ __('about_history_who_we_are') }}</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-3">{{ __('about_history_who_we_are') }}</p>
                                 @foreach(array_filter(explode("\n\n", $profile->short_description)) as $i => $para)
                                     <p class="mb-4 leading-relaxed {{ $i === 0 ? 'text-lg font-medium text-slate-800' : 'text-slate-600' }}">{{ $para }}</p>
                                 @endforeach
@@ -196,20 +196,20 @@
             <section class="py-16 sm:py-24 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="mb-14 pb-10 border-b border-slate-100">
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-3">{{ __('about_history_eyebrow') }}</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-3">{{ __('about_history_eyebrow') }}</p>
                         <h2 class="text-4xl sm:text-5xl font-black text-slate-900 mb-5">{{ __('about_history_heading') }}</h2>
                     </div>
                     @if($historySections->isNotEmpty())
                         @php
                             $timelineColors = [
-                                0 => ['ring' => 'ring-rose-200',    'dot' => 'bg-rose-500',    'badge' => 'bg-rose-50 border-rose-200 text-rose-700'],
+                                0 => ['ring' => 'ring-[#002366]/20',    'dot' => 'bg-[#002366]',    'badge' => 'bg-[#002366]/5 border-[#002366]/20 text-[#002366]'],
                                 1 => ['ring' => 'ring-amber-200',   'dot' => 'bg-amber-500',   'badge' => 'bg-amber-50 border-amber-200 text-amber-700'],
                                 2 => ['ring' => 'ring-sky-200',     'dot' => 'bg-sky-500',     'badge' => 'bg-sky-50 border-sky-200 text-sky-700'],
                                 3 => ['ring' => 'ring-emerald-200', 'dot' => 'bg-emerald-500', 'badge' => 'bg-emerald-50 border-emerald-200 text-emerald-700'],
                             ];
                         @endphp
                         <div class="relative">
-                            <div class="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-rose-300 via-slate-200 to-slate-100"></div>
+                            <div class="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[#002366]/30 via-slate-200 to-slate-100"></div>
                             <div class="space-y-10">
                                 @foreach($historySections as $section)
                                     @php
@@ -287,7 +287,7 @@
 
                 {{-- Header --}}
                 <div class="mb-10">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('about_achievements_eyebrow') }}</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('about_achievements_eyebrow') }}</p>
                     <h2 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('about_achievements_heading') }}</h2>
                 </div>
 
@@ -301,9 +301,9 @@
                         <p class="text-3xl font-black text-sky-700">{{ $studentCount }}</p>
                         <p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-1">{{ __('about_achievements_stat_students') }}</p>
                     </div>
-                    <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 text-center">
-                        <p class="text-3xl font-black text-rose-700">{{ $schoolCount }}</p>
-                        <p class="text-xs font-semibold uppercase tracking-wide text-rose-600 mt-1">{{ __('about_achievements_stat_school') }}</p>
+                    <div class="bg-[#002366]/5 border border-[#002366]/20 rounded-2xl p-5 text-center">
+                        <p class="text-3xl font-black text-[#002366]">{{ $schoolCount }}</p>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-[#002366] mt-1">{{ __('about_achievements_stat_school') }}</p>
                     </div>
                 </div>
 
@@ -315,7 +315,7 @@
                                 'all'      => ['label' => 'about_achievements_filter_all',      'active' => 'bg-slate-900 border-slate-900 text-white'],
                                 'students' => ['label' => 'about_achievements_filter_students', 'active' => 'bg-sky-600 border-sky-600 text-white'],
                                 'staff'    => ['label' => 'about_achievements_filter_staff',    'active' => 'bg-violet-600 border-violet-600 text-white'],
-                                'school'   => ['label' => 'about_achievements_filter_school',   'active' => 'bg-rose-600 border-rose-600 text-white'],
+                                'school'   => ['label' => 'about_achievements_filter_school',   'active' => 'bg-[#002366] border-[#002366] text-white'],
                             ];
                         @endphp
                         @foreach($categoryBtns as $catKey => $catInfo)
@@ -327,7 +327,7 @@
                     </div>
                     <select
                         wire:model.live="activeYear"
-                        class="sm:ml-auto px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-rose-400"
+                        class="sm:ml-auto px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#002366]"
                     >
                         <option value="all">{{ __('common_all_years') }}</option>
                         @foreach($achievementYears as $year)
@@ -342,7 +342,7 @@
                         @foreach($achievements as $achievement)
                             @php
                                 $badgeCls = match($achievement->category) {
-                                    'school'   => 'bg-rose-100 text-rose-700',
+                                    'school'   => 'bg-[#002366]/10 text-[#002366]',
                                     'students' => 'bg-sky-100 text-sky-700',
                                     'staff'    => 'bg-violet-100 text-violet-700',
                                     default    => 'bg-slate-100 text-slate-600',
@@ -415,7 +415,7 @@
                 @php $seniorStaff = $staff->get('senior_management', collect()); @endphp
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale">
                     <div class="px-6 py-4 border-b border-slate-100">
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_team_leadership_eyebrow') }}</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_leadership_eyebrow') }}</p>
                         <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_senior_management') }}</h2>
                     </div>
                     <div class="p-6">
@@ -445,7 +445,7 @@
                 <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
                     <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_team_section_eyebrow') }}</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_section_eyebrow') }}</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_academic_section') }}</h2>
                             <p class="text-xs text-slate-400 mt-0.5">{{ __('about_team_academic_lead') }}</p>
                         </div>
@@ -486,7 +486,7 @@
                 <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
                     <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-600">{{ __('about_team_section_eyebrow') }}</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_section_eyebrow') }}</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_admin_section') }}</h2>
                             <p class="text-xs text-slate-400 mt-0.5">{{ __('about_team_admin_lead') }}</p>
                         </div>

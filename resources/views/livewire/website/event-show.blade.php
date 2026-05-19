@@ -5,7 +5,7 @@
         @if($event->cover_image_path)
             <img src="{{ $event->cover_image_url }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
         @else
-            <div class="w-full h-full bg-gradient-to-br from-slate-800 via-rose-950 to-slate-900"></div>
+            <div class="w-full h-full bg-gradient-to-br from-slate-800 via-[#002366] to-slate-900"></div>
         @endif
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
         <div class="absolute bottom-4 left-4">
@@ -20,7 +20,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         {{-- Back link --}}
-        <a href="{{ route('events.index') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-rose-600 transition-colors mb-6">
+        <a href="{{ route('events.index') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-[#002366] transition-colors mb-6">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
             {{ __('event_show_back') }}
         </a>
@@ -53,8 +53,8 @@
                             @foreach($event->attachments as $attachment)
                                 @if(!empty($attachment['url']))
                                     <a href="{{ $attachment['url'] }}" target="_blank" rel="noopener"
-                                       class="flex items-center gap-3 bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-200 rounded-xl p-3.5 transition-all">
-                                        <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
+                                       class="flex items-center gap-3 bg-slate-50 hover:bg-[#002366]/5 border border-slate-100 hover:border-[#002366]/20 rounded-xl p-3.5 transition-all">
+                                        <div class="w-8 h-8 rounded-lg bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                                         </div>
                                         <div class="flex-1 min-w-0">

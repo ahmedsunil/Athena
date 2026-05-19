@@ -3,7 +3,7 @@
     {{-- Page header --}}
     <div class="bg-white border-b border-slate-200 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('digital_services_page_label') }}</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('digital_services_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('digital_services_heading') }}</h1>
         </div>
     </div>
@@ -15,7 +15,7 @@
                 @foreach([['downloads','digital_services_tab_downloads'],['resources','digital_services_tab_resources'],['calendar','digital_services_tab_calendar']] as [$id,$labelKey])
                     <button wire:click="setTab('{{ $id }}')"
                             class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap
-                                   {{ $activeTab === $id ? 'border-rose-600 text-rose-600' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300' }}">
+                                   {{ $activeTab === $id ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300' }}">
                         {{ __($labelKey) }}
                     </button>
                 @endforeach
@@ -52,33 +52,33 @@
                         </svg>
                     </span>
                     <input type="text" wire:model.live.debounce.300ms="search" placeholder="{{ __('digital_services_search_placeholder') }}"
-                           class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm bg-white">
+                           class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm bg-white">
                 </div>
 
                 {{-- Filters row: category pills + selects + clear --}}
                 <div class="flex flex-wrap items-center gap-2 mb-4" data-reveal="fade">
                     <button wire:click="setCategory('All')"
                             class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                                   {{ $activeCategory === 'All' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                                   {{ $activeCategory === 'All' ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                         {{ __('common_all') }}
                     </button>
                     @foreach($docCategories as $cat)
                         <button wire:click="setCategory('{{ $cat }}')"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                                       {{ $activeCategory === $cat ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                                       {{ $activeCategory === $cat ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                             {{ __($docCategoryLabels[$cat] ?? $cat) }}
                         </button>
                     @endforeach
                     <div class="ml-auto flex items-center gap-2">
                         <select wire:model.live="activeMonth"
-                                class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+                                class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                             <option value="All">{{ __('common_all_months') }}</option>
                             @foreach(range(1, 12) as $month)
                                 <option value="{{ $month }}">{{ __('common_month_' . $month) }}</option>
                             @endforeach
                         </select>
                         <select wire:model.live="activeYear"
-                                class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+                                class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                             <option value="All">{{ __('common_all_years') }}</option>
                             @foreach($years as $year)
                                 <option value="{{ $year }}">{{ $year }}</option>
@@ -94,7 +94,7 @@
                 {{-- Documents list --}}
                 @php
                 $ftColors = [
-                    'PDF'  => 'bg-rose-100 text-rose-700',
+                    'PDF'  => 'bg-[#002366]/10 text-[#002366]',
                     'DOCX' => 'bg-sky-100 text-sky-700',
                     'XLS'  => 'bg-emerald-100 text-emerald-700',
                     'XLSX' => 'bg-emerald-100 text-emerald-700',
@@ -134,7 +134,7 @@
                                 </div>
                                 @if($doc->file_path)
                                     <a href="{{ $doc->download_url }}" target="_blank" rel="noopener noreferrer"
-                                       class="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-2 rounded-lg transition-colors">
+                                       class="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-[#002366] hover:text-[#002366] bg-[#002366]/5 hover:bg-[#002366]/10 px-3 py-2 rounded-lg transition-colors">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                                         </svg>
@@ -162,7 +162,7 @@
                     @foreach(['All','Students','Parents','Staff'] as $aud)
                         <button wire:click="setAudience('{{ $aud }}')"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                                       {{ $activeAudience === $aud ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                                       {{ $activeAudience === $aud ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                             {{ __($audienceLabels[$aud] ?? $aud) }}
                         </button>
                     @endforeach
@@ -176,7 +176,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($resources as $i => $resource)
                             <a href="{{ $resource->url }}" target="_blank" rel="noopener noreferrer"
-                               class="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-rose-200 transition-all block"
+                               class="group bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md hover:border-[#002366]/20 transition-all block"
                                data-reveal="scale" style="--reveal-delay: {{ ($i % 6) * 60 }}ms">
                                 <div class="flex items-start gap-3 mb-3">
                                     <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 {{ $resource->icon_color_classes }}">
@@ -218,7 +218,7 @@
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center gap-1.5">
                                             <p class="font-bold text-slate-900 text-sm">{{ $resource->title }}</p>
-                                            <span class="text-slate-400 group-hover:text-rose-500 transition-colors">
+                                            <span class="text-slate-400 group-hover:text-[#002366] transition-colors">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                                 </svg>
@@ -241,7 +241,7 @@
         @if($activeTab === 'calendar')
             @php
                 $calTypeColors = [
-                    'holiday' => 'bg-red-100 text-red-700',
+                    'holiday' => 'bg-[#002366]/10 text-[#002366]',
                     'term'    => 'bg-sky-100 text-sky-700',
                     'event'   => 'bg-emerald-100 text-emerald-700',
                     'exam'    => 'bg-amber-100 text-amber-700',
@@ -252,7 +252,7 @@
             <div class="flex flex-wrap items-center gap-3 mb-4">
                 @if($allCalendars->count() > 1)
                     <select wire:model.live="activeCalendarId"
-                            class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                            class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366]">
                         @foreach($allCalendars as $cal)
                             <option value="{{ $cal->id }}">{{ $cal->title }}</option>
                         @endforeach
@@ -310,8 +310,8 @@
                     [
                         'label' => __('calendar_stat_total_days'),
                         'value' => $currentCalendar?->stat_total_days,
-                        'color' => 'text-rose-600',
-                        'bg'    => 'bg-rose-50',
+                        'color' => 'text-[#002366]',
+                        'bg'    => 'bg-[#002366]/5',
                         'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"/></svg>',
                     ],
                 ];
@@ -385,7 +385,7 @@
                                 <div class="min-h-[72px] sm:min-h-[84px] p-1 sm:p-1.5 {{ !$isValid || $isWeekend ? 'bg-slate-50' : 'bg-white' }}">
                                     @if($isValid)
                                         <div class="flex items-center justify-center w-6 h-6 rounded-full mb-1 mx-auto text-xs
-                                                    {{ $isToday ? 'bg-rose-600 text-white font-black' : 'text-slate-600 font-semibold' }}">
+                                                    {{ $isToday ? 'bg-[#002366] text-white font-black' : 'text-slate-600 font-semibold' }}">
                                             {{ $dayNum }}
                                         </div>
                                         <div class="space-y-px">
@@ -436,7 +436,7 @@
                                 @foreach($monthEntries as $me)
                                     <div class="bg-white rounded-xl border border-slate-200 p-3 flex items-start gap-3">
                                         <div class="flex-shrink-0 text-center w-9 pt-0.5">
-                                            <p class="text-lg font-black text-rose-600 leading-none">{{ $me->date->format('d') }}</p>
+                                            <p class="text-lg font-black text-[#002366] leading-none">{{ $me->date->format('d') }}</p>
                                             <p class="text-[10px] text-slate-400 uppercase font-semibold">{{ __('common_month_short_' . $me->date->month) }}</p>
                                             <p class="text-[10px] text-slate-300 font-semibold">{{ $me->date->format('Y') }}</p>
                                         </div>
@@ -496,7 +496,7 @@
                          data-reveal="scale" style="--reveal-delay: {{ $i * 80 }}ms">
                         <div class="flex items-start justify-between gap-2 mb-4">
                             <div>
-                                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-1">{{ $t['label'] }}</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-1">{{ $t['label'] }}</p>
                                 @if($t['dates'])
                                     <p class="text-xs font-semibold text-slate-500">{{ $t['dates'] }}</p>
                                 @endif
@@ -542,7 +542,7 @@
             @endphp
             <div class="mt-4 bg-white rounded-2xl border border-slate-200 p-6" data-reveal="fade">
                 <div class="mb-5">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-1">{{ __('calendar_exams_eyebrow') }}</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-1">{{ __('calendar_exams_eyebrow') }}</p>
                     <h3 class="text-lg font-black text-slate-900">{{ __('calendar_exams_heading') }}</h3>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">

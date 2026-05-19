@@ -16,7 +16,7 @@
                         class="absolute inset-0 {{ app()->getLocale() === 'dv' ? 'bg-gradient-to-l' : 'bg-gradient-to-r' }} from-slate-950/80 via-slate-900/50 to-transparent" id="slide-gradient"></div>
                     <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center pt-16">
                         <div class="max-w-xl" data-reveal="left">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-3">
+                            <p class="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#002366] mb-3">
                                 <span data-lang-key="school_name"
                                       data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
                             </p>
@@ -33,7 +33,7 @@
                                 <div class="flex flex-wrap gap-3">
                                     @if($slide->button_1_label)
                                         <a href="{{ $slide->button_1_link_key ?: '#' }}"
-                                           class="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
+                                           class="inline-flex items-center gap-2 bg-[#002366] hover:bg-[#001a4d] text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
                                            data-en="{{ $slide->getTranslation('button_1_label', 'en', false) }}"
                                            data-dv="{{ $slide->getTranslation('button_1_label', 'dv', false) ?: $slide->getTranslation('button_1_label', 'en', false) }}">{{ $slide->button_1_label }}</a>
                                     @endif
@@ -127,13 +127,13 @@
 
     {{-- Stats --}}
     @if($stats->isNotEmpty())
-        <section class="bg-rose-600 py-8">
+        <section class="bg-[#002366] py-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-6 text-center text-white">
                     @foreach($stats as $stat)
                         <div data-reveal="scale" style="--reveal-delay: {{ $loop->index * 80 }}ms">
                             <p class="text-3xl sm:text-4xl font-black">{{ $stat->value }}</p>
-                            <p class="text-rose-200 text-sm font-medium mt-1">{{ $stat->title }}</p>
+                            <p class="text-white/75 text-sm font-medium mt-1">{{ $stat->title }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -146,7 +146,7 @@
         <section class="py-16 sm:py-20 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10" data-reveal="fade">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_portal_label') }}</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('home_portal_label') }}</p>
                     <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_quick_access') }}</h2>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -159,9 +159,9 @@
                         @endphp
                         <a href="{{ $quickAccessHref }}" data-reveal="scale"
                            style="--reveal-delay: {{ $loop->index * 55 }}ms"
-                           class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-200 hover:shadow-md transition-all text-center">
+                           class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#002366]/20 hover:shadow-md transition-all text-center">
                             <div
-                                class="w-10 h-10 rounded-xl bg-rose-50 group-hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors">
+                                class="w-10 h-10 rounded-xl bg-[#002366]/5 group-hover:bg-[#002366]/10 text-[#002366] flex items-center justify-center transition-colors">
                                 <x-icon :key="$quickAccessIcon"/>
                             </div>
                             <span
@@ -179,11 +179,11 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-end justify-between mb-10" data-reveal="fade">
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_events_label') }}</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('home_events_label') }}</p>
                         <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_featured_events') }}</h2>
                     </div>
                     <a href="{{ route('events.index') }}"
-                       class="text-sm font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1">
+                       class="text-sm font-semibold text-[#002366] hover:text-[#002366] flex items-center gap-1">
                         {{ __('home_all_events') }}
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -230,7 +230,7 @@
                                 </p>
                                 <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">{{ $event->short_description }}</p>
                                 <a href="{{ route('events.show', $event->slug) }}"
-                                   class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">
+                                   class="block w-full text-center text-sm font-semibold text-[#002366] hover:text-[#002366] border border-[#002366]/20 hover:border-[#002366]/40 rounded-xl py-2 transition-colors">
                                     {{ __('events_view_details') }}
                                 </a>
                             </div>
@@ -254,7 +254,7 @@
                             </div>
                         @endif
                         <div class="flex-1 p-8 flex flex-col justify-center">
-                            <p class="text-xs font-bold uppercase tracking-widest text-rose-400 mb-4">{{ __('home_principals_welcome') }}</p>
+                            <p class="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#002366] mb-4">{{ __('home_principals_welcome') }}</p>
                             @if($profile->principal_message)
                                 <p class="text-slate-200 leading-relaxed italic text-lg">
                                     "{{ $profile->principal_message }}"</p>
@@ -269,7 +269,7 @@
                                 @endif
                             </div>
                             <a href="{{ route('about') }}"
-                               class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-rose-400 hover:text-rose-300">
+                               class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/85 hover:text-white">
                                 {{ __('home_read_full_message') }}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
@@ -290,7 +290,7 @@
         <section class="py-16 sm:py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12" data-reveal="fade">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_community_label') }}</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('home_community_label') }}</p>
                     <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_what_people_say') }}</h2>
                 </div>
 
@@ -310,7 +310,7 @@
                                              class="w-10 h-10 rounded-full object-cover flex-shrink-0">
                                     @else
                                         <div
-                                            class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                                            class="w-10 h-10 rounded-full bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0 text-sm font-bold">
                                             {{ strtoupper(substr($t->name, 0, 1)) }}
                                         </div>
                                     @endif
@@ -328,7 +328,7 @@
                     <div class="flex justify-center gap-2 mt-8" id="t-dots">
                         @foreach($tChunks as $ci => $chunk)
                             <button onclick="tGoTo({{ $ci }})"
-                                    class="t-dot w-2 h-2 rounded-full transition-colors {{ $ci === 0 ? 'bg-rose-600' : 'bg-slate-300' }}"></button>
+                                    class="t-dot w-2 h-2 rounded-full transition-colors {{ $ci === 0 ? 'bg-[#002366]' : 'bg-slate-300' }}"></button>
                         @endforeach
                     </div>
                 @endif
@@ -346,7 +346,7 @@
                     if (dots[current]) dots[current].className = 't-dot w-2 h-2 rounded-full transition-colors bg-slate-300';
                     current = (n + total) % total;
                     pages[current].classList.remove('hidden');
-                    if (dots[current]) dots[current].className = 't-dot w-2 h-2 rounded-full transition-colors bg-rose-600';
+                    if (dots[current]) dots[current].className = 't-dot w-2 h-2 rounded-full transition-colors bg-[#002366]';
                 };
 
                 if (total > 1) setInterval(function () {
@@ -360,7 +360,7 @@
     <section id="contact" class="py-16 sm:py-20 bg-slate-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-reveal="fade">
-                <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2">{{ __('home_contact_label') }}</p>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('home_contact_label') }}</p>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900">{{ __('home_contact_heading') }}</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -368,7 +368,7 @@
                     @if($profile->email)
                         <div class="flex items-start gap-3">
                             <div
-                                class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
+                                class="w-9 h-9 rounded-lg bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0">
                                 <x-icon key="Mail"/>
                             </div>
                             <div><p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_email') }}</p>
@@ -408,13 +408,13 @@
                 <form action="#" method="post" class="space-y-4" data-reveal="right" style="--reveal-delay: 120ms">
                     @csrf
                     <input type="text" name="name" placeholder="{{ __('home_form_name_placeholder') }}"
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
                     <input type="email" name="email" placeholder="{{ __('home_form_email_placeholder') }}"
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm">
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
                     <textarea name="message" rows="4" placeholder="{{ __('home_form_message_placeholder') }}"
-                              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-500 text-sm resize-none"></textarea>
+                              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm resize-none"></textarea>
                     <button type="submit"
-                            class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                            class="w-full bg-[#002366] hover:bg-[#001a4d] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
                         {{ __('home_form_send') }}
                     </button>
                 </form>

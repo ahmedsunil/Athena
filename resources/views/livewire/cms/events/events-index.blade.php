@@ -224,7 +224,7 @@
                     <td class="admin-table-cell text-zinc-500 text-xs whitespace-nowrap">{{ $event->date_start->format('j M Y') }}</td>
                     <td class="admin-table-cell">
                         @if($event->is_featured)
-                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-rose-50 text-rose-600">
+                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-[#002366]/5 text-[#002366]">
                                 #{{ $event->featured_sort_order + 1 }}
                             </span>
                         @else

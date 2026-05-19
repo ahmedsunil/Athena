@@ -133,7 +133,7 @@
     {{-- Houses list --}}
     @php
     $colourSwatches = [
-        'rose'    => 'bg-rose-500',
+        'rose'    => 'bg-[#002366]',
         'sky'     => 'bg-sky-500',
         'emerald' => 'bg-emerald-500',
         'amber'   => 'bg-amber-500',

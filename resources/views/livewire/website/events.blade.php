@@ -3,7 +3,7 @@
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">{{ __('events_page_label') }}</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('events_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ __('events_heading') }}</h1>
         </div>
     </section>
@@ -19,7 +19,7 @@
                         wire:click="setFilter('{{ $value }}')"
                         class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                {{ $filter === $value
-                                   ? 'bg-rose-600 border-rose-600 text-white'
+                                   ? 'bg-[#002366] border-[#002366] text-white'
                                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                     {{ __($labelKey) }}
                 </button>
@@ -60,7 +60,7 @@
                             </p>
                             <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">{{ $event->short_description }}</p>
                             <a href="{{ route('events.show', $event->slug) }}"
-                               class="block w-full text-center text-sm font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 rounded-xl py-2 transition-colors">
+                               class="block w-full text-center text-sm font-semibold text-[#002366] hover:text-[#002366] border border-[#002366]/20 hover:border-[#002366]/40 rounded-xl py-2 transition-colors">
                                 {{ __('events_view_details') }}
                             </a>
                         </div>

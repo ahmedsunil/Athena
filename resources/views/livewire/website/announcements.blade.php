@@ -2,7 +2,7 @@
 
     <section class="border-b border-slate-200 bg-white py-6">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p class="mb-2 text-xs font-bold uppercase tracking-widest text-rose-600" data-reveal="fade">{{ __('announcements_page_label') }}</p>
+            <p class="mb-2 text-xs font-bold uppercase tracking-widest text-[#002366]" data-reveal="fade">{{ __('announcements_page_label') }}</p>
             <h1 class="text-3xl font-black text-slate-900 sm:text-4xl" data-reveal="left">{{ __('announcements_heading') }}</h1>
         </div>
     </section>
@@ -15,13 +15,13 @@
             <button type="button"
                     wire:key="announcement-filter-active"
                     wire:click="setFilter('active')"
-                    class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'active' ? 'border-rose-600 bg-rose-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
+                    class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'active' ? 'border-[#002366] bg-[#002366] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
                 {{ __('announcements_filter_active') }}
             </button>
             <button type="button"
                     wire:key="announcement-filter-closed"
                     wire:click="setFilter('closed')"
-                    class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'closed' ? 'border-rose-600 bg-rose-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
+                    class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'closed' ? 'border-[#002366] bg-[#002366] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
                 {{ __('announcements_filter_closed') }}
             </button>
         </div>
@@ -39,15 +39,15 @@
                         tabindex="0"
                         onclick="window.location.href = @js(route('announcements.show', $announcement->slug))"
                         onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href = @js(route('announcements.show', $announcement->slug)); }"
-                        class="cursor-pointer rounded-2xl border border-slate-200 bg-white p-5 transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+                        class="cursor-pointer rounded-2xl border border-slate-200 bg-white p-5 transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#002366] focus:ring-offset-2"
                         data-reveal="fade" style="--reveal-delay: {{ $loop->index * 45 }}ms">
                         <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-600">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#002366]/5 text-[#002366]">
                                 <x-icon :key="$announcement->icon_key" class="h-4 w-4" />
                             </div>
                             <div class="min-w-0 flex-1">
                                 <div class="mb-2 flex flex-wrap items-center gap-2">
-                                    <span class="text-xs font-bold uppercase tracking-wide text-rose-600">{{ $announcement->category }}</span>
+                                    <span class="text-xs font-bold uppercase tracking-wide text-[#002366]">{{ $announcement->category }}</span>
                                     <span class="text-xs font-semibold text-slate-400">{{ $localizedDate($announcement->created_at) }}</span>
                                     @if($announcement->deadline)
                                         <span class="text-xs font-semibold text-slate-400">{{ __('announcements_deadline') }} {{ $localizedDate($announcement->deadline) }}</span>
@@ -60,7 +60,7 @@
                                 <div class="mt-4 flex flex-wrap items-center gap-3">
                                     <a href="{{ route('announcements.show', $announcement->slug) }}"
                                        onclick="event.stopPropagation()"
-                                       class="inline-flex text-sm font-semibold text-rose-600 hover:text-rose-700">
+                                       class="inline-flex text-sm font-semibold text-[#002366] hover:text-[#002366]">
                                         {{ __('announcements_view_details') }}
                                     </a>
                                     @if($announcement->attachment_links)

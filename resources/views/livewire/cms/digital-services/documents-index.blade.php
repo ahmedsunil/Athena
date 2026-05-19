@@ -124,7 +124,7 @@
     {{-- Documents list --}}
     @php
     $ftColors = [
-        'PDF'  => 'bg-rose-100 text-rose-700',
+        'PDF'  => 'bg-[#002366]/10 text-[#002366]',
         'DOCX' => 'bg-sky-100 text-sky-700',
         'XLS'  => 'bg-emerald-100 text-emerald-700',
         'XLSX' => 'bg-emerald-100 text-emerald-700',

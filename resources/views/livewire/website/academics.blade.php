@@ -2,7 +2,7 @@
 
     @php
     $stageColors = [
-        'FS'  => 'bg-rose-100 text-rose-700',
+        'FS'  => 'bg-[#002366]/10 text-[#002366]',
         'KS1' => 'bg-sky-100 text-sky-700',
         'KS2' => 'bg-emerald-100 text-emerald-700',
         'KS3' => 'bg-violet-100 text-violet-700',
@@ -16,7 +16,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row lg:items-center gap-8">
                 <div class="flex-1 min-w-0">
-                    <p class="text-xs font-bold uppercase tracking-widest text-rose-600 mb-2" data-reveal="fade">{{ __('academics_page_label') }}</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('academics_page_label') }}</p>
                     <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3" data-reveal="left">{{ __('academics_heading') }}</h1>
                     @if($overview->text)
                         <p class="text-slate-500 max-w-2xl text-sm leading-relaxed" data-reveal="fade">{{ $overview->text }}</p>
@@ -85,7 +85,7 @@
                     @if($level->streams && count($level->streams) > 0)
                         <div class="mb-4 flex flex-wrap gap-2">
                             @foreach($level->streams as $stream)
-                                <span class="text-xs font-semibold bg-rose-50 text-rose-700 px-2.5 py-1 rounded-full">{{ $stream }}</span>
+                                <span class="text-xs font-semibold bg-[#002366]/5 text-[#002366] px-2.5 py-1 rounded-full">{{ $stream }}</span>
                             @endforeach
                         </div>
                     @endif
@@ -109,7 +109,7 @@
                             <ul class="space-y-1.5">
                                 @foreach($level->targets as $target)
                                     <li class="text-xs text-slate-600 flex gap-2">
-                                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0"></span>
+                                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#002366] flex-shrink-0"></span>
                                         {{ $target }}
                                     </li>
                                 @endforeach
