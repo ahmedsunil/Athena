@@ -165,7 +165,7 @@
                     @foreach($quickAccess as $item)
                         @php
                             $isAdmissions = $item->link_key === '/admissions' || strcasecmp($item->title, 'Admissions') === 0;
-                            $quickAccessTitle = $isAdmissions ? 'Announcements' : $item->title;
+                            $quickAccessTitle = $isAdmissions ? __('common_announcements') : $item->title;
                             $quickAccessHref = $isAdmissions ? route('announcements.index') : $item->link_key;
                             $quickAccessIcon = $isAdmissions ? 'Bell' : $item->icon_key;
                         @endphp
@@ -223,9 +223,9 @@
                                     </div>
                                 @endif
                                 <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
-                            {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
-                            {{ $event->status }}
-                        </span>
+                                    {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
+                                    {{ __('common_status_' . $event->status) }}
+                                </span>
                             </div>
                             <div class="p-5">
                                 <p class="text-xs text-sky-600 font-semibold mb-1">{{ $event->formatted_date_range }}</p>

@@ -46,7 +46,7 @@
                             @endif
                             <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
                                 {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
-                                {{ $event->status }}
+                                {{ __('common_status_' . $event->status) }}
                             </span>
                         </div>
 

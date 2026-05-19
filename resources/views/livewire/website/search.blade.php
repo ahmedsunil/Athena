@@ -70,6 +70,12 @@
             {{-- Results --}}
             @php
                 $grouped = collect($results)->groupBy('section');
+                $sectionLabels = [
+                    'Events' => __('nav_events'),
+                    'Gallery' => __('nav_gallery'),
+                    'Downloads' => __('nav_downloads'),
+                    'Announcements' => __('common_announcements'),
+                ];
                 $sectionColors = [
                     'Events'    => ['bg' => 'bg-sky-100',    'text' => 'text-sky-700'],
                     'Gallery'   => ['bg' => 'bg-violet-100', 'text' => 'text-violet-700'],
@@ -83,7 +89,7 @@
                     <div class="max-h-[60vh] overflow-y-auto py-2">
                         @foreach($grouped as $section => $items)
                             <div class="px-3 pt-2 pb-1">
-                                <p class="text-[10px] font-bold uppercase tracking-widest {{ $sectionColors[$section]['text'] ?? 'text-slate-500' }} px-1 mb-1">{{ $section }}</p>
+                                <p class="text-[10px] font-bold uppercase tracking-widest {{ $sectionColors[$section]['text'] ?? 'text-slate-500' }} px-1 mb-1">{{ $sectionLabels[$section] ?? $section }}</p>
                                 @foreach($items as $item)
                                     <a
                                         href="{{ $item['url'] }}"

@@ -111,6 +111,37 @@ class HomeApiTest extends TestCase
             ->assertDontSee('1 Jun 2026');
     }
 
+    public function test_event_status_labels_render_in_dhivehi(): void
+    {
+        foreach (['upcoming', 'ongoing', 'completed'] as $index => $status) {
+            Event::create([
+                'title' => ucfirst($status) . ' Event',
+                'slug' => $status . '-event',
+                'status' => $status,
+                'date_start' => now()->addDays($index + 1)->toDateString(),
+                'location' => 'School Hall',
+                'short_description' => 'Event details',
+                'is_active' => true,
+            ]);
+        }
+
+        $this->withSession(['locale' => 'dv'])
+            ->get('/events')
+            ->assertOk()
+            ->assertSee('ކުރިއަށް އޮތް')
+            ->assertSee('ކުރިއަށްދާ')
+            ->assertSee('ނިމިފައި')
+            ->assertDontSee('>Upcoming<', false)
+            ->assertDontSee('>Ongoing<', false)
+            ->assertDontSee('>Completed<', false);
+
+        $this->withSession(['locale' => 'dv'])
+            ->get('/events/upcoming-event')
+            ->assertOk()
+            ->assertSee('ކުރިއަށް އޮތް')
+            ->assertDontSee('>Upcoming<', false);
+    }
+
     public function test_about_achievement_category_pills_render_in_dhivehi(): void
     {
         $this->withSession(['locale' => 'dv'])
