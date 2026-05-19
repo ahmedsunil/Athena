@@ -268,7 +268,7 @@
                             </div>
                         @endif
                         <div class="flex-1 p-8 flex flex-col justify-center">
-                            <p class="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#002366] mb-4">{{ __('home_principals_welcome') }}</p>
+                            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-white/70">{{ __('home_principals_welcome') }}</p>
                             @if($profile->principal_message)
                                 <p class="text-slate-200 leading-relaxed italic text-lg">
                                     "{{ $profile->principal_message }}"</p>
