@@ -232,6 +232,7 @@
     "home_form_send": "Send Message",
 
     "search_placeholder": "Search events, documents, gallery…",
+    "search_escape": "ESC",
     "search_quick_links": "Quick links",
     "search_no_results": "No results for",
     "search_try_different": "Try a different term",

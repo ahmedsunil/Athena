@@ -64,7 +64,7 @@
                 <button
                     x-on:click="open = false"
                     class="flex-shrink-0 rounded-md border border-slate-200 px-1.5 py-0.5 text-[10px] font-semibold text-slate-400 hover:bg-slate-50"
-                >ESC</button>
+                >{{ __('search_escape') }}</button>
             </div>
 
             {{-- Results --}}
@@ -128,10 +128,10 @@
                     <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 px-1">{{ __('search_quick_links') }}</p>
                     <div class="grid grid-cols-2 gap-2">
                         @foreach([
-                            ['label' => 'Events',          'url' => route('events.index'),          'color' => 'sky',    'icon' => 'calendar'],
-                            ['label' => 'Academics',       'url' => route('academics.index'),       'color' => 'emerald','icon' => 'book'],
-                            ['label' => 'Gallery',         'url' => route('gallery.index'),         'color' => 'violet', 'icon' => 'photo'],
-                            ['label' => 'Digital Services','url' => route('digital-services.index'),'color' => 'amber',  'icon' => 'document'],
+                            ['label' => __('nav_events'),           'url' => route('events.index'),           'color' => 'sky',    'icon' => 'calendar'],
+                            ['label' => __('nav_academics'),        'url' => route('academics.index'),        'color' => 'emerald','icon' => 'book'],
+                            ['label' => __('nav_gallery'),          'url' => route('gallery.index'),          'color' => 'violet', 'icon' => 'photo'],
+                            ['label' => __('nav_digital_services'), 'url' => route('digital-services.index'), 'color' => 'amber',  'icon' => 'document'],
                         ] as $link)
                             <a
                                 href="{{ $link['url'] }}"
