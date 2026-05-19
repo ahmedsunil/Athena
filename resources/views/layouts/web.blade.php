@@ -47,6 +47,36 @@
         .locale-dv .brand-mark .brand-label {
             line-height: 1.35 !important;
         }
+        .site-header.home-transparent:not(.is-scrolled) {
+            background: transparent !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .brand-title,
+        .site-header.home-transparent:not(.is-scrolled) .nav-link,
+        .site-header.home-transparent:not(.is-scrolled) .nav-icon-button {
+            color: rgba(255, 255, 255, 0.94) !important;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .brand-label {
+            color: rgba(255, 255, 255, 0.68) !important;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .nav-link:hover,
+        .site-header.home-transparent:not(.is-scrolled) .nav-icon-button:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .lang-toggle {
+            border-color: rgba(255, 255, 255, 0.25) !important;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .lang-button {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: rgba(255, 255, 255, 0.82) !important;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .lang-button.is-active {
+            background: #ffffff !important;
+            color: #002366 !important;
+        }
         [data-reveal] {
             opacity: 0;
             transform: translate3d(0, 22px, 0);
@@ -92,7 +122,7 @@
     </script>
     @livewireStyles
 </head>
-<body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen pt-16">
+<body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen {{ request()->routeIs('home') ? '' : 'pt-16' }}">
 @include('layouts.partials.nav')
 @livewire('website.search')
 
@@ -156,6 +186,26 @@
                 requestAnimationFrame(setupReveal);
             });
         });
+    })();
+
+    (function () {
+        function setupHeaderScroll() {
+            var header = document.getElementById('site-header');
+            if (!header || !header.classList.contains('home-transparent')) {
+                return;
+            }
+
+            function syncHeader() {
+                header.classList.toggle('is-scrolled', window.scrollY > 24);
+            }
+
+            syncHeader();
+            window.addEventListener('scroll', syncHeader, { passive: true });
+            document.addEventListener('livewire:navigated', syncHeader);
+        }
+
+        document.addEventListener('DOMContentLoaded', setupHeaderScroll);
+        document.addEventListener('livewire:navigated', setupHeaderScroll);
     })();
 </script>
 </body>
