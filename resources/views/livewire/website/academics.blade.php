@@ -14,18 +14,24 @@
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row lg:items-center gap-8">
+            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('academics_page_label') }}</p>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ __('academics_heading') }}</h1>
+        </div>
+    </section>
+
+    {{-- Level cards --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <section class="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6" data-reveal="fade">
+            <div class="flex flex-col lg:flex-row lg:items-center gap-6">
                 <div class="flex-1 min-w-0">
-                    <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('academics_page_label') }}</p>
-                    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3" data-reveal="left">{{ __('academics_heading') }}</h1>
                     @if($overview->text)
-                        <p class="text-slate-500 max-w-2xl text-sm leading-relaxed" data-reveal="fade">{{ $overview->text }}</p>
+                        <p class="text-slate-600 max-w-3xl text-sm leading-relaxed">{{ $overview->text }}</p>
                     @endif
                     @if($overview->curriculum)
-                        <span class="mt-3 inline-block text-xs font-semibold bg-sky-100 text-sky-700 px-3 py-1 rounded-full" data-reveal="fade">{{ $overview->curriculum }}</span>
+                        <span class="mt-4 inline-block text-xs font-semibold bg-sky-100 text-sky-700 px-3 py-1 rounded-full">{{ $overview->curriculum }}</span>
                     @endif
                 </div>
-                <div class="lg:ml-auto grid grid-cols-2 gap-3 sm:flex sm:items-center" data-reveal="right">
+                <div class="grid grid-cols-2 gap-3 sm:flex sm:items-center lg:justify-end">
                     <div class="h-20 sm:h-24 w-full sm:w-52 rounded-2xl border border-slate-200 bg-white px-4 py-3 flex items-center justify-center shadow-sm">
                         <img src="{{ asset('images/cambridge-international-education.svg') }}" alt="Cambridge International Education" class="max-h-12 w-full object-contain">
                     </div>
@@ -34,11 +40,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    {{-- Level cards --}}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         @if($levels->isEmpty())
             <div class="text-center py-20 text-slate-400">
                 <p class="text-lg font-semibold">{{ __('academics_empty') }}</p>
