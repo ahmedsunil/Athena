@@ -379,24 +379,34 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-4" data-reveal="left">
-                    @if($profile->email)
+                    @php
+                        $contactEmail = $profile->email ?: 'info@hulhudhuffaaruschool.edu.mv';
+                        $contactPhone = $profile->phone ?: '+960 658-0000';
+                        $contactPhoneHref = preg_replace('/[^\d+]/', '', $contactPhone);
+                        $mapUrl = 'https://maps.app.goo.gl/LSx66yU4VQqPvLWq7';
+                    @endphp
+                    @if($contactEmail)
                         <div class="flex items-start gap-3">
                             <div
                                 class="w-9 h-9 rounded-lg bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0">
                                 <x-icon key="Mail"/>
                             </div>
-                            <div><p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_email') }}</p>
-                                <p class="text-slate-600 text-sm">{{ $profile->email }}</p></div>
+                            <div>
+                                <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_email') }}</p>
+                                <a href="mailto:{{ $contactEmail }}" class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $contactEmail }}</a>
+                            </div>
                         </div>
                     @endif
-                    @if($profile->phone)
+                    @if($contactPhone)
                         <div class="flex items-start gap-3">
                             <div
                                 class="w-9 h-9 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0">
                                 <x-icon key="Phone"/>
                             </div>
-                            <div><p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_phone') }}</p>
-                                <p class="text-slate-600 text-sm">{{ $profile->phone }}</p></div>
+                            <div>
+                                <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_phone') }}</p>
+                                <a href="tel:{{ $contactPhoneHref }}" class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $contactPhone }}</a>
+                            </div>
                         </div>
                     @endif
                     @php
@@ -414,7 +424,7 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_address') }}</p>
-                                <p class="text-slate-600 text-sm">{{ $locationParts }}</p>
+                                <a href="{{ $mapUrl }}" target="_blank" rel="noopener" class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $locationParts }}</a>
                             </div>
                         </div>
                     @endif
