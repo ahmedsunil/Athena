@@ -1,8 +1,8 @@
 <footer class="bg-[#002366] text-white/70">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10 text-center">
             <div>
-                <div class="flex items-center gap-2 mb-3">
+                <div class="flex items-center justify-center gap-2 mb-3">
                     @if($footerProfile['logo_path'])
                         <img src="{{ $footerProfile['logo_url'] }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
                     @else
@@ -39,8 +39,14 @@
                 </div>
             </div>
         </div>
-        <div class="border-t border-white/10 pt-6 text-xs text-center">
-            &copy; {{ now()->year }} <span data-lang-key="footer_copyright_suffix" data-en="{{ ($footerProfile['school_name'] ?: 'Hulhudhuffaaru School') . '. All rights reserved.' }}">{{ ($footerProfile['school_name'] ?: __('school_name')) . '. ' . __('footer_copyright_suffix') }}</span>
+        <div class="border-t border-white/10 pt-5 text-xs text-center space-y-2">
+            <p>
+                &copy; {{ now()->year }} <span data-lang-key="footer_copyright_suffix" data-en="{{ ($footerProfile['school_name'] ?: 'Hulhudhuffaaru School') . '. All rights reserved.' }}">{{ ($footerProfile['school_name'] ?: __('school_name')) . '. ' . __('footer_copyright_suffix') }}</span>
+            </p>
+            <p>
+                Developed by
+                <a href="https://github.com/ahmedsunil" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-white/80 transition-colors">Ahmed Sunil</a>
+            </p>
         </div>
     </div>
 </footer>
