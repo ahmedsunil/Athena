@@ -1,6 +1,6 @@
 <div>
     {{-- Page header --}}
-    <section class="bg-white border-b border-slate-200 py-6">
+    <section class="bg-white border-b border-slate-200 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('about_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ $profile->school_name }}</h1>

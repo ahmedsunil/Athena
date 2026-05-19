@@ -2,7 +2,7 @@
     @php
         $localizedDate = fn ($date) => $date->format('j') . ' ' . __('common_month_short_' . $date->month) . ' ' . $date->format('Y');
     @endphp
-    <section class="border-b border-slate-200 bg-white py-6">
+    <section class="border-b border-slate-200 bg-white py-8">
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <a href="{{ route('announcements.index') }}"
                class="mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#002366]">

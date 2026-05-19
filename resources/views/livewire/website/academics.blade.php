@@ -12,7 +12,7 @@
     @endphp
 
     {{-- Page header --}}
-    <section class="bg-white border-b border-slate-200 py-6">
+    <section class="bg-white border-b border-slate-200 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2" data-reveal="fade">{{ __('academics_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900" data-reveal="left">{{ __('academics_heading') }}</h1>
@@ -20,7 +20,7 @@
     </section>
 
     {{-- Level cards --}}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section class="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6" data-reveal="fade">
             <div class="flex flex-col lg:flex-row lg:items-center gap-6">
                 <div class="flex-1 min-w-0">

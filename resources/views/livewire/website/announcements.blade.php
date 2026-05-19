@@ -1,6 +1,6 @@
 <div>
 
-    <section class="border-b border-slate-200 bg-white py-6">
+    <section class="border-b border-slate-200 bg-white py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p class="mb-2 text-xs font-bold uppercase tracking-widest text-[#002366]" data-reveal="fade">{{ __('announcements_page_label') }}</p>
             <h1 class="text-3xl font-black text-slate-900 sm:text-4xl" data-reveal="left">{{ __('announcements_heading') }}</h1>

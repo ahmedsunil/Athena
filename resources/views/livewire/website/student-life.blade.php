@@ -1,12 +1,12 @@
 <div>
 
     {{-- Page header --}}
-    <div class="bg-white border-b border-slate-200 py-10">
+    <section class="bg-white border-b border-slate-200 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal="fade">
             <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('student_life_page_label') }}</p>
             <h1 class="text-3xl sm:text-4xl font-black text-slate-900">{{ __('student_life_heading') }}</h1>
         </div>
-    </div>
+    </section>
 
     {{-- Sticky tab bar --}}
     <div class="bg-white border-b border-slate-200 sticky top-16 z-40">
@@ -29,7 +29,7 @@
     </div>
 
     {{-- Tab content --}}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {{-- Clubs tab --}}
         @if($activeTab === 'clubs')
