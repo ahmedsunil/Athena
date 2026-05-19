@@ -298,12 +298,15 @@
                     <div
                         class="t-page {{ $ci === 0 ? '' : 'hidden' }} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach($chunk as $t)
+                            @php
+                                $testimonialName = app()->getLocale() === 'dv' && $t->name_dv ? $t->name_dv : $t->name;
+                            @endphp
                             <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col"
                                  data-reveal="scale" style="--reveal-delay: {{ $loop->index * 70 }}ms">
                                 <p class="text-sm text-slate-700 leading-relaxed italic flex-1">"{{ $t->message }}"</p>
                                 <div class="mt-5 flex items-center gap-3">
                                     @if($t->photo_path)
-                                        <img src="{{ $t->photo_url }}" alt="{{ $t->name }}"
+                                        <img src="{{ $t->photo_url }}" alt="{{ $testimonialName }}"
                                              class="w-10 h-10 rounded-full object-cover flex-shrink-0">
                                     @else
                                         <div
@@ -312,7 +315,7 @@
                                         </div>
                                     @endif
                                     <div>
-                                        <p class="text-sm font-semibold text-slate-900">{{ $t->name }}</p>
+                                        <p class="text-sm font-semibold text-slate-900">{{ $testimonialName }}</p>
                                         <p class="text-xs text-slate-500">{{ $t->current_designation }}</p>
                                     </div>
                                 </div>

@@ -256,9 +256,9 @@
                             <h2 class="text-3xl font-black text-white">{{ __('about_founding_heading') }}</h2>
                             <p class="mt-3 text-amber-200/50 text-sm max-w-md mx-auto">{{ __('about_founding_subtext') }}</p>
                         </div>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+                        <div class="grid justify-center gap-5 [grid-template-columns:repeat(auto-fit,minmax(8.5rem,10rem))]">
                             @foreach($foundingMembers as $member)
-                                <div class="group">
+                                <div class="group text-center">
                                     <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 ring-1 ring-amber-700/20">
                                         @if($member->photo_path)
                                             <img src="{{ $member->photo_url }}" alt="{{ $member->name }}" class="w-full h-full object-cover object-top grayscale sepia brightness-75 group-hover:grayscale-0 group-hover:sepia-0 group-hover:brightness-90 transition-all duration-700">
@@ -266,9 +266,6 @@
                                             <div class="w-full h-full bg-stone-800 flex items-center justify-center text-amber-400 text-3xl font-black">{{ strtoupper(substr($member->name, 0, 1)) }}</div>
                                         @endif
                                         <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>
-                                        <div class="absolute top-2 left-2">
-                                            <span class="bg-amber-500 text-stone-950 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-sm">{{ __('about_founding_badge') }}</span>
-                                        </div>
                                     </div>
                                     <p class="font-bold text-white text-sm leading-tight">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
                                     <p class="text-amber-400 text-[11px] font-semibold uppercase tracking-wide mt-0.5">{{ $member->subject }}</p>

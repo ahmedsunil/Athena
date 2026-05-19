@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Announcement;
 use App\Models\Event;
+use Database\Seeders\HomeTestimonialSeeder;
 use Database\Seeders\SchoolProfileSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -121,5 +122,16 @@ class HomeApiTest extends TestCase
             ->assertDontSee('>Students<', false)
             ->assertDontSee('>Staff<', false)
             ->assertDontSee('>School<', false);
+    }
+
+    public function test_home_testimonial_names_render_in_dhivehi(): void
+    {
+        $this->seed(HomeTestimonialSeeder::class);
+
+        $this->withSession(['locale' => 'dv'])
+            ->get('/')
+            ->assertOk()
+            ->assertSee('އަމީނަތު ޝަޒްނާ')
+            ->assertDontSee('Mrs. Aminath Shazna');
     }
 }
