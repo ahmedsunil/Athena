@@ -2,44 +2,44 @@
 
     {{-- Hero --}}
     @if($slides->isNotEmpty())
-        <section class="relative h-[55vh] min-h-105 overflow-hidden" id="hero-slider">
+        <section class="relative min-h-[720px] overflow-hidden bg-slate-950" id="hero-slider">
             @foreach($slides as $i => $slide)
                 <div
-                    class="hero-slide absolute inset-0 transition-opacity duration-700 {{ $i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}">
+                    class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-out {{ $i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}">
                     @if($slide->image_path)
                         <img src="{{ $slide->image_url }}" alt="{{ $slide->title }}"
                              class="absolute inset-0 w-full h-full object-cover">
                     @else
-                        <div class="absolute inset-0 bg-slate-900"></div>
+                        <div class="absolute inset-0 bg-[#002366]"></div>
                     @endif
-                    <div
-                        class="absolute inset-0 {{ app()->getLocale() === 'dv' ? 'bg-gradient-to-l' : 'bg-gradient-to-r' }} from-slate-950/80 via-slate-900/50 to-transparent" id="slide-gradient"></div>
-                    <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center pt-16">
-                        <div class="max-w-xl" data-reveal="left">
-                            <p class="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#002366] mb-3">
+                    <div class="absolute inset-0 bg-slate-950/70"></div>
+
+                    <div class="relative min-h-[720px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-36 flex items-center justify-center">
+                        <div class="mx-auto max-w-5xl text-center" data-reveal="scale">
+                            <p class="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
                                 <span data-lang-key="school_name"
                                       data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
                             </p>
-                            <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5"
+                            <h1 class="mx-auto max-w-5xl text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] mb-6"
                                 data-en="{{ $slide->getTranslation('title', 'en', false) }}"
                                 data-dv="{{ $slide->getTranslation('title', 'dv', false) ?: $slide->getTranslation('title', 'en', false) }}">{{ $slide->title }}</h1>
                             @php $descEn = $slide->getTranslation('description', 'en', false); $descDv = $slide->getTranslation('description', 'dv', false) ?: $descEn; @endphp
                             @if($slide->description)
-                                <p class="text-slate-300 text-base mb-8 leading-relaxed"
+                                <p class="mx-auto max-w-2xl text-white/80 text-base sm:text-lg mb-9 leading-relaxed"
                                    data-en="{{ $descEn }}"
                                    data-dv="{{ $descDv }}">{{ $slide->description }}</p>
                             @endif
                             @if($slide->button_1_label || $slide->button_2_label)
-                                <div class="flex flex-wrap gap-3">
+                                <div class="flex flex-wrap justify-center gap-3">
                                     @if($slide->button_1_label)
                                         <a href="{{ $slide->button_1_link_key ?: '#' }}"
-                                           class="inline-flex items-center gap-2 bg-[#002366] hover:bg-[#001a4d] text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
+                                           class="inline-flex min-h-12 items-center justify-center gap-2 bg-white text-[#002366] hover:bg-white/90 font-bold px-7 py-3 rounded-full shadow-xl shadow-black/20 transition-colors text-sm"
                                            data-en="{{ $slide->getTranslation('button_1_label', 'en', false) }}"
                                            data-dv="{{ $slide->getTranslation('button_1_label', 'dv', false) ?: $slide->getTranslation('button_1_label', 'en', false) }}">{{ $slide->button_1_label }}</a>
                                     @endif
                                     @if($slide->button_2_label)
                                         <a href="{{ $slide->button_2_link_key ?: '#' }}"
-                                           class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm"
+                                           class="inline-flex min-h-12 items-center justify-center gap-2 bg-transparent hover:bg-white/10 text-white font-bold px-7 py-3 rounded-full border border-white/30 transition-colors text-sm"
                                            data-en="{{ $slide->getTranslation('button_2_label', 'en', false) }}"
                                            data-dv="{{ $slide->getTranslation('button_2_label', 'dv', false) ?: $slide->getTranslation('button_2_label', 'en', false) }}">{{ $slide->button_2_label }}</a>
                                     @endif
@@ -51,21 +51,28 @@
             @endforeach
 
             @if($slides->count() > 1)
-                <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                    @foreach($slides as $i => $slide)
-                        <button onclick="heroGoTo({{ $i }})"
-                                class="hero-dot w-2 h-2 rounded-full transition-colors {{ $i === 0 ? 'bg-white' : 'bg-white/40' }}"></button>
-                    @endforeach
+                <div class="absolute bottom-16 left-1/2 z-10 flex w-[min(92vw,34rem)] -translate-x-1/2 items-center gap-4">
+                    <span class="text-xs font-bold tabular-nums text-white/70">01</span>
+                    <div class="flex flex-1 items-center gap-2">
+                        @foreach($slides as $i => $slide)
+                            <button onclick="heroGoTo({{ $i }})"
+                                    aria-label="Go to slide {{ $i + 1 }}"
+                                    class="hero-dot h-1.5 flex-1 rounded-full transition-all duration-300 {{ $i === 0 ? 'bg-white' : 'bg-white/35 hover:bg-white/65' }}"></button>
+                        @endforeach
+                    </div>
+                    <span class="text-xs font-bold tabular-nums text-white/70">{{ str_pad((string) $slides->count(), 2, '0', STR_PAD_LEFT) }}</span>
                 </div>
                 <button onclick="heroPrev()"
-                        class="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors">
+                        aria-label="Previous slide"
+                        class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white shadow-lg backdrop-blur-md transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
                 <button onclick="heroNext()"
-                        class="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors">
+                        aria-label="Next slide"
+                        class="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white shadow-lg backdrop-blur-md transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -81,14 +88,19 @@
                 var total = slides.length;
                 var timer;
 
+                function setDot(index, active) {
+                    if (!dots[index]) return;
+                    dots[index].className = 'hero-dot h-1.5 flex-1 rounded-full transition-all duration-300 ' + (active ? 'bg-white' : 'bg-white/35 hover:bg-white/65');
+                }
+
                 function goTo(n) {
                     slides[current].classList.replace('opacity-100', 'opacity-0');
                     slides[current].classList.add('pointer-events-none');
-                    if (dots[current]) dots[current].classList.replace('bg-white', 'bg-white/40');
+                    setDot(current, false);
                     current = (n + total) % total;
                     slides[current].classList.replace('opacity-0', 'opacity-100');
                     slides[current].classList.remove('pointer-events-none');
-                    if (dots[current]) dots[current].classList.replace('bg-white/40', 'bg-white');
+                    setDot(current, true);
                 }
 
                 function next() {
@@ -127,13 +139,13 @@
 
     {{-- Stats --}}
     @if($stats->isNotEmpty())
-        <section class="bg-[#002366] py-8">
+        <section class="relative z-20 -mt-12 pb-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-6 text-center text-white">
+                <div class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 text-center shadow-2xl shadow-slate-900/10">
                     @foreach($stats as $stat)
-                        <div data-reveal="scale" style="--reveal-delay: {{ $loop->index * 80 }}ms">
-                            <p class="text-3xl sm:text-4xl font-black">{{ $stat->value }}</p>
-                            <p class="text-white/75 text-sm font-medium mt-1">{{ $stat->title }}</p>
+                        <div class="bg-white/95 px-5 py-6 backdrop-blur" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 80 }}ms">
+                            <p class="text-3xl sm:text-4xl font-black text-[#002366]">{{ $stat->value }}</p>
+                            <p class="text-slate-500 text-sm font-semibold mt-1">{{ $stat->title }}</p>
                         </div>
                     @endforeach
                 </div>
