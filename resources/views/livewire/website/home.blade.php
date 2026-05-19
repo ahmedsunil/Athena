@@ -20,7 +20,7 @@
                                 <span data-lang-key="school_name"
                                       data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
                             </p>
-                            <h1 class="mx-auto max-w-5xl text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] mb-6"
+                            <h1 class="mx-auto max-w-5xl break-words text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] mb-6 [overflow-wrap:anywhere]"
                                 data-en="{{ $slide->getTranslation('title', 'en', false) }}"
                                 data-dv="{{ $slide->getTranslation('title', 'dv', false) ?: $slide->getTranslation('title', 'en', false) }}">{{ $slide->title }}</h1>
                             @php $descEn = $slide->getTranslation('description', 'en', false); $descDv = $slide->getTranslation('description', 'dv', false) ?: $descEn; @endphp
