@@ -64,7 +64,7 @@
                 </div>
                 <button onclick="heroPrev()"
                         aria-label="Previous slide"
-                        class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white shadow-lg backdrop-blur-md transition-colors">
+                        class="absolute left-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/20 sm:flex">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -72,7 +72,7 @@
                 </button>
                 <button onclick="heroNext()"
                         aria-label="Next slide"
-                        class="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white shadow-lg backdrop-blur-md transition-colors">
+                        class="absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/20 sm:flex">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -260,9 +260,11 @@
                 <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden" data-reveal="scale">
                     <div class="flex flex-col md:flex-row">
                         @if($profile->principal_photo_path)
-                            <div class="flex-shrink-0 w-full md:w-56">
-                                <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}"
-                                     class="w-full h-56 md:h-full object-cover object-top">
+                            <div class="flex w-full shrink-0 items-center justify-center bg-slate-900/35 px-8 pt-8 md:w-64 md:px-7 md:py-8">
+                                <div class="h-36 w-36 overflow-hidden rounded-full bg-slate-700 ring-4 ring-white/10 shadow-2xl shadow-slate-950/30 sm:h-40 sm:w-40">
+                                    <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}"
+                                         class="h-full w-full object-cover object-top">
+                                </div>
                             </div>
                         @endif
                         <div class="flex-1 p-8 flex flex-col justify-center">
