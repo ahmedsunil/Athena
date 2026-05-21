@@ -5,9 +5,11 @@ namespace App\Livewire\Cms\DigitalServices;
 use App\Models\DigitalServiceCalendar;
 use App\Models\DigitalServiceCalendarEntry;
 use App\Models\Event;
+use App\Services\MoeAcademicCalendarService;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Throwable;
 
 class CalendarEntriesIndex extends Component
 {
@@ -188,6 +190,31 @@ class CalendarEntriesIndex extends Component
     public function cancelCalendar(): void
     {
         $this->resetCalendarForm();
+    }
+
+    public function openGenerateFromMoe(?int $calendarId = null): void
+    {
+        $targetCalendarId = $calendarId ?? $this->calendarId;
+        $targetCalendar = $targetCalendarId ? DigitalServiceCalendar::find($targetCalendarId) : null;
+
+        if (! $targetCalendar) {
+            $this->dispatch('toast', message: 'Select a calendar before generating from MOE.');
+            return;
+        }
+
+        $year = $targetCalendar->year ?: (int) date('Y');
+
+        try {
+            $service = app(MoeAcademicCalendarService::class);
+            $payload = $service->scrape([$year], MoeAcademicCalendarService::DEFAULT_SOURCE_URL, 45);
+            $service->import($payload, $targetCalendar->id);
+
+            $this->calendarId = $targetCalendar->id;
+            $this->dispatch('toast', message: "Generated academic calendar {$year} from MOE.");
+            $this->resetPage();
+        } catch (Throwable $e) {
+            $this->dispatch('toast', message: $e->getMessage());
+        }
     }
 
     public function syncEvents(): void

@@ -46,6 +46,8 @@
                         </td>
                         <td class="admin-table-cell whitespace-nowrap text-right">
                             <button type="button" wire:click="selectCalendar({{ $cal->id }})" class="mr-2 text-xs font-medium text-sky-600 hover:text-sky-800">Open</button>
+                            <button type="button" wire:click="openGenerateFromMoe({{ $cal->id }})" wire:loading.attr="disabled" wire:target="openGenerateFromMoe"
+                                    class="mr-2 text-xs font-medium text-emerald-600 hover:text-emerald-800 disabled:opacity-60">Generate from MOE</button>
                             <button type="button" wire:click="editCalendar({{ $cal->id }})" class="mr-2 text-xs font-medium text-zinc-500 hover:text-zinc-950">Edit</button>
                             <button type="button" wire:click="deleteCalendar({{ $cal->id }})" wire:confirm="Delete this calendar and all its entries?" class="text-xs font-medium text-red-500 hover:text-red-700">Delete</button>
                         </td>
@@ -67,6 +69,8 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <button type="button" wire:click="selectCalendar({{ $cal->id }})" class="text-xs text-sky-600">Open</button>
+                            <button type="button" wire:click="openGenerateFromMoe({{ $cal->id }})" wire:loading.attr="disabled" wire:target="openGenerateFromMoe"
+                                    class="text-xs text-emerald-600 disabled:opacity-60">MOE</button>
                             <button type="button" wire:click="editCalendar({{ $cal->id }})" class="text-xs text-zinc-500">Edit</button>
                             <button type="button" wire:click="deleteCalendar({{ $cal->id }})" wire:confirm="Delete?" class="text-xs text-red-500">Del</button>
                         </div>
@@ -97,6 +101,12 @@
                 <button type="button" wire:click="$set('showSyncModal', true)"
                         class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm transition-colors hover:bg-zinc-50">
                     Sync Events
+                </button>
+                <button type="button" wire:click="openGenerateFromMoe({{ $currentCalendar->id }})"
+                        wire:loading.attr="disabled" wire:target="openGenerateFromMoe"
+                        class="inline-flex h-9 items-center rounded-md border border-emerald-200 bg-emerald-50 px-3 admin-label text-emerald-700 shadow-sm transition-colors hover:bg-emerald-100 disabled:opacity-60">
+                    <span wire:loading.remove wire:target="openGenerateFromMoe">Generate from MOE</span>
+                    <span wire:loading wire:target="openGenerateFromMoe">Generating...</span>
                 </button>
                 <button type="button" wire:click="editCalendar({{ $currentCalendar->id }})"
                         class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm transition-colors hover:bg-zinc-50">

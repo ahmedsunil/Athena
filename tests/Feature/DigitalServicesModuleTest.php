@@ -3,11 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\DigitalServiceDocument;
-use App\Models\DigitalServiceResource;
 use App\Models\DigitalServiceCalendar;
+use App\Models\DigitalServiceResource;
 use App\Models\DigitalServiceCalendarEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -60,13 +62,98 @@ class DigitalServicesModuleTest extends TestCase
             ->get('/cms/digital-services/calendar')
             ->assertOk()
             ->assertSee('Academic Calendar 2026')
+            ->assertSee('Generate from MOE')
             ->assertDontSee('First Term Begins');
 
         $this->actingAs($user)
             ->get('/cms/digital-services/calendar?calendarId=' . $calendar->id)
             ->assertOk()
             ->assertSee('Academic Calendar 2026')
+            ->assertSee('Generate from MOE')
             ->assertSee('First Term Begins');
+    }
+
+    public function test_moe_academic_calendar_command_imports_json_into_database(): void
+    {
+        $inputPath = storage_path('framework/testing/moe-academic-calendar-input.json');
+        $outputPath = storage_path('framework/testing/moe-academic-calendar-output.json');
+
+        File::ensureDirectoryExists(dirname($inputPath));
+
+        File::put($inputPath, json_encode([
+            'source_url' => 'https://moe.gov.mv/en/academic-calendar',
+            'scraped_at' => '2026-05-20T00:00:00Z',
+            'available_years' => [2026],
+            'years' => [
+                [
+                    'year' => 2026,
+                    'event_count' => 3,
+                    'events' => [
+                        [
+                            'id' => '1',
+                            'year' => 2026,
+                            'title_en' => 'Beginning of Academic Year 2026',
+                            'title_dv' => '2026 އަހަރުގެ ކިޔަވައިދޭ އަހަރު ފެށޭނެ',
+                            'event_type' => 'Academic',
+                            'start_date' => '2026-01-27',
+                            'end_date' => null,
+                            'description_en' => 'First day of Term 1.',
+                            'description_dv' => 'ޓާމް 1 ގެ ފުރަތަމަ ދުވަސް',
+                            'is_tentative' => false,
+                        ],
+                        [
+                            'id' => '2',
+                            'year' => 2026,
+                            'title_en' => 'Mid-Term Break',
+                            'event_type' => 'Holiday',
+                            'start_date' => '2026-02-18',
+                            'end_date' => '2026-02-22',
+                            'description_en' => 'School closed for the break.',
+                            'is_tentative' => true,
+                        ],
+                        [
+                            'id' => '3',
+                            'year' => 2026,
+                            'title_en' => 'First Term Examinations',
+                            'event_type' => 'Exam',
+                            'start_date' => '2026-03-15',
+                            'end_date' => '2026-03-19',
+                            'description_en' => 'End-of-term examinations.',
+                            'is_tentative' => false,
+                        ],
+                    ],
+                ],
+            ],
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+
+        $exitCode = Artisan::call('moe:academic-calendar', [
+            '--input' => $inputPath,
+            '--output' => $outputPath,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+
+        $calendar = DigitalServiceCalendar::where('year', 2026)->firstOrFail();
+        $this->assertSame('Academic Calendar 2026', $calendar->title);
+        $this->assertTrue($calendar->is_active);
+        $this->assertStringContainsString('Imported from MOE academic calendar.', $calendar->description ?? '');
+
+        $this->assertDatabaseCount('digital_service_calendars', 1);
+        $this->assertDatabaseCount('digital_service_calendar_entries', 3);
+        $this->assertDatabaseHas('digital_service_calendar_entries', [
+            'calendar_id' => $calendar->id,
+            'title' => 'Beginning of Academic Year 2026',
+            'type' => 'term',
+            'date' => '2026-01-27 00:00:00',
+            'is_tentative' => 0,
+        ]);
+        $this->assertDatabaseHas('digital_service_calendar_entries', [
+            'calendar_id' => $calendar->id,
+            'title' => 'Mid-Term Break',
+            'type' => 'holiday',
+            'is_tentative' => 1,
+        ]);
+        $this->assertFileExists($outputPath);
     }
 
     public function test_downloads_tab_shows_active_document(): void
