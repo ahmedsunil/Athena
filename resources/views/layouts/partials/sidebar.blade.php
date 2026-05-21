@@ -154,7 +154,7 @@
                             $activeRoutes = $item['activeRoutes'] ?? [$item['route']];
                             $isActive = collect($activeRoutes)->contains(fn($r) => str_starts_with($currentRoute, $r));
                         @endphp
-                        <a href="{{ $item['href'] }}"
+                        <a href="{{ $item['href'] }}" wire:navigate
                            class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors
                                       {{ $isActive ? 'bg-white/15 text-white' : 'text-white hover:bg-white/10 hover:text-white' }}">
                                 <span class="shrink-0 text-white">
@@ -174,6 +174,7 @@
     <div class="mt-auto shrink-0 border-t border-white/10 bg-black px-3 pb-2 pt-2">
         <div x-show="accountOpen"
              x-transition
+             x-cloak
              class="overflow-hidden rounded-lg border border-white/10 bg-black shadow-sm">
             <div class="flex items-center gap-2.5 px-2.5 py-2.5">
                 <div
@@ -187,7 +188,7 @@
             </div>
 
             <div class="border-t border-white/10 px-2 py-1.5">
-                <a href="{{ route('profile.index') }}"
+                <a href="{{ route('profile.index') }}" wire:navigate
                    class="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white">
                     <svg class="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="1.8"
                          viewBox="0 0 24 24">
