@@ -6,7 +6,7 @@
                     @if($footerProfile['logo_path'])
                         <img src="{{ $footerProfile['logo_url'] }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
                     @else
-                        <img src="{{ asset('logo.png') }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
+                        <img src="{{ asset('images/app-mark.webp') }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
                     @endif
                     <span class="text-white font-bold text-sm" data-lang-key="school_name" data-en="{{ $footerProfile['school_name'] ?: 'Hulhudhuffaaru School' }}">{{ $footerProfile['school_name'] ?: __('school_name') }}</span>
                 </div>

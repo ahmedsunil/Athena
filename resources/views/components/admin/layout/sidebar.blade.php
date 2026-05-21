@@ -19,7 +19,7 @@
 
 {{-- Logo --}}
 <div class="mx-1 flex h-24 shrink-0 items-center border-b border-zinc-100 px-4">
-    <img src="/images/logo.png" alt="{{ config('app.name') }}" class="h-16 w-auto object-contain">
+    <img src="{{ asset('images/app-mark.webp') }}" alt="{{ config('app.name') }}" class="h-16 w-auto object-contain">
 </div>
 
 {{-- Nav groups --}}

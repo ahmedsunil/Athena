@@ -4,18 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('school_name') }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script>tailwind.config = {
-        theme: {
-            extend: {
-                fontFamily: {
-                    sans: ['DM Sans', 'system-ui', 'sans-serif'],
-                    mono: ['IBM Plex Mono', 'ui-monospace', 'monospace']
-                }
-            }
-        }
-    }</script>
     <style>
         @php echo '@font-face'; @endphp {
             font-family: 'Dhivehi';

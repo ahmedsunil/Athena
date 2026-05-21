@@ -22,7 +22,7 @@
         <section class="w-full max-w-md">
             <div class="mb-8 text-center">
                 <a href="/" class="inline-flex flex-col items-center">
-                    <img src="images/app.png" alt="{{ config('app.name') }}"
+                    <img src="{{ asset('images/app-mark.webp') }}" alt="{{ config('app.name') }}"
                          class="h-24 w-24 rounded-2xl object-contain shadow-sm">
                     <span class="mt-4 text-lg font-bold leading-6 text-zinc-950">{{ config('app.name') }}</span>
                     <span class="mt-1 text-xs font-normal leading-5 text-zinc-500">School website administration</span>

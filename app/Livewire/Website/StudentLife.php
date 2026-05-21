@@ -12,7 +12,7 @@ use Livewire\Component;
 class StudentLife extends Component
 {
     #[Url]
-    public string $activeTab = 'clubs';
+    public string $activeTab = 'student-council';
 
     public function setTab(string $tab): void
     {

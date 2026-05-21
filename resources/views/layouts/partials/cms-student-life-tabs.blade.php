@@ -1,11 +1,15 @@
 @php
     $currentRoute = request()->route()?->getName() ?? '';
     $tabs = [
-        ['label' => 'Clubs',          'route' => 'cms.student-life.clubs',          'href' => route('cms.student-life.clubs')],
-        ['label' => 'Prefects',       'route' => 'cms.student-life.prefects',       'href' => route('cms.student-life.prefects')],
-        ['label' => 'Houses',         'route' => 'cms.student-life.houses',         'href' => route('cms.student-life.houses')],
-        ['label' => 'Uniform Bodies', 'route' => 'cms.student-life.uniform-bodies', 'href' => route('cms.student-life.uniform-bodies')],
+        ['label' => 'Student Council', 'routes' => ['cms.student-life.clubs', 'cms.student-life.houses'], 'href' => route('cms.student-life.clubs')],
+        ['label' => 'Prefects',        'routes' => ['cms.student-life.prefects'],                         'href' => route('cms.student-life.prefects')],
+        ['label' => 'Uniform Bodies',  'routes' => ['cms.student-life.uniform-bodies'],                   'href' => route('cms.student-life.uniform-bodies')],
     ];
+    $councilSubTabs = [
+        ['label' => 'Clubs',  'route' => 'cms.student-life.clubs',  'href' => route('cms.student-life.clubs')],
+        ['label' => 'Houses', 'route' => 'cms.student-life.houses', 'href' => route('cms.student-life.houses')],
+    ];
+    $inCouncil = in_array($currentRoute, ['cms.student-life.clubs', 'cms.student-life.houses']);
 @endphp
 
 <div>
@@ -15,7 +19,7 @@
 
 <div class="flex items-center gap-1 pb-0 flex-wrap">
     @foreach($tabs as $tab)
-        @php $isActive = str_starts_with($currentRoute, $tab['route']); @endphp
+        @php $isActive = in_array($currentRoute, $tab['routes']); @endphp
         <a href="{{ $tab['href'] }}"
            class="relative px-3 py-2 text-sm font-medium transition-colors bg-zinc-800 rounded-md
                   {{ $isActive ? 'text-zinc-50' : 'text-zinc-500 hover:text-zinc-100' }}">
@@ -23,3 +27,16 @@
         </a>
     @endforeach
 </div>
+
+@if($inCouncil)
+    <div class="flex items-center gap-1 flex-wrap">
+        @foreach($councilSubTabs as $sub)
+            @php $subActive = $currentRoute === $sub['route']; @endphp
+            <a href="{{ $sub['href'] }}"
+               class="px-3 py-1.5 text-xs font-medium rounded-md transition-colors
+                      {{ $subActive ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500 hover:text-zinc-300' }}">
+                {{ $sub['label'] }}
+            </a>
+        @endforeach
+    </div>
+@endif
