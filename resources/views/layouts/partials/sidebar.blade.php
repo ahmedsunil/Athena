@@ -128,7 +128,7 @@
 <div class="flex h-full min-h-0 flex-col bg-black text-slate-100" x-data="{ accountOpen: false }">
     <div class="flex items-center gap-3 px-4 py-5">
         @if(file_exists(public_path('images/logo.png')))
-            <img src="/images/logo.png" alt="{{ config('app.name') }}" class="h-11 w-11 rounded-xl object-contain">
+            <img src="/images/app.png" alt="{{ config('app.name') }}" class="h-14 w-14 rounded-xl object-contain">
         @else
             <div
                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-sm font-bold text-black shadow-sm">

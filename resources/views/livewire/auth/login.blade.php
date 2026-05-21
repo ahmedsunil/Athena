@@ -1,6 +1,10 @@
 @php use App\Models\Setting; @endphp
 <div>
-    <h2 class="mb-6 admin-page-title">Sign in to your account</h2>
+    <div class="mb-7">
+        <p class="admin-eyebrow">School Website CMS</p>
+        <h2 class="mt-2 admin-page-title text-lg">Sign in to Athena</h2>
+        <p class="mt-2 admin-page-subtitle">Manage website content, announcements, events, and school updates.</p>
+    </div>
 
     <form wire:submit="login" class="space-y-4">
 
@@ -8,7 +12,7 @@
         <div>
             <label class="mb-1.5 block admin-label">Email address</label>
             <input type="email" wire:model="email" autocomplete="email" autofocus
-                   class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                   class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm transition focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
             @error('email') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
         </div>
 
@@ -16,7 +20,7 @@
         <div>
             <label class="mb-1.5 block admin-label">Password</label>
             <input type="password" wire:model="password" autocomplete="current-password"
-                   class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                   class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-normal leading-5 text-zinc-950 placeholder-zinc-400 shadow-sm transition focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
             @error('password') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
         </div>
 
@@ -27,20 +31,20 @@
                        class="h-3.5 w-3.5 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950">
                 Remember me
             </label>
-            <a href="{{ route('password.request') }}" class="admin-link-label text-zinc-950 hover:text-zinc-800">
+            <a href="{{ route('password.request') }}" class="admin-link-label text-zinc-950 hover:text-zinc-700">
                 Forgot password?
             </a>
         </div>
 
         <button type="submit"
-                class="w-full rounded-lg bg-zinc-950 px-4 py-2.5 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800">
+                class="w-full rounded-lg bg-zinc-950 px-4 py-2.5 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2">
             Sign in
         </button>
 
     </form>
 
     @if(Setting::get('google_login_enabled') === '1')
-        <div class="mt-4">
+        <div class="mt-5">
             <div class="relative">
                 <div class="absolute inset-0 flex items-center">
                     <div class="w-full border-t border-zinc-200"></div>

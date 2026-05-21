@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ isset($title) ? $title . ' — ' . config('app.name') : config('app.name') }}</title>
+    <title>{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,24 +13,38 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen bg-zinc-50 font-sans text-zinc-900 antialiased">
+<body class="min-h-screen bg-zinc-50 font-sans text-sm font-normal leading-5 text-zinc-950 antialiased">
 
-<div class="flex min-h-screen flex-col items-center justify-center px-4 py-12">
+<div class="relative min-h-screen overflow-hidden">
+    <div class="absolute inset-x-0 top-0 h-2 bg-black"></div>
 
-    {{-- Brand --}}
-    <div class="mb-8 text-center">
-        <a href="/" class="inline-block">
-            <span class="text-xl font-semibold text-zinc-950">{{ config('app.name') }}</span>
-        </a>
-    </div>
+    <main class="relative flex min-h-screen items-center justify-center px-4 py-10 sm:px-6">
+        <section class="w-full max-w-md">
+            <div class="mb-8 text-center">
+                <a href="/" class="inline-flex flex-col items-center">
+                    <img src="images/app.png" alt="{{ config('app.name') }}"
+                         class="h-24 w-24 rounded-2xl object-contain shadow-sm">
+                    <span class="mt-4 text-lg font-bold leading-6 text-zinc-950">{{ config('app.name') }}</span>
+                    <span class="mt-1 text-xs font-normal leading-5 text-zinc-500">School website administration</span>
+                </a>
+            </div>
 
-    {{-- Card --}}
-    <div class="w-full max-w-sm">
-        <div class="rounded-xl border border-zinc-200 bg-white p-8 shadow-sm">
-            {{ $slot }}
-        </div>
-    </div>
+            <div class="rounded-lg border border-zinc-200 bg-white p-8 shadow-sm">
+                {{ $slot }}
+            </div>
 
+            <p class="mt-6 text-center admin-caption">
+                Secure access for authorized website administrators.
+            </p>
+
+            <p class="mt-2 text-center admin-caption">
+                Developed by
+                <a href="https://github.com/ahmedsunil" class="font-medium text-zinc-950 hover:text-zinc-700">
+                    Ahmed Sunil
+                </a>
+            </p>
+        </section>
+    </main>
 </div>
 
 @livewireScripts
@@ -73,9 +87,5 @@
         </div>
     </template>
 </div>
-<footer
-    class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-2 admin-caption shadow-sm">
-    <a href="https://github.com/ahmedsunil">Developed by Ahmed Sunil</a>
-</footer>
 </body>
 </html>
