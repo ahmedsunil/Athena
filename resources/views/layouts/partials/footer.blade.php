@@ -22,7 +22,10 @@
                 <p class="text-white text-sm font-semibold mb-3" data-lang-key="footer_quick_links" data-en="Quick Links">{{ __('footer_quick_links') }}</p>
                 <div class="space-y-1.5">
                     @foreach($footerLinks as $link)
-                        <a href="{{ $link->link_key }}" class="block text-xs hover:text-white transition-colors">
+                        @php $isExternalFooterLink = preg_match('/^https?:\/\//i', $link->link_key) === 1; @endphp
+                        <a href="{{ $link->link_key }}"
+                           @if($isExternalFooterLink) target="_blank" rel="noopener noreferrer" @endif
+                           class="block text-xs hover:text-white transition-colors">
                             {{ app()->getLocale() === 'dv' && $link->label_dv ? $link->label_dv : $link->label }}
                         </a>
                     @endforeach

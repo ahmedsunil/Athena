@@ -19,7 +19,7 @@
                 <tr>
                     <td class="admin-table-cell text-zinc-400 whitespace-nowrap">#{{ $loop->iteration }}</td>
                     <td class="admin-table-cell">
-                        <i data-lucide="{{ $icon['lucide'] }}" class="h-4 w-4"></i>
+                        <x-icon :key="$key" class="h-4 w-4" />
                     </td>
                     <td class="admin-table-cell-primary">
                         <code class="rounded bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-700">{{ $key }}</code>
@@ -32,7 +32,7 @@
         <x-slot name="mobile">
             @foreach($icons as $key => $icon)
                 <li class="flex items-center gap-3 px-4 py-3">
-                    <i data-lucide="{{ $icon['lucide'] }}" class="h-4 w-4 shrink-0 text-zinc-500"></i>
+                    <x-icon :key="$key" class="h-4 w-4 shrink-0 text-zinc-500" />
                     <div class="min-w-0 flex-1">
                         <code class="font-mono text-xs text-zinc-700">{{ $key }}</code>
                         <p class="text-sm text-zinc-500">{{ $icon['label'] }}</p>
@@ -43,6 +43,3 @@
     </x-admin.tables.data-table>
 
 </div>
-
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script>lucide.createIcons();</script>

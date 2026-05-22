@@ -24,15 +24,35 @@
                     @error('label_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="mb-1.5 block admin-label">Link</label>
-                    <select wire:model="link_key"
-                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                        <option value="">Select a link…</option>
-                        @foreach($linkKeys as $key => $label)
-                            <option value="{{ $key }}">{{ $label }} ({{ $key }})</option>
-                        @endforeach
-                    </select>
+                    <label class="mb-1.5 block admin-label">Link type</label>
+                    <div class="grid h-9 grid-cols-2 rounded-md border border-zinc-200 bg-zinc-100 p-0.5 shadow-sm">
+                        <button type="button" wire:click="setLinkType('internal')"
+                                class="rounded-[5px] admin-link-label transition-colors {{ $link_type === 'internal' ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">
+                            From dropdown
+                        </button>
+                        <button type="button" wire:click="setLinkType('custom')"
+                                class="rounded-[5px] admin-link-label transition-colors {{ $link_type === 'custom' ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">
+                            Custom link
+                        </button>
+                    </div>
+                    @error('link_type') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+
+                    @if($link_type === 'internal')
+                        <label class="mt-2 mb-1.5 block admin-label">Page</label>
+                        <select wire:model="link_key"
+                                class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                            <option value="">Select a link...</option>
+                            @foreach($linkKeys as $key => $label)
+                                <option value="{{ $key }}">{{ $label }} ({{ $key }})</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <label class="mt-2 mb-1.5 block admin-label">External URL</label>
+                        <input type="url" wire:model="custom_url" placeholder="https://example.com"
+                               class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @endif
                     @error('link_key') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                    @error('custom_url') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
@@ -86,6 +106,10 @@
                     <td class="admin-table-cell text-zinc-400 whitespace-nowrap">#{{ $link->id }}</td>
                     <td class="admin-table-cell-primary">{{ $link->label }}</td>
                     <td class="admin-table-cell">
+                        @php $isExternal = preg_match('/^https?:\/\//i', $link->link_key) === 1; @endphp
+                        <span class="mr-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium {{ $isExternal ? 'bg-blue-50 text-blue-700' : 'bg-zinc-100 text-zinc-600' }}">
+                            {{ $isExternal ? 'External' : 'Page' }}
+                        </span>
                         <code class="rounded bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-700">{{ $link->link_key }}</code>
                     </td>
                     <td class="admin-table-cell">
@@ -112,6 +136,10 @@
                 <li class="flex items-center justify-between gap-3 px-4 py-3">
                     <div>
                         <p class="text-sm font-medium text-zinc-950">{{ $link->label }}</p>
+                        @php $isExternal = preg_match('/^https?:\/\//i', $link->link_key) === 1; @endphp
+                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium {{ $isExternal ? 'bg-blue-50 text-blue-700' : 'bg-zinc-100 text-zinc-600' }}">
+                            {{ $isExternal ? 'External' : 'Page' }}
+                        </span>
                         <code class="font-mono text-xs text-zinc-500">{{ $link->link_key }}</code>
                     </div>
                     <div class="flex items-center gap-2">

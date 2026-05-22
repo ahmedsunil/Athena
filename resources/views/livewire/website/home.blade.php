@@ -168,8 +168,11 @@
                             $quickAccessTitle = $isAdmissions ? __('common_announcements') : $item->title;
                             $quickAccessHref = $isAdmissions ? route('announcements.index') : $item->link_key;
                             $quickAccessIcon = $isAdmissions ? 'Bell' : $item->icon_key;
+                            $isExternalQuickAccess = preg_match('/^https?:\/\//i', $quickAccessHref) === 1;
                         @endphp
-                        <a href="{{ $quickAccessHref }}" data-reveal="scale"
+                        <a href="{{ $quickAccessHref }}"
+                           @if($isExternalQuickAccess) target="_blank" rel="noopener noreferrer" @endif
+                           data-reveal="scale"
                            style="--reveal-delay: {{ $loop->index * 55 }}ms"
                            class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#002366]/20 hover:shadow-md transition-all text-center">
                             <div
