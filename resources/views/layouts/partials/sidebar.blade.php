@@ -125,7 +125,7 @@
     ];
 @endphp
 
-<div class="flex h-full min-h-0 flex-col bg-black text-slate-100" x-data="{ accountOpen: false }">
+<div class="flex h-full min-h-0 flex-col bg-black text-slate-100">
     <div class="flex items-center gap-3 px-4 py-5">
         @if(file_exists(public_path('images/app-mark.webp')))
             <img src="{{ asset('images/app-mark.webp') }}" alt="{{ config('app.name') }}" class="h-14 w-14 rounded-xl object-contain">
@@ -171,11 +171,23 @@
         @endforeach
     </nav>
 
-    <div class="mt-auto shrink-0 border-t border-white/10 bg-black px-3 pb-2 pt-2">
-        <div x-show="accountOpen"
-             x-transition
-             x-cloak
-             class="overflow-hidden rounded-lg border border-white/10 bg-black shadow-sm">
+    <details class="mt-auto shrink-0 border-t border-white/10 bg-black px-3 pb-2 pt-2">
+        <summary class="flex w-full cursor-pointer list-none items-center justify-between rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-white/10 [&::-webkit-details-marker]:hidden">
+            <div class="flex min-w-0 items-center gap-2.5">
+                <div
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 admin-button-label text-white">
+                    {{ $initial }}
+                </div>
+                <span class="truncate text-[13px] font-semibold text-white">{{ $user?->name ?? 'Admin' }}</span>
+            </div>
+            <svg class="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m7 15 5 5 5-5"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="m7 9 5-5 5 5"/>
+            </svg>
+        </summary>
+
+        <div class="overflow-hidden rounded-lg border border-white/10 bg-black shadow-sm">
             <div class="flex items-center gap-2.5 px-2.5 py-2.5">
                 <div
                     class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 admin-button-label text-white">
@@ -214,23 +226,5 @@
                 </form>
             </div>
         </div>
-
-        <button type="button"
-                class="flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-white/10"
-                :aria-expanded="accountOpen.toString()"
-                @click="accountOpen = !accountOpen">
-            <div class="flex min-w-0 items-center gap-2.5">
-                <div
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/10 admin-button-label text-white">
-                    {{ $initial }}
-                </div>
-                <span class="truncate text-[13px] font-semibold text-white">{{ $user?->name ?? 'Admin' }}</span>
-            </div>
-            <svg class="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m7 15 5 5 5-5"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="m7 9 5-5 5 5"/>
-            </svg>
-        </button>
-    </div>
+    </details>
 </div>

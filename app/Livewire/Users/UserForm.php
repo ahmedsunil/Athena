@@ -21,6 +21,7 @@ class UserForm extends Component
     public string $password_confirmation = '';
     public array $selectedRoles = ['user'];
     public bool $isActive = true;
+    public string $roleSearch = '';
 
     public function mount(?int $userId = null): void
     {
@@ -90,10 +91,20 @@ class UserForm extends Component
         $this->redirect(route('users.index'), navigate: true);
     }
 
+    public function clearRoles(): void
+    {
+        $this->selectedRoles = [];
+    }
+
     public function render()
     {
         $title = $this->userId ? 'Edit User' : 'New User';
         $roles = \Spatie\Permission\Models\Role::orderBy('name')->pluck('name');
+
+        if (trim($this->roleSearch) !== '') {
+            $query = mb_strtolower(trim($this->roleSearch));
+            $roles = $roles->filter(fn (string $role) => str_contains(mb_strtolower($role), $query))->values();
+        }
 
         return view('livewire.users.user-form', compact('roles'))
             ->layout('layouts.app', ['title' => $title]);

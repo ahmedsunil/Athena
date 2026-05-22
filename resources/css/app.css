@@ -12,8 +12,6 @@
         'Courier New', monospace;
 }
 
-[x-cloak] { display: none !important; }
-
 @layer base {
     :root {
         --admin-chart-1: hsl(12 76% 61%);

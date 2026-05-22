@@ -82,107 +82,37 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <label class="mb-1.5 block admin-label">Roles</label>
-                    <div x-data="{
-                            open: false,
-                            search: '',
-                            allRoles: @js($roles->values()->all()),
-                            get selected() { return $wire.selectedRoles ?? [] },
-                            get filtered() {
-                                if (!this.search) return this.allRoles;
-                                return this.allRoles.filter(r => r.toLowerCase().includes(this.search.toLowerCase()));
-                            },
-                            toggle(role) {
-                                const s = this.selected;
-                                $wire.selectedRoles = s.includes(role) ? s.filter(r => r !== role) : [...s, role];
-                            },
-                            has(role) { return this.selected.includes(role) },
-                            cap(str) { return str.charAt(0).toUpperCase() + str.slice(1) },
-                            openDropdown() { this.open = true; this.$nextTick(() => this.$refs.search?.focus()); }
-                         }"
-                         @click.outside="open = false; search = ''"
-                         @keydown.escape="open = false; search = ''"
-                         class="relative">
-
-                        {{-- Trigger --}}
-                        <button type="button"
-                                @click="openDropdown()"
-                                class="flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-md border border-zinc-200 bg-white px-2.5 py-1.5 text-left shadow-sm transition-colors hover:border-zinc-300 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
-                            <template x-if="selected.length === 0">
-                                <span class="admin-body-muted">Select roles…</span>
-                            </template>
-                            <template x-for="role in selected" :key="role">
-                                <span class="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 admin-label">
-                                    <span x-text="cap(role)"></span>
-                                    <button type="button"
-                                            @click.stop="toggle(role)"
-                                            class="rounded-full text-zinc-400 hover:text-zinc-700 focus:outline-none">
-                                        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                                        </svg>
-                                    </button>
-                                </span>
-                            </template>
-                            <svg class="ml-auto h-4 w-4 shrink-0 text-zinc-400 transition-transform"
-                                 :class="open ? 'rotate-180' : ''"
-                                 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/>
+                    <div class="rounded-md border border-zinc-200 bg-white p-2 shadow-sm">
+                        <div class="mb-2 flex items-center gap-2 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1.5">
+                            <svg class="h-3.5 w-3.5 shrink-0 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z"/>
                             </svg>
-                        </button>
+                            <input wire:model.live.debounce.250ms="roleSearch"
+                                   type="text"
+                                   placeholder="Search roles..."
+                                   class="w-full bg-transparent text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:outline-none">
+                        </div>
 
-                        {{-- Dropdown --}}
-                        <div x-show="open"
-                             x-transition:enter="transition ease-out duration-100"
-                             x-transition:enter-start="opacity-0 -translate-y-1 scale-95"
-                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave="transition ease-in duration-75"
-                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave-end="opacity-0 -translate-y-1 scale-95"
-                             class="absolute z-20 mt-1 w-full rounded-md border border-zinc-200 bg-white shadow-lg">
+                        <div class="grid gap-1 sm:grid-cols-2">
+                            @forelse($roles as $role)
+                                <label class="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm text-zinc-700 hover:bg-zinc-50">
+                                    <input type="checkbox" wire:model.live="selectedRoles" value="{{ $role }}"
+                                           class="h-3.5 w-3.5 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950">
+                                    <span>{{ ucfirst($role) }}</span>
+                                </label>
+                            @empty
+                                <p class="px-2 py-1.5 admin-muted">No roles match.</p>
+                            @endforelse
+                        </div>
 
-                            {{-- Search --}}
-                            <div class="border-b border-zinc-100 p-2">
-                                <div class="flex items-center gap-2 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1.5">
-                                    <svg class="h-3.5 w-3.5 shrink-0 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z"/>
-                                    </svg>
-                                    <input x-ref="search"
-                                           x-model="search"
-                                           type="text"
-                                           placeholder="Search roles…"
-                                           class="w-full bg-transparent text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:outline-none">
-                                </div>
-                            </div>
-
-                            {{-- Options --}}
-                            <div class="max-h-48 overflow-y-auto py-1">
-                                <template x-for="role in filtered" :key="role">
-                                    <button type="button"
-                                            @click="toggle(role)"
-                                            class="flex w-full items-center gap-2.5 px-3 py-2 text-sm font-normal leading-5 text-zinc-700 hover:bg-zinc-50">
-                                        <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors"
-                                              :class="has(role) ? 'bg-zinc-950 border-zinc-950' : 'border-zinc-300'">
-                                            <svg x-show="has(role)" class="h-2.5 w-2.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
-                                            </svg>
-                                        </span>
-                                        <span x-text="cap(role)"></span>
-                                    </button>
-                                </template>
-                                <template x-if="filtered.length === 0">
-                                    <p class="px-3 py-2 admin-muted">No roles match.</p>
-                                </template>
-                            </div>
-
-                            {{-- Footer --}}
-                            <div x-show="selected.length > 0" class="border-t border-zinc-100 px-3 py-2">
-                                <button type="button"
-                                        @click="$wire.selectedRoles = []"
-                                        class="admin-muted hover:text-zinc-700">
+                        @if(count($selectedRoles) > 0)
+                            <div class="mt-2 border-t border-zinc-100 pt-2">
+                                <button type="button" wire:click="clearRoles" class="admin-muted hover:text-zinc-700">
                                     Clear selection
                                 </button>
                             </div>
+                        @endif
                         </div>
-                    </div>
                     @error('selectedRoles') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                     @error('selectedRoles.*') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>

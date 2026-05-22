@@ -442,18 +442,19 @@
                         'library'          => 'Library',
                     ];
                 @endphp
-                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
+                    <button type="button" wire:click="toggleStaffSection('academic')" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
                             <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_section_eyebrow') }}</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_academic_section') }}</h2>
                             <p class="text-xs text-slate-400 mt-0.5">{{ __('about_team_academic_lead') }}</p>
                         </div>
-                        <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0 {{ ($openStaffSections['academic'] ?? false) ? 'rotate-180' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="p-6 space-y-8">
+                    @if($openStaffSections['academic'] ?? false)
+                    <div class="p-6 space-y-8">
                         @forelse($academicSubSections as $key => $label)
                             @php $group = $academicStaff->get($key, collect()); @endphp
                             @if($group->isNotEmpty())
@@ -471,6 +472,7 @@
                             <p class="text-sm text-slate-400">{{ __('about_team_no_academic_staff') }}</p>
                         @endforelse
                     </div>
+                    @endif
                 </div>
 
                 {{-- Administrative Section --}}
@@ -483,18 +485,19 @@
                         'printer' => 'Printing',
                     ];
                 @endphp
-                <div x-data="{ open: false }" class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
+                    <button type="button" wire:click="toggleStaffSection('administrative')" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
                         <div class="text-left">
                             <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_section_eyebrow') }}</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_admin_section') }}</h2>
                             <p class="text-xs text-slate-400 mt-0.5">{{ __('about_team_admin_lead') }}</p>
                         </div>
-                        <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0" :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-5 h-5 text-slate-300 transition-transform duration-200 flex-shrink-0 {{ ($openStaffSections['administrative'] ?? false) ? 'rotate-180' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="p-6 space-y-8">
+                    @if($openStaffSections['administrative'] ?? false)
+                    <div class="p-6 space-y-8">
                         @forelse($adminSubSections as $key => $label)
                             @php $group = $adminStaff->get($key, collect()); @endphp
                             @if($group->isNotEmpty())
@@ -511,6 +514,7 @@
                             <p class="text-sm text-slate-400">{{ __('about_team_no_admin_staff') }}</p>
                         @endforelse
                     </div>
+                    @endif
                 </div>
 
             </div>

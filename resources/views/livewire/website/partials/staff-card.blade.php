@@ -8,10 +8,15 @@
     $accentBorder = $borderMap[$accentColor] ?? 'border-slate-300';
 @endphp
 
-<div x-data="{ expanded: false }">
-    <div
-        @click="expanded = !expanded"
-        class="bg-white border border-slate-200 rounded-2xl p-4 cursor-pointer hover:border-slate-300 hover:shadow-sm transition-all duration-150 select-none group"
+@php
+    $expanded = $expandedStaffCards[$member->id] ?? false;
+@endphp
+
+<div>
+    <button
+        type="button"
+        wire:click="toggleStaffCard({{ $member->id }})"
+        class="w-full text-left bg-white border border-slate-200 rounded-2xl p-4 cursor-pointer hover:border-slate-300 hover:shadow-sm transition-all duration-150 select-none group"
     >
         {{-- Avatar --}}
         <div class="mb-3">
@@ -33,28 +38,20 @@
         {{-- Expand hint --}}
         @if($member->education || !empty($member->work_experiences))
             <div class="mt-2.5 flex items-center justify-between">
-                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-show="!expanded">{{ __('staff_card_details') }}</span>
-                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-show="expanded" x-cloak>{{ __('staff_card_close') }}</span>
+                <span class="text-[10px] font-semibold text-slate-400 leading-none">{{ $expanded ? __('staff_card_close') : __('staff_card_details') }}</span>
                 <svg
-                    class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200"
-                    :class="expanded ? 'rotate-180' : ''"
+                    class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200 {{ $expanded ? 'rotate-180' : '' }}"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                 >
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                 </svg>
             </div>
         @endif
-    </div>
+    </button>
 
     {{-- Inline detail panel --}}
-    <div
-        x-show="expanded"
-        x-transition:enter="transition ease-out duration-150"
-        x-transition:enter-start="opacity-0 -translate-y-1"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-cloak
-        class="border border-t-0 border-slate-200 rounded-b-2xl bg-slate-50 px-4 pb-4 pt-3 -mt-2 space-y-3"
-    >
+    @if($expanded)
+    <div class="border border-t-0 border-slate-200 rounded-b-2xl bg-slate-50 px-4 pb-4 pt-3 -mt-2 space-y-3">
         @if($member->education)
             <div class="flex items-start gap-2">
                 <svg class="w-3.5 h-3.5 text-slate-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,4 +73,5 @@
             </div>
         @endif
     </div>
+    @endif
 </div>

@@ -1,25 +1,11 @@
 @props(['label' => null])
 
-<div
-    x-data="{ on: @entangle($attributes->wire('model')) }"
-    class="flex cursor-pointer items-center gap-2.5"
-    @click="on = !on">
+<label class="flex cursor-pointer items-center gap-2.5">
+    <input type="checkbox" {{ $attributes->whereStartsWith('wire:model') }} class="peer sr-only">
 
-    {{-- Track --}}
-    <button
-        type="button"
-        role="switch"
-        :aria-checked="on"
-        :class="on ? 'bg-zinc-900' : 'bg-zinc-200'"
-        class="inline-flex h-5 w-9 shrink-0 items-center rounded-full shadow-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-950/10">
-        {{-- Knob --}}
-        <span
-            :class="on ? 'translate-x-4' : 'translate-x-0.5'"
-            class="inline-block h-3.5 w-3.5 rounded-full bg-white shadow-sm transition-transform duration-200">
-        </span>
-    </button>
+    <span class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-zinc-200 shadow-sm transition-colors duration-200 after:absolute after:left-0.5 after:h-3.5 after:w-3.5 after:rounded-full after:bg-white after:shadow-sm after:transition-transform after:duration-200 peer-checked:bg-zinc-900 peer-checked:after:translate-x-4 peer-focus:ring-2 peer-focus:ring-zinc-950/10"></span>
 
     @if($label)
         <span class="text-sm font-medium leading-5 text-zinc-700">{{ $label }}</span>
     @endif
-</div>
+</label>

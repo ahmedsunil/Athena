@@ -15,6 +15,7 @@ class RoleForm extends Component
 
     public string $name = '';
     public array $selectedPermissions = [];
+    public string $permissionSearch = '';
 
     public function mount(?int $roleId = null): void
     {
@@ -49,11 +50,42 @@ class RoleForm extends Component
         $this->redirect(route('roles.index'), navigate: true);
     }
 
+    public function togglePermission(string $permission): void
+    {
+        if (in_array($permission, $this->selectedPermissions, true)) {
+            $this->selectedPermissions = array_values(array_diff($this->selectedPermissions, [$permission]));
+            return;
+        }
+
+        $this->selectedPermissions[] = $permission;
+    }
+
+    public function togglePermissionGroup(string $group, array $permissions): void
+    {
+        $selected = collect($this->selectedPermissions);
+        $allSelected = collect($permissions)->every(fn (string $permission) => $selected->contains($permission));
+
+        $this->selectedPermissions = $allSelected
+            ? $selected->reject(fn (string $permission) => in_array($permission, $permissions, true))->values()->all()
+            : $selected->merge($permissions)->unique()->values()->all();
+    }
+
     public function render()
     {
         $permissions = Permission::orderBy('name')->get()->groupBy(function ($p) {
             return ucfirst(explode('.', $p->name)[0]);
-        });
+        })->map(function ($items, $group) {
+            $query = mb_strtolower(trim($this->permissionSearch));
+
+            if ($query === '') {
+                return $items;
+            }
+
+            return $items->filter(fn ($permission) =>
+                str_contains(mb_strtolower($permission->name), $query)
+                || str_contains(mb_strtolower((string) $group), $query)
+            );
+        })->filter(fn ($items) => $items->isNotEmpty());
 
         return view('livewire.roles.role-form', compact('permissions'))
             ->layout('layouts.app', ['title' => $this->roleId ? 'Edit Role' : 'Create Role']);

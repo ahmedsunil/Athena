@@ -1,4 +1,4 @@
-<div class="space-y-6 px-4 py-5 sm:px-6" x-data="{ tab: 'profile' }">
+<div class="space-y-6 px-4 py-5 sm:px-6">
     <div>
         <h1 class="admin-page-title">Settings</h1>
         <p class="mt-1 admin-caption">Manage your profile and account settings.</p>
@@ -8,38 +8,41 @@
         <aside class="space-y-1">
             <p class="mb-2 px-3 admin-eyebrow">Profile Settings</p>
             <button type="button"
-                    @click="tab = 'profile'"
-                    :class="tab === 'profile' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950'"
-                    class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors">
+                    wire:click="setTab('profile')"
+                    class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors {{ $activeTab === 'profile' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950' }}">
                 Profile
             </button>
             <button type="button"
-                    @click="tab = 'password'"
-                    :class="tab === 'password' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950'"
-                    class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors">
+                    wire:click="setTab('password')"
+                    class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors {{ $activeTab === 'password' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950' }}">
                 Password
             </button>
             <button type="button"
-                    @click="tab = 'two-factor'"
-                    :class="tab === 'two-factor' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950'"
-                    class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors">
+                    wire:click="setTab('two-factor')"
+                    class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors {{ $activeTab === 'two-factor' ? 'bg-zinc-100 text-zinc-950' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950' }}">
                 Two-Factor Auth
             </button>
         </aside>
 
         <div class="min-w-0 space-y-4">
-            <section x-show="tab === 'profile'" x-cloak class="space-y-4">
+            @if($activeTab === 'profile')
+            <section class="space-y-4">
                 <livewire:profile.update-profile-information />
                 <livewire:profile.delete-account />
             </section>
+            @endif
 
-            <section x-show="tab === 'password'" x-cloak>
+            @if($activeTab === 'password')
+            <section>
                 <livewire:profile.update-password />
             </section>
+            @endif
 
-            <section x-show="tab === 'two-factor'" x-cloak>
+            @if($activeTab === 'two-factor')
+            <section>
                 <livewire:profile.two-factor-authentication />
             </section>
+            @endif
 
         </div>
     </div>

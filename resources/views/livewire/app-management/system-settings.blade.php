@@ -40,12 +40,8 @@
             </button>
         </div>
 
-        <div class="p-5 space-y-4"
-             x-data="{ enabled: @entangle('googleLoginEnabled') }"
-             x-show="enabled"
-             x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0 -translate-y-1"
-             x-transition:enter-end="opacity-100 translate-y-0">
+        @if($googleLoginEnabled)
+        <div class="p-5 space-y-4">
 
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
@@ -86,6 +82,7 @@
                 </ol>
             </div>
         </div>
+        @endif
 
         <div class="flex justify-end border-t border-zinc-100 px-5 py-3">
             <button wire:click="saveGoogle"

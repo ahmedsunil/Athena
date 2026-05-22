@@ -6,11 +6,24 @@ use App\Models\DigitalServiceDocument;
 use App\Models\Event;
 use App\Models\GalleryAlbum;
 use App\Models\Announcement;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Search extends Component
 {
     public string $query = '';
+    public bool $open = false;
+
+    #[On('openSearch')]
+    public function open(): void
+    {
+        $this->open = true;
+    }
+
+    public function close(): void
+    {
+        $this->open = false;
+    }
 
     public function getResultsProperty(): array
     {

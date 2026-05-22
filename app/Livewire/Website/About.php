@@ -16,6 +16,8 @@ class About extends Component
     public string $activeTab = 'about';
     public string $activeCategory = 'all';
     public string $activeYear = 'all';
+    public array $openStaffSections = [];
+    public array $expandedStaffCards = [];
 
     public function switchTab(string $tab): void
     {
@@ -30,6 +32,16 @@ class About extends Component
     public function switchYear(string $year): void
     {
         $this->activeYear = $year;
+    }
+
+    public function toggleStaffSection(string $section): void
+    {
+        $this->openStaffSections[$section] = ! ($this->openStaffSections[$section] ?? false);
+    }
+
+    public function toggleStaffCard(int $memberId): void
+    {
+        $this->expandedStaffCards[$memberId] = ! ($this->expandedStaffCards[$memberId] ?? false);
     }
 
     public function render()

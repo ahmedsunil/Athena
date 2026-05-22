@@ -20,29 +20,7 @@
         </div>
 
         {{-- Permissions grouped + searchable --}}
-        <div x-data="{
-                search: '',
-                allPerms: @js(
-                    $permissions->flatMap(fn($perms, $group) =>
-                        $perms->map(fn($p) => ['name' => $p->name, 'group' => $group])
-                    )->values()->all()
-                ),
-                get filtered() {
-                    if (!this.search.trim()) return this.allPerms;
-                    const q = this.search.toLowerCase();
-                    return this.allPerms.filter(p => p.name.toLowerCase().includes(q) || p.group.toLowerCase().includes(q));
-                },
-                get filteredGroups() {
-                    const groups = {};
-                    this.filtered.forEach(p => {
-                        if (!groups[p.group]) groups[p.group] = [];
-                        groups[p.group].push(p.name);
-                    });
-                    return groups;
-                },
-                groupKeys() { return Object.keys(this.filteredGroups); },
-                hasResults() { return this.filtered.length > 0; }
-             }">
+        <div>
 
             <div class="mb-3 flex items-center justify-between gap-3">
                 <p class="admin-label">Permissions</p>
@@ -50,64 +28,53 @@
                     <svg class="h-3.5 w-3.5 shrink-0 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z"/>
                     </svg>
-                    <input x-model="search"
+                    <input wire:model.live.debounce.250ms="permissionSearch"
                            type="text"
                            placeholder="Search permissions…"
                            class="w-full bg-transparent text-xs font-normal leading-5 text-zinc-700 placeholder-zinc-400 focus:outline-none">
-                    <button x-show="search" type="button" @click="search = ''" class="shrink-0 text-zinc-400 hover:text-zinc-700">
+                    @if($permissionSearch !== '')
+                    <button type="button" wire:click="$set('permissionSearch', '')" class="shrink-0 text-zinc-400 hover:text-zinc-700">
                         <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
+                    @endif
                 </div>
             </div>
 
             <div class="space-y-3">
-                <template x-for="group in groupKeys()" :key="group">
+                @forelse($permissions as $group => $groupPermissions)
+                    @php
+                        $permissionNames = $groupPermissions->pluck('name')->values()->all();
+                        $allSelected = collect($permissionNames)->every(fn ($permission) => in_array($permission, $selectedPermissions, true));
+                    @endphp
                     <div class="rounded-lg border border-zinc-200 p-4">
                         <div class="mb-2.5 flex items-center justify-between gap-2">
-                            <p class="admin-eyebrow" x-text="group"></p>
+                            <p class="admin-eyebrow">{{ $group }}</p>
                             <button type="button"
-                                    @click="
-                                        const groupPerms = filteredGroups[group];
-                                        const allSelected = groupPerms.every(p => $wire.selectedPermissions.includes(p));
-                                        const arr = [...$wire.selectedPermissions];
-                                        if (allSelected) {
-                                            $wire.selectedPermissions = arr.filter(p => !groupPerms.includes(p));
-                                        } else {
-                                            const toAdd = groupPerms.filter(p => !arr.includes(p));
-                                            $wire.selectedPermissions = [...arr, ...toAdd];
-                                        }
-                                    "
-                                    class="text-[10px] font-medium text-zinc-400 hover:text-zinc-700 transition-colors"
-                                    x-text="filteredGroups[group].every(p => $wire.selectedPermissions.includes(p)) ? 'Deselect all' : 'Select all'">
+                                    wire:click="togglePermissionGroup(@js($group), @js($permissionNames))"
+                                    class="text-[10px] font-medium text-zinc-400 hover:text-zinc-700 transition-colors">
+                                {{ $allSelected ? 'Deselect all' : 'Select all' }}
                             </button>
                         </div>
                         <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                            <template x-for="permName in filteredGroups[group]" :key="permName">
+                            @foreach($groupPermissions as $permission)
                                 <label class="flex cursor-pointer items-center gap-2">
                                     <input type="checkbox"
-                                           x-bind:value="permName"
-                                           x-bind:checked="$wire.selectedPermissions.includes(permName)"
-                                           @change="
-                                               const arr = [...$wire.selectedPermissions];
-                                               const idx = arr.indexOf(permName);
-                                               if (idx === -1) arr.push(permName); else arr.splice(idx, 1);
-                                               $wire.selectedPermissions = arr;
-                                           "
+                                           value="{{ $permission->name }}"
+                                           wire:click="togglePermission(@js($permission->name))"
+                                           @checked(in_array($permission->name, $selectedPermissions, true))
                                            class="h-3.5 w-3.5 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950">
-                                    <span class="text-xs font-normal leading-5 text-zinc-700" x-text="permName"></span>
+                                    <span class="text-xs font-normal leading-5 text-zinc-700">{{ $permission->name }}</span>
                                 </label>
-                            </template>
+                            @endforeach
                         </div>
                     </div>
-                </template>
-
-                <template x-if="!hasResults()">
+                @empty
                     <p class="rounded-lg border border-zinc-200 px-4 py-6 text-center admin-muted">
-                        No permissions match "<span x-text="search"></span>".
+                        No permissions match "{{ $permissionSearch }}".
                     </p>
-                </template>
+                @endforelse
             </div>
 
             @error('selectedPermissions') <p class="mt-2 admin-form-error">{{ $message }}</p> @enderror
