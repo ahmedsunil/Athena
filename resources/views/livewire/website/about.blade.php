@@ -42,7 +42,7 @@
 
             {{-- Mission & Vision --}}
             <section class="py-12 sm:py-16 bg-slate-50 border-b border-slate-200">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="mb-8">
                         <span class="text-xs font-black uppercase tracking-widest text-[#002366]">{{ __('about_section_our_purpose') }}</span>
                         <h2 class="text-3xl font-black text-slate-900 mt-1">{{ __('about_section_mission_vision') }}</h2>
