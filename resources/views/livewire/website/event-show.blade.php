@@ -7,10 +7,10 @@
         @else
             <div class="w-full h-full bg-gradient-to-br from-slate-800 via-[#002366] to-slate-900"></div>
         @endif
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+        <div class="absolute inset-0 bg-slate-900/25"></div>
         <div class="absolute bottom-4 left-4">
             <span class="inline-block text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
-                {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-[#002366]/10 text-[#002366]' : 'bg-slate-100 text-slate-600') }}">
+                {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-[#002366] text-white' : 'bg-slate-100 text-slate-600') }}">
                 {{ __('common_status_' . $event->status) }}
             </span>
         </div>
