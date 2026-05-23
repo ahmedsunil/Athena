@@ -41,7 +41,7 @@
             {{-- Clubs --}}
             <div class="mb-10">
                 <h2 class="text-lg font-bold text-slate-900 mb-5">{{ __('student_life_tab_clubs') }}</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @forelse($clubs as $i => $club)
                         @php $colour = $clubPalette[$i % count($clubPalette)]; @endphp
                         <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-md transition-shadow"
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-slate-400 col-span-3">{{ __('student_life_clubs_empty') }}</p>
+                        <p class="text-slate-400 md:col-span-2">{{ __('student_life_clubs_empty') }}</p>
                     @endforelse
                 </div>
             </div>
@@ -142,7 +142,7 @@
 
         {{-- Prefects tab --}}
         @if($activeTab === 'prefects')
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @forelse($prefects as $i => $prefect)
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center"
                          data-reveal="scale" style="--reveal-delay: {{ ($i % 8) * 55 }}ms">
@@ -176,7 +176,7 @@
                         @endif
                     </div>
                 @empty
-                    <p class="text-slate-400 col-span-4">{{ __('student_life_prefects_empty') }}</p>
+                    <p class="text-slate-400 md:col-span-2">{{ __('student_life_prefects_empty') }}</p>
                 @endforelse
             </div>
         @endif
@@ -195,7 +195,7 @@
                 'violet'  => 'text-[#002366]','teal'    => 'text-teal-700',
             ];
             @endphp
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @forelse($uniformBodies as $i => $body)
                     @php
                     $ubg = $uniformBg[$body->colour] ?? 'bg-slate-100';
@@ -244,7 +244,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-slate-400 col-span-3">{{ __('student_life_uniform_empty') }}</p>
+                    <p class="text-slate-400 md:col-span-2">{{ __('student_life_uniform_empty') }}</p>
                 @endforelse
             </div>
         @endif
