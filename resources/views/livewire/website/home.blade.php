@@ -14,7 +14,8 @@
                     @endif
                     <div class="absolute inset-0 bg-slate-950/70"></div>
 
-                    <div class="relative min-h-[720px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-36 flex items-center justify-center">
+                    <div
+                        class="relative min-h-[720px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-36 flex items-center justify-center">
                         <div class="mx-auto max-w-5xl text-center" data-reveal="scale">
                             <p class="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
                                 <span data-lang-key="school_name"
@@ -51,7 +52,8 @@
             @endforeach
 
             @if($slides->count() > 1)
-                <div class="absolute bottom-16 left-1/2 z-10 flex w-[min(92vw,34rem)] -translate-x-1/2 items-center gap-4">
+                <div
+                    class="absolute bottom-16 left-1/2 z-10 flex w-[min(92vw,34rem)] -translate-x-1/2 items-center gap-4">
                     <span class="text-xs font-bold tabular-nums text-white/70">01</span>
                     <div class="flex flex-1 items-center gap-2">
                         @foreach($slides as $i => $slide)
@@ -60,7 +62,8 @@
                                     class="hero-dot h-1.5 flex-1 rounded-full transition-all duration-300 {{ $i === 0 ? 'bg-white' : 'bg-white/35 hover:bg-white/65' }}"></button>
                         @endforeach
                     </div>
-                    <span class="text-xs font-bold tabular-nums text-white/70">{{ str_pad((string) $slides->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                    <span
+                        class="text-xs font-bold tabular-nums text-white/70">{{ str_pad((string) $slides->count(), 2, '0', STR_PAD_LEFT) }}</span>
                 </div>
                 <button onclick="heroPrev()"
                         aria-label="Previous slide"
@@ -139,11 +142,19 @@
 
     {{-- Stats --}}
     @if($stats->isNotEmpty())
-        <section class="relative z-20 -mt-12 pb-12">
+        <section class="bg-white py-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 text-center shadow-2xl shadow-slate-900/10">
+                @php
+                    $statIcons = ['Users', 'Briefcase', 'Calendar', 'BookOpen'];
+                @endphp
+                <div
+                    class="grid grid-cols-2 lg:grid-cols-{{ min($stats->count(), 4) }} gap-px overflow-hidden rounded-sm border border-slate-200 bg-slate-200 text-center">
                     @foreach($stats as $stat)
-                        <div class="bg-white/95 px-5 py-6 backdrop-blur" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 80 }}ms">
+                        <div class="bg-white/95 px-5 py-6 backdrop-blur" data-reveal="scale"
+                             style="--reveal-delay: {{ $loop->index * 80 }}ms">
+                            <div class="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-sm bg-[#002366]/5 text-[#002366]">
+                                <x-icon :key="$statIcons[$loop->index % count($statIcons)]" class="h-4 w-4"/>
+                            </div>
                             <p class="text-3xl sm:text-4xl font-black text-[#002366]">{{ $stat->value }}</p>
                             <p class="text-slate-500 text-sm font-semibold mt-1">{{ $stat->title }}</p>
                         </div>
@@ -226,7 +237,8 @@
                                     </div>
                                 @endif
                                 <div class="absolute inset-0 bg-slate-900/25"></div>
-                                <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#002366] text-white">
+                                <span
+                                    class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#002366] text-white">
                                     {{ __('common_status_' . $event->status) }}
                                 </span>
                             </div>
@@ -263,8 +275,10 @@
                 <div class="bg-white rounded-2xl border border-[#D8E0EC] overflow-hidden shadow-sm" data-reveal="scale">
                     <div class="flex flex-col md:flex-row">
                         @if($profile->principal_photo_path)
-                            <div class="flex w-full shrink-0 items-center justify-center bg-[#002366]/5 px-8 pt-8 md:w-64 md:px-7 md:py-8">
-                                <div class="h-36 w-36 overflow-hidden rounded-full bg-slate-100 ring-4 ring-white shadow-xl shadow-slate-900/10 sm:h-40 sm:w-40">
+                            <div
+                                class="flex w-full shrink-0 items-center justify-center bg-[#002366]/5 px-8 pt-8 md:w-64 md:px-7 md:py-8">
+                                <div
+                                    class="h-36 w-36 overflow-hidden rounded-full bg-slate-100 ring-4 ring-white shadow-xl shadow-slate-900/10 sm:h-40 sm:w-40">
                                     <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}"
                                          class="h-full w-full object-cover object-top">
                                 </div>
@@ -396,7 +410,8 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_email') }}</p>
-                                <a href="mailto:{{ $contactEmail }}" class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $contactEmail }}</a>
+                                <a href="mailto:{{ $contactEmail }}"
+                                   class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $contactEmail }}</a>
                             </div>
                         </div>
                     @endif
@@ -408,7 +423,8 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_phone') }}</p>
-                                <a href="tel:{{ $contactPhoneHref }}" class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $contactPhone }}</a>
+                                <a href="tel:{{ $contactPhoneHref }}"
+                                   class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $contactPhone }}</a>
                             </div>
                         </div>
                     @endif
@@ -427,34 +443,41 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_address') }}</p>
-                                <a href="{{ $mapUrl }}" target="_blank" rel="noopener" class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $locationParts }}</a>
+                                <a href="{{ $mapUrl }}" target="_blank" rel="noopener"
+                                   class="text-sm text-slate-600 transition-colors hover:text-[#002366]">{{ $locationParts }}</a>
                             </div>
                         </div>
                     @endif
                 </div>
                 <form wire:submit="submitContact" class="space-y-4" data-reveal="right" style="--reveal-delay: 120ms">
                     @if($contactSent)
-                        <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+                        <div
+                            class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
                             {{ __('home_form_success') }}
                         </div>
                     @endif
 
                     <div>
-                    <input type="text" wire:model="contactName" placeholder="{{ __('home_form_name_placeholder') }}"
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
-                    @error('contactName') <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
+                        <input type="text" wire:model="contactName" placeholder="{{ __('home_form_name_placeholder') }}"
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
+                        @error('contactName') <p
+                            class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
-                    <input type="email" wire:model="contactEmail" placeholder="{{ __('home_form_email_placeholder') }}"
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
-                    @error('contactEmail') <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
+                        <input type="email" wire:model="contactEmail"
+                               placeholder="{{ __('home_form_email_placeholder') }}"
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
+                        @error('contactEmail') <p
+                            class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
-                    <textarea wire:model="contactMessage" rows="4" placeholder="{{ __('home_form_message_placeholder') }}"
+                    <textarea wire:model="contactMessage" rows="4"
+                              placeholder="{{ __('home_form_message_placeholder') }}"
                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm resize-none"></textarea>
-                    @error('contactMessage') <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
+                        @error('contactMessage') <p
+                            class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
                     </div>
 
                     <button type="submit" wire:loading.attr="disabled" wire:target="submitContact"
