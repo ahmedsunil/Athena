@@ -6,7 +6,7 @@
         'KS1' => 'bg-[#002366]/10 text-[#002366]',
         'KS2' => 'bg-emerald-100 text-emerald-700',
         'KS3' => 'bg-[#002366]/10 text-[#002366]',
-        'KS4' => 'bg-amber-100 text-amber-700',
+        'KS4' => 'bg-[#B21F2D]/10 text-[#B21F2D]',
         'KS5' => 'bg-slate-100 text-slate-700',
     ];
     @endphp

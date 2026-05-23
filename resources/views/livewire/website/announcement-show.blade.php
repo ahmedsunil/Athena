@@ -20,7 +20,7 @@
                         <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">{{ $announcement->category }}</span>
                         <span class="text-xs font-medium text-slate-400">{{ __('announcement_show_created') }} {{ $localizedDate($announcement->created_at) }}</span>
                         @if($announcement->deadline)
-                            <span class="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700">{{ __('announcement_show_deadline') }} {{ $localizedDate($announcement->deadline) }}</span>
+                            <span class="rounded-full bg-[#B21F2D]/5 px-2.5 py-1 text-xs font-bold text-[#B21F2D]">{{ __('announcement_show_deadline') }} {{ $localizedDate($announcement->deadline) }}</span>
                         @endif
                     </div>
                     <h1 class="text-3xl font-black leading-tight text-slate-900 sm:text-4xl">{{ $announcement->title }}</h1>

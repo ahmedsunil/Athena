@@ -1,9 +1,9 @@
 {{-- Variables: $member (StaffMember), $accentColor ('rose'|'sky'|'amber') --}}
 @php
     $borderMap = [
-        'rose'  => 'border-[#002366]/40',
+        'rose'  => 'border-[#B21F2D]/40',
         'sky'   => 'border-[#002366]/40',
-        'amber' => 'border-amber-300',
+        'amber' => 'border-[#B21F2D]/40',
     ];
     $accentBorder = $borderMap[$accentColor] ?? 'border-slate-300';
 @endphp

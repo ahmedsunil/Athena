@@ -203,7 +203,7 @@
                         @php
                             $timelineColors = [
                                 0 => ['ring' => 'ring-[#002366]/20',    'dot' => 'bg-[#002366]',    'badge' => 'bg-[#002366]/5 border-[#002366]/20 text-[#002366]'],
-                                1 => ['ring' => 'ring-amber-200',   'dot' => 'bg-amber-500',   'badge' => 'bg-amber-50 border-amber-200 text-amber-700'],
+                                1 => ['ring' => 'ring-[#B21F2D]/20',   'dot' => 'bg-[#B21F2D]',   'badge' => 'bg-[#B21F2D]/5 border-[#B21F2D]/20 text-[#B21F2D]'],
                                 2 => ['ring' => 'ring-[#002366]/20',     'dot' => 'bg-[#002366]/50',     'badge' => 'bg-[#002366]/5 border-[#002366]/20 text-[#002366]'],
                                 3 => ['ring' => 'ring-emerald-200', 'dot' => 'bg-emerald-500', 'badge' => 'bg-emerald-50 border-emerald-200 text-emerald-700'],
                             ];
@@ -249,26 +249,26 @@
                     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center mb-14">
                             <div class="inline-flex items-center gap-3 mb-4">
-                                <span class="h-px w-10 bg-amber-600/50"></span>
-                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-500 border border-amber-700/30 px-3 py-1 rounded-sm">{{ __('about_founding_eyebrow') }}</span>
-                                <span class="h-px w-10 bg-amber-600/50"></span>
+                                <span class="h-px w-10 bg-[#B21F2D]/50"></span>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-[#B21F2D] border border-[#B21F2D]/30 px-3 py-1 rounded-sm">{{ __('about_founding_eyebrow') }}</span>
+                                <span class="h-px w-10 bg-[#B21F2D]/50"></span>
                             </div>
                             <h2 class="text-3xl font-black text-white">{{ __('about_founding_heading') }}</h2>
-                            <p class="mt-3 text-amber-200/50 text-sm max-w-md mx-auto">{{ __('about_founding_subtext') }}</p>
+                            <p class="mt-3 text-[#B21F2D]/70 text-sm max-w-md mx-auto">{{ __('about_founding_subtext') }}</p>
                         </div>
                         <div class="grid justify-center gap-5 [grid-template-columns:repeat(auto-fit,minmax(8.5rem,10rem))]">
                             @foreach($foundingMembers as $member)
                                 <div class="group text-center">
-                                    <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 ring-1 ring-amber-700/20">
+                                    <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 ring-1 ring-[#B21F2D]/20">
                                         @if($member->photo_path)
                                             <img src="{{ $member->photo_url }}" alt="{{ $member->name }}" class="w-full h-full object-cover object-top grayscale sepia brightness-75 group-hover:grayscale-0 group-hover:sepia-0 group-hover:brightness-90 transition-all duration-700">
                                         @else
-                                            <div class="w-full h-full bg-stone-800 flex items-center justify-center text-amber-400 text-3xl font-black">{{ strtoupper(substr($member->name, 0, 1)) }}</div>
+                                            <div class="w-full h-full bg-stone-800 flex items-center justify-center text-[#B21F2D] text-3xl font-black">{{ strtoupper(substr($member->name, 0, 1)) }}</div>
                                         @endif
                                         <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>
                                     </div>
                                     <p class="font-bold text-white text-sm leading-tight">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
-                                    <p class="text-amber-400 text-[11px] font-semibold uppercase tracking-wide mt-0.5">{{ $member->subject }}</p>
+                                    <p class="text-[#B21F2D] text-[11px] font-semibold uppercase tracking-wide mt-0.5">{{ $member->subject }}</p>
                                     @if($member->tribute)
                                         <p class="text-stone-400 text-xs mt-1.5 leading-relaxed line-clamp-3">{{ $member->tribute }}</p>
                                     @endif
@@ -379,7 +379,7 @@
                                 <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
                                     @if($achievement->award)
                                         <span class="inline-flex items-center gap-1.5 text-xs font-black text-slate-900">
-                                            <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg class="w-3.5 h-3.5 text-[#B21F2D]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                             {{ $achievement->award }}
                                         </span>
                                     @endif

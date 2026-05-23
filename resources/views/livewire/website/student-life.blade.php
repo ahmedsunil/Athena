@@ -34,8 +34,8 @@
         @if($activeTab === 'student-council')
             @php
             $clubPalette = ['violet', 'pink', 'sky', 'amber', 'emerald', 'blue'];
-            $clubBg  = ['violet'=>'bg-[#002366]/10','pink'=>'bg-pink-100','sky'=>'bg-[#002366]/10','amber'=>'bg-amber-100','emerald'=>'bg-emerald-100','blue'=>'bg-[#002366]/10'];
-            $clubFg  = ['violet'=>'text-[#002366]','pink'=>'text-pink-600','sky'=>'text-[#002366]','amber'=>'text-amber-600','emerald'=>'text-emerald-600','blue'=>'text-[#002366]'];
+            $clubBg  = ['violet'=>'bg-[#002366]/10','pink'=>'bg-[#B21F2D]/10','sky'=>'bg-[#002366]/10','amber'=>'bg-[#B21F2D]/10','emerald'=>'bg-emerald-100','blue'=>'bg-[#002366]/10'];
+            $clubFg  = ['violet'=>'text-[#002366]','pink'=>'text-[#B21F2D]','sky'=>'text-[#002366]','amber'=>'text-[#B21F2D]','emerald'=>'text-emerald-600','blue'=>'text-[#002366]'];
             @endphp
 
             {{-- Clubs --}}
@@ -157,13 +157,13 @@
                         <p class="font-bold text-slate-900 text-sm">{{ $prefect->name }}</p>
                         @php
                         $roleTextClass = match(true) {
-                            str_contains($prefect->role_colour, 'rose')    => 'text-[#002366]',
+                            str_contains($prefect->role_colour, 'rose')    => 'text-[#B21F2D]',
                             str_contains($prefect->role_colour, 'violet')  => 'text-[#002366]',
                             str_contains($prefect->role_colour, 'emerald') => 'text-emerald-600',
                             str_contains($prefect->role_colour, 'sky')     => 'text-[#002366]',
-                            str_contains($prefect->role_colour, 'amber')   => 'text-amber-600',
+                            str_contains($prefect->role_colour, 'amber')   => 'text-[#B21F2D]',
                             str_contains($prefect->role_colour, 'teal')    => 'text-teal-600',
-                            str_contains($prefect->role_colour, 'orange')  => 'text-orange-600',
+                            str_contains($prefect->role_colour, 'orange')  => 'text-[#B21F2D]',
                             default                                         => 'text-slate-500',
                         };
                         @endphp
@@ -185,13 +185,13 @@
         @if($activeTab === 'uniform-bodies')
             @php
             $uniformBg = [
-                'rose'    => 'bg-[#002366]/10',    'sky'     => 'bg-[#002366]/10',
-                'emerald' => 'bg-emerald-100', 'amber'   => 'bg-amber-100',
+                'rose'    => 'bg-[#B21F2D]/10',    'sky'     => 'bg-[#002366]/10',
+                'emerald' => 'bg-emerald-100', 'amber'   => 'bg-[#B21F2D]/10',
                 'violet'  => 'bg-[#002366]/10',  'teal'    => 'bg-teal-100',
             ];
             $uniformFg = [
-                'rose'    => 'text-[#002366]',  'sky'     => 'text-[#002366]',
-                'emerald' => 'text-emerald-700','amber'  => 'text-amber-700',
+                'rose'    => 'text-[#B21F2D]',  'sky'     => 'text-[#002366]',
+                'emerald' => 'text-emerald-700','amber'  => 'text-[#B21F2D]',
                 'violet'  => 'text-[#002366]','teal'    => 'text-teal-700',
             ];
             @endphp

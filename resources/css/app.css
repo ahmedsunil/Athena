@@ -18,6 +18,10 @@
         --brand-blue-hover: #001a4d;
         --brand-blue-soft: rgb(0 35 102 / 0.1);
         --brand-blue-ring: rgb(0 35 102 / 0.16);
+        --brand-red: #b21f2d;
+        --brand-red-hover: #8f1824;
+        --brand-red-soft: rgb(178 31 45 / 0.1);
+        --brand-red-ring: rgb(178 31 45 / 0.2);
         --admin-chart-1: hsl(12 76% 61%);
         --admin-chart-2: hsl(173 58% 39%);
         --admin-chart-3: hsl(197 37% 24%);
