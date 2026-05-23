@@ -230,6 +230,8 @@
     "home_form_email_placeholder": "Email address",
     "home_form_message_placeholder": "Your message",
     "home_form_send": "Send Message",
+    "home_form_sending": "Sending...",
+    "home_form_success": "Your message has been sent.",
 
     "search_placeholder": "Search events, documents, gallery…",
     "search_escape": "ESC",

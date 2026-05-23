@@ -432,17 +432,35 @@
                         </div>
                     @endif
                 </div>
-                <form action="#" method="post" class="space-y-4" data-reveal="right" style="--reveal-delay: 120ms">
-                    @csrf
-                    <input type="text" name="name" placeholder="{{ __('home_form_name_placeholder') }}"
+                <form wire:submit="submitContact" class="space-y-4" data-reveal="right" style="--reveal-delay: 120ms">
+                    @if($contactSent)
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+                            {{ __('home_form_success') }}
+                        </div>
+                    @endif
+
+                    <div>
+                    <input type="text" wire:model="contactName" placeholder="{{ __('home_form_name_placeholder') }}"
                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
-                    <input type="email" name="email" placeholder="{{ __('home_form_email_placeholder') }}"
+                    @error('contactName') <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                    <input type="email" wire:model="contactEmail" placeholder="{{ __('home_form_email_placeholder') }}"
                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm">
-                    <textarea name="message" rows="4" placeholder="{{ __('home_form_message_placeholder') }}"
+                    @error('contactEmail') <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                    <textarea wire:model="contactMessage" rows="4" placeholder="{{ __('home_form_message_placeholder') }}"
                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm resize-none"></textarea>
-                    <button type="submit"
+                    @error('contactMessage') <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p> @enderror
+                    </div>
+
+                    <button type="submit" wire:loading.attr="disabled" wire:target="submitContact"
                             class="w-full bg-[#002366] hover:bg-[#001a4d] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
-                        {{ __('home_form_send') }}
+                        <span wire:loading.remove wire:target="submitContact">{{ __('home_form_send') }}</span>
+                        <span wire:loading wire:target="submitContact">{{ __('home_form_sending') }}</span>
                     </button>
                 </form>
             </div>

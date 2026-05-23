@@ -210,6 +210,8 @@
     "home_form_email_placeholder": "އީމެއިލް އެޑްރެސް",
     "home_form_message_placeholder": "ތިޔަ މެސެޖު",
     "home_form_send": "މެސެޖް ފޮނުވުން",
+    "home_form_sending": "ފޮނުވަނީ...",
+    "home_form_success": "ތިޔަ މެސެޖް ފޮނުވިއްޖެ.",
     "search_placeholder": "އިވެންޓްތައް، ލިޔެކިޔުންތައް، ގެލެރީ",
     "search_escape": "ESC",
     "search_quick_links": "އަވަސް ލިންކްތައް",
