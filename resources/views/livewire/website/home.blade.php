@@ -225,8 +225,8 @@
                                         </svg>
                                     </div>
                                 @endif
-                                <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
-                                    {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-[#002366]/10 text-[#002366]' : 'bg-slate-100 text-slate-600') }}">
+                                <div class="absolute inset-0 bg-slate-900/25"></div>
+                                <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#002366] text-white">
                                     {{ __('common_status_' . $event->status) }}
                                 </span>
                             </div>
