@@ -258,35 +258,35 @@
 
     {{-- Principal's Message --}}
     @if($profile->principal_name || $profile->principal_message)
-        <section class="py-16 sm:py-20 bg-[#002366]">
+        <section class="py-16 sm:py-20 bg-[#F3F6FA]">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden" data-reveal="scale">
+                <div class="bg-white rounded-2xl border border-[#D8E0EC] overflow-hidden shadow-sm" data-reveal="scale">
                     <div class="flex flex-col md:flex-row">
                         @if($profile->principal_photo_path)
-                            <div class="flex w-full shrink-0 items-center justify-center bg-[#002366]/35 px-8 pt-8 md:w-64 md:px-7 md:py-8">
-                                <div class="h-36 w-36 overflow-hidden rounded-full bg-slate-700 ring-4 ring-white/10 shadow-2xl shadow-slate-950/30 sm:h-40 sm:w-40">
+                            <div class="flex w-full shrink-0 items-center justify-center bg-[#002366]/5 px-8 pt-8 md:w-64 md:px-7 md:py-8">
+                                <div class="h-36 w-36 overflow-hidden rounded-full bg-slate-100 ring-4 ring-white shadow-xl shadow-slate-900/10 sm:h-40 sm:w-40">
                                     <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}"
                                          class="h-full w-full object-cover object-top">
                                 </div>
                             </div>
                         @endif
                         <div class="flex-1 p-8 flex flex-col justify-center">
-                            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-white/70">{{ __('home_principals_welcome') }}</p>
+                            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('home_principals_welcome') }}</p>
                             @if($profile->principal_message)
-                                <p class="text-slate-200 leading-relaxed italic text-lg">
+                                <p class="text-slate-700 leading-relaxed italic text-lg">
                                     "{{ $profile->principal_message }}"</p>
                             @endif
-                            <div class="mt-6 pt-5 border-t border-slate-700">
+                            <div class="mt-6 pt-5 border-t border-[#D8E0EC]">
                                 @if($profile->principal_name)
-                                    <p class="font-bold text-white">{{ $profile->principal_name }}</p>
+                                    <p class="font-bold text-slate-900">{{ $profile->principal_name }}</p>
                                 @endif
                                 @if($profile->principal_designation)
-                                    <p class="text-sm text-slate-400">{{ $profile->principal_designation }}
+                                    <p class="text-sm text-slate-500">{{ $profile->principal_designation }}
                                         , {{ $profile->school_name }}</p>
                                 @endif
                             </div>
                             <a href="{{ route('about') }}"
-                               class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/85 hover:text-white">
+                               class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#002366] hover:text-[#001a4d]">
                                 {{ __('home_read_full_message') }}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
