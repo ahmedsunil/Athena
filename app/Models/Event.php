@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -15,7 +16,7 @@ class Event extends Model
 
     protected $fillable = [
         'public_id', 'status', 'title', 'slug',
-        'date_start', 'date_end', 'location',
+        'date_start', 'time_start', 'date_end', 'time_end', 'location',
         'cover_image_path', 'short_description', 'full_description',
         'attachments', 'contact',
         'is_featured', 'featured_sort_order', 'is_active',
@@ -50,10 +51,38 @@ class Event extends Model
         if (! $this->date_start) {
             return '';
         }
-        $start = $this->date_start->format('j M Y');
+
+        $startDate = $this->date_start->format('j M Y');
+        $endDate = $this->date_end?->format('j M Y');
+        $startTime = $this->formatTime($this->time_start);
+        $endTime = $this->formatTime($this->time_end);
+
         if (! $this->date_end || $this->date_end->eq($this->date_start)) {
-            return $start;
+            if ($startTime && $endTime) {
+                return "{$startDate}, {$startTime} - {$endTime}";
+            }
+
+            if ($startTime || $endTime) {
+                return "{$startDate}, " . ($startTime ?: $endTime);
+            }
+
+            return $startDate;
         }
-        return $start . ' – ' . $this->date_end->format('j M Y');
+
+        $start = $startTime ? "{$startDate}, {$startTime}" : $startDate;
+        $end = $endTime ? "{$endDate}, {$endTime}" : $endDate;
+
+        return "{$start} - {$end}";
+    }
+
+    private function formatTime(?string $time): ?string
+    {
+        if (! $time) {
+            return null;
+        }
+
+        $time = substr($time, 0, 8);
+
+        return Carbon::createFromFormat(strlen($time) === 5 ? 'H:i' : 'H:i:s', $time)->format('g:i A');
     }
 }

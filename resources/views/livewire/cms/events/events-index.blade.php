@@ -31,8 +31,8 @@
                 </div>
             </div>
 
-            {{-- Status + Dates --}}
-            <div class="grid gap-4 sm:grid-cols-3">
+            {{-- Status + Date/time --}}
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 <div>
                     <label class="mb-1.5 block admin-label">Status</label>
                     <select wire:model="status"
@@ -50,10 +50,22 @@
                     @error('date_start') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
                 <div>
+                    <label class="mb-1.5 block admin-label">Start time <span class="text-zinc-400">(optional)</span></label>
+                    <input type="time" wire:model="time_start"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('time_start') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
                     <label class="mb-1.5 block admin-label">End date <span class="text-zinc-400">(optional)</span></label>
                     <input type="date" wire:model="date_end"
                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
                     @error('date_end') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">End time <span class="text-zinc-400">(optional)</span></label>
+                    <input type="time" wire:model="time_end"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('time_end') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
                 </div>
             </div>
 
@@ -221,7 +233,7 @@
                             {{ ucfirst($event->status) }}
                         </span>
                     </td>
-                    <td class="admin-table-cell text-zinc-500 text-xs whitespace-nowrap">{{ $event->date_start->format('j M Y') }}</td>
+                    <td class="admin-table-cell text-zinc-500 text-xs whitespace-nowrap">{{ $event->formatted_date_range }}</td>
                     <td class="admin-table-cell">
                         @if($event->is_featured)
                             <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-[#002366]/5 text-[#002366]">
@@ -255,7 +267,7 @@
                     @endif
                     <div class="min-w-0 flex-1">
                         <p class="truncate text-sm font-medium text-zinc-950">{{ $event->title }}</p>
-                        <p class="truncate text-xs text-zinc-500">{{ ucfirst($event->status) }} · {{ $event->date_start->format('j M Y') }}</p>
+                        <p class="truncate text-xs text-zinc-500">{{ ucfirst($event->status) }} · {{ $event->formatted_date_range }}</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button wire:click="edit({{ $event->id }})" class="text-xs text-zinc-500">Edit</button>

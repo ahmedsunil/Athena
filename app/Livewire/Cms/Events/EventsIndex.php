@@ -16,7 +16,9 @@ class EventsIndex extends Component
     public string $slug = '';
     public string $status = 'upcoming';
     public string $date_start = '';
+    public string $time_start = '';
     public string $date_end = '';
+    public string $time_end = '';
     public string $location_en = '';
     public string $location_dv = '';
     public $cover_image = null;
@@ -41,7 +43,9 @@ class EventsIndex extends Component
             'slug'                 => ['required', 'string', 'max:255'],
             'status'               => ['required', 'in:ongoing,upcoming,completed'],
             'date_start'           => ['required', 'date'],
+            'time_start'           => ['nullable', 'date_format:H:i'],
             'date_end'             => ['nullable', 'date', 'after_or_equal:date_start'],
+            'time_end'             => ['nullable', 'date_format:H:i'],
             'location_en'          => ['required', 'string', 'max:255'],
             'location_dv'          => ['nullable', 'string', 'max:255'],
             'cover_image'          => ['nullable', 'image', 'max:4096'],
@@ -75,7 +79,9 @@ class EventsIndex extends Component
             'slug'              => Str::slug($this->slug),
             'status'            => $this->status,
             'date_start'        => $this->date_start,
+            'time_start'        => $this->time_start ?: null,
             'date_end'          => $this->date_end ?: null,
+            'time_end'          => $this->time_end ?: null,
             'location'          => ['en' => $this->location_en, 'dv' => $this->location_dv],
             'short_description' => ['en' => $this->short_description_en, 'dv' => $this->short_description_dv],
             'full_description'  => ($this->full_description_en || $this->full_description_dv)
@@ -117,7 +123,9 @@ class EventsIndex extends Component
         $this->slug                   = $event->slug;
         $this->status                 = $event->status;
         $this->date_start             = $event->date_start->format('Y-m-d');
+        $this->time_start             = $event->time_start ? substr($event->time_start, 0, 5) : '';
         $this->date_end               = $event->date_end?->format('Y-m-d') ?? '';
+        $this->time_end               = $event->time_end ? substr($event->time_end, 0, 5) : '';
         $this->location_en            = $event->getTranslation('location', 'en', false) ?? '';
         $this->location_dv            = $event->getTranslation('location', 'dv', false) ?? '';
         $this->existing_cover_image   = $event->cover_image_path;
@@ -164,7 +172,7 @@ class EventsIndex extends Component
     private function resetForm(): void
     {
         $this->reset([
-            'title_en', 'title_dv', 'slug', 'date_start', 'date_end',
+            'title_en', 'title_dv', 'slug', 'date_start', 'time_start', 'date_end', 'time_end',
             'location_en', 'location_dv',
             'cover_image', 'existing_cover_image', 'coverImageRemoved',
             'short_description_en', 'short_description_dv',
