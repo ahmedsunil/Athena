@@ -278,9 +278,9 @@
                     <div class="flex flex-col md:flex-row">
                         @if($profile->principal_photo_path)
                             <div
-                                class="flex w-full shrink-0 items-center justify-center bg-[#002366]/5 px-8 pt-8 md:w-64 md:px-7 md:py-8">
+                                class="flex w-full shrink-0 items-center justify-center bg-[#002366]/5 px-8 py-8 md:w-72 md:px-7 md:py-8">
                                 <div
-                                    class="h-36 w-36 overflow-hidden rounded-full bg-slate-100 ring-4 ring-white shadow-xl shadow-slate-900/10 sm:h-40 sm:w-40">
+                                    class="h-36 w-36 overflow-hidden rounded-full bg-slate-100 ring-4 ring-white shadow-xl shadow-slate-900/10 sm:h-40 sm:w-40 md:h-80 md:w-52 md:rounded-sm md:ring-1 md:ring-[#D8E0EC]">
                                     <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}"
                                          class="h-full w-full object-cover object-top">
                                 </div>
