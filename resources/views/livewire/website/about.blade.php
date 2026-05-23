@@ -59,12 +59,12 @@
                             <p class="text-slate-700 leading-relaxed">{{ $mission->mission ?? __('about_mission_not_set') }}</p>
                         </div>
                         {{-- Vision --}}
-                        <div class="bg-white rounded-2xl border border-sky-100 p-7">
+                        <div class="bg-white rounded-2xl border border-[#002366]/10 p-7">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="w-8 h-8 rounded-full bg-sky-50 border border-sky-200 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                <div class="w-8 h-8 rounded-full bg-[#002366]/5 border border-[#002366]/20 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-[#002366]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                 </div>
-                                <p class="text-xs font-black uppercase tracking-widest text-sky-600">{{ __('about_label_vision') }}</p>
+                                <p class="text-xs font-black uppercase tracking-widest text-[#002366]">{{ __('about_label_vision') }}</p>
                             </div>
                             <p class="text-slate-700 leading-relaxed">{{ $mission->vision ?? __('about_vision_not_set') }}</p>
                         </div>
@@ -119,7 +119,7 @@
                 <section class="py-16 sm:py-20 bg-slate-50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center mb-12">
-                            <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">{{ __('about_leadership_eyebrow_2') }}</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-[#002366] mb-2">{{ __('about_leadership_eyebrow_2') }}</p>
                             <h2 class="text-3xl font-black text-slate-900">{{ __('about_leadership_team') }}</h2>
                             <div class="mt-3 mx-auto w-10 h-1 rounded-full bg-[#002366]"></div>
                         </div>
@@ -140,7 +140,7 @@
                                         @endif
                                     </div>
                                     <p class="font-bold text-slate-900 {{ $isFirst ? 'mt-3' : 'mt-1' }}">{{ app()->getLocale() === 'dv' && $member->name_dv ? $member->name_dv : $member->name }}</p>
-                                    <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 {{ $isFirst ? 'text-[#002366]' : 'text-sky-600' }}">{{ $member->role }}</p>
+                                    <p class="text-xs font-semibold uppercase tracking-wide mt-0.5 mb-3 {{ $isFirst ? 'text-[#002366]' : 'text-[#002366]' }}">{{ $member->role }}</p>
                                     @if($member->bio)
                                         <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">{{ $member->bio }}</p>
                                     @endif
@@ -204,7 +204,7 @@
                             $timelineColors = [
                                 0 => ['ring' => 'ring-[#002366]/20',    'dot' => 'bg-[#002366]',    'badge' => 'bg-[#002366]/5 border-[#002366]/20 text-[#002366]'],
                                 1 => ['ring' => 'ring-amber-200',   'dot' => 'bg-amber-500',   'badge' => 'bg-amber-50 border-amber-200 text-amber-700'],
-                                2 => ['ring' => 'ring-sky-200',     'dot' => 'bg-sky-500',     'badge' => 'bg-sky-50 border-sky-200 text-sky-700'],
+                                2 => ['ring' => 'ring-[#002366]/20',     'dot' => 'bg-[#002366]/50',     'badge' => 'bg-[#002366]/5 border-[#002366]/20 text-[#002366]'],
                                 3 => ['ring' => 'ring-emerald-200', 'dot' => 'bg-emerald-500', 'badge' => 'bg-emerald-50 border-emerald-200 text-emerald-700'],
                             ];
                         @endphp
@@ -297,9 +297,9 @@
                         <p class="text-3xl font-black text-slate-900">{{ $totalCount }}</p>
                         <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mt-1">{{ __('about_achievements_stat_total') }}</p>
                     </div>
-                    <div class="bg-sky-50 border border-sky-200 rounded-2xl p-5 text-center">
-                        <p class="text-3xl font-black text-sky-700">{{ $studentCount }}</p>
-                        <p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-1">{{ __('about_achievements_stat_students') }}</p>
+                    <div class="bg-[#002366]/5 border border-[#002366]/20 rounded-2xl p-5 text-center">
+                        <p class="text-3xl font-black text-[#002366]">{{ $studentCount }}</p>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-[#002366] mt-1">{{ __('about_achievements_stat_students') }}</p>
                     </div>
                     <div class="bg-[#002366]/5 border border-[#002366]/20 rounded-2xl p-5 text-center">
                         <p class="text-3xl font-black text-[#002366]">{{ $schoolCount }}</p>
@@ -312,9 +312,9 @@
                     <div class="flex gap-2 flex-wrap">
                         @php
                             $categoryBtns = [
-                                'all'      => ['label' => 'about_achievements_filter_all',      'active' => 'bg-slate-900 border-slate-900 text-white'],
-                                'students' => ['label' => 'about_achievements_filter_students', 'active' => 'bg-sky-600 border-sky-600 text-white'],
-                                'staff'    => ['label' => 'about_achievements_filter_staff',    'active' => 'bg-violet-600 border-violet-600 text-white'],
+                                'all'      => ['label' => 'about_achievements_filter_all',      'active' => 'bg-[#002366] border-[#002366] text-white'],
+                                'students' => ['label' => 'about_achievements_filter_students', 'active' => 'bg-[#002366] border-[#002366] text-white'],
+                                'staff'    => ['label' => 'about_achievements_filter_staff',    'active' => 'bg-[#002366] border-[#002366] text-white'],
                                 'school'   => ['label' => 'about_achievements_filter_school',   'active' => 'bg-[#002366] border-[#002366] text-white'],
                             ];
                         @endphp
@@ -343,8 +343,8 @@
                             @php
                                 $badgeCls = match($achievement->category) {
                                     'school'   => 'bg-[#002366]/10 text-[#002366]',
-                                    'students' => 'bg-sky-100 text-sky-700',
-                                    'staff'    => 'bg-violet-100 text-violet-700',
+                                    'students' => 'bg-[#002366]/10 text-[#002366]',
+                                    'staff'    => 'bg-[#002366]/10 text-[#002366]',
                                     default    => 'bg-slate-100 text-slate-600',
                                 };
                             @endphp

@@ -1,6 +1,6 @@
 <div>
     @if($open)
-        <button type="button" wire:click="close" class="fixed inset-0 z-[998] bg-slate-900/60 backdrop-blur-sm" aria-label="Close search"></button>
+        <button type="button" wire:click="close" class="fixed inset-0 z-[998] bg-[#002366]/60 backdrop-blur-sm" aria-label="Close search"></button>
 
         <div class="fixed left-1/2 top-[10vh] z-[999] w-full max-w-xl -translate-x-1/2 px-4">
             <div class="rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/10 overflow-hidden">
@@ -33,8 +33,8 @@
                         'Announcements' => __('common_announcements'),
                     ];
                     $sectionColors = [
-                        'Events'    => ['bg' => 'bg-sky-100',    'text' => 'text-sky-700'],
-                        'Gallery'   => ['bg' => 'bg-violet-100', 'text' => 'text-violet-700'],
+                        'Events'    => ['bg' => 'bg-[#002366]/10',    'text' => 'text-[#002366]'],
+                        'Gallery'   => ['bg' => 'bg-[#002366]/10', 'text' => 'text-[#002366]'],
                         'Downloads' => ['bg' => 'bg-amber-100',  'text' => 'text-amber-700'],
                         'Announcements' => ['bg' => 'bg-[#002366]/10', 'text' => 'text-[#002366]'],
                     ];
@@ -86,11 +86,11 @@
                             ] as $link)
                                 <a href="{{ $link['url'] }}" wire:click="close" class="spotlight-item flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none transition-colors">
                                     @if($link['icon'] === 'calendar')
-                                        <svg class="w-4 h-4 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        <svg class="w-4 h-4 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                     @elseif($link['icon'] === 'book')
                                         <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                     @elseif($link['icon'] === 'photo')
-                                        <svg class="w-4 h-4 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        <svg class="w-4 h-4 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                     @else
                                         <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                     @endif

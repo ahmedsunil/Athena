@@ -226,12 +226,12 @@
                                     </div>
                                 @endif
                                 <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
-                                    {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
+                                    {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-[#002366]/10 text-[#002366]' : 'bg-slate-100 text-slate-600') }}">
                                     {{ __('common_status_' . $event->status) }}
                                 </span>
                             </div>
                             <div class="p-5">
-                                <p class="text-xs text-sky-600 font-semibold mb-1">{{ $event->formatted_date_range }}</p>
+                                <p class="text-xs text-[#002366] font-semibold mb-1">{{ $event->formatted_date_range }}</p>
                                 <h3 class="font-bold text-slate-900 mb-1">{{ $event->title }}</h3>
                                 <p class="text-xs text-slate-500 mb-3 flex items-start gap-1.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 mt-0.5"
@@ -258,12 +258,12 @@
 
     {{-- Principal's Message --}}
     @if($profile->principal_name || $profile->principal_message)
-        <section class="py-16 sm:py-20 bg-slate-900">
+        <section class="py-16 sm:py-20 bg-[#002366]">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden" data-reveal="scale">
                     <div class="flex flex-col md:flex-row">
                         @if($profile->principal_photo_path)
-                            <div class="flex w-full shrink-0 items-center justify-center bg-slate-900/35 px-8 pt-8 md:w-64 md:px-7 md:py-8">
+                            <div class="flex w-full shrink-0 items-center justify-center bg-[#002366]/35 px-8 pt-8 md:w-64 md:px-7 md:py-8">
                                 <div class="h-36 w-36 overflow-hidden rounded-full bg-slate-700 ring-4 ring-white/10 shadow-2xl shadow-slate-950/30 sm:h-40 sm:w-40">
                                     <img src="{{ $profile->principal_photo_url }}" alt="{{ $profile->principal_name }}"
                                          class="h-full w-full object-cover object-top">
@@ -403,7 +403,7 @@
                     @if($contactPhone)
                         <div class="flex items-start gap-3">
                             <div
-                                class="w-9 h-9 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0">
+                                class="w-9 h-9 rounded-lg bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0">
                                 <x-icon key="Phone"/>
                             </div>
                             <div>

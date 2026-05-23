@@ -14,6 +14,10 @@
 
 @layer base {
     :root {
+        --brand-blue: #002366;
+        --brand-blue-hover: #001a4d;
+        --brand-blue-soft: rgb(0 35 102 / 0.1);
+        --brand-blue-ring: rgb(0 35 102 / 0.16);
         --admin-chart-1: hsl(12 76% 61%);
         --admin-chart-2: hsl(173 58% 39%);
         --admin-chart-3: hsl(197 37% 24%);
@@ -172,4 +176,98 @@
     .admin-table-body > tr:hover {
         background-color: #f4f4f5;
     }
+}
+
+.website-shell button.bg-zinc-950,
+.website-shell a.bg-zinc-950,
+.website-shell button.bg-slate-900,
+.website-shell a.bg-slate-900,
+.website-shell button.bg-sky-600,
+.website-shell a.bg-sky-600,
+.website-shell button.bg-blue-600,
+.website-shell a.bg-blue-600,
+.website-shell button.bg-violet-600,
+.website-shell a.bg-violet-600,
+.website-shell .lang-button.is-active {
+    background-color: var(--brand-blue) !important;
+}
+
+.website-shell button.border-zinc-950,
+.website-shell a.border-zinc-950,
+.website-shell button.border-slate-900,
+.website-shell a.border-slate-900,
+.website-shell button.border-sky-600,
+.website-shell a.border-sky-600,
+.website-shell button.border-blue-600,
+.website-shell a.border-blue-600,
+.website-shell button.border-violet-600,
+.website-shell a.border-violet-600 {
+    border-color: var(--brand-blue) !important;
+}
+
+.website-shell button.bg-zinc-950:hover,
+.website-shell a.bg-zinc-950:hover,
+.website-shell button.bg-slate-900:hover,
+.website-shell a.bg-slate-900:hover,
+.website-shell button.bg-sky-600:hover,
+.website-shell a.bg-sky-600:hover,
+.website-shell button.bg-blue-600:hover,
+.website-shell a.bg-blue-600:hover,
+.website-shell button.bg-violet-600:hover,
+.website-shell a.bg-violet-600:hover,
+.website-shell .hover\:bg-zinc-800:hover,
+.website-shell .hover\:bg-slate-800:hover,
+.website-shell .hover\:bg-sky-700:hover,
+.website-shell .hover\:bg-blue-700:hover,
+.website-shell .hover\:bg-violet-700:hover {
+    background-color: var(--brand-blue-hover) !important;
+}
+
+.website-shell .focus\:ring-zinc-950:focus,
+.website-shell .focus\:ring-zinc-950\/10:focus,
+.website-shell .focus\:ring-slate-900:focus,
+.website-shell .focus\:ring-sky-600:focus,
+.website-shell .focus\:ring-blue-600:focus,
+.website-shell .focus\:ring-violet-600:focus,
+.website-shell .focus\:border-zinc-950:focus,
+.website-shell .focus\:border-sky-600:focus,
+.website-shell .focus\:border-blue-600:focus {
+    --tw-ring-color: var(--brand-blue-ring) !important;
+    border-color: var(--brand-blue) !important;
+}
+
+.website-shell .text-sky-600,
+.website-shell .text-sky-700,
+.website-shell .text-blue-600,
+.website-shell .text-blue-700,
+.website-shell .text-violet-600,
+.website-shell .text-violet-700 {
+    color: var(--brand-blue) !important;
+}
+
+.website-shell .hover\:text-sky-700:hover,
+.website-shell .hover\:text-blue-700:hover,
+.website-shell .hover\:text-blue-800:hover,
+.website-shell .hover\:text-violet-700:hover,
+.website-shell .hover\:text-violet-800:hover {
+    color: var(--brand-blue-hover) !important;
+}
+
+.website-shell .bg-sky-50,
+.website-shell .bg-sky-100,
+.website-shell .bg-blue-50,
+.website-shell .bg-blue-100,
+.website-shell .bg-violet-50,
+.website-shell .bg-violet-100 {
+    background-color: var(--brand-blue-soft) !important;
+}
+
+.website-shell .border-sky-200,
+.website-shell .border-blue-200,
+.website-shell .border-violet-200,
+.website-shell .ring-sky-200,
+.website-shell .ring-blue-200,
+.website-shell .ring-violet-200 {
+    border-color: var(--brand-blue-ring) !important;
+    --tw-ring-color: var(--brand-blue-ring) !important;
 }

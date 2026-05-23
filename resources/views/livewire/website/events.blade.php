@@ -45,14 +45,14 @@
                                 </div>
                             @endif
                             <span class="absolute top-3 left-3 text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full
-                                {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-600') }}">
+                                {{ $event->status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' : ($event->status === 'upcoming' ? 'bg-[#002366]/10 text-[#002366]' : 'bg-slate-100 text-slate-600') }}">
                                 {{ __('common_status_' . $event->status) }}
                             </span>
                         </div>
 
                         {{-- Card body --}}
                         <div class="p-5">
-                            <p class="text-xs text-sky-600 font-semibold mb-1">{{ $event->formatted_date_range }}</p>
+                            <p class="text-xs text-[#002366] font-semibold mb-1">{{ $event->formatted_date_range }}</p>
                             <h3 class="font-bold text-slate-900 mb-1">{{ $event->title }}</h3>
                             <p class="text-xs text-slate-500 mb-3 flex items-start gap-1.5">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>

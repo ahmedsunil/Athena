@@ -34,8 +34,8 @@
         @if($activeTab === 'student-council')
             @php
             $clubPalette = ['violet', 'pink', 'sky', 'amber', 'emerald', 'blue'];
-            $clubBg  = ['violet'=>'bg-violet-100','pink'=>'bg-pink-100','sky'=>'bg-sky-100','amber'=>'bg-amber-100','emerald'=>'bg-emerald-100','blue'=>'bg-blue-100'];
-            $clubFg  = ['violet'=>'text-violet-600','pink'=>'text-pink-600','sky'=>'text-sky-600','amber'=>'text-amber-600','emerald'=>'text-emerald-600','blue'=>'text-blue-600'];
+            $clubBg  = ['violet'=>'bg-[#002366]/10','pink'=>'bg-pink-100','sky'=>'bg-[#002366]/10','amber'=>'bg-amber-100','emerald'=>'bg-emerald-100','blue'=>'bg-[#002366]/10'];
+            $clubFg  = ['violet'=>'text-[#002366]','pink'=>'text-pink-600','sky'=>'text-[#002366]','amber'=>'text-amber-600','emerald'=>'text-emerald-600','blue'=>'text-[#002366]'];
             @endphp
 
             {{-- Clubs --}}
@@ -57,7 +57,7 @@
                             </div>
                             <h3 class="font-bold text-slate-900 mb-2">{{ $club->name }}</h3>
                             @if($club->meeting_schedule)
-                                <p class="text-xs text-sky-600 font-semibold mb-3 flex items-center gap-1">
+                                <p class="text-xs text-[#002366] font-semibold mb-3 flex items-center gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                     {{ $club->meeting_schedule }}
                                 </p>
@@ -158,9 +158,9 @@
                         @php
                         $roleTextClass = match(true) {
                             str_contains($prefect->role_colour, 'rose')    => 'text-[#002366]',
-                            str_contains($prefect->role_colour, 'violet')  => 'text-violet-600',
+                            str_contains($prefect->role_colour, 'violet')  => 'text-[#002366]',
                             str_contains($prefect->role_colour, 'emerald') => 'text-emerald-600',
-                            str_contains($prefect->role_colour, 'sky')     => 'text-sky-600',
+                            str_contains($prefect->role_colour, 'sky')     => 'text-[#002366]',
                             str_contains($prefect->role_colour, 'amber')   => 'text-amber-600',
                             str_contains($prefect->role_colour, 'teal')    => 'text-teal-600',
                             str_contains($prefect->role_colour, 'orange')  => 'text-orange-600',
@@ -185,14 +185,14 @@
         @if($activeTab === 'uniform-bodies')
             @php
             $uniformBg = [
-                'rose'    => 'bg-[#002366]/10',    'sky'     => 'bg-sky-100',
+                'rose'    => 'bg-[#002366]/10',    'sky'     => 'bg-[#002366]/10',
                 'emerald' => 'bg-emerald-100', 'amber'   => 'bg-amber-100',
-                'violet'  => 'bg-violet-100',  'teal'    => 'bg-teal-100',
+                'violet'  => 'bg-[#002366]/10',  'teal'    => 'bg-teal-100',
             ];
             $uniformFg = [
-                'rose'    => 'text-[#002366]',  'sky'     => 'text-sky-700',
+                'rose'    => 'text-[#002366]',  'sky'     => 'text-[#002366]',
                 'emerald' => 'text-emerald-700','amber'  => 'text-amber-700',
-                'violet'  => 'text-violet-700','teal'    => 'text-teal-700',
+                'violet'  => 'text-[#002366]','teal'    => 'text-teal-700',
             ];
             @endphp
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -219,7 +219,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 mb-2">{{ $body->name }}</h3>
                         @if($body->meeting_schedule)
-                            <p class="text-xs text-sky-600 font-semibold mb-3 flex items-center gap-1">
+                            <p class="text-xs text-[#002366] font-semibold mb-3 flex items-center gap-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                 {{ $body->meeting_schedule }}
                             </p>

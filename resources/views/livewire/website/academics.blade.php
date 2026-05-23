@@ -3,9 +3,9 @@
     @php
     $stageColors = [
         'FS'  => 'bg-[#002366]/10 text-[#002366]',
-        'KS1' => 'bg-sky-100 text-sky-700',
+        'KS1' => 'bg-[#002366]/10 text-[#002366]',
         'KS2' => 'bg-emerald-100 text-emerald-700',
-        'KS3' => 'bg-violet-100 text-violet-700',
+        'KS3' => 'bg-[#002366]/10 text-[#002366]',
         'KS4' => 'bg-amber-100 text-amber-700',
         'KS5' => 'bg-slate-100 text-slate-700',
     ];
@@ -28,7 +28,7 @@
                         <p class="text-slate-600 max-w-3xl text-sm leading-relaxed">{{ $overview->text }}</p>
                     @endif
                     @if($overview->curriculum)
-                        <span class="mt-4 inline-block text-xs font-semibold bg-sky-100 text-sky-700 px-3 py-1 rounded-full">{{ $overview->curriculum }}</span>
+                        <span class="mt-4 inline-block text-xs font-semibold bg-[#002366]/10 text-[#002366] px-3 py-1 rounded-full">{{ $overview->curriculum }}</span>
                     @endif
                 </div>
                 <div class="grid grid-cols-2 gap-3 sm:flex sm:items-center lg:justify-end">

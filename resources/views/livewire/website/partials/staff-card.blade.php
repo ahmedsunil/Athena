@@ -2,7 +2,7 @@
 @php
     $borderMap = [
         'rose'  => 'border-[#002366]/40',
-        'sky'   => 'border-sky-300',
+        'sky'   => 'border-[#002366]/40',
         'amber' => 'border-amber-300',
     ];
     $accentBorder = $borderMap[$accentColor] ?? 'border-slate-300';

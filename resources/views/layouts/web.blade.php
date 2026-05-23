@@ -117,7 +117,7 @@
     </script>
     @livewireStyles
 </head>
-<body class="font-sans bg-white text-slate-900 flex flex-col min-h-screen {{ request()->routeIs('home') ? '' : 'pt-16' }}">
+<body class="website-shell font-sans bg-white text-slate-900 flex flex-col min-h-screen {{ request()->routeIs('home') ? '' : 'pt-16' }}">
 @include('layouts.partials.nav')
 @livewire('website.search')
 
