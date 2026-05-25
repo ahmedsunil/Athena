@@ -47,7 +47,7 @@
                 <p class="text-lg font-semibold">{{ __('academics_empty') }}</p>
             </div>
         @else
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 @foreach($levels as $level)
                 <article class="bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md transition-shadow" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 60 }}ms">
 
