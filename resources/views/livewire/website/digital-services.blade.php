@@ -149,7 +149,7 @@
                 @endif
 
                 @if($documents->hasPages())
-                    <div class="mt-4">{{ $documents->links() }}</div>
+                    <div class="mt-4">{{ $documents->links('vendor.pagination.website') }}</div>
                 @endif
             </div>
         @endif

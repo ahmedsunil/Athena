@@ -78,7 +78,7 @@
 
             @if($announcements->hasPages())
                 <div class="mt-8">
-                    {{ $announcements->links() }}
+                    {{ $announcements->links('vendor.pagination.website') }}
                 </div>
             @endif
         @endif
