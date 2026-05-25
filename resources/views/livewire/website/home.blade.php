@@ -17,10 +17,6 @@
                     <div
                         class="relative min-h-[720px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-36 flex items-center justify-center">
                         <div class="mx-auto max-w-5xl text-center" data-reveal="scale">
-                            <p class="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-sm backdrop-blur-md">
-                                <span data-lang-key="school_name"
-                                      data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
-                            </p>
                             <h1 class="mx-auto max-w-5xl break-words text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] mb-6 [overflow-wrap:anywhere]"
                                 data-en="{{ $slide->getTranslation('title', 'en', false) }}"
                                 data-dv="{{ $slide->getTranslation('title', 'dv', false) ?: $slide->getTranslation('title', 'en', false) }}">{{ $slide->title }}</h1>
