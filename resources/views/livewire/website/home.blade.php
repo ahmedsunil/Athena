@@ -315,7 +315,7 @@
 
     {{-- Testimonials --}}
     @if($testimonials->isNotEmpty())
-        @php $tChunks = $testimonials->chunk(4); @endphp
+        @php $tChunks = $testimonials->chunk(2); @endphp
         <section class="py-16 sm:py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12" data-reveal="fade">
@@ -325,7 +325,7 @@
 
                 @foreach($tChunks as $ci => $chunk)
                     <div
-                        class="t-page {{ $ci === 0 ? '' : 'hidden' }} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        class="t-page {{ $ci === 0 ? '' : 'hidden' }} grid grid-cols-1 md:grid-cols-2 gap-6">
                         @foreach($chunk as $t)
                             @php
                                 $testimonialName = app()->getLocale() === 'dv' && $t->name_dv ? $t->name_dv : $t->name;
