@@ -47,30 +47,44 @@ class About extends Component
     public function render()
     {
         $profile = SchoolProfile::singleton();
-        $mission = Mission::singleton();
-        $leadership = LeadershipMember::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get();
-        $foundingMembers = FoundingMember::orderBy('sort_order')->orderBy('id')->get();
-        $historySections = HistorySection::orderBy('sort_order')->orderBy('id')->get();
 
-        $achievementsQuery = Achievement::where('is_active', true);
-        if ($this->activeCategory !== 'all') {
-            $achievementsQuery->where('category', $this->activeCategory);
-        }
-        if ($this->activeYear !== 'all') {
-            $achievementsQuery->where('year', (int) $this->activeYear);
-        }
-        $achievements = $achievementsQuery->orderByDesc('year')->orderBy('sort_order')->orderBy('id')->get();
+        $mission         = null;
+        $leadership      = collect();
+        $foundingMembers = collect();
+        $historySections = collect();
+        $staff           = collect();
+        $achievements    = collect();
+        $achievementYears = collect();
+        $totalCount = $studentCount = $schoolCount = 0;
 
-        $achievementYears = Achievement::where('is_active', true)->distinct()->orderByDesc('year')->pluck('year');
-        $totalCount   = Achievement::where('is_active', true)->count();
-        $studentCount = Achievement::where('is_active', true)->where('category', 'students')->count();
-        $schoolCount  = Achievement::where('is_active', true)->where('category', 'school')->count();
-
-        $staff = StaffMember::where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('id')
-            ->get()
-            ->groupBy('section');
+        match ($this->activeTab) {
+            'about' => [
+                $mission    = Mission::singleton(),
+                $leadership = LeadershipMember::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get(),
+            ],
+            'history' => [
+                $historySections = HistorySection::orderBy('sort_order')->orderBy('id')->get(),
+                $foundingMembers = FoundingMember::orderBy('sort_order')->orderBy('id')->get(),
+            ],
+            'achievements' => (function () use (&$achievements, &$achievementYears, &$totalCount, &$studentCount, &$schoolCount) {
+                $all = Achievement::where('is_active', true)
+                    ->orderByDesc('year')->orderBy('sort_order')->orderBy('id')
+                    ->get();
+                $achievements     = $all
+                    ->when($this->activeCategory !== 'all', fn ($c) => $c->where('category', $this->activeCategory))
+                    ->when($this->activeYear !== 'all', fn ($c) => $c->where('year', (int) $this->activeYear))
+                    ->values();
+                $achievementYears = $all->pluck('year')->unique()->sortDesc()->values();
+                $totalCount       = $all->count();
+                $studentCount     = $all->where('category', 'students')->count();
+                $schoolCount      = $all->where('category', 'school')->count();
+            })(),
+            'team' => [
+                $leadership = LeadershipMember::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get(),
+                $staff      = StaffMember::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get()->groupBy('section'),
+            ],
+            default => null,
+        };
 
         return view('livewire.website.about', [
             'profile'          => $profile,
