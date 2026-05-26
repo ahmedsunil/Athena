@@ -11,30 +11,30 @@
 @endphp
 
 <footer class="bg-[#002366] text-white/70">
+    <div class="px-4 pt-12 pb-8 text-center sm:px-6 lg:px-8">
+        <div class="mb-5 flex justify-center gap-3">
+            @foreach($socialNetworks as $network)
+                @php
+                    $matchedLink = $footerLinkItems->first(function ($link) use ($network) {
+                        return preg_match('/' . $network['match'] . '/i', $link->link_key . ' ' . $link->label) === 1;
+                    });
+                    $socialHref = $matchedLink?->link_key ?: '#';
+                @endphp
+                <a href="{{ $socialHref }}"
+                   @if($socialHref !== '#') target="_blank" rel="noopener noreferrer" @endif
+                   class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-white hover:bg-white hover:text-[#002366]"
+                   aria-label="{{ $network['label'] }}">
+                    {!! svg_icon($network['icon'], 'h-4 w-4') !!}
+                </a>
+            @endforeach
+        </div>
+            <h2 class="text-2xl font-black text-white sm:text-3xl">Let's Connect</h2>
+    </div>
+
     <livewire:website.footer-contact />
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
-        <div class="text-center">
-            <div class="mb-5 flex justify-center gap-3">
-                @foreach($socialNetworks as $network)
-                    @php
-                        $matchedLink = $footerLinkItems->first(function ($link) use ($network) {
-                            return preg_match('/' . $network['match'] . '/i', $link->link_key . ' ' . $link->label) === 1;
-                        });
-                        $socialHref = $matchedLink?->link_key ?: '#';
-                    @endphp
-                    <a href="{{ $socialHref }}"
-                       @if($socialHref !== '#') target="_blank" rel="noopener noreferrer" @endif
-                       class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-white hover:bg-white hover:text-[#002366]"
-                       aria-label="{{ $network['label'] }}">
-                        {!! svg_icon($network['icon'], 'h-4 w-4') !!}
-                    </a>
-                @endforeach
-            </div>
-            <h2 class="text-2xl font-black text-white sm:text-3xl">Let's Connect</h2>
-        </div>
-
-        <div class="mt-12 grid gap-9 text-left sm:grid-cols-2 lg:grid-cols-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-4 sm:pt-14 sm:pb-5">
+        <div class="grid gap-9 text-left sm:grid-cols-2 lg:grid-cols-3">
             <div>
                 <div class="mb-4 flex items-center gap-3">
                     @if($footerProfile['logo_path'])
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="mt-10 border-t border-white/10 pt-5 text-center text-xs text-white/50">
+        <div class="mt-8 border-t border-white/10 pt-4 text-center text-xs text-white/50">
             <p>
                 Copyright &copy; {{ now()->year }} {{ $footerProfile['school_name'] ?: __('school_name') }}. All rights reserved.
                 <span class="mx-2 text-white/25">|</span>
