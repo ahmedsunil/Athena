@@ -42,7 +42,9 @@ use App\Livewire\Cms\StudentLife\ClubsIndex;
 use App\Livewire\Cms\StudentLife\PrefectsIndex;
 use App\Livewire\Cms\StudentLife\HousesIndex;
 use App\Livewire\Cms\StudentLife\UniformBodiesIndex;
+use App\Livewire\Cms\StudentLife\PeopleIndex;
 use App\Livewire\Website\StudentLife;
+use App\Livewire\Website\StudentLifeShow;
 use App\Livewire\Cms\Gallery\GalleryIndex;
 use App\Livewire\Website\Gallery;
 use App\Livewire\Cms\DigitalServices\DocumentsIndex;
@@ -107,6 +109,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cms/student-life/prefects',       PrefectsIndex::class)->name('cms.student-life.prefects');
         Route::get('/cms/student-life/houses',         HousesIndex::class)->name('cms.student-life.houses');
         Route::get('/cms/student-life/uniform-bodies', UniformBodiesIndex::class)->name('cms.student-life.uniform-bodies');
+        Route::get('/cms/student-life/people',         PeopleIndex::class)->name('cms.student-life.people');
 
         // CMS — gallery module
         Route::get('/cms/gallery', GalleryIndex::class)->name('cms.gallery.index');
@@ -135,6 +138,10 @@ Route::get('/events', Events::class)->name('events.index');
 Route::get('/events/{slug}', EventShow::class)->name('events.show');
 Route::get('/academics', Academics::class)->name('academics.index');
 Route::get('/student-life', StudentLife::class)->name('student-life.index');
+Route::get('/student-life/{type}/{id}', StudentLifeShow::class)
+    ->whereIn('type', ['clubs', 'houses', 'prefects', 'uniform-bodies'])
+    ->whereNumber('id')
+    ->name('student-life.show');
 Route::get('/gallery', Gallery::class)->name('gallery.index');
 Route::get('/digital-services', DigitalServices::class)->name('digital-services.index');
 Route::get('/admissions', fn () => 'Admissions')->name('admissions');

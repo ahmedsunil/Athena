@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
 
 use Spatie\Translatable\HasTranslations;
@@ -33,5 +34,10 @@ class StudentLifeClub extends Model
         $words = preg_split('/\s+/', trim($this->name));
         $initials = array_map(fn($w) => strtoupper($w[0] ?? ''), $words);
         return implode('', array_slice(array_filter($initials), 0, 2));
+    }
+
+    public function people(): MorphMany
+    {
+        return $this->morphMany(StudentLifePerson::class, 'personable');
     }
 }

@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 use Spatie\Translatable\HasTranslations;
 class StudentLifeHouse extends Model
@@ -30,5 +31,10 @@ class StudentLifeHouse extends Model
             'amber'   => ['bg' => 'bg-amber-500',   'text' => 'text-amber-600',   'bg_light' => 'bg-amber-50'],
             default   => ['bg' => 'bg-slate-400',   'text' => 'text-slate-600',   'bg_light' => 'bg-slate-50'],
         };
+    }
+
+    public function people(): MorphMany
+    {
+        return $this->morphMany(StudentLifePerson::class, 'personable');
     }
 }

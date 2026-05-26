@@ -4,6 +4,7 @@
         ['label' => 'Student Council', 'routes' => ['cms.student-life.clubs', 'cms.student-life.houses'], 'href' => route('cms.student-life.clubs')],
         ['label' => 'Prefects',        'routes' => ['cms.student-life.prefects'],                         'href' => route('cms.student-life.prefects')],
         ['label' => 'Uniform Bodies',  'routes' => ['cms.student-life.uniform-bodies'],                   'href' => route('cms.student-life.uniform-bodies')],
+        ['label' => 'People History',  'routes' => ['cms.student-life.people'],                          'href' => route('cms.student-life.people')],
     ];
     $councilSubTabs = [
         ['label' => 'Clubs',  'route' => 'cms.student-life.clubs',  'href' => route('cms.student-life.clubs')],

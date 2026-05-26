@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
 
 use Spatie\Translatable\HasTranslations;
@@ -39,5 +40,10 @@ class StudentLifeUniformBody extends Model
             'teal'    => ['bg' => 'bg-teal-500',    'text' => 'text-teal-600',    'bg_light' => 'bg-teal-50'],
             default   => ['bg' => 'bg-slate-400',   'text' => 'text-slate-600',   'bg_light' => 'bg-slate-50'],
         };
+    }
+
+    public function people(): MorphMany
+    {
+        return $this->morphMany(StudentLifePerson::class, 'personable');
     }
 }
