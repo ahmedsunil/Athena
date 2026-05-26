@@ -1,4 +1,5 @@
 <footer class="bg-[#002366] text-white/70">
+    <livewire:website.footer-contact />
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-5">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10 text-center">
             <div>
