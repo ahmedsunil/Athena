@@ -1,55 +1,113 @@
+@php
+    $location = collect([$footerProfile['island'], $footerProfile['atoll'], $footerProfile['country']])->filter()->join(', ');
+    $footerLinkItems = $footerLinks->values();
+    $socialNetworks = [
+        ['label' => 'Facebook', 'icon' => 'Facebook', 'match' => 'facebook'],
+        ['label' => 'Instagram', 'icon' => 'Instagram', 'match' => 'instagram'],
+        ['label' => 'YouTube', 'icon' => 'Youtube', 'match' => 'youtube'],
+        ['label' => 'X', 'icon' => 'TwitterX', 'match' => 'twitter|x.com'],
+        ['label' => 'WhatsApp', 'icon' => 'WhatsApp', 'match' => 'whatsapp'],
+    ];
+@endphp
+
 <footer class="bg-[#002366] text-white/70">
     <livewire:website.footer-contact />
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-5">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10 text-center">
-            <div>
-                <div class="flex items-center justify-center gap-2 mb-3">
-                    @if($footerProfile['logo_path'])
-                        <img src="{{ $footerProfile['logo_url'] }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
-                    @else
-                        <img src="{{ asset('images/app-mark.webp') }}" alt="{{ $footerProfile['school_name'] }}" class="w-7 h-7 object-contain">
-                    @endif
-                    <span class="text-white font-bold text-sm" data-lang-key="school_name" data-en="{{ $footerProfile['school_name'] ?: 'Hulhudhuffaaru School' }}">{{ $footerProfile['school_name'] ?: __('school_name') }}</span>
-                </div>
-                <p class="text-xs leading-relaxed">
-                    <span data-lang-key="footer_tagline_1" data-en="{{ $footerProfile['motto'] ?: 'Knowledge, Character, Service.' }}">{{ $footerProfile['motto'] ?: __('footer_tagline_1') }}</span><br>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
+        <div class="text-center">
+            <div class="mb-5 flex justify-center gap-3">
+                @foreach($socialNetworks as $network)
                     @php
-                        $location = collect([$footerProfile['island'], $footerProfile['atoll'], $footerProfile['country']])->filter()->join(', ');
+                        $matchedLink = $footerLinkItems->first(function ($link) use ($network) {
+                            return preg_match('/' . $network['match'] . '/i', $link->link_key . ' ' . $link->label) === 1;
+                        });
+                        $socialHref = $matchedLink?->link_key ?: '#';
                     @endphp
-                    <span data-lang-key="footer_tagline_2" data-en="{{ $location ?: 'Raa Atoll, Republic of Maldives.' }}">{{ $location ?: __('footer_tagline_2') }}</span>
+                    <a href="{{ $socialHref }}"
+                       @if($socialHref !== '#') target="_blank" rel="noopener noreferrer" @endif
+                       class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-white hover:bg-white hover:text-[#002366]"
+                       aria-label="{{ $network['label'] }}">
+                        {!! svg_icon($network['icon'], 'h-4 w-4') !!}
+                    </a>
+                @endforeach
+            </div>
+            <h2 class="text-2xl font-black text-white sm:text-3xl">Let's Connect</h2>
+        </div>
+
+        <div class="mt-12 grid gap-9 text-left sm:grid-cols-2 lg:grid-cols-3">
+            <div>
+                <div class="mb-4 flex items-center gap-3">
+                    @if($footerProfile['logo_path'])
+                        <img src="{{ $footerProfile['logo_url'] }}" alt="{{ $footerProfile['school_name'] }}" class="h-10 w-10 object-contain">
+                    @else
+                        <img src="{{ asset('images/app-mark.webp') }}" alt="{{ $footerProfile['school_name'] }}" class="h-10 w-10 object-contain">
+                    @endif
+                    <span class="text-base font-black text-white" data-lang-key="school_name" data-en="{{ $footerProfile['school_name'] ?: 'Hulhudhuffaaru School' }}">{{ $footerProfile['school_name'] ?: __('school_name') }}</span>
+                </div>
+                <p class="max-w-xs text-sm leading-relaxed text-white/60">
+                    <span data-lang-key="footer_tagline_1" data-en="{{ $footerProfile['motto'] ?: 'Knowledge, Character, Service.' }}">{{ $footerProfile['motto'] ?: __('footer_tagline_1') }}</span>
+                    @if($location)
+                        <br>{{ $location }}
+                    @endif
                 </p>
             </div>
+
             <div>
-                <p class="text-white text-sm font-semibold mb-3" data-lang-key="footer_quick_links" data-en="Quick Links">{{ __('footer_quick_links') }}</p>
-                <div class="space-y-1.5">
-                    @foreach($footerLinks as $link)
+                <h3 class="mb-4 text-base font-bold text-white">Resources</h3>
+                <ul class="space-y-2.5 text-sm">
+                    @forelse($footerLinkItems as $link)
                         @php $isExternalFooterLink = preg_match('/^https?:\/\//i', $link->link_key) === 1; @endphp
-                        <a href="{{ $link->link_key }}"
-                           @if($isExternalFooterLink) target="_blank" rel="noopener noreferrer" @endif
-                           class="block text-xs hover:text-white transition-colors">
-                            {{ app()->getLocale() === 'dv' && $link->label_dv ? $link->label_dv : $link->label }}
-                        </a>
-                    @endforeach
-                </div>
+                        <li>
+                            <a href="{{ $link->link_key }}"
+                               @if($isExternalFooterLink) target="_blank" rel="noopener noreferrer" @endif
+                               class="text-white/55 transition-colors hover:text-white">
+                                {{ app()->getLocale() === 'dv' && $link->label_dv ? $link->label_dv : $link->label }}
+                            </a>
+                        </li>
+                    @empty
+                        <li><a href="/announcements" class="text-white/55 transition-colors hover:text-white">Announcements</a></li>
+                        <li><a href="/events" class="text-white/55 transition-colors hover:text-white">Events</a></li>
+                        <li><a href="/academics" class="text-white/55 transition-colors hover:text-white">Academics</a></li>
+                    @endforelse
+                </ul>
             </div>
+
             <div>
-                <p class="text-white text-sm font-semibold mb-3" data-lang-key="footer_contact" data-en="Contact">{{ __('footer_contact') }}</p>
-                <div class="space-y-1.5 text-xs">
-                    @if($footerProfile['email']) <p>{{ $footerProfile['email'] }}</p> @endif
-                    @if($footerProfile['phone']) <p>{{ $footerProfile['phone'] }}</p> @endif
-                    @if($footerProfile['island'] || $footerProfile['atoll'])
-                        <p>{{ collect([$footerProfile['island'], $footerProfile['atoll']])->filter()->join(', ') }}</p>
+                <h3 class="mb-4 text-base font-bold text-white">{{ __('footer_contact') }}</h3>
+                <ul class="space-y-3 text-sm">
+                    @if($footerProfile['email'])
+                        <li>
+                            <a href="mailto:{{ $footerProfile['email'] }}" class="flex items-start gap-3 text-white/55 transition-colors hover:text-white">
+                                {!! svg_icon('Mail', 'mt-0.5 h-4 w-4 flex-shrink-0') !!}
+                                <span>{{ $footerProfile['email'] }}</span>
+                            </a>
+                        </li>
                     @endif
-                </div>
+                    @if($footerProfile['phone'])
+                        @php $phoneHref = preg_replace('/[^\d+]/', '', $footerProfile['phone']); @endphp
+                        <li>
+                            <a href="tel:{{ $phoneHref }}" class="flex items-start gap-3 text-white/55 transition-colors hover:text-white">
+                                {!! svg_icon('Phone', 'mt-0.5 h-4 w-4 flex-shrink-0') !!}
+                                <span>{{ $footerProfile['phone'] }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if($location)
+                        <li class="flex items-start gap-3 text-white/55">
+                            {!! svg_icon('MapPin', 'mt-0.5 h-4 w-4 flex-shrink-0') !!}
+                            <span>{{ $location }}</span>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
-        <div class="border-t border-white/10 pt-5 text-xs text-center space-y-2">
+
+        <div class="mt-10 border-t border-white/10 pt-5 text-center text-xs text-white/50">
             <p>
-                &copy; {{ now()->year }} <span data-lang-key="footer_copyright_suffix" data-en="{{ ($footerProfile['school_name'] ?: 'Hulhudhuffaaru School') . '. All rights reserved.' }}">{{ ($footerProfile['school_name'] ?: __('school_name')) . '. ' . __('footer_copyright_suffix') }}</span>
-            </p>
-            <p>
+                Copyright &copy; {{ now()->year }} {{ $footerProfile['school_name'] ?: __('school_name') }}. All rights reserved.
+                <span class="mx-2 text-white/25">|</span>
                 Developed by
-                <a href="https://github.com/ahmedsunil" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-white/80 transition-colors">Ahmed Sunil</a>
+                <a href="https://github.com/ahmedsunil" target="_blank" rel="noopener noreferrer" class="font-semibold text-white transition-colors hover:text-white/80">Ahmed Sunil</a>
             </p>
         </div>
     </div>
