@@ -11,6 +11,8 @@ class SchoolProfile extends Model
 {
     use HasTranslations;
 
+    private static ?self $singletonInstance = null;
+
     public array $translatable = ['school_name', 'motto', 'short_description', 'address', 'island', 'atoll', 'country', 'principal_name', 'principal_designation', 'principal_message'];
 
     protected $fillable = [
@@ -21,7 +23,12 @@ class SchoolProfile extends Model
 
     public static function singleton(): self
     {
-        return self::firstOrCreate(['id' => 1]);
+        return self::$singletonInstance ??= self::firstOrCreate(['id' => 1]);
+    }
+
+    public static function clearSingletonCache(): void
+    {
+        self::$singletonInstance = null;
     }
 
     public static function resolveMediaUrl(?string $path): ?string

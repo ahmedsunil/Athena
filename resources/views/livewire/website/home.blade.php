@@ -149,7 +149,7 @@
                         <div class="bg-white/95 px-5 py-6 backdrop-blur" data-reveal="scale"
                              style="--reveal-delay: {{ $loop->index * 80 }}ms">
                             <div class="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-sm bg-[#002366]/5 text-[#002366]">
-                                <x-icon :key="$statIcons[$loop->index % count($statIcons)]" class="h-4 w-4"/>
+                                {!! svg_icon($statIcons[$loop->index % count($statIcons)], 'h-4 w-4') !!}
                             </div>
                             <p class="text-3xl sm:text-4xl font-black text-[#002366]">{{ $stat->value }}</p>
                             <p class="text-slate-500 text-sm font-semibold mt-1">{{ $stat->title }}</p>
@@ -184,7 +184,7 @@
                            class="group flex flex-col items-center gap-3 bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#002366]/20 hover:shadow-md transition-all text-center">
                             <div
                                 class="w-10 h-10 rounded-xl bg-[#002366]/5 group-hover:bg-[#002366]/10 text-[#002366] flex items-center justify-center transition-colors">
-                                <x-icon :key="$quickAccessIcon"/>
+                                {!! svg_icon($quickAccessIcon) !!}
                             </div>
                             <span
                                 class="text-sm font-semibold text-slate-700 group-hover:text-slate-900">{{ $quickAccessTitle }}</span>
@@ -404,7 +404,7 @@
                         <div class="flex items-start gap-3">
                             <div
                                 class="w-9 h-9 rounded-lg bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0">
-                                <x-icon key="Mail"/>
+                                {!! svg_icon('Mail') !!}
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_email') }}</p>
@@ -417,7 +417,7 @@
                         <div class="flex items-start gap-3">
                             <div
                                 class="w-9 h-9 rounded-lg bg-[#002366]/10 text-[#002366] flex items-center justify-center flex-shrink-0">
-                                <x-icon key="Phone"/>
+                                {!! svg_icon('Phone') !!}
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_phone') }}</p>
@@ -437,7 +437,7 @@
                         <div class="flex items-start gap-3">
                             <div
                                 class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                                <x-icon key="MapPin"/>
+                                {!! svg_icon('MapPin') !!}
                             </div>
                             <div>
                                 <p class="font-semibold text-slate-900 text-sm">{{ __('home_contact_address') }}</p>

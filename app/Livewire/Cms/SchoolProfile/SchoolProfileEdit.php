@@ -145,6 +145,7 @@ class SchoolProfileEdit extends Component
         }
 
         $profile->update($data);
+        SchoolProfile::clearSingletonCache();
 
         $this->dispatch('toast', message: 'School profile saved.');
     }
