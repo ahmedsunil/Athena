@@ -37,11 +37,7 @@
         <div class="grid gap-9 text-left sm:grid-cols-2 lg:grid-cols-3">
             <div>
                 <div class="mb-4 flex items-center gap-3">
-                    @if($footerProfile['logo_path'])
-                        <img src="{{ $footerProfile['logo_url'] }}" alt="{{ $footerProfile['school_name'] }}" class="h-10 w-10 object-contain">
-                    @else
-                        <img src="{{ asset('images/app-mark.webp') }}" alt="{{ $footerProfile['school_name'] }}" class="h-10 w-10 object-contain">
-                    @endif
+                    <img src="{{ asset('images/logo-bw.webp') }}" alt="{{ $footerProfile['school_name'] }}" class="h-10 w-10 object-contain">
                     <span class="text-base font-black text-white" data-lang-key="school_name" data-en="{{ $footerProfile['school_name'] ?: 'Hulhudhuffaaru School' }}">{{ $footerProfile['school_name'] ?: __('school_name') }}</span>
                 </div>
                 <p class="max-w-xs text-sm leading-relaxed text-white/60">
