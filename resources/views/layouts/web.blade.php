@@ -36,6 +36,21 @@
         .brand-label {
             padding-block: 1px;
         }
+        .nav-logo {
+            transition: opacity 180ms ease;
+        }
+        .nav-logo-transparent {
+            opacity: 0;
+        }
+        .nav-logo-scrolled {
+            opacity: 1;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .nav-logo-transparent {
+            opacity: 1;
+        }
+        .site-header.home-transparent:not(.is-scrolled) .nav-logo-scrolled {
+            opacity: 0;
+        }
         .locale-dv .brand-mark .brand-title {
             line-height: 1.45 !important;
         }

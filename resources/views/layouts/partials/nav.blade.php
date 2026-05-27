@@ -2,8 +2,9 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
       <a href="{{ route('home') }}" wire:navigate class="brand-mark flex h-16 min-w-0 items-center gap-2.5 justify-self-start">
-        <span class="flex h-8 w-8 shrink-0 items-center justify-center -translate-y-0.5">
-          <img src="{{ asset('images/app-mark.webp') }}" alt="{{ __('school_name') }}" class="block h-8 w-8 object-contain">
+        <span class="relative flex h-8 w-8 shrink-0 items-center justify-center -translate-y-0.5">
+          <img src="{{ asset('images/logo-bw.webp') }}" alt="{{ __('school_name') }}" class="nav-logo nav-logo-transparent absolute inset-0 block h-8 w-8 object-contain">
+          <img src="{{ asset('images/app-mark.webp') }}" alt="" aria-hidden="true" class="nav-logo nav-logo-scrolled absolute inset-0 block h-8 w-8 object-contain">
         </span>
         <span class="brand-text flex min-w-0 max-w-[10rem] flex-col justify-center sm:max-w-none">
           <span class="brand-title block truncate font-bold text-slate-900 text-sm transition-colors" data-lang-key="school_name" data-en="Hulhudhuffaaru School">{{ __('school_name') }}</span>
