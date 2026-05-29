@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ filter: @js($filter) }">
 
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-8">
@@ -15,12 +15,9 @@
         <div class="flex gap-2 flex-wrap mb-8">
             @foreach(['all' => 'events_filter_all', 'ongoing' => 'events_filter_ongoing', 'upcoming' => 'events_filter_upcoming', 'completed' => 'events_filter_completed'] as $value => $labelKey)
                 <button type="button"
-                        wire:key="event-filter-{{ $value }}"
-                        wire:click="setFilter('{{ $value }}')"
-                        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
-                               {{ $filter === $value
-                                   ? 'bg-[#002366] border-[#002366] text-white'
-                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
+                        @click="filter = '{{ $value }}'"
+                        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
+                        :class="filter === '{{ $value }}' ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'">
                     {{ __($labelKey) }}
                 </button>
             @endforeach
@@ -34,7 +31,7 @@
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($events as $event)
-                    <div wire:key="event-card-{{ $event->id }}-{{ $filter }}" class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 60 }}ms">
+                    <div x-show="filter === 'all' || filter === '{{ $event->status }}'" class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow" data-reveal="scale" style="--reveal-delay: {{ $loop->index * 60 }}ms">
                         {{-- Cover image --}}
                         <div class="relative h-48 overflow-hidden bg-slate-100">
                             @if($event->cover_image_path)

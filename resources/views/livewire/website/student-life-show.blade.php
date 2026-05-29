@@ -139,16 +139,16 @@
                         @if($hasPeopleHistory)
                             <div class="flex flex-wrap gap-2">
                                 @if($hasActivePeople)
-                                    <button type="button" wire:click="setPeopleFilter('active')"
+                                    <a href="{{ route('student-life.show', ['type' => $type, 'id' => $item->id, 'people' => 'active']) }}"
                                             class="rounded-sm border px-3 py-2 text-xs font-bold transition-colors {{ $peopleFilter === 'active' ? 'border-[#002366] bg-[#002366] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-[#002366]/40 hover:text-[#002366]' }}">
                                         Active
-                                    </button>
+                                    </a>
                                 @endif
                                 @foreach($peopleYears as $year)
-                                    <button type="button" wire:click="setPeopleFilter('{{ $year }}')"
+                                    <a href="{{ route('student-life.show', ['type' => $type, 'id' => $item->id, 'people' => $year]) }}"
                                             class="rounded-sm border px-3 py-2 text-xs font-bold transition-colors {{ (string) $peopleFilter === (string) $year ? 'border-[#002366] bg-[#002366] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-[#002366]/40 hover:text-[#002366]' }}">
                                         {{ $year }}
-                                    </button>
+                                    </a>
                                 @endforeach
                             </div>
                         @endif

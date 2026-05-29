@@ -13,6 +13,10 @@
 }
 
 @layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
     :root {
         --brand-blue: #002366;
         --brand-blue-hover: #001a4d;

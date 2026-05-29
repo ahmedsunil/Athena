@@ -1,1 +1,5 @@
-// Frontend entrypoint for Vite-managed application scripts.
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();

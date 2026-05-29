@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ filter: @js($filter) }">
 
     <section class="border-b border-slate-200 bg-white py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -12,18 +12,14 @@
             $localizedDate = fn ($date) => $date->format('j') . ' ' . __('common_month_short_' . $date->month) . ' ' . $date->format('Y');
         @endphp
         <div class="mb-8 flex flex-wrap gap-2">
-            <button type="button"
-                    wire:key="announcement-filter-active"
-                    wire:click="setFilter('active')"
+            <a href="{{ route('announcements.index', ['filter' => 'active']) }}"
                     class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'active' ? 'border-[#002366] bg-[#002366] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
                 {{ __('announcements_filter_active') }}
-            </button>
-            <button type="button"
-                    wire:key="announcement-filter-closed"
-                    wire:click="setFilter('closed')"
+            </a>
+            <a href="{{ route('announcements.index', ['filter' => 'closed']) }}"
                     class="rounded-full border px-4 py-2 text-sm font-semibold transition-colors {{ $filter === 'closed' ? 'border-[#002366] bg-[#002366] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300' }}">
                 {{ __('announcements_filter_closed') }}
-            </button>
+            </a>
         </div>
 
         @if($announcements->isEmpty())
@@ -34,7 +30,6 @@
             <div class="grid gap-4 lg:grid-cols-2">
                 @foreach($announcements as $announcement)
                     <article
-                        wire:key="announcement-{{ $announcement->id }}-{{ $filter }}"
                         role="link"
                         tabindex="0"
                         onclick="window.location.href = @js(route('announcements.show', $announcement->slug))"

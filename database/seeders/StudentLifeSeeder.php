@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\StudentLifeClub;
 use App\Models\StudentLifeHouse;
+use App\Models\StudentLifePerson;
 use App\Models\StudentLifePrefect;
 use App\Models\StudentLifeUniformBody;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 class StudentLifeSeeder extends Seeder
@@ -82,8 +84,9 @@ class StudentLifeSeeder extends Seeder
             ],
         ];
 
+        $clubModels = [];
         foreach ($clubs as $club) {
-            StudentLifeClub::updateOrCreate(['name' => $club['name']], $club);
+            $clubModels[$club['name']] = StudentLifeClub::updateOrCreate(['name' => $club['name']], $club);
         }
 
         // Prefects
@@ -210,8 +213,9 @@ class StudentLifeSeeder extends Seeder
             ],
         ];
 
+        $houseModels = [];
         foreach ($houses as $house) {
-            StudentLifeHouse::updateOrCreate(['name' => $house['name']], $house);
+            $houseModels[$house['name']] = StudentLifeHouse::updateOrCreate(['name' => $house['name']], $house);
         }
 
         // Uniform Bodies
@@ -257,8 +261,140 @@ class StudentLifeSeeder extends Seeder
             ],
         ];
 
+        $uniformBodyModels = [];
         foreach ($uniformBodies as $body) {
-            StudentLifeUniformBody::updateOrCreate(['name' => $body['name']], $body);
+            $uniformBodyModels[$body['name']] = StudentLifeUniformBody::updateOrCreate(['name' => $body['name']], $body);
+        }
+
+        $this->seedPeopleHistory($clubModels, $houseModels, $uniformBodyModels);
+    }
+
+    private function seedPeopleHistory(array $clubs, array $houses, array $uniformBodies): void
+    {
+        $currentYear = now()->year;
+        $years = range($currentYear, $currentYear - 5);
+
+        $teachers = [
+            'Ahmed Rasheed',
+            'Aishath Haleema',
+            'Mohamed Latheef',
+            'Fathimath Niyaza',
+            'Hassan Zareer',
+            'Mariya Ali',
+        ];
+
+        $students = [
+            ['name' => 'Aishath Nuha', 'grade' => 'Grade 10A'],
+            ['name' => 'Mohamed Nihan', 'grade' => 'Grade 10B'],
+            ['name' => 'Fathimath Zaina', 'grade' => 'Grade 9A'],
+            ['name' => 'Ahmed Zayan', 'grade' => 'Grade 9B'],
+            ['name' => 'Mariyam Zaha', 'grade' => 'Grade 8A'],
+            ['name' => 'Yoosuf Ayaan', 'grade' => 'Grade 8B'],
+            ['name' => 'Aishath Meesha', 'grade' => 'Grade 10A'],
+            ['name' => 'Ibrahim Rayan', 'grade' => 'Grade 10B'],
+            ['name' => 'Fathimath Aira', 'grade' => 'Grade 9A'],
+            ['name' => 'Mohamed Shayan', 'grade' => 'Grade 9B'],
+            ['name' => 'Mariyam Hana', 'grade' => 'Grade 8A'],
+            ['name' => 'Ahmed Mueen', 'grade' => 'Grade 8B'],
+        ];
+
+        foreach (array_values($clubs) as $clubIndex => $club) {
+            foreach ($years as $yearIndex => $year) {
+                $offset = ($clubIndex * 2) + $yearIndex;
+                $this->seedPeopleForOwner($club, $year, [
+                    [
+                        'name' => $teachers[($clubIndex + $yearIndex) % count($teachers)],
+                        'designation' => 'Teacher in Charge',
+                        'is_teacher_in_charge' => true,
+                        'sort_order' => 1,
+                    ],
+                    [
+                        'name' => $students[$offset % count($students)]['name'],
+                        'designation' => 'President',
+                        'grade' => $students[$offset % count($students)]['grade'],
+                        'sort_order' => 2,
+                    ],
+                    [
+                        'name' => $students[($offset + 3) % count($students)]['name'],
+                        'designation' => 'Vice President',
+                        'grade' => $students[($offset + 3) % count($students)]['grade'],
+                        'sort_order' => 3,
+                    ],
+                ], $year === $currentYear);
+            }
+        }
+
+        foreach (array_values($houses) as $houseIndex => $house) {
+            foreach ($years as $yearIndex => $year) {
+                $offset = ($houseIndex * 3) + $yearIndex;
+                $this->seedPeopleForOwner($house, $year, [
+                    [
+                        'name' => $teachers[($houseIndex + $yearIndex + 2) % count($teachers)],
+                        'designation' => 'House Master',
+                        'is_teacher_in_charge' => true,
+                        'sort_order' => 1,
+                    ],
+                    [
+                        'name' => $students[$offset % count($students)]['name'],
+                        'designation' => 'House Captain',
+                        'grade' => $students[$offset % count($students)]['grade'],
+                        'sort_order' => 2,
+                    ],
+                    [
+                        'name' => $students[($offset + 5) % count($students)]['name'],
+                        'designation' => 'Vice Captain',
+                        'grade' => $students[($offset + 5) % count($students)]['grade'],
+                        'sort_order' => 3,
+                    ],
+                ], $year === $currentYear);
+            }
+        }
+
+        foreach (array_values($uniformBodies) as $bodyIndex => $body) {
+            foreach ($years as $yearIndex => $year) {
+                $offset = ($bodyIndex * 4) + $yearIndex;
+                $this->seedPeopleForOwner($body, $year, [
+                    [
+                        'name' => $teachers[($bodyIndex + $yearIndex + 4) % count($teachers)],
+                        'designation' => 'Patron',
+                        'is_teacher_in_charge' => true,
+                        'sort_order' => 1,
+                    ],
+                    [
+                        'name' => $students[$offset % count($students)]['name'],
+                        'designation' => 'Leader',
+                        'grade' => $students[$offset % count($students)]['grade'],
+                        'sort_order' => 2,
+                    ],
+                    [
+                        'name' => $students[($offset + 7) % count($students)]['name'],
+                        'designation' => 'Deputy Leader',
+                        'grade' => $students[($offset + 7) % count($students)]['grade'],
+                        'sort_order' => 3,
+                    ],
+                ], $year === $currentYear);
+            }
+        }
+    }
+
+    private function seedPeopleForOwner(Model $owner, int $year, array $people, bool $isActiveYear): void
+    {
+        foreach ($people as $person) {
+            StudentLifePerson::updateOrCreate(
+                [
+                    'personable_type' => $owner::class,
+                    'personable_id' => $owner->getKey(),
+                    'year' => $year,
+                    'designation' => $person['designation'],
+                    'sort_order' => $person['sort_order'],
+                ],
+                [
+                    'name' => $person['name'],
+                    'grade' => ($person['is_teacher_in_charge'] ?? false) ? null : ($person['grade'] ?? null),
+                    'is_teacher_in_charge' => $person['is_teacher_in_charge'] ?? false,
+                    'is_active' => $isActiveYear,
+                ]
+            );
         }
     }
 }

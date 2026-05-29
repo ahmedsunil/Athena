@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\WebsiteController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
@@ -130,18 +131,19 @@ Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('aut
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
 // Public website
-Route::get('/', Home::class)->name('home');
-Route::get('/announcements', Announcements::class)->name('announcements.index');
-Route::get('/announcements/{slug}', AnnouncementShow::class)->name('announcements.show');
-Route::get('/about', About::class)->name('about');
-Route::get('/events', Events::class)->name('events.index');
-Route::get('/events/{slug}', EventShow::class)->name('events.show');
-Route::get('/academics', Academics::class)->name('academics.index');
-Route::get('/student-life', StudentLife::class)->name('student-life.index');
-Route::get('/student-life/{type}/{id}', StudentLifeShow::class)
+Route::get('/', [WebsiteController::class, 'home'])->name('home');
+Route::get('/site-search', [WebsiteController::class, 'search'])->name('website.search');
+Route::get('/announcements', [WebsiteController::class, 'announcements'])->name('announcements.index');
+Route::get('/announcements/{slug}', [WebsiteController::class, 'announcementShow'])->name('announcements.show');
+Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+Route::get('/events', [WebsiteController::class, 'events'])->name('events.index');
+Route::get('/events/{slug}', [WebsiteController::class, 'eventShow'])->name('events.show');
+Route::get('/academics', [WebsiteController::class, 'academics'])->name('academics.index');
+Route::get('/student-life', [WebsiteController::class, 'studentLife'])->name('student-life.index');
+Route::get('/student-life/{type}/{id}', [WebsiteController::class, 'studentLifeShow'])
     ->whereIn('type', ['clubs', 'houses', 'prefects', 'uniform-bodies'])
     ->whereNumber('id')
     ->name('student-life.show');
-Route::get('/gallery', Gallery::class)->name('gallery.index');
-Route::get('/digital-services', DigitalServices::class)->name('digital-services.index');
+Route::get('/gallery', [WebsiteController::class, 'gallery'])->name('gallery.index');
+Route::get('/digital-services', [WebsiteController::class, 'digitalServices'])->name('digital-services.index');
 Route::get('/admissions', fn () => 'Admissions')->name('admissions');

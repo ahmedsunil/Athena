@@ -13,11 +13,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex gap-0 overflow-x-auto">
                 @foreach([['downloads','digital_services_tab_downloads'],['resources','digital_services_tab_resources'],['calendar','digital_services_tab_calendar']] as [$id,$labelKey])
-                    <button wire:click="setTab('{{ $id }}')"
+                    <a href="{{ route('digital-services.index', ['activeTab' => $id]) }}"
                             class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap
                                    {{ $activeTab === $id ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300' }}">
                         {{ __($labelKey) }}
-                    </button>
+                    </a>
                 @endforeach
             </div>
         </div>
@@ -45,49 +45,53 @@
         @if($activeTab === 'downloads')
             <div>
                 {{-- Search --}}
-                <div class="relative max-w-md mb-4">
+                <form method="GET" action="{{ route('digital-services.index') }}" class="relative max-w-md mb-4">
+                    <input type="hidden" name="activeTab" value="downloads">
+                    <input type="hidden" name="activeCategory" value="{{ $activeCategory }}">
+                    <input type="hidden" name="activeMonth" value="{{ $activeMonth }}">
+                    <input type="hidden" name="activeYear" value="{{ $activeYear }}">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </span>
-                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="{{ __('digital_services_search_placeholder') }}"
+                    <input type="text" name="search" value="{{ $search }}" placeholder="{{ __('digital_services_search_placeholder') }}"
                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#002366] text-sm bg-white">
-                </div>
+                </form>
 
                 {{-- Filters row: category pills + selects + clear --}}
                 <div class="flex flex-wrap items-center gap-2 mb-4" data-reveal="fade">
-                    <button wire:click="setCategory('All')"
+                    <a href="{{ route('digital-services.index', ['activeTab' => 'downloads', 'activeCategory' => 'All', 'activeMonth' => $activeMonth, 'activeYear' => $activeYear, 'search' => $search]) }}"
                             class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                    {{ $activeCategory === 'All' ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                         {{ __('common_all') }}
-                    </button>
+                    </a>
                     @foreach($docCategories as $cat)
-                        <button wire:click="setCategory('{{ $cat }}')"
+                        <a href="{{ route('digital-services.index', ['activeTab' => 'downloads', 'activeCategory' => $cat, 'activeMonth' => $activeMonth, 'activeYear' => $activeYear, 'search' => $search]) }}"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                        {{ $activeCategory === $cat ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                             {{ __($docCategoryLabels[$cat] ?? $cat) }}
-                        </button>
+                        </a>
                     @endforeach
                     <div class="ml-auto flex items-center gap-2">
-                        <select wire:model.live="activeMonth"
+                        <select onchange="window.location.href = @js(route('digital-services.index')) + '?activeTab=downloads&activeCategory=' + encodeURIComponent(@js($activeCategory)) + '&activeMonth=' + encodeURIComponent(this.value) + '&activeYear=' + encodeURIComponent(@js($activeYear)) + '&search=' + encodeURIComponent(@js($search))"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                             <option value="All">{{ __('common_all_months') }}</option>
                             @foreach(range(1, 12) as $month)
-                                <option value="{{ $month }}">{{ __('common_month_' . $month) }}</option>
+                                <option value="{{ $month }}" @selected((string) $activeMonth === (string) $month)>{{ __('common_month_' . $month) }}</option>
                             @endforeach
                         </select>
-                        <select wire:model.live="activeYear"
+                        <select onchange="window.location.href = @js(route('digital-services.index')) + '?activeTab=downloads&activeCategory=' + encodeURIComponent(@js($activeCategory)) + '&activeMonth=' + encodeURIComponent(@js($activeMonth)) + '&activeYear=' + encodeURIComponent(this.value) + '&search=' + encodeURIComponent(@js($search))"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                             <option value="All">{{ __('common_all_years') }}</option>
                             @foreach($years as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
+                                <option value="{{ $year }}" @selected((string) $activeYear === (string) $year)>{{ $year }}</option>
                             @endforeach
                         </select>
-                        <button wire:click="clearFilters"
+                        <a href="{{ route('digital-services.index', ['activeTab' => 'downloads']) }}"
                                 class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">
                             {{ __('common_clear') }}
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -160,11 +164,11 @@
                 {{-- Audience filter --}}
                 <div class="flex flex-wrap gap-2 mb-6">
                     @foreach(['All','Students','Parents','Staff'] as $aud)
-                        <button wire:click="setAudience('{{ $aud }}')"
+                        <a href="{{ route('digital-services.index', ['activeTab' => 'resources', 'activeAudience' => $aud]) }}"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                        {{ $activeAudience === $aud ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                             {{ __($audienceLabels[$aud] ?? $aud) }}
-                        </button>
+                        </a>
                     @endforeach
                 </div>
 
@@ -251,10 +255,10 @@
             {{-- Calendar selector + tentative badge --}}
             <div class="flex flex-wrap items-center gap-3 mb-4">
                 @if($allCalendars->count() > 1)
-                    <select wire:model.live="activeCalendarId"
+                    <select onchange="window.location.href = @js(route('digital-services.index')) + '?activeTab=calendar&activeCalendarId=' + encodeURIComponent(this.value)"
                             class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366]">
                         @foreach($allCalendars as $cal)
-                            <option value="{{ $cal->id }}">{{ $cal->title }}</option>
+                            <option value="{{ $cal->id }}" @selected((int) $activeCalendarId === (int) $cal->id)>{{ $cal->title }}</option>
                         @endforeach
                     </select>
                 @endif
@@ -277,19 +281,35 @@
 
                     {{-- Month navigation --}}
                     <div class="bg-white rounded-xl border border-slate-200 px-4 py-3 flex items-center justify-between mb-3">
-                        <button wire:click="prevMonth" @disabled($calendarMonth <= 0)
-                                class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                            </svg>
-                        </button>
+                        @if($calendarMonth <= 0)
+                            <span class="p-1.5 rounded-lg border border-slate-200 opacity-40 cursor-not-allowed transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </span>
+                        @else
+                            <a href="{{ route('digital-services.index', ['activeTab' => 'calendar', 'activeCalendarId' => $activeCalendarId, 'calendarMonth' => $calendarMonth - 1]) }}"
+                                    class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </a>
+                        @endif
                         <h3 class="text-base font-black text-slate-900">{{ $localizedMonthYear($currentMonthCarbon) }}</h3>
-                        <button wire:click="nextMonth" @disabled($calendarMonth >= 12)
-                                class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </button>
+                        @if($calendarMonth >= 12)
+                            <span class="p-1.5 rounded-lg border border-slate-200 opacity-40 cursor-not-allowed transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        @else
+                            <a href="{{ route('digital-services.index', ['activeTab' => 'calendar', 'activeCalendarId' => $activeCalendarId, 'calendarMonth' => $calendarMonth + 1]) }}"
+                                    class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        @endif
                     </div>
 
                     {{-- Calendar card --}}

@@ -31,7 +31,7 @@
             <h2 class="text-2xl font-black text-white sm:text-3xl">Let's Connect</h2>
     </div>
 
-    <livewire:website.footer-contact />
+    @include('livewire.website.footer-contact', ['profile' => \App\Models\SchoolProfile::singleton()])
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-4 sm:pt-14 sm:pb-5">
         <div class="grid gap-9 text-left sm:grid-cols-2 lg:grid-cols-3">

@@ -14,22 +14,18 @@
     <div class="sticky top-16 z-40 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex gap-0 overflow-x-auto">
-                <button
-                    wire:click="switchTab('about')"
+                <a href="{{ route('about', ['tab' => 'about']) }}"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'about' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >{{ __('about_tab_about') }}</button>
-                <button
-                    wire:click="switchTab('history')"
+                >{{ __('about_tab_about') }}</a>
+                <a href="{{ route('about', ['tab' => 'history']) }}"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'history' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >{{ __('about_tab_history') }}</button>
-                <button
-                    wire:click="switchTab('achievements')"
+                >{{ __('about_tab_history') }}</a>
+                <a href="{{ route('about', ['tab' => 'achievements']) }}"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'achievements' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >{{ __('about_tab_achievements') }}</button>
-                <button
-                    wire:click="switchTab('team')"
+                >{{ __('about_tab_achievements') }}</a>
+                <a href="{{ route('about', ['tab' => 'team']) }}"
                     class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors {{ $activeTab === 'team' ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}"
-                >{{ __('about_tab_team') }}</button>
+                >{{ __('about_tab_team') }}</a>
             </div>
         </div>
     </div>
@@ -319,19 +315,18 @@
                             ];
                         @endphp
                         @foreach($categoryBtns as $catKey => $catInfo)
-                            <button
-                                wire:click="switchCategory('{{ $catKey }}')"
+                            <a href="{{ route('about', ['tab' => 'achievements', 'category' => $catKey, 'year' => $activeYear]) }}"
                                 class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors {{ $activeCategory === $catKey ? $catInfo['active'] : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}"
-                            >{{ __($catInfo['label']) }}</button>
+                            >{{ __($catInfo['label']) }}</a>
                         @endforeach
                     </div>
                     <select
-                        wire:model.live="activeYear"
+                        onchange="window.location.href = @js(route('about')) + '?tab=achievements&category=' + encodeURIComponent(@js($activeCategory)) + '&year=' + encodeURIComponent(this.value)"
                         class="sm:ml-auto px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#002366]"
                     >
                         <option value="all">{{ __('common_all_years') }}</option>
                         @foreach($achievementYears as $year)
-                            <option value="{{ $year }}">{{ $year }}</option>
+                            <option value="{{ $year }}" @selected((string) $activeYear === (string) $year)>{{ $year }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -443,7 +438,7 @@
                     ];
                 @endphp
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 80ms">
-                    <button type="button" wire:click="toggleStaffSection('academic')" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 transition-colors">
                         <div class="text-left">
                             <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_section_eyebrow') }}</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_academic_section') }}</h2>
@@ -486,7 +481,7 @@
                     ];
                 @endphp
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden" data-reveal="scale" style="--reveal-delay: 160ms">
-                    <button type="button" wire:click="toggleStaffSection('administrative')" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-4 border-b border-slate-100 transition-colors">
                         <div class="text-left">
                             <p class="text-xs font-bold uppercase tracking-widest text-[#002366]">{{ __('about_team_section_eyebrow') }}</p>
                             <h2 class="text-xl font-black text-slate-900 mt-0.5">{{ __('about_team_admin_section') }}</h2>

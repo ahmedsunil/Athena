@@ -8,14 +8,10 @@
     $accentBorder = $borderMap[$accentColor] ?? 'border-slate-300';
 @endphp
 
-@php
-    $expanded = $expandedStaffCards[$member->id] ?? false;
-@endphp
-
-<div>
+<div x-data="{ expanded: false }">
     <button
         type="button"
-        wire:click="toggleStaffCard({{ $member->id }})"
+        @click="expanded = ! expanded"
         class="w-full text-left bg-white border border-slate-200 rounded-2xl p-4 cursor-pointer hover:border-slate-300 hover:shadow-sm transition-all duration-150 select-none group"
     >
         {{-- Avatar --}}
@@ -38,9 +34,10 @@
         {{-- Expand hint --}}
         @if($member->education || !empty($member->work_experiences))
             <div class="mt-2.5 flex items-center justify-between">
-                <span class="text-[10px] font-semibold text-slate-400 leading-none">{{ $expanded ? __('staff_card_close') : __('staff_card_details') }}</span>
+                <span class="text-[10px] font-semibold text-slate-400 leading-none" x-text="expanded ? @js(__('staff_card_close')) : @js(__('staff_card_details'))"></span>
                 <svg
-                    class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200 {{ $expanded ? 'rotate-180' : '' }}"
+                    class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200"
+                    :class="expanded ? 'rotate-180' : ''"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                 >
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
@@ -50,8 +47,7 @@
     </button>
 
     {{-- Inline detail panel --}}
-    @if($expanded)
-    <div class="border border-t-0 border-slate-200 rounded-b-2xl bg-slate-50 px-4 pb-4 pt-3 -mt-2 space-y-3">
+    <div x-show="expanded" x-cloak class="border border-t-0 border-slate-200 rounded-b-2xl bg-slate-50 px-4 pb-4 pt-3 -mt-2 space-y-3">
         @if($member->education)
             <div class="flex items-start gap-2">
                 <svg class="w-3.5 h-3.5 text-slate-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,5 +69,4 @@
             </div>
         @endif
     </div>
-    @endif
 </div>

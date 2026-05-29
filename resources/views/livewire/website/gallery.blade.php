@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ activeCategory: @js($activeCategory), activeMonth: @js($activeMonth), activeYear: @js($activeYear) }">
 
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-8">
@@ -23,37 +23,37 @@
 
         {{-- Filters row: category pills + selects + clear --}}
         <div class="flex flex-wrap items-center gap-2 mb-8" data-reveal="fade">
-            <button wire:click="setCategory('All')"
+            <a href="{{ route('gallery.index', ['activeCategory' => 'All', 'activeMonth' => $activeMonth, 'activeYear' => $activeYear]) }}"
                     class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                            {{ $activeCategory === 'All' ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                 {{ __('common_all') }}
-            </button>
+            </a>
             @foreach($categories as $cat)
-                <button wire:click="setCategory('{{ $cat }}')"
+                <a href="{{ route('gallery.index', ['activeCategory' => $cat, 'activeMonth' => $activeMonth, 'activeYear' => $activeYear]) }}"
                         class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors
                                {{ $activeCategory === $cat ? 'bg-[#002366] border-[#002366] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300' }}">
                     {{ __($categoryLabels[$cat] ?? $cat) }}
-                </button>
+                </a>
             @endforeach
             <div class="ml-auto flex items-center gap-2">
-                <select wire:model.live="activeMonth"
+                <select x-model="activeMonth" @change="window.location.href = @js(route('gallery.index')) + '?activeCategory=' + encodeURIComponent(activeCategory) + '&activeMonth=' + encodeURIComponent(activeMonth) + '&activeYear=' + encodeURIComponent(activeYear)"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                     <option value="All">{{ __('common_all_months') }}</option>
                     @foreach(range(1, 12) as $month)
                         <option value="{{ $month }}">{{ __('common_month_' . $month) }}</option>
                     @endforeach
                 </select>
-                <select wire:model.live="activeYear"
+                <select x-model="activeYear" @change="window.location.href = @js(route('gallery.index')) + '?activeCategory=' + encodeURIComponent(activeCategory) + '&activeMonth=' + encodeURIComponent(activeMonth) + '&activeYear=' + encodeURIComponent(activeYear)"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#002366] font-medium">
                     <option value="All">{{ __('common_all_years') }}</option>
                     @foreach($years as $year)
                         <option value="{{ $year }}">{{ $year }}</option>
                     @endforeach
                 </select>
-                <button wire:click="clearFilters"
+                <a href="{{ route('gallery.index') }}"
                         class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">
                     {{ __('common_clear') }}
-                </button>
+                </a>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ activeTab: @js($activeTab) }">
 
     {{-- Page header --}}
     <section class="bg-white border-b border-slate-200 py-8">
@@ -17,11 +17,11 @@
                     ['key' => 'prefects',         'label_key' => 'student_life_tab_prefects'],
                     ['key' => 'uniform-bodies',   'label_key' => 'student_life_tab_uniform_bodies'],
                 ] as $tab)
-                    <button wire:click="setTab('{{ $tab['key'] }}')"
+                    <a href="{{ route('student-life.index', ['activeTab' => $tab['key']]) }}"
                             class="px-5 py-4 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors
                                    {{ $activeTab === $tab['key'] ? 'border-[#002366] text-[#002366]' : 'border-transparent text-slate-500 hover:text-slate-700' }}">
                         {{ __($tab['label_key']) }}
-                    </button>
+                    </a>
                 @endforeach
             </div>
         </div>

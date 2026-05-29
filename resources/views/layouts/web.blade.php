@@ -130,18 +130,16 @@
         window.__dv      = {!! file_get_contents(base_path('lang/dv.json')) !!};
         window.__langUrl = '{{ url('/lang') }}';
     </script>
-    @livewireStyles
 </head>
 <body class="website-shell font-sans bg-white text-slate-900 flex flex-col min-h-screen {{ request()->routeIs('home') ? '' : 'pt-16' }}">
 @include('layouts.partials.nav')
-@livewire('website.search')
+@include('livewire.website.search')
 
 <main class="flex-1">
     {{ $slot }}
 </main>
 
 @include('layouts.partials.footer')
-@livewireScripts
 <script>
     (function () {
         var observer = null;
@@ -182,20 +180,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', setupReveal);
-        document.addEventListener('livewire:navigated', setupReveal);
         new MutationObserver(function () {
             requestAnimationFrame(setupReveal);
         }).observe(document.body, { childList: true, subtree: true });
-
-        document.addEventListener('livewire:init', function () {
-            if (! window.Livewire || ! window.Livewire.hook) {
-                return;
-            }
-
-            window.Livewire.hook('morph.updated', function () {
-                requestAnimationFrame(setupReveal);
-            });
-        });
     })();
 
     (function () {
@@ -211,11 +198,9 @@
 
             syncHeader();
             window.addEventListener('scroll', syncHeader, { passive: true });
-            document.addEventListener('livewire:navigated', syncHeader);
         }
 
         document.addEventListener('DOMContentLoaded', setupHeaderScroll);
-        document.addEventListener('livewire:navigated', setupHeaderScroll);
     })();
 </script>
 </body>
