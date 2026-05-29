@@ -43,8 +43,7 @@
                                                 <a :href="item.url" @click="closeSearch()" class="spotlight-item flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none">
                                                     <span class="mt-0.5 flex-shrink-0 rounded-md p-1.5" :class="section.bgClass">
                                                         <svg x-show="section.name === 'Events'" class="h-3.5 w-3.5" :class="section.textClass" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                                        <svg x-show="section.name === 'Gallery'" class="h-3.5 w-3.5" :class="section.textClass" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                                        <svg x-show="section.name !== 'Events' && section.name !== 'Gallery'" class="h-3.5 w-3.5" :class="section.textClass" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                                        <svg x-show="section.name !== 'Events'" class="h-3.5 w-3.5" :class="section.textClass" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                                     </span>
                                                     <span class="min-w-0">
                                                         <span class="block truncate text-sm font-semibold text-slate-900" x-text="item.title"></span>
@@ -73,7 +72,6 @@
                                 @foreach([
                                     ['label' => __('nav_events'),           'url' => route('events.index'),           'icon' => 'calendar'],
                                     ['label' => __('nav_academics'),        'url' => route('academics.index'),        'icon' => 'book'],
-                                    ['label' => __('nav_gallery'),          'url' => route('gallery.index'),          'icon' => 'photo'],
                                     ['label' => __('nav_digital_services'), 'url' => route('digital-services.index'), 'icon' => 'document'],
                                 ] as $link)
                                     <a href="{{ $link['url'] }}" @click="closeSearch()" class="spotlight-item flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none">
@@ -81,8 +79,6 @@
                                             <svg class="h-4 w-4 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                         @elseif($link['icon'] === 'book')
                                             <svg class="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                                        @elseif($link['icon'] === 'photo')
-                                            <svg class="h-4 w-4 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                         @else
                                             <svg class="h-4 w-4 text-[#B21F2D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                         @endif
@@ -96,111 +92,6 @@
             </div>
         </div>
     </template>
-
-    @if(false)
-        <button type="button" class="fixed inset-0 z-[998] bg-[#002366]/60 backdrop-blur-sm" aria-label="Close search"></button>
-
-        <div class="fixed left-1/2 top-[10vh] z-[999] w-full max-w-xl -translate-x-1/2 px-4">
-            <div class="rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/10 overflow-hidden">
-                <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-100">
-                    <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/>
-                    </svg>
-                    <input
-                        data-legacy-model="query"
-                        type="text"
-                        placeholder="{{ __('search_placeholder') }}"
-                        class="flex-1 bg-transparent text-sm text-slate-900 placeholder-slate-400 outline-none"
-                        autocomplete="off"
-                        spellcheck="false"
-                        autofocus
-                    >
-                    <button
-                        type="button"
-                        data-legacy-click="close"
-                        class="flex-shrink-0 rounded-md border border-slate-200 px-1.5 py-0.5 text-[10px] font-semibold text-slate-400 hover:bg-slate-50"
-                    >{{ __('search_escape') }}</button>
-                </div>
-
-                @php
-                    $grouped = collect($results)->groupBy('section');
-                    $sectionLabels = [
-                        'Events' => __('nav_events'),
-                        'Gallery' => __('nav_gallery'),
-                        'Downloads' => __('nav_downloads'),
-                        'Announcements' => __('common_announcements'),
-                    ];
-                    $sectionColors = [
-                        'Events'    => ['bg' => 'bg-[#002366]/10',    'text' => 'text-[#002366]'],
-                        'Gallery'   => ['bg' => 'bg-[#002366]/10', 'text' => 'text-[#002366]'],
-                        'Downloads' => ['bg' => 'bg-[#B21F2D]/10',  'text' => 'text-[#B21F2D]'],
-                        'Announcements' => ['bg' => 'bg-[#002366]/10', 'text' => 'text-[#002366]'],
-                    ];
-                @endphp
-
-                @if(strlen(trim($query)) >= 2)
-                    @if($results)
-                        <div class="max-h-[60vh] overflow-y-auto py-2">
-                            @foreach($grouped as $section => $items)
-                                <div class="px-3 pt-2 pb-1">
-                                    <p class="text-[10px] font-bold uppercase tracking-widest {{ $sectionColors[$section]['text'] ?? 'text-slate-500' }} px-1 mb-1">{{ $sectionLabels[$section] ?? $section }}</p>
-                                    @foreach($items as $item)
-                                        <a href="{{ $item['url'] }}" class="spotlight-item flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-slate-50 focus:bg-slate-50 focus:outline-none transition-colors">
-                                            <span class="mt-0.5 flex-shrink-0 rounded-md {{ $sectionColors[$section]['bg'] ?? 'bg-slate-100' }} p-1.5">
-                                                @if($section === 'Events')
-                                                    <svg class="w-3.5 h-3.5 {{ $sectionColors[$section]['text'] ?? '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                                @elseif($section === 'Gallery')
-                                                    <svg class="w-3.5 h-3.5 {{ $sectionColors[$section]['text'] ?? '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                                @else
-                                                    <svg class="w-3.5 h-3.5 {{ $sectionColors[$section]['text'] ?? '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                                @endif
-                                            </span>
-                                            <span class="min-w-0">
-                                                <span class="block truncate text-sm font-semibold text-slate-900">{{ $item['title'] }}</span>
-                                                @if($item['snippet'])
-                                                    <span class="block truncate text-xs text-slate-400 mt-0.5">{{ $item['snippet'] }}</span>
-                                                @endif
-                                            </span>
-                                        </a>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <div class="px-4 py-10 text-center">
-                            <p class="text-sm font-semibold text-slate-500">{{ __('search_no_results') }} "{{ $query }}"</p>
-                            <p class="text-xs text-slate-400 mt-1">{{ __('search_try_different') }}</p>
-                        </div>
-                    @endif
-                @else
-                    <div class="p-4">
-                        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 px-1">{{ __('search_quick_links') }}</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            @foreach([
-                                ['label' => __('nav_events'),           'url' => route('events.index'),           'icon' => 'calendar'],
-                                ['label' => __('nav_academics'),        'url' => route('academics.index'),        'icon' => 'book'],
-                                ['label' => __('nav_gallery'),          'url' => route('gallery.index'),          'icon' => 'photo'],
-                                ['label' => __('nav_digital_services'), 'url' => route('digital-services.index'), 'icon' => 'document'],
-                            ] as $link)
-                                <a href="{{ $link['url'] }}" class="spotlight-item flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none transition-colors">
-                                    @if($link['icon'] === 'calendar')
-                                        <svg class="w-4 h-4 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                    @elseif($link['icon'] === 'book')
-                                        <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                                    @elseif($link['icon'] === 'photo')
-                                        <svg class="w-4 h-4 text-[#002366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                    @else
-                                        <svg class="w-4 h-4 text-[#B21F2D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                    @endif
-                                    {{ $link['label'] }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
-    @endif
 </div>
 
 <script>
@@ -213,13 +104,11 @@
             controller: null,
             labels: {
                 Events: @js(__('nav_events')),
-                Gallery: @js(__('nav_gallery')),
                 Downloads: @js(__('nav_downloads')),
                 Announcements: @js(__('common_announcements')),
             },
             styles: {
                 Events: { bgClass: 'bg-[#002366]/10', textClass: 'text-[#002366]' },
-                Gallery: { bgClass: 'bg-[#002366]/10', textClass: 'text-[#002366]' },
                 Downloads: { bgClass: 'bg-[#B21F2D]/10', textClass: 'text-[#B21F2D]' },
                 Announcements: { bgClass: 'bg-[#002366]/10', textClass: 'text-[#002366]' },
             },

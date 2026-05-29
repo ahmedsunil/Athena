@@ -4,7 +4,6 @@ namespace App\Livewire\Website;
 
 use App\Models\DigitalServiceDocument;
 use App\Models\Event;
-use App\Models\GalleryAlbum;
 use App\Models\Announcement;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -51,21 +50,6 @@ class Search extends Component
                     'title'   => $event->title,
                     'snippet' => $event->short_description,
                     'url'     => route('events.show', $event->slug),
-                ];
-            });
-
-        GalleryAlbum::where('is_active', true)
-            ->where('title', 'like', $like)
-            ->orderByDesc('date')
-            ->limit(4)
-            ->get(['title', 'category'])
-            ->each(function ($album) use (&$results) {
-                $results[] = [
-                    'section' => 'Gallery',
-                    'color'   => 'violet',
-                    'title'   => $album->title,
-                    'snippet' => $album->category,
-                    'url'     => route('gallery.index'),
                 ];
             });
 

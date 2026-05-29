@@ -47,7 +47,6 @@ use App\Livewire\Cms\StudentLife\PeopleIndex;
 use App\Livewire\Website\StudentLife;
 use App\Livewire\Website\StudentLifeShow;
 use App\Livewire\Cms\Gallery\GalleryIndex;
-use App\Livewire\Website\Gallery;
 use App\Livewire\Cms\DigitalServices\DocumentsIndex;
 use App\Livewire\Cms\DigitalServices\ResourcesIndex;
 use App\Livewire\Cms\DigitalServices\CalendarEntriesIndex;
@@ -144,6 +143,5 @@ Route::get('/student-life/{type}/{id}', [WebsiteController::class, 'studentLifeS
     ->whereIn('type', ['clubs', 'houses', 'prefects', 'uniform-bodies'])
     ->whereNumber('id')
     ->name('student-life.show');
-Route::get('/gallery', [WebsiteController::class, 'gallery'])->name('gallery.index');
 Route::get('/digital-services', [WebsiteController::class, 'digitalServices'])->name('digital-services.index');
 Route::get('/admissions', fn () => 'Admissions')->name('admissions');

@@ -12,7 +12,6 @@ use App\Models\DigitalServiceDocument;
 use App\Models\DigitalServiceResource;
 use App\Models\Event;
 use App\Models\FoundingMember;
-use App\Models\GalleryAlbum;
 use App\Models\HistorySection;
 use App\Models\HomeQuickAccess;
 use App\Models\HomeSlide;
@@ -198,39 +197,6 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function gallery(Request $request): View
-    {
-        $activeCategory = $request->query('activeCategory', 'All');
-        $activeYear = $request->query('activeYear', 'All');
-        $activeMonth = $request->query('activeMonth', 'All');
-        $categories = ['Events', 'Sports', 'Graduation', 'Cultural', 'Academic', 'Trips'];
-
-        $albums = GalleryAlbum::where('is_active', true)
-            ->when($activeCategory !== 'All', fn ($query) => $query->where('category->en', $activeCategory))
-            ->when($activeYear !== 'All', fn ($query) => $query->whereYear('date', (int) $activeYear))
-            ->when($activeMonth !== 'All', fn ($query) => $query->whereMonth('date', (int) $activeMonth))
-            ->orderBy('date', 'desc')
-            ->orderBy('id', 'desc')
-            ->get();
-
-        $years = GalleryAlbum::where('is_active', true)
-            ->pluck('date')
-            ->map(fn ($date) => date('Y', strtotime((string) $date)))
-            ->unique()
-            ->sortDesc()
-            ->values();
-
-        return $this->page('livewire.website.gallery', [
-            'albums' => $albums,
-            'years' => $years,
-            'total' => GalleryAlbum::where('is_active', true)->count(),
-            'categories' => $categories,
-            'activeCategory' => $activeCategory,
-            'activeYear' => $activeYear,
-            'activeMonth' => $activeMonth,
-        ]);
-    }
-
     public function digitalServices(Request $request): View
     {
         $data = $this->digitalServicesData($request);
@@ -260,20 +226,6 @@ class WebsiteController extends Controller
                     'title' => $event->title,
                     'snippet' => $event->short_description,
                     'url' => route('events.show', $event->slug),
-                ];
-            });
-
-        GalleryAlbum::where('is_active', true)
-            ->where('title', 'like', $like)
-            ->orderByDesc('date')
-            ->limit(4)
-            ->get(['title', 'category'])
-            ->each(function (GalleryAlbum $album) use (&$results) {
-                $results[] = [
-                    'section' => 'Gallery',
-                    'title' => $album->title,
-                    'snippet' => $album->category,
-                    'url' => route('gallery.index'),
                 ];
             });
 
