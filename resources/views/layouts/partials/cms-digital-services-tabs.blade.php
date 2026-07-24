@@ -8,7 +8,7 @@
 @endphp
 
 <div>
-    <h1 class="admin-page-title text-lg">Digital Services</h1>
+    <h1 class="admin-page-title text-lg">Media</h1>
     <p class="admin-muted">Manage documents, online resources, and academic calendar entries.</p>
 </div>
 

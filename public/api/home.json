@@ -19,50 +19,54 @@
       "id": "slide-1",
       "imageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80",
       "title": "Shaping Tomorrow's Leaders",
-      "title_dv": "މާދަމާގެ ލީޑަރުން ބިނާކުރުން",
       "subtitle": "Hulhudhuffaaru School inspires every student to grow in knowledge, character, faith, and service.",
-      "subtitle_dv": "ހުޅުދުއްފާރު ސްކޫލްގައި ކޮންމެ ދަރިވަރަކަށް ޢިލްމާއި، އަޚްލާޤާއި، ދީނާއި، ޚިދުމަތުގައި ކުރިއަރުވުމަށް އިލްހާމް ދެއެވެ.",
       "ctaLabel": "Apply for Admission",
-      "ctaLabel_dv": "އެޑްމިޝަންއަށް އެދޭ",
       "ctaHref": "/admissions"
     },
     {
       "id": "slide-2",
       "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80",
       "title": "Excellence in Education",
-      "title_dv": "ތަޢުލީމުގައި އެންމެ މަތީ ފެންވަރު",
       "subtitle": "From Grade 1 to Higher Secondary, we provide a caring environment where learners are challenged to do their best.",
-      "subtitle_dv": "ގްރޭޑް 1 އިން ހަޔަރ ސެކަންޑަރީއަށް، ދަރިވަރުން އެންމެ ރަނގަޅު މަސައްކަތް ކުރުމަށް ކެއްތެރި ފެންވަރެއް ދެމެވެ.",
       "ctaLabel": "Explore Academics",
-      "ctaLabel_dv": "ތަޢުލީމީ ބައި ބަލާ",
       "ctaHref": "/academics"
     },
     {
       "id": "slide-3",
       "imageUrl": "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1600&q=80",
       "title": "A Thriving Island School Community",
-      "title_dv": "ކުރިއަރާ ރަށް ސްކޫލް މުޖުތަމައެއް",
       "subtitle": "Clubs, sports, arts, Quran, leadership, and service help students learn beyond the classroom.",
-      "subtitle_dv": "ކްލަބްތަކާއި، ކުޅިވަރާއި، ފަންނާއި, ޤުރްއާނާއި، ލީޑަރޝިޕާއި، ޚިދުމަތް ދަރިވަރުން ކުލާހުގެ ބޭރުގައި ދަސްކުރުމަށް އެހީވެއެވެ.",
       "ctaLabel": "Discover Student Life",
-      "ctaLabel_dv": "ދަރިވަރުންގެ ޙަޔާތް ބަލާ",
       "ctaHref": "/student-life"
     }
   ],
   "stats": [
-    { "id": "stat-1", "value": "850+", "label": "Students Enrolled", "label_dv": "ކިޔަވާ ދަރިވަރުން" },
-    { "id": "stat-2", "value": "90+", "label": "Dedicated Staff", "label_dv": "ޚިދުމަތްތެރި ސްޓާފް" },
-    { "id": "stat-3", "value": "31", "label": "Years of Service", "label_dv": "ޚިދުމަތުގެ އަހަރު" },
-    { "id": "stat-4", "value": "96%", "label": "Exam Pass Rate", "label_dv": "އިމްތިޙާނު ފާސް ނިސްބަތް" }
+    {
+      "id": "stat-1",
+      "value": "850+",
+      "label": "Students Enrolled"
+    },
+    {
+      "id": "stat-2",
+      "value": "90+",
+      "label": "Dedicated Staff"
+    },
+    {
+      "id": "stat-3",
+      "value": "31",
+      "label": "Years of Service"
+    },
+    {
+      "id": "stat-4",
+      "value": "96%",
+      "label": "Exam Pass Rate"
+    }
   ],
   "principal": {
     "name": "Mr. Mohamed Rasheed",
-    "name_dv": "މުޙައްމަދު ރަޝީދު",
     "title": "Principal, Hulhudhuffaaru School",
-    "title_dv": "ހުޅުދުއްފާރު ސްކޫލްގެ ޕްރިންސިޕަލް",
     "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
-    "message": "Welcome to Hulhudhuffaaru School. Our school is built on the belief that every child deserves a safe, caring, and ambitious learning environment. With the support of our parents, teachers, students, and island community, we continue to prepare young people who are proud Maldivians and confident global citizens.",
-    "message_dv": "ހުޅުދުއްފާރު ސްކޫލަށް މަރުހަބާ. ކޮންމެ ކުދިންނަކަށް އަމާން، ކެއްތެރި، އަދި އަމާޒު ބޮޑު ދަސްކުރުމުގެ މާހައުލެއް ލިބެން ޖެހޭ ކަމުގައި އެކަން ބިނާކުރެވިފައިވެއެވެ. ބަލިވެރިންނާއި، މުދައްރިސުންނާއި، ދަރިވަރުންނާއި، ރަށު މުޖުތަމައުގެ އެހީއާއެކު ޤައުމީ ފަޚުރު ހުރި މާލިޑިވިއަންތަކަކަށާއި އައްދުނިޔޭގައި ބަރޯސާވެރި މީހުންނަށް ތައްޔާރުކުރަމެވެ."
+    "message": "Welcome to Hulhudhuffaaru School. Our school is built on the belief that every child deserves a safe, caring, and ambitious learning environment. With the support of our parents, teachers, students, and island community, we continue to prepare young people who are proud Maldivians and confident global citizens."
   },
   "featuredEvents": [
     {
@@ -88,65 +92,93 @@
     }
   ],
   "quickLinks": [
-    { "id": "ql-1", "label": "Admissions", "label_dv": "އެޑްމިޝަން", "href": "/admissions", "icon": "ClipboardList" },
-    { "id": "ql-2", "label": "Events", "label_dv": "ޙަރަކާތްތައް", "href": "/events", "icon": "Calendar" },
-    { "id": "ql-3", "label": "Academics", "label_dv": "ތަޢުލީމީ ބައި", "href": "/academics", "icon": "BookOpen" },
-    { "id": "ql-4", "label": "Student Life", "label_dv": "ދަރިވަރުންގެ ޙަޔާތް", "href": "/student-life", "icon": "Users" },
-    { "id": "ql-5", "label": "Gallery", "label_dv": "ގެލެރީ", "href": "/gallery", "icon": "Image" },
-    { "id": "ql-6", "label": "Downloads", "label_dv": "ޑައުންލޯޑްސް", "href": "/downloads", "icon": "Download" },
-    { "id": "ql-7", "label": "Digital Services", "label_dv": "ޑިޖިޓަލް ޚިދުމަތްތައް", "href": "/digital-services", "icon": "Laptop" },
-    { "id": "ql-8", "label": "Contact Us", "label_dv": "ގުޅުއްވާ", "href": "#contact", "icon": "Mail" }
+    {
+      "id": "ql-1",
+      "label": "Admissions",
+      "href": "/admissions",
+      "icon": "ClipboardList"
+    },
+    {
+      "id": "ql-2",
+      "label": "Events",
+      "href": "/events",
+      "icon": "Calendar"
+    },
+    {
+      "id": "ql-3",
+      "label": "Academics",
+      "href": "/academics",
+      "icon": "BookOpen"
+    },
+    {
+      "id": "ql-4",
+      "label": "Student Life",
+      "href": "/student-life",
+      "icon": "Users"
+    },
+    {
+      "id": "ql-5",
+      "label": "Gallery",
+      "href": "/gallery",
+      "icon": "Image"
+    },
+    {
+      "id": "ql-6",
+      "label": "Downloads",
+      "href": "/downloads",
+      "icon": "Download"
+    },
+    {
+      "id": "ql-7",
+      "label": "Media",
+      "href": "/digital-services",
+      "icon": "Laptop"
+    },
+    {
+      "id": "ql-8",
+      "label": "Contact Us",
+      "href": "#contact",
+      "icon": "Mail"
+    }
   ],
   "testimonials": [
     {
       "id": "test-1",
       "quote": "The teachers know our children well and keep parents involved. We feel that the school and home are working together.",
-      "quote_dv": "މުދައްރިސުން އަހަރެމެންގެ ކުދިން ރަނގަޅަށް ދަނެގެން، ބަލިވެރިން އެކުގައި ބަހައްޓަވައެވެ. ސްކޫލާއި ގޭގެ އެއްގޮތް މަސައްކަތެއް ކުރެވޭ ކަމަށް އަހަރެމެން ހީކުރަމެވެ.",
       "author": "Mrs. Aminath Shazna",
-      "author_dv": "އަމީނަތު ޝަޒްނާ",
       "role": "Parent of Grade 7 Student",
-      "role_dv": "ގްރޭޑް 7 ދަރިވަރެއްގެ ބަލިވެރިޔާ",
       "photoUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80"
     },
     {
       "id": "test-2",
       "quote": "Hulhudhuffaaru School gave me confidence, discipline, and the foundation I needed for higher studies.",
-      "quote_dv": "ހުޅުދުއްފާރު ސްކޫލުން މަށަށް ބަރޯސާ، ތަރުތީބު، އަދި މަތީ ތަޢުލީމަށް ބޭނުންވި ބިނާ ދިނެވެ.",
       "author": "Ahmed Zayan",
-      "author_dv": "އަޙްމަދު ޒަޔާން",
       "role": "Alumni, Class of 2022",
-      "role_dv": "ކްލާސް 2022 އެލަމްނައި",
       "photoUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80"
     },
     {
       "id": "test-3",
       "quote": "The school balances academics, Quran, sports, and leadership in a way that helps students become well-rounded.",
-      "quote_dv": "ސްކޫލުން ތަޢުލީމާއި، ޤުރްއާނާއި، ކުޅިވަރާއި، ލީޑަރޝިޕް އެއްފެންވަރަށް ބެލެހެއްޓުމުން ދަރިވަރުން ފުރިހަމަ މީހުންނަށް ކުރިއަރައެވެ.",
       "author": "Mr. Hassan Shareef",
-      "author_dv": "ޙަސަން ޝަރީފް",
       "role": "School Board Member",
-      "role_dv": "ސްކޫލް ބޯޑް މެމްބަރ",
       "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
     },
     {
       "id": "test-4",
       "quote": "Student clubs helped me find my voice and learn how to serve the community with other students.",
-      "quote_dv": "ދަރިވަރު ކްލަބްތަކުން މަށަށް އަޑު ހޯދުމަށާއި އެހެން ދަރިވަރުންނާއެކު މުޖުތަމައަށް ޚިދުމަތްކުރުމަށް ދަސްކޮށްދިނެވެ.",
       "author": "Mariyam Sana",
-      "author_dv": "މަރްޔަމް ސަނާ",
       "role": "Student Leader",
-      "role_dv": "ދަރިވަރު ލީޑަރ",
       "photoUrl": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&q=80"
     }
   ],
   "contact": {
     "address": "Hulhudhuffaaru School, Hulhudhuffaaru, Raa Atoll, Maldives",
-    "address_dv": "ހުޅުދުއްފާރު ސްކޫލް، ހުޅުދުއްފާރު، ރ އަތޮޅު، ދިވެހިރާއްޖެ",
-    "island_dv": "ހުޅުދުއްފާރު",
-    "atoll_dv": "ރ އަތޮޅު",
-    "country_dv": "ދިވެހިރާއްޖެ",
     "phone": "+960 658-0000",
     "email": "info@hulhudhuffaaruschool.edu.mv",
-    "formFields": ["name", "email", "message"]
+    "formFields": [
+      "name",
+      "email",
+      "message"
+    ]
   }
 }

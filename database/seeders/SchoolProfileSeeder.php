@@ -37,14 +37,11 @@ class SchoolProfileSeeder extends Seeder
                     'email' => $contact['email'] ?? null,
                     'phone' => $contact['phone'] ?? null,
                     'address' => $this->translation($contact, 'address'),
-                    'island' => ['en' => $addressParts->get(1), 'dv' => $contact['island_dv'] ?? $addressParts->get(1)],
-                    'atoll' => ['en' => $addressParts->get(2), 'dv' => $contact['atoll_dv'] ?? $addressParts->get(2)],
-                    'country' => ['en' => $addressParts->last(), 'dv' => $contact['country_dv'] ?? $addressParts->last()],
+                    'island' => ['en' => $addressParts->get(1)],
+                    'atoll' => ['en' => $addressParts->get(2)],
+                    'country' => ['en' => $addressParts->last()],
                     'principal_name' => $this->translation($principal, 'name'),
-                    'principal_designation' => [
-                        'en' => Str::before($principal['title'] ?? 'Principal', ','),
-                        'dv' => $principal['title_dv'] ?? Str::before($principal['title'] ?? 'Principal', ','),
-                    ],
+                    'principal_designation' => ['en' => Str::before($principal['title'] ?? 'Principal', ',')],
                     'principal_message' => $this->translation($principal, 'message'),
                     'principal_photo_path' => $principal['photoUrl'] ?? null,
                 ]
@@ -76,7 +73,6 @@ class SchoolProfileSeeder extends Seeder
 
         return [
             'en' => $english,
-            'dv' => $item["{$key}_dv"] ?? $english,
         ];
     }
 }

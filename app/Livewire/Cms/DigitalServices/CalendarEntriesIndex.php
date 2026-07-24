@@ -410,6 +410,6 @@ class CalendarEntriesIndex extends Component
             'calendars'       => $calendars,
             'currentCalendar' => $currentCalendar,
             'entries'         => $entries,
-        ])->layout('layouts.app', ['title' => 'Digital Services — Academic Calendar']);
+        ])->layout('layouts.app', ['title' => 'Media — Academic Calendar']);
     }
 }

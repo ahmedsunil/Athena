@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
     'users' => 'Users',
     'roles' => 'Roles',
     'app.activity' => 'Activity Log',

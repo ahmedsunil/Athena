@@ -17,28 +17,19 @@
                     <div
                         class="relative min-h-[720px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-36 flex items-center justify-center">
                         <div class="mx-auto max-w-5xl text-center" data-reveal="scale">
-                            <h1 class="mx-auto max-w-5xl break-words text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] mb-6 [overflow-wrap:anywhere]"
-                                data-en="{{ $slide->getTranslation('title', 'en', false) }}"
-                                data-dv="{{ $slide->getTranslation('title', 'dv', false) ?: $slide->getTranslation('title', 'en', false) }}">{{ $slide->title }}</h1>
-                            @php $descEn = $slide->getTranslation('description', 'en', false); $descDv = $slide->getTranslation('description', 'dv', false) ?: $descEn; @endphp
+                            <h1 class="mx-auto max-w-5xl break-words text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] mb-6 [overflow-wrap:anywhere]">{{ $slide->title }}</h1>
                             @if($slide->description)
-                                <p class="mx-auto max-w-2xl text-white/80 text-base sm:text-lg mb-9 leading-relaxed"
-                                   data-en="{{ $descEn }}"
-                                   data-dv="{{ $descDv }}">{{ $slide->description }}</p>
+                                <p class="mx-auto max-w-2xl text-white/80 text-base sm:text-lg mb-9 leading-relaxed">{{ $slide->description }}</p>
                             @endif
                             @if($slide->button_1_label || $slide->button_2_label)
                                 <div class="flex flex-wrap justify-center gap-3">
                                     @if($slide->button_1_label)
                                         <a href="{{ $slide->button_1_link_key ?: '#' }}"
-                                           class="inline-flex min-h-12 items-center justify-center gap-2 bg-white text-[#002366] hover:bg-white/90 font-bold px-7 py-3 rounded-full shadow-xl shadow-black/20 transition-colors text-sm"
-                                           data-en="{{ $slide->getTranslation('button_1_label', 'en', false) }}"
-                                           data-dv="{{ $slide->getTranslation('button_1_label', 'dv', false) ?: $slide->getTranslation('button_1_label', 'en', false) }}">{{ $slide->button_1_label }}</a>
+                                           class="inline-flex min-h-12 items-center justify-center gap-2 bg-white text-[#002366] hover:bg-white/90 font-bold px-7 py-3 rounded-full shadow-xl shadow-black/20 transition-colors text-sm">{{ $slide->button_1_label }}</a>
                                     @endif
                                     @if($slide->button_2_label)
                                         <a href="{{ $slide->button_2_link_key ?: '#' }}"
-                                           class="inline-flex min-h-12 items-center justify-center gap-2 bg-transparent hover:bg-white/10 text-white font-bold px-7 py-3 rounded-full border border-white/30 transition-colors text-sm"
-                                           data-en="{{ $slide->getTranslation('button_2_label', 'en', false) }}"
-                                           data-dv="{{ $slide->getTranslation('button_2_label', 'dv', false) ?: $slide->getTranslation('button_2_label', 'en', false) }}">{{ $slide->button_2_label }}</a>
+                                           class="inline-flex min-h-12 items-center justify-center gap-2 bg-transparent hover:bg-white/10 text-white font-bold px-7 py-3 rounded-full border border-white/30 transition-colors text-sm">{{ $slide->button_2_label }}</a>
                                     @endif
                                 </div>
                             @endif
@@ -326,7 +317,7 @@
                         class="t-page {{ $ci === 0 ? '' : 'hidden' }} grid grid-cols-1 md:grid-cols-2 gap-6">
                         @foreach($chunk as $t)
                             @php
-                                $testimonialName = app()->getLocale() === 'dv' && $t->name_dv ? $t->name_dv : $t->name;
+                                $testimonialName = $t->name;
                             @endphp
                             <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col"
                                  data-reveal="scale" style="--reveal-delay: {{ $loop->index * 70 }}ms">

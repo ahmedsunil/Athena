@@ -30,7 +30,7 @@ class HomeSlideSeeder extends Seeder
                     'image_path'        => $slide['imageUrl'] ?? null,
                     'button_1_label'    => $this->translation($slide, 'ctaLabel'),
                     'button_1_link_key' => $slide['ctaHref'] ?? null,
-                    'button_2_label'    => ['en' => '', 'dv' => ''],
+                    'button_2_label'    => ['en' => ''],
                     'button_2_link_key' => null,
                     'is_active'         => true,
                     'sort_order'        => $index,
@@ -43,7 +43,6 @@ class HomeSlideSeeder extends Seeder
     {
         return [
             'en' => $item[$key] ?? '',
-            'dv' => $item["{$key}_dv"] ?? ($item[$key] ?? ''),
         ];
     }
 }

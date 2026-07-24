@@ -27,7 +27,7 @@ class ConfirmPassword extends Component
 
         session(['auth.password_confirmed_at' => time()]);
 
-        $this->redirect(session()->get('url.intended', route('dashboard')), navigate: true);
+        $this->redirect(session()->get('url.intended', route('cms.school-profile')));
     }
 
     public function render()

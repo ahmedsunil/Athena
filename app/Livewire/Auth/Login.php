@@ -59,7 +59,7 @@ class Login extends Component
         session()->flash('toast', 'Welcome back, ' . $user->name . '!');
         session()->flash('toast_type', 'success');
 
-        $this->redirectIntended(default: route('dashboard'), navigate: true);
+        $this->redirectIntended(default: route('cms.school-profile'));
     }
 
     protected function ensureIsNotRateLimited(): bool

@@ -39,7 +39,6 @@ class HomeQuickAccessSeeder extends Seeder
     {
         return [
             'en' => $item[$key] ?? '',
-            'dv' => $item["{$key}_dv"] ?? ($item[$key] ?? ''),
         ];
     }
 }

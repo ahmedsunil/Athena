@@ -87,7 +87,7 @@
     { "id": "ql-4", "label": "Student Life", "href": "/student-life", "icon": "Users" },
     { "id": "ql-5", "label": "Gallery", "href": "/gallery", "icon": "Image" },
     { "id": "ql-6", "label": "Downloads", "href": "/downloads", "icon": "Download" },
-    { "id": "ql-7", "label": "Digital Services", "href": "/digital-services", "icon": "Laptop" },
+    { "id": "ql-7", "label": "Media", "href": "/digital-services", "icon": "Laptop" },
     { "id": "ql-8", "label": "Contact Us", "href": "#contact", "icon": "Mail" }
   ],
 

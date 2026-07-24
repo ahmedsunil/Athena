@@ -1,0 +1,119 @@
+<div class="mx-auto max-w-2xl space-y-4">
+
+    <div>
+        <h1 class="admin-page-title">{{ $announcementId ? 'Edit announcement' : 'New announcement' }}</h1>
+    </div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm sm:p-5">
+        <form wire:submit="save" class="space-y-4">
+            <div class="grid gap-4 sm:grid-cols-3">
+                <div>
+                    <label class="mb-1.5 block admin-label">Icon</label>
+                    <select wire:model="icon_key"
+                            class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                        @foreach($iconKeys as $key => $label)
+                            <option value="{{ $key }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    @error('icon_key') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Category</label>
+                    <input type="text" wire:model="category" placeholder="e.g. Job Opening, Bid, Competition"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('category') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Deadline <span class="text-zinc-400">(optional)</span></label>
+                    <input type="date" wire:model="deadline"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('deadline') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                    <label class="mb-1.5 block admin-label">Title (English)</label>
+                    <input type="text" wire:model.live.debounce.400ms="title_en"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('title_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Slug</label>
+                    <input type="text" wire:model="slug"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 font-mono text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('slug') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+            </div>
+
+            <div>
+                <label class="mb-1.5 block admin-label">Description (English) <span class="text-zinc-400">(optional)</span></label>
+                <textarea wire:model="description_en" rows="3"
+                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
+                @error('description_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div>
+                <label class="mb-1.5 block admin-label">Attached files <span class="text-zinc-400">(optional)</span></label>
+                @if($attachments)
+                    <div class="mb-3 space-y-2">
+                        @foreach($attachments as $i => $attachment)
+                            <div class="grid gap-2 rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)_auto] sm:items-center">
+                                <input type="text" wire:model="attachments.{{ $i }}.label" placeholder="Label"
+                                       class="h-8 rounded-md border border-zinc-200 bg-white px-2 text-xs text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                @if(! empty($attachment['path']))
+                                    <input type="text" value="Uploaded file" disabled
+                                           class="h-8 rounded-md border border-zinc-200 bg-zinc-100 px-2 text-xs text-zinc-400">
+                                @else
+                                    <input type="url" wire:model="attachments.{{ $i }}.url" placeholder="https://drive.google.com/..."
+                                           class="h-8 rounded-md border border-zinc-200 bg-white px-2 text-xs text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                                @endif
+                                <button type="button" wire:click="removeAttachment({{ $i }})"
+                                        class="text-xs font-medium text-red-500 hover:text-red-700">Remove</button>
+                            </div>
+                            @error("attachments.{$i}.url") <p class="admin-form-error">{{ $message }}</p> @enderror
+                        @endforeach
+                    </div>
+                @endif
+                <input type="file" wire:model.live="uploaded_files" multiple
+                       class="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-zinc-700 hover:file:bg-zinc-200">
+                <button type="button" wire:click="addUrlAttachment"
+                        class="mt-2 inline-flex h-8 items-center gap-1.5 rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-600 shadow-sm hover:bg-zinc-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+                    Add URL
+                </button>
+                @error('uploaded_files.*') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                    <label class="mb-1.5 block admin-label">Sort order</label>
+                    <input type="number" wire:model="sort_order" min="0"
+                           class="h-9 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+                    @error('sort_order') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="mb-1.5 block admin-label">Visibility</label>
+                    <div class="grid h-9 grid-cols-2 rounded-md border border-zinc-200 bg-zinc-100 p-0.5 shadow-sm">
+                        <button type="button" wire:click="$set('is_active', true)"
+                                class="rounded-[5px] admin-link-label transition-colors {{ $is_active ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">Active</button>
+                        <button type="button" wire:click="$set('is_active', false)"
+                                class="rounded-[5px] admin-link-label transition-colors {{ !$is_active ? 'bg-white text-zinc-950 shadow-sm' : 'text-zinc-500 hover:text-zinc-950' }}">Inactive</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button type="submit"
+                        class="inline-flex h-9 items-center rounded-md bg-zinc-950 px-3 admin-button-label text-white shadow-sm transition-colors hover:bg-zinc-800">
+                    {{ $announcementId ? 'Update announcement' : 'Add announcement' }}
+                </button>
+                <a href="{{ route('cms.announcements.index') }}" wire:navigate
+                   class="inline-flex h-9 items-center rounded-md border border-zinc-200 bg-white px-3 admin-label shadow-sm transition-colors hover:bg-zinc-50">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>

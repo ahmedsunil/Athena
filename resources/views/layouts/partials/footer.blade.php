@@ -57,7 +57,7 @@
                             <a href="{{ $link->link_key }}"
                                @if($isExternalFooterLink) target="_blank" rel="noopener noreferrer" @endif
                                class="text-white/55 transition-colors hover:text-white">
-                                {{ app()->getLocale() === 'dv' && $link->label_dv ? $link->label_dv : $link->label }}
+                                {{ $link->label }}
                             </a>
                         </li>
                     @empty

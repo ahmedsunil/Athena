@@ -18,9 +18,7 @@ class HomeSlideSeederTest extends TestCase
         $slide = HomeSlide::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === "Shaping Tomorrow's Leaders");
 
         $this->assertNotNull($slide);
-        $this->assertSame('މާދަމާގެ ލީޑަރުން ބިނާކުރުން', $slide->getTranslation('title', 'dv', false));
         $this->assertSame('Apply for Admission', $slide->getTranslation('button_1_label', 'en', false));
-        $this->assertSame('އެޑްމިޝަންއަށް އެދޭ', $slide->getTranslation('button_1_label', 'dv', false));
         $this->assertSame('/admissions', $slide->button_1_link_key);
         $this->assertSame(0, $slide->sort_order);
         $this->assertTrue($slide->is_active);
@@ -41,10 +39,10 @@ class HomeSlideSeederTest extends TestCase
     public function test_home_slide_seeder_overwrites_existing_rows(): void
     {
         HomeSlide::create([
-            'title' => ['en' => 'Old Slide', 'dv' => 'ކުރީގެ ސްލައިޑް'],
-            'description' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
-            'button_1_label' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
-            'button_2_label' => ['en' => '', 'dv' => ''],
+            'title' => ['en' => 'Old Slide'],
+            'description' => ['en' => 'Old'],
+            'button_1_label' => ['en' => 'Old'],
+            'button_2_label' => ['en' => ''],
             'is_active' => true,
             'sort_order' => 99,
         ]);

@@ -1,16 +1,16 @@
 @php
     $currentRoute = request()->route()?->getName() ?? '';
     $tabs = [
-        ['label' => 'Student Council', 'routes' => ['cms.student-life.clubs', 'cms.student-life.houses'], 'href' => route('cms.student-life.clubs')],
-        ['label' => 'Prefects',        'routes' => ['cms.student-life.prefects'],                         'href' => route('cms.student-life.prefects')],
-        ['label' => 'Uniform Bodies',  'routes' => ['cms.student-life.uniform-bodies'],                   'href' => route('cms.student-life.uniform-bodies')],
-        ['label' => 'People History',  'routes' => ['cms.student-life.people'],                          'href' => route('cms.student-life.people')],
+        ['label' => 'Student Council', 'routes' => ['cms.clubs', 'cms.houses'], 'href' => route('cms.clubs')],
+        ['label' => 'Prefects',        'routes' => ['cms.prefects'],                         'href' => route('cms.prefects')],
+        ['label' => 'Uniform Bodies',  'routes' => ['cms.uniform-bodies'],                   'href' => route('cms.uniform-bodies')],
+        ['label' => 'People History',  'routes' => ['cms.people'],                          'href' => route('cms.people')],
     ];
     $councilSubTabs = [
-        ['label' => 'Clubs',  'route' => 'cms.student-life.clubs',  'href' => route('cms.student-life.clubs')],
-        ['label' => 'Houses', 'route' => 'cms.student-life.houses', 'href' => route('cms.student-life.houses')],
+        ['label' => 'Clubs',  'route' => 'cms.clubs',  'href' => route('cms.clubs')],
+        ['label' => 'Houses', 'route' => 'cms.houses', 'href' => route('cms.houses')],
     ];
-    $inCouncil = in_array($currentRoute, ['cms.student-life.clubs', 'cms.student-life.houses']);
+    $inCouncil = in_array($currentRoute, ['cms.clubs', 'cms.houses']);
 @endphp
 
 <div>

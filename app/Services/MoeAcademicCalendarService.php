@@ -231,16 +231,13 @@ class MoeAcademicCalendarService
             );
             $title = trim((string) (data_get($event, 'event_title_en') ?: data_get($event, 'title_en') ?: data_get($event, 'title') ?: data_get($event, 'name') ?: ''));
             $eventType = trim((string) (data_get($event, 'event_type') ?: data_get($setting, 'event_type_en') ?: data_get($event, 'type') ?: ''));
-            $eventTypeDv = trim((string) (data_get($event, 'event_type_dv') ?: data_get($setting, 'event_type_dv') ?: ''));
 
             $events[] = [
                 'id' => (string) $eventId,
                 'calendar_widget_setting_id' => (int) data_get($event, 'calendar_widget_setting_id', data_get($setting, 'id', 0)) ?: null,
                 'year' => $parsedYear ?: ($startDate ? (int) substr($startDate, 0, 4) : $year),
                 'title_en' => $title,
-                'title_dv' => trim((string) (data_get($event, 'event_title_dv') ?: data_get($event, 'title_dv') ?: '')),
                 'event_type' => $eventType,
-                'event_type_dv' => $eventTypeDv,
                 'bg_color' => trim((string) (data_get($setting, 'bg_color') ?: '')),
                 'text_color' => trim((string) (data_get($setting, 'text_color') ?: '')),
                 'border_color' => trim((string) (data_get($setting, 'border_color') ?: '')),
@@ -249,7 +246,6 @@ class MoeAcademicCalendarService
                 'start_month' => trim((string) (data_get($event, 'start_month') ?: '')),
                 'start_day' => trim((string) (data_get($event, 'start_day') ?: '')),
                 'description_en' => trim((string) (data_get($event, 'description_en') ?: data_get($event, 'short_description') ?: data_get($event, 'description') ?: data_get($event, 'fullDescription') ?: '')),
-                'description_dv' => trim((string) (data_get($event, 'description_dv') ?: '')),
                 'is_tentative' => $this->normalizeTentative($event),
             ];
         }
@@ -305,9 +301,7 @@ class MoeAcademicCalendarService
                 data_get($event, 'is_tentative'),
                 data_get($event, 'tentative'),
                 data_get($event, 'title_en'),
-                data_get($event, 'title_dv'),
                 data_get($event, 'description_en'),
-                data_get($event, 'description_dv'),
                 data_get($event, 'fullDescription'),
             ]
         )));
@@ -486,9 +480,7 @@ class MoeAcademicCalendarService
                             'calendar_widget_setting_id' => data_get($event, 'calendar_widget_setting_id') ? (int) data_get($event, 'calendar_widget_setting_id') : null,
                             'year' => (int) (data_get($event, 'year') ?: $year),
                             'title_en' => trim((string) data_get($event, 'title_en', data_get($event, 'title', ''))),
-                            'title_dv' => trim((string) data_get($event, 'title_dv', '')),
                             'event_type' => trim((string) data_get($event, 'event_type', data_get($event, 'type', 'event'))),
-                            'event_type_dv' => trim((string) data_get($event, 'event_type_dv', '')),
                             'bg_color' => trim((string) data_get($event, 'bg_color', '')),
                             'text_color' => trim((string) data_get($event, 'text_color', '')),
                             'border_color' => trim((string) data_get($event, 'border_color', '')),
@@ -497,7 +489,6 @@ class MoeAcademicCalendarService
                             'start_month' => trim((string) data_get($event, 'start_month', '')),
                             'start_day' => trim((string) data_get($event, 'start_day', '')),
                             'description_en' => trim((string) data_get($event, 'description_en', data_get($event, 'description', ''))),
-                            'description_dv' => trim((string) data_get($event, 'description_dv', '')),
                             'is_tentative' => (bool) data_get($event, 'is_tentative', false),
                         ];
                     })
@@ -569,12 +560,8 @@ class MoeAcademicCalendarService
     private function normalizeCalendarEntryDescription(array $event): ?string
     {
         $description = trim((string) data_get($event, 'description_en', data_get($event, 'description', '')));
-        $descriptionDv = trim((string) data_get($event, 'description_dv', ''));
-        $titleDv = trim((string) data_get($event, 'title_dv', ''));
 
-        $parts = array_filter([$description, $descriptionDv, $titleDv]);
-
-        return $parts ? implode("\n", $parts) : null;
+        return $description !== '' ? $description : null;
     }
 
     private function normalizeCalendarEntryType(string $type): string

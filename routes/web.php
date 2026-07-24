@@ -1,17 +1,22 @@
 <?php
 
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\WebsiteController;
 use App\Livewire\AppManagement\SystemSettings;
 use App\Livewire\Auditing\ActivityLog;
 use App\Livewire\Auditing\ActivityLogShow;
 use App\Livewire\Cms\FooterLinks\FooterLinksIndex;
+use App\Livewire\Cms\FooterLinks\FooterLinkForm;
 use App\Livewire\Cms\Announcements\AnnouncementsIndex;
+use App\Livewire\Cms\Announcements\AnnouncementForm;
 use App\Livewire\Cms\HomeQuickAccess\HomeQuickAccessIndex;
+use App\Livewire\Cms\HomeQuickAccess\HomeQuickAccessForm;
 use App\Livewire\Cms\HomeSlides\HomeSlidesIndex;
+use App\Livewire\Cms\HomeSlides\HomeSlideForm;
 use App\Livewire\Cms\HomeStats\HomeStatsIndex;
+use App\Livewire\Cms\HomeStats\HomeStatForm;
 use App\Livewire\Cms\HomeTestimonials\HomeTestimonialsIndex;
+use App\Livewire\Cms\HomeTestimonials\HomeTestimonialForm;
 use App\Livewire\Cms\Icons\IconsIndex;
 use App\Livewire\Cms\Links\LinksIndex;
 use App\Livewire\Cms\SchoolProfile\SchoolProfileEdit;
@@ -27,28 +32,45 @@ use App\Livewire\Website\Home;
 use App\Livewire\Website\Announcements;
 use App\Livewire\Website\AnnouncementShow;
 use App\Livewire\Cms\Events\EventsIndex;
+use App\Livewire\Cms\Events\EventForm;
 use App\Livewire\Website\Events;
 use App\Livewire\Website\EventShow;
 use App\Livewire\Cms\About\MissionEdit;
 use App\Livewire\Cms\About\LeadershipIndex;
+use App\Livewire\Cms\About\LeadershipForm;
 use App\Livewire\Cms\About\FoundingMembersIndex;
+use App\Livewire\Cms\About\FoundingMemberForm;
+use App\Livewire\Cms\About\HistorySectionForm;
 use App\Livewire\Cms\About\HistorySectionsIndex;
 use App\Livewire\Cms\About\AchievementsIndex;
+use App\Livewire\Cms\About\AchievementForm;
 use App\Livewire\Cms\About\StaffIndex;
+use App\Livewire\Cms\About\StaffForm;
 use App\Livewire\Website\About;
 use App\Livewire\Cms\Academics\AcademicsOverviewEdit;
 use App\Livewire\Cms\Academics\AcademicLevelsIndex;
+use App\Livewire\Cms\Academics\AcademicLevelForm;
 use App\Livewire\Website\Academics;
+use App\Livewire\Cms\StudentLife\ClubForm;
 use App\Livewire\Cms\StudentLife\ClubsIndex;
-use App\Livewire\Cms\StudentLife\PrefectsIndex;
+use App\Livewire\Cms\StudentLife\HouseForm;
 use App\Livewire\Cms\StudentLife\HousesIndex;
-use App\Livewire\Cms\StudentLife\UniformBodiesIndex;
 use App\Livewire\Cms\StudentLife\PeopleIndex;
+use App\Livewire\Cms\StudentLife\PersonForm;
+use App\Livewire\Cms\StudentLife\PrefectForm;
+use App\Livewire\Cms\StudentLife\PrefectsIndex;
+use App\Livewire\Cms\StudentLife\UniformBodiesIndex;
+use App\Livewire\Cms\StudentLife\UniformBodyForm;
 use App\Livewire\Website\StudentLife;
 use App\Livewire\Website\StudentLifeShow;
 use App\Livewire\Cms\Gallery\GalleryIndex;
+use App\Livewire\Cms\Gallery\GalleryForm;
 use App\Livewire\Cms\DigitalServices\DocumentsIndex;
+use App\Livewire\Cms\DigitalServices\DocumentForm;
 use App\Livewire\Cms\DigitalServices\ResourcesIndex;
+use App\Livewire\Cms\DigitalServices\ResourceForm;
+use App\Livewire\Cms\DigitalServices\CalendarsIndex;
+use App\Livewire\Cms\DigitalServices\CalendarForm;
 use App\Livewire\Cms\DigitalServices\CalendarEntriesIndex;
 use App\Livewire\Website\DigitalServices;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('role:admin')->group(function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
         // User management
         Route::get('/users', UsersList::class)->name('users.index');
         Route::get('/users/create', UserForm::class)->name('users.create');
@@ -83,47 +106,88 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // CMS — content modules
         Route::get('/cms/school-profile', SchoolProfileEdit::class)->name('cms.school-profile');
         Route::get('/cms/footer-links', FooterLinksIndex::class)->name('cms.footer-links');
+        Route::get('/cms/footer-links/create', FooterLinkForm::class)->name('cms.footer-links.create');
+        Route::get('/cms/footer-links/{linkId}/edit', FooterLinkForm::class)->whereNumber('linkId')->name('cms.footer-links.edit');
         Route::get('/cms/home/slides', HomeSlidesIndex::class)->name('cms.home.slides');
+        Route::get('/cms/home/slides/create', HomeSlideForm::class)->name('cms.home.slides.create');
+        Route::get('/cms/home/slides/{itemId}/edit', HomeSlideForm::class)->whereNumber('itemId')->name('cms.home.slides.edit');
         Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
+        Route::get('/cms/home/stats/create', HomeStatForm::class)->name('cms.home.stats.create');
+        Route::get('/cms/home/stats/{itemId}/edit', HomeStatForm::class)->whereNumber('itemId')->name('cms.home.stats.edit');
         Route::get('/cms/home/quick-access', HomeQuickAccessIndex::class)->name('cms.home.quick-access');
+        Route::get('/cms/home/quick-access/create', HomeQuickAccessForm::class)->name('cms.home.quick-access.create');
+        Route::get('/cms/home/quick-access/{itemId}/edit', HomeQuickAccessForm::class)->whereNumber('itemId')->name('cms.home.quick-access.edit');
         Route::get('/cms/home/testimonials', HomeTestimonialsIndex::class)->name('cms.home.testimonials');
+        Route::get('/cms/home/testimonials/create', HomeTestimonialForm::class)->name('cms.home.testimonials.create');
+        Route::get('/cms/home/testimonials/{itemId}/edit', HomeTestimonialForm::class)->whereNumber('itemId')->name('cms.home.testimonials.edit');
         Route::get('/cms/announcements', AnnouncementsIndex::class)->name('cms.announcements.index');
+        Route::get('/cms/announcements/create', AnnouncementForm::class)->name('cms.announcements.create');
+        Route::get('/cms/announcements/{announcementId}/edit', AnnouncementForm::class)->whereNumber('announcementId')->name('cms.announcements.edit');
 
         // CMS — about module
         Route::get('/cms/about/mission', MissionEdit::class)->name('cms.about.mission');
         Route::get('/cms/about/leadership', LeadershipIndex::class)->name('cms.about.leadership');
+        Route::get('/cms/about/leadership/create', LeadershipForm::class)->name('cms.about.leadership.create');
+        Route::get('/cms/about/leadership/{leadershipId}/edit', LeadershipForm::class)->whereNumber('leadershipId')->name('cms.about.leadership.edit');
         Route::get('/cms/about/founding-members', FoundingMembersIndex::class)->name('cms.about.founding-members');
-        Route::get('/cms/about/history', HistorySectionsIndex::class)->name('cms.about.history');
-        Route::get('/cms/about/achievements', AchievementsIndex::class)->name('cms.about.achievements');
-        Route::get('/cms/about/team', StaffIndex::class)->name('cms.about.team');
+        Route::get('/cms/about/founding-members/create', FoundingMemberForm::class)->name('cms.about.founding-members.create');
+        Route::get('/cms/about/founding-members/{foundingId}/edit', FoundingMemberForm::class)->whereNumber('foundingId')->name('cms.about.founding-members.edit');
+        Route::get('/cms/history', HistorySectionsIndex::class)->name('cms.history');
+        Route::get('/cms/history/create', HistorySectionForm::class)->name('cms.history.create');
+        Route::get('/cms/history/{sectionId}/edit', HistorySectionForm::class)->whereNumber('sectionId')->name('cms.history.edit');
+        Route::get('/cms/achievements', AchievementsIndex::class)->name('cms.achievements');
+        Route::get('/cms/achievements/create', AchievementForm::class)->name('cms.achievements.create');
+        Route::get('/cms/achievements/{achievementId}/edit', AchievementForm::class)->whereNumber('achievementId')->name('cms.achievements.edit');
+        Route::get('/cms/team', StaffIndex::class)->name('cms.team');
+        Route::get('/cms/team/create', StaffForm::class)->name('cms.team.create');
+        Route::get('/cms/team/{staffId}/edit', StaffForm::class)->whereNumber('staffId')->name('cms.team.edit');
 
         // CMS — events module
         Route::get('/cms/events', EventsIndex::class)->name('cms.events.index');
+        Route::get('/cms/events/create', EventForm::class)->name('cms.events.create');
+        Route::get('/cms/events/{eventId}/edit', EventForm::class)->whereNumber('eventId')->name('cms.events.edit');
 
         // CMS — academics module
         Route::get('/cms/academics/overview', AcademicsOverviewEdit::class)->name('cms.academics.overview');
         Route::get('/cms/academics/levels', AcademicLevelsIndex::class)->name('cms.academics.levels');
+        Route::get('/cms/academics/levels/create', AcademicLevelForm::class)->name('cms.academics.levels.create');
+        Route::get('/cms/academics/levels/{levelId}/edit', AcademicLevelForm::class)->whereNumber('levelId')->name('cms.academics.levels.edit');
 
         // CMS — student life module
-        Route::get('/cms/student-life/clubs',          ClubsIndex::class)->name('cms.student-life.clubs');
-        Route::get('/cms/student-life/prefects',       PrefectsIndex::class)->name('cms.student-life.prefects');
-        Route::get('/cms/student-life/houses',         HousesIndex::class)->name('cms.student-life.houses');
-        Route::get('/cms/student-life/uniform-bodies', UniformBodiesIndex::class)->name('cms.student-life.uniform-bodies');
-        Route::get('/cms/student-life/people',         PeopleIndex::class)->name('cms.student-life.people');
+        Route::get('/cms/clubs',                    ClubsIndex::class)->name('cms.clubs');
+        Route::get('/cms/clubs/create',             ClubForm::class)->name('cms.clubs.create');
+        Route::get('/cms/clubs/{club}/edit',        ClubForm::class)->whereNumber('club')->name('cms.clubs.edit');
+        Route::get('/cms/prefects',                 PrefectsIndex::class)->name('cms.prefects');
+        Route::get('/cms/prefects/create',          PrefectForm::class)->name('cms.prefects.create');
+        Route::get('/cms/prefects/{prefect}/edit',  PrefectForm::class)->whereNumber('prefect')->name('cms.prefects.edit');
+        Route::get('/cms/houses',                   HousesIndex::class)->name('cms.houses');
+        Route::get('/cms/houses/create',            HouseForm::class)->name('cms.houses.create');
+        Route::get('/cms/houses/{house}/edit',      HouseForm::class)->whereNumber('house')->name('cms.houses.edit');
+        Route::get('/cms/uniform-bodies',           UniformBodiesIndex::class)->name('cms.uniform-bodies');
+        Route::get('/cms/uniform-bodies/create',    UniformBodyForm::class)->name('cms.uniform-bodies.create');
+        Route::get('/cms/uniform-bodies/{body}/edit', UniformBodyForm::class)->whereNumber('body')->name('cms.uniform-bodies.edit');
+        Route::get('/cms/people',                   PeopleIndex::class)->name('cms.people');
+        Route::get('/cms/people/create',            PersonForm::class)->name('cms.people.create');
+        Route::get('/cms/people/{person}/edit',     PersonForm::class)->whereNumber('person')->name('cms.people.edit');
 
         // CMS — gallery module
         Route::get('/cms/gallery', GalleryIndex::class)->name('cms.gallery.index');
+        Route::get('/cms/gallery/create', GalleryForm::class)->name('cms.gallery.create');
+        Route::get('/cms/gallery/{albumId}/edit', GalleryForm::class)->whereNumber('albumId')->name('cms.gallery.edit');
 
         // CMS — digital services module
-        Route::get('/cms/digital-services/documents',       DocumentsIndex::class)->name('cms.digital-services.documents');
-        Route::get('/cms/digital-services/resources',       ResourcesIndex::class)->name('cms.digital-services.resources');
-        Route::get('/cms/digital-services/calendar',        CalendarEntriesIndex::class)->name('cms.digital-services.calendar');
-        Route::redirect('/cms/digital-services/calendars',   '/cms/digital-services/calendar')->name('cms.digital-services.calendars');
+        Route::get('/cms/digital-services/documents',                  DocumentsIndex::class)->name('cms.digital-services.documents');
+        Route::get('/cms/digital-services/documents/create',           DocumentForm::class)->name('cms.digital-services.documents.create');
+        Route::get('/cms/digital-services/documents/{itemId}/edit',    DocumentForm::class)->whereNumber('itemId')->name('cms.digital-services.documents.edit');
+        Route::get('/cms/digital-services/resources',                  ResourcesIndex::class)->name('cms.digital-services.resources');
+        Route::get('/cms/digital-services/resources/create',           ResourceForm::class)->name('cms.digital-services.resources.create');
+        Route::get('/cms/digital-services/resources/{itemId}/edit',    ResourceForm::class)->whereNumber('itemId')->name('cms.digital-services.resources.edit');
+        Route::get('/cms/digital-services/calendars',                  CalendarsIndex::class)->name('cms.digital-services.calendars');
+        Route::get('/cms/digital-services/calendars/create',           CalendarForm::class)->name('cms.digital-services.calendars.create');
+        Route::get('/cms/digital-services/calendars/{itemId}/edit',    CalendarForm::class)->whereNumber('itemId')->name('cms.digital-services.calendars.edit');
+        Route::get('/cms/digital-services/calendar',                   CalendarEntriesIndex::class)->name('cms.digital-services.calendar');
     });
 });
-
-// Locale
-Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
 // Google OAuth
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');

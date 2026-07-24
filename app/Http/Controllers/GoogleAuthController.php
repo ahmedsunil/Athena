@@ -66,6 +66,6 @@ class GoogleAuthController extends Controller
         session()->flash('toast', 'Welcome, '.$user->name.'!');
         session()->flash('toast_type', 'success');
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('cms.school-profile'));
     }
 }

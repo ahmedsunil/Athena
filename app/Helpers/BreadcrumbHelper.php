@@ -11,5 +11,5 @@ function current_breadcrumb(): string
         }
     }
 
-    return 'Dashboard';
+    return 'Admin';
 }

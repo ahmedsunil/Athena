@@ -16,10 +16,6 @@
                 @error('mission_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div class="mt-2">
-                <label class="mb-1.5 block admin-label">Mission (ދިވެހި)</label>
-                <textarea wire:model="mission_dv" rows="4" dir="rtl"
-                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('mission_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
         </div>
 
@@ -34,10 +30,6 @@
                 @error('vision_en') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
             <div class="mt-2">
-                <label class="mb-1.5 block admin-label">Vision (ދިވެހި)</label>
-                <textarea wire:model="vision_dv" rows="4" dir="rtl"
-                          class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950"></textarea>
-                @error('vision_dv') <p class="mt-1 admin-form-error">{{ $message }}</p> @enderror
             </div>
         </div>
 

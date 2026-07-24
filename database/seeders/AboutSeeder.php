@@ -52,7 +52,6 @@ class AboutSeeder extends Seeder
         foreach ($items as $index => $item) {
             LeadershipMember::create([
                 'name'       => $item['name'],
-                'name_dv'    => $item['name_dv'] ?? null,
                 'role'       => $this->translation($item, 'role'),
                 'bio'        => $this->translation($item, 'bio'),
                 'photo_path' => $item['photoUrl'] ?? null,
@@ -67,7 +66,6 @@ class AboutSeeder extends Seeder
         foreach ($items as $index => $item) {
             FoundingMember::create([
                 'name'       => $item['name'],
-                'name_dv'    => $item['name_dv'] ?? null,
                 'subject'    => $this->translation($item, 'subject'),
                 'tribute'    => $this->translation($item, 'tribute'),
                 'photo_path' => $item['photoUrl'] ?? null,
@@ -85,29 +83,25 @@ class AboutSeeder extends Seeder
             HistorySection::create([
                 'title'      => $this->translation($section, 'title'),
                 'year_label' => $yearLabels[$index] ?? null,
-                'body'       => [
-                    'en' => $this->blocksToText($section['blocks'] ?? [], 'en'),
-                    'dv' => $this->blocksToText($section['blocks'] ?? [], 'dv'),
-                ],
+                'body'       => ['en' => $this->blocksToText($section['blocks'] ?? [])],
                 'sort_order' => $index,
             ]);
         }
     }
 
-    private function blocksToText(array $blocks, string $locale): string
+    private function blocksToText(array $blocks): string
     {
         $parts = [];
-        $suffix = $locale === 'dv' ? '_dv' : '';
 
         foreach ($blocks as $block) {
             switch ($block['type']) {
                 case 'paragraph':
-                    $parts[] = $block["text{$suffix}"] ?? $block['text'];
+                    $parts[] = $block['text'];
                     break;
 
                 case 'founderList':
                     $lines = array_map(
-                        fn ($f) => ($f["name{$suffix}"] ?? $f['name']) . ' - ' . ($f["subject{$suffix}"] ?? $f['subject']),
+                        fn ($f) => $f['name'] . ' - ' . $f['subject'],
                         $block['items'] ?? []
                     );
                     $parts[] = implode("\n", $lines);
@@ -115,7 +109,7 @@ class AboutSeeder extends Seeder
 
                 case 'highlightList':
                     $lines = array_map(
-                        fn ($h) => ($h["label{$suffix}"] ?? $h['label']) . ': ' . ($h["text{$suffix}"] ?? $h['text']),
+                        fn ($h) => $h['label'] . ': ' . $h['text'],
                         $block['items'] ?? []
                     );
                     $parts[] = implode("\n", $lines);
@@ -137,7 +131,6 @@ class AboutSeeder extends Seeder
                 'award'          => $this->translation($item, 'award'),
                 'event_name'     => $this->translation($item, 'event'),
                 'person_name'    => $item['personName'] ?? null,
-                'person_name_dv' => $item['personName_dv'] ?? null,
                 'photo_path'     => $item['photoUrl'] ?? null,
                 'is_active'      => true,
                 'sort_order'     => $index,
@@ -147,9 +140,6 @@ class AboutSeeder extends Seeder
 
     private function translation(array $item, string $key): array
     {
-        return [
-            'en' => $item[$key] ?? '',
-            'dv' => $item["{$key}_dv"] ?? ($item[$key] ?? ''),
-        ];
+        return ['en' => $item[$key] ?? ''];
     }
 }

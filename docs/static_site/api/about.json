@@ -14,7 +14,6 @@
       "leadershipMembers are ordered by seniority"
     ]
   },
-
   "school": {
     "name": "Hulhudhuffaaru School",
     "foundedYear": 1987,
@@ -24,19 +23,16 @@
     "logoUrl": null,
     "heroImageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80"
   },
-
   "principal": {
     "name": "Dr. Patricia Nwachukwu",
     "title": "Principal",
     "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80",
     "message": "Dear Parents, Students, and Friends of Hulhudhuffaaru School,\n\nIt is my profound honour to serve as the Principal of this exceptional institution. When I joined this school 12 years ago, I was struck by one thing above all else: the unwavering belief, shared by staff, students, and parents alike, that every child is capable of greatness.\n\nThat belief is the foundation of everything we do here. Our teachers do not simply deliver content — they build relationships, nurture curiosity, and hold every student to the highest expectations of character and intellect. Our students do not simply attend school — they belong to a community that challenges them, celebrates them, and holds them accountable.\n\nOver the past decade, we have expanded our facilities, launched our digital services platform, deepened our extracurricular programmes, and achieved some of our best examination results in the school's history. But numbers alone do not capture what makes this place special. What makes this school extraordinary is the young person who walks in on their first day uncertain of themselves, and graduates four or six years later with the confidence, skills, and values to change the world.\n\nTo prospective families: we warmly invite you to visit us. See our classrooms, meet our teachers, speak to our students. I am confident that what you find will exceed your expectations.\n\nTo our current families: thank you for your continued trust and partnership. Together, we are raising the next generation of Nigeria's leaders.\n\nWith warmest regards,\n\nDr. Patricia Nwachukwu\nPrincipal, Hulhudhuffaaru School"
   },
-
   "mission": {
     "missionStatement": "To provide a holistic, values-driven education that equips every student with the knowledge, character, and confidence to lead purposeful lives and contribute meaningfully to society.",
     "visionStatement": "To be a leading institution of learning in West Africa, recognised for academic excellence, character formation, and the development of global citizens who serve their communities with integrity and compassion."
   },
-
   "schoolHistory": {
     "intro": "The story of Hulhudhuffaaru School is a testament to a community's unwavering commitment to its children. Established during a pivotal moment in the history of Raa Atoll, our school has grown from humble beginnings into a leading institution for higher secondary education. The development and success we see today are the direct result of the grit, vision, and tireless hard work of our founding educators and the pioneer community.",
     "sections": [
@@ -69,9 +65,18 @@
           {
             "type": "founderList",
             "items": [
-              { "name": "Mr. Mohamed Rasheed", "subject": "Mathematics" },
-              { "name": "Mr. Ahmed Niyaz", "subject": "Mathematics & Dhivehi" },
-              { "name": "Mr. Abdul Latheef Umar", "subject": "Practical Arts & Physical Education" }
+              {
+                "name": "Mr. Mohamed Rasheed",
+                "subject": "Mathematics"
+              },
+              {
+                "name": "Mr. Ahmed Niyaz",
+                "subject": "Mathematics & Dhivehi"
+              },
+              {
+                "name": "Mr. Abdul Latheef Umar",
+                "subject": "Practical Arts & Physical Education"
+              }
             ]
           },
           {
@@ -95,9 +100,18 @@
           {
             "type": "highlightList",
             "items": [
-              { "label": "Academic Range", "text": "We now serve students from Grade 1 through Grade 12." },
-              { "label": "Higher Secondary", "text": "We offer specialized streams in both Science and Commerce." },
-              { "label": "Our Vision", "text": "To be the premier higher secondary school in the North Central Province, producing graduates who are both proud Maldivians and global citizens." }
+              {
+                "label": "Academic Range",
+                "text": "We now serve students from Grade 1 through Grade 12."
+              },
+              {
+                "label": "Higher Secondary",
+                "text": "We offer specialized streams in both Science and Commerce."
+              },
+              {
+                "label": "Our Vision",
+                "text": "To be the premier higher secondary school in the North Central Province, producing graduates who are both proud Maldivians and global citizens."
+              }
             ]
           }
         ]
@@ -114,7 +128,6 @@
       }
     ]
   },
-
   "foundingMembers": [
     {
       "id": "fm-1",
@@ -152,7 +165,6 @@
       "tribute": "Built the school's first athletics programme from nothing. Under his coaching, the school won its first inter-school championships in 1991 — a titan of school spirit."
     }
   ],
-
   "leadership": [
     {
       "id": "ldr-1",
@@ -197,7 +209,6 @@
       "bio": "Mr. Nweke leads the school's digital transformation, overseeing the portal, e-learning platforms, and classroom technology. He holds a BSc in Computer Science."
     }
   ],
-
   "achievements": [
     {
       "id": "ach-1",

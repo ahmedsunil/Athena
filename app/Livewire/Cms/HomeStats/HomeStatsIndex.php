@@ -4,67 +4,11 @@ namespace App\Livewire\Cms\HomeStats;
 
 use App\Models\HomeStat;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class HomeStatsIndex extends Component
 {
-    public string $title_en = '';
-    public string $title_dv = '';
-    public string $value = '';
-    public bool $is_active = true;
-    public int $sort_order = 0;
-    public ?int $editingId = null;
-
-    protected function rules(): array
-    {
-        return [
-            'title_en'   => ['required', 'string', 'max:255'],
-            'title_dv'   => ['nullable', 'string', 'max:255'],
-            'value'      => ['required', 'string', 'max:100'],
-            'is_active'  => ['boolean'],
-            'sort_order' => ['integer', 'min:0'],
-        ];
-    }
-
-    public function save(): void
-    {
-        $this->validate();
-
-        $data = [
-            'title'      => ['en' => $this->title_en, 'dv' => $this->title_dv],
-            'value'      => $this->value,
-            'is_active'  => $this->is_active,
-            'sort_order' => $this->sort_order,
-        ];
-
-        if ($this->editingId) {
-            HomeStat::findOrFail($this->editingId)->update($data);
-            $this->dispatch('toast', message: 'Stat updated.');
-        } else {
-            HomeStat::create($data);
-            $this->dispatch('toast', message: 'Stat created.');
-        }
-
-        $this->reset(['title_en', 'title_dv', 'value', 'is_active', 'sort_order', 'editingId']);
-        $this->is_active = true;
-    }
-
-    public function edit(int $id): void
-    {
-        $stat = HomeStat::findOrFail($id);
-        $this->editingId  = $stat->id;
-        $this->title_en   = $stat->getTranslation('title', 'en', false) ?? '';
-        $this->title_dv   = $stat->getTranslation('title', 'dv', false) ?? '';
-        $this->value      = $stat->value;
-        $this->is_active  = $stat->is_active;
-        $this->sort_order = $stat->sort_order;
-    }
-
-    public function cancel(): void
-    {
-        $this->reset(['title_en', 'title_dv', 'value', 'is_active', 'sort_order', 'editingId']);
-        $this->is_active = true;
-    }
-
+    use WithPagination;
     public function delete(int $id): void
     {
         HomeStat::findOrFail($id)->delete();
@@ -74,7 +18,7 @@ class HomeStatsIndex extends Component
     public function render()
     {
         return view('livewire.cms.home-stats.home-stats-index', [
-            'stats' => HomeStat::orderBy('sort_order')->orderBy('id')->get(),
+            'stats' => HomeStat::orderBy('sort_order')->orderBy('id')->paginate(15),
         ])->layout('layouts.app', ['title' => 'Home Stats']);
     }
 }

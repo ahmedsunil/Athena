@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'dv' ? 'rtl' : 'ltr' }}" class="{{ app()->getLocale() === 'dv' ? 'locale-dv' : '' }}">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +7,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        @php echo '@font-face'; @endphp {
-            font-family: 'Dhivehi';
-            src: url('{{ asset('fonts/Dhivehi.ttf') }}') format('truetype');
-            font-display: swap;
-        }
         html,
         body {
             max-width: 100%;
             overflow-x: hidden;
-        }
-        .locale-dv, .locale-dv * {
-            font-family: 'Dhivehi', sans-serif !important;
-            line-height: 2;
-            word-spacing: 0.05em;
-        }
-        .locale-dv .lang-toggle,
-        .locale-dv .lang-toggle * {
-            font-family: 'DM Sans', system-ui, sans-serif !important;
-            line-height: 1 !important;
-            word-spacing: normal !important;
         }
         .brand-mark,
         .brand-mark * {
@@ -51,12 +35,6 @@
         .site-header.home-transparent:not(.is-scrolled) .nav-logo-scrolled {
             opacity: 0;
         }
-        .locale-dv .brand-mark .brand-title {
-            line-height: 1.45 !important;
-        }
-        .locale-dv .brand-mark .brand-label {
-            line-height: 1.35 !important;
-        }
         .site-header.home-transparent:not(.is-scrolled) {
             background: transparent !important;
             border-color: transparent !important;
@@ -75,17 +53,6 @@
         .site-header.home-transparent:not(.is-scrolled) .nav-icon-button:hover {
             color: #ffffff !important;
             background: rgba(255, 255, 255, 0.12) !important;
-        }
-        .site-header.home-transparent:not(.is-scrolled) .lang-toggle {
-            border-color: rgba(255, 255, 255, 0.25) !important;
-        }
-        .site-header.home-transparent:not(.is-scrolled) .lang-button {
-            background: rgba(255, 255, 255, 0.08) !important;
-            color: rgba(255, 255, 255, 0.82) !important;
-        }
-        .site-header.home-transparent:not(.is-scrolled) .lang-button.is-active {
-            background: #ffffff !important;
-            color: #002366 !important;
         }
         [data-reveal] {
             opacity: 0;
@@ -124,12 +91,6 @@
             }
         }
     </style>
-    <script>
-        window.__locale  = '{{ app()->getLocale() }}';
-        window.__en      = {!! file_get_contents(base_path('lang/en.json')) !!};
-        window.__dv      = {!! file_get_contents(base_path('lang/dv.json')) !!};
-        window.__langUrl = '{{ url('/lang') }}';
-    </script>
 </head>
 <body class="website-shell font-sans bg-white text-slate-900 flex flex-col min-h-screen {{ request()->routeIs('home') ? '' : 'pt-16' }}">
 @include('layouts.partials.nav')

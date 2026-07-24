@@ -34,7 +34,7 @@ class Register extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard'), navigate: true);
+        $this->redirect(route('cms.school-profile'), navigate: true);
     }
 
     public function render()

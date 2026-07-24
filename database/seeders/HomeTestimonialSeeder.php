@@ -27,8 +27,7 @@ class HomeTestimonialSeeder extends Seeder
                 HomeTestimonial::create([
                     'photo_path'            => $testimonial['photoUrl'] ?? null,
                     'name'                  => $testimonial['author'],
-                    'name_dv'               => $testimonial['author_dv'] ?? null,
-                    'previous_designation'  => ['en' => '', 'dv' => ''],
+                    'previous_designation'  => ['en' => ''],
                     'current_designation'   => $this->translation($testimonial, 'role'),
                     'message'               => $this->translation($testimonial, 'quote'),
                     'is_active'             => true,
@@ -42,7 +41,6 @@ class HomeTestimonialSeeder extends Seeder
     {
         return [
             'en' => $item[$key] ?? '',
-            'dv' => $item["{$key}_dv"] ?? ($item[$key] ?? ''),
         ];
     }
 }

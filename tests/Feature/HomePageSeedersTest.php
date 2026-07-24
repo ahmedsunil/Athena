@@ -29,7 +29,6 @@ class HomePageSeedersTest extends TestCase
         $profile = SchoolProfile::firstOrFail();
         $this->assertSame(1, $profile->id);
         $this->assertSame('Mr. Mohamed Rasheed', $profile->getTranslation('principal_name', 'en', false));
-        $this->assertSame('މުޙައްމަދު ރަޝީދު', $profile->getTranslation('principal_name', 'dv', false));
         $this->assertSame('info@hulhudhuffaaruschool.edu.mv', $profile->email);
         $this->assertSame(
             'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80',
@@ -39,20 +38,16 @@ class HomePageSeedersTest extends TestCase
         $stat = HomeStat::all()->first(fn ($s) => $s->getTranslation('title', 'en', false) === 'Students Enrolled');
         $this->assertNotNull($stat);
         $this->assertSame('850+', $stat->value);
-        $this->assertSame('ކިޔަވާ ދަރިވަރުން', $stat->getTranslation('title', 'dv', false));
         $this->assertSame(0, $stat->sort_order);
 
         $qa = HomeQuickAccess::all()->first(fn ($q) => $q->getTranslation('title', 'en', false) === 'Admissions');
         $this->assertNotNull($qa);
-        $this->assertSame('އެޑްމިޝަން', $qa->getTranslation('title', 'dv', false));
         $this->assertSame('ClipboardList', $qa->icon_key);
         $this->assertSame('/admissions', $qa->link_key);
 
         $testimonial = HomeTestimonial::all()->first(fn ($t) => $t->name === 'Mrs. Aminath Shazna');
         $this->assertNotNull($testimonial);
-        $this->assertSame('އަމީނަތު ޝަޒްނާ', $testimonial->name_dv);
         $this->assertSame('Parent of Grade 7 Student', $testimonial->getTranslation('current_designation', 'en', false));
-        $this->assertSame('ގްރޭޑް 7 ދަރިވަރެއްގެ ބަލިވެރިޔާ', $testimonial->getTranslation('current_designation', 'dv', false));
         $this->assertSame(
             'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80',
             $testimonial->photo_url
@@ -84,14 +79,14 @@ class HomePageSeedersTest extends TestCase
     public function test_home_page_supporting_seeders_overwrite_existing_rows(): void
     {
         HomeStat::create([
-            'title' => ['en' => 'Old Stat', 'dv' => 'ކުރީގެ ސްޓެޓް'],
+            'title' => ['en' => 'Old Stat'],
             'value' => '0',
             'is_active' => true,
             'sort_order' => 99,
         ]);
 
         HomeQuickAccess::create([
-            'title' => ['en' => 'Old Link', 'dv' => 'ކުރީގެ ލިންކް'],
+            'title' => ['en' => 'Old Link'],
             'icon_key' => 'Old',
             'link_key' => '/old',
             'is_active' => true,
@@ -100,9 +95,9 @@ class HomePageSeedersTest extends TestCase
 
         HomeTestimonial::create([
             'name' => 'Old Person',
-            'previous_designation' => ['en' => '', 'dv' => ''],
-            'current_designation' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
-            'message' => ['en' => 'Old', 'dv' => 'ކުރީގެ'],
+            'previous_designation' => ['en' => ''],
+            'current_designation' => ['en' => 'Old'],
+            'message' => ['en' => 'Old'],
             'is_active' => true,
             'sort_order' => 99,
         ]);

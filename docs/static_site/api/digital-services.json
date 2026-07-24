@@ -5,7 +5,7 @@
       "calendarEntry": "A key academic date or event such as a term start, holiday, or examination period, shown in a structured list."
     },
     "relationships": [
-      "Resources are filtered by audience on the Digital Services page",
+      "Resources are filtered by audience on the Media page",
       "CalendarEntries are displayed in chronological order and are independent of resources"
     ]
   },

@@ -102,12 +102,5 @@ class AnnouncementsModuleTest extends TestCase
             ->assertSee('Announcements')
             ->assertSee('/announcements')
             ->assertDontSee('>Admissions<', false);
-
-        $this->withSession(['locale' => 'dv'])
-            ->get('/')
-            ->assertOk()
-            ->assertSee('އިއުލާންތައް')
-            ->assertSee('/announcements')
-            ->assertDontSee('>Announcements<', false);
     }
 }

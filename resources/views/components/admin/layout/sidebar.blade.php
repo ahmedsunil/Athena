@@ -3,12 +3,6 @@
 
     $navGroups = [
         [
-            'label' => 'Overview',
-            'items' => [
-                ['label' => 'Dashboard', 'route' => 'dashboard', 'href' => route('dashboard'), 'icon' => 'dashboard'],
-            ],
-        ],
-        [
             'label' => 'Manage',
             'items' => [
                 ['label' => 'Announcements', 'route' => 'cms.announcements', 'href' => route('cms.announcements.index'), 'icon' => 'announcements'],

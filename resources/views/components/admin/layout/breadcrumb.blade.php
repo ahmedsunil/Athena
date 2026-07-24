@@ -1,15 +1,11 @@
 @php
     $routeLabels = [
-        'dashboard'  => 'Dashboard',
-        // Add your routes here:
-        // 'orders'     => 'Orders',
-        // 'customers'  => 'Customers',
-        // 'products'   => 'Products',
-        // 'profile'    => 'Profile',
+        'cms.school-profile' => 'Home',
+        'profile'            => 'Profile',
     ];
 
     $currentRoute = request()->route()?->getName() ?? '';
-    $breadcrumb   = 'Dashboard';
+    $breadcrumb   = 'Admin';
 
     foreach ($routeLabels as $prefix => $label) {
         if (str_starts_with($currentRoute, $prefix)) {

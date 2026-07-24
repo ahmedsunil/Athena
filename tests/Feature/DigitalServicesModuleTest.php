@@ -93,12 +93,10 @@ class DigitalServicesModuleTest extends TestCase
                             'id' => '1',
                             'year' => 2026,
                             'title_en' => 'Beginning of Academic Year 2026',
-                            'title_dv' => '2026 އަހަރުގެ ކިޔަވައިދޭ އަހަރު ފެށޭނެ',
                             'event_type' => 'Academic',
                             'start_date' => '2026-01-27',
                             'end_date' => null,
                             'description_en' => 'First day of Term 1.',
-                            'description_dv' => 'ޓާމް 1 ގެ ފުރަތަމަ ދުވަސް',
                             'is_tentative' => false,
                         ],
                         [

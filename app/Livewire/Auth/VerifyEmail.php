@@ -12,7 +12,7 @@ class VerifyEmail extends Component
     public function sendVerification(): void
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            $this->redirect(route('dashboard'), navigate: true);
+            $this->redirect(route('cms.school-profile'));
             return;
         }
 

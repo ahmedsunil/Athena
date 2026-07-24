@@ -10,7 +10,7 @@ return [
     '/student-life' => 'Student Life',
     '/gallery' => 'Gallery',
     '/downloads' => 'Downloads',
-    '/digital-services' => 'Digital Services',
+    '/digital-services' => 'Media',
     '/search' => 'Search',
     '#contact' => 'Contact Us',
     '/login' => 'CMS',
