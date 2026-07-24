@@ -72,7 +72,10 @@ use App\Livewire\Cms\DigitalServices\ResourceForm;
 use App\Livewire\Cms\DigitalServices\CalendarsIndex;
 use App\Livewire\Cms\DigitalServices\CalendarForm;
 use App\Livewire\Cms\DigitalServices\CalendarEntriesIndex;
+use App\Livewire\Cms\Apps\WebAppsIndex;
+use App\Livewire\Cms\Apps\WebAppForm;
 use App\Livewire\Website\DigitalServices;
+use App\Livewire\Website\Apps;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -108,7 +111,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cms/footer-links', FooterLinksIndex::class)->name('cms.footer-links');
         Route::get('/cms/footer-links/create', FooterLinkForm::class)->name('cms.footer-links.create');
         Route::get('/cms/footer-links/{linkId}/edit', FooterLinkForm::class)->whereNumber('linkId')->name('cms.footer-links.edit');
-        Route::get('/cms/home/slides', HomeSlidesIndex::class)->name('cms.home.slides');
+        // CMS — apps module
+        Route::get('/cms/apps', WebAppsIndex::class)->name('cms.apps');
+        Route::get('/cms/apps/create', WebAppForm::class)->name('cms.apps.create');
+        Route::get('/cms/apps/{appId}/edit', WebAppForm::class)->whereNumber('appId')->name('cms.apps.edit');
+
+        // CMS — content modules
+        Route::get('/cms/school-profile', SchoolProfileEdit::class)->name('cms.school-profile');
         Route::get('/cms/home/slides/create', HomeSlideForm::class)->name('cms.home.slides.create');
         Route::get('/cms/home/slides/{itemId}/edit', HomeSlideForm::class)->whereNumber('itemId')->name('cms.home.slides.edit');
         Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
@@ -208,4 +217,5 @@ Route::get('/student-life/{type}/{id}', [WebsiteController::class, 'studentLifeS
     ->whereNumber('id')
     ->name('student-life.show');
 Route::get('/digital-services', [WebsiteController::class, 'digitalServices'])->name('digital-services.index');
+Route::get('/apps', [WebsiteController::class, 'apps'])->name('apps.index');
 Route::get('/admissions', fn () => 'Admissions')->name('admissions');

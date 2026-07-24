@@ -18,6 +18,7 @@
         <a href="{{ route('academics.index') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('academics*') ? 'is-active text-[#002366]' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_academics" data-en="Academics">{{ __('nav_academics') }}</span></a>
         <a href="{{ route('student-life.index') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('student-life*') ? 'is-active text-[#002366]' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_student_life" data-en="Student Life">{{ __('nav_student_life') }}</span></a>
         <a href="{{ route('digital-services.index') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('digital-services*') ? 'is-active text-[#002366]' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_digital_services" data-en="Media">{{ __('nav_digital_services') }}</span></a>
+        <a href="{{ route('apps.index') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('apps*') ? 'is-active text-[#002366]' : 'text-slate-600 hover:text-slate-900' }}"><span data-lang-key="nav_apps" data-en="Apps">{{ __('nav_apps') }}</span></a>
       </nav>
       <div class="flex shrink-0 items-center gap-2 justify-self-end">
         <button type="button" onclick="window.dispatchEvent(new CustomEvent('open-site-search'))" class="nav-icon-button p-2 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors" aria-label="Search">
@@ -36,5 +37,6 @@
     <a href="{{ route('academics.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('academics*') ? 'bg-[#002366]/5 text-[#002366]' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_academics" data-en="Academics">{{ __('nav_academics') }}</span></a>
     <a href="{{ route('student-life.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('student-life*') ? 'bg-[#002366]/5 text-[#002366]' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_student_life" data-en="Student Life">{{ __('nav_student_life') }}</span></a>
     <a href="{{ route('digital-services.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('digital-services*') ? 'bg-[#002366]/5 text-[#002366]' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_digital_services" data-en="Media">{{ __('nav_digital_services') }}</span></a>
+    <a href="{{ route('apps.index') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('apps*') ? 'bg-[#002366]/5 text-[#002366]' : 'text-slate-700 hover:bg-slate-50' }}"><span data-lang-key="nav_apps" data-en="Apps">{{ __('nav_apps') }}</span></a>
   </div>
 </header>

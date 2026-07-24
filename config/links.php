@@ -8,6 +8,7 @@ return [
     '/admissions' => 'Admissions',
     '/events' => 'Events',
     '/student-life' => 'Student Life',
+    '/apps' => 'Apps',
     '/gallery' => 'Gallery',
     '/downloads' => 'Downloads',
     '/digital-services' => 'Media',

@@ -10,6 +10,7 @@
     "nav_gallery": "Gallery",
     "nav_downloads": "Downloads",
     "nav_digital_services": "Media",
+    "nav_apps": "Apps",
 
     "footer_tagline_1": "Knowledge, Character, Service.",
     "footer_tagline_2": "Raa Atoll, Republic of Maldives.",
@@ -140,6 +141,10 @@
     "announcement_show_deadline": "Deadline",
     "announcement_show_no_details": "No additional details provided.",
     "announcement_show_attached_files": "Attached Files",
+
+    "apps_page_label": "Digital by default. Transparent by design.",
+    "apps_heading": "Our Platforms",
+    "apps_empty": "No apps available yet.",
 
     "digital_services_page_label": "Online Hub",
     "digital_services_heading": "Media",

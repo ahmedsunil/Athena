@@ -13,6 +13,7 @@ use App\Models\DigitalServiceResource;
 use App\Models\Event;
 use App\Models\FoundingMember;
 use App\Models\HistorySection;
+use App\Models\WebApp;
 use App\Models\HomeQuickAccess;
 use App\Models\HomeSlide;
 use App\Models\HomeStat;
@@ -194,6 +195,13 @@ class WebsiteController extends Controller
             'hasPeopleHistory' => $historyPeople->isNotEmpty(),
             'hasActivePeople' => $activePeople->isNotEmpty(),
             'fallbackPeople' => $this->fallbackPeople($type, $item),
+        ]);
+    }
+
+    public function apps(): View
+    {
+        return $this->page('livewire.website.apps', [
+            'apps' => WebApp::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get(),
         ]);
     }
 
