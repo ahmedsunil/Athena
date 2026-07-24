@@ -17,7 +17,7 @@
                 @foreach($apps as $app)
                     <a href="{{ $app->url }}" target="_blank" rel="noopener noreferrer"
                        class="group flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
-                        <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#002366]/10 text-[#002366] transition-colors group-hover:bg-[#002366] group-hover:text-white">
+                        <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#002366]/10 text-[#002366]">
                             {!! svg_icon($app->icon_key, 'h-7 w-7') !!}
                         </span>
                         <div class="min-w-0 flex-1">
@@ -26,13 +26,20 @@
                                 <p class="mt-0.5 text-sm text-slate-500">{{ $app->subtitle }}</p>
                             @endif
                         </div>
-                        <span class="inline-flex h-9 shrink-0 items-center rounded-lg bg-[#002366] px-4 text-xs font-bold text-white transition-colors group-hover:bg-[#001a4d]">
-                            {{ $app->action_label }}
-                        </span>
                     </a>
                 @endforeach
             </div>
         @endif
+    </section>
+
+    {{-- Quote --}}
+    <section class="border-t border-slate-100 bg-white py-14">
+        <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8" data-reveal="fade">
+            <blockquote class="text-base italic leading-relaxed text-slate-600 sm:text-lg">
+                &ldquo;Given the initial state of the machine and the input signals, it is always possible to predict all future behaviour.&rdquo;
+            </blockquote>
+            <p class="mt-3 text-xs font-medium text-slate-400">&mdash; Alan Turing</p>
+        </div>
     </section>
 
 </div>
