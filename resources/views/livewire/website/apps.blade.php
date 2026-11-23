@@ -17,8 +17,12 @@
                 @foreach($apps as $app)
                     <a href="{{ $app->url }}" target="_blank" rel="noopener noreferrer"
                        class="group flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
-                        <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#002366]/10 text-[#002366]">
-                            {!! svg_icon($app->icon_key, 'h-7 w-7') !!}
+                        <span class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#002366]/10 text-[#002366]">
+                            @if($app->icon_url)
+                                <img src="{{ $app->icon_url }}" alt="" class="h-full w-full object-contain" loading="lazy">
+                            @else
+                                {!! svg_icon($app->icon_key, 'h-7 w-7') !!}
+                            @endif
                         </span>
                         <div class="min-w-0 flex-1">
                             <h3 class="text-base font-bold text-slate-900">{{ $app->title }}</h3>

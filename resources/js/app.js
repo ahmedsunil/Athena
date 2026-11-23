@@ -1,8 +1,12 @@
 import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
-
-Alpine.start();
+// Livewire pages (CMS, auth) ship their own Alpine with the navigate plugin.
+// Starting a second copy breaks wire:navigate redirects, so only start ours
+// on pages without Livewire (the public site).
+if (!window.Livewire) {
+    window.Alpine = Alpine;
+    Alpine.start();
+}
 
 // Hover/touch prefetch for every browser. Chrome may also prerender via the
 // speculationrules block in the layout, but users can turn that off ("Preload pages").

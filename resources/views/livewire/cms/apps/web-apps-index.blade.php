@@ -25,7 +25,13 @@
             @forelse($apps as $a)
                 <tr>
                     <td class="admin-table-cell text-zinc-400 whitespace-nowrap">#{{ $a->id }}</td>
-                    <td class="admin-table-cell text-lg">{!! svg_icon($a->icon_key, 'h-5 w-5') !!}</td>
+                    <td class="admin-table-cell text-lg">
+                        @if($a->icon_url)
+                            <img src="{{ $a->icon_url }}" alt="" class="h-6 w-6 rounded object-contain">
+                        @else
+                            {!! svg_icon($a->icon_key, 'h-5 w-5') !!}
+                        @endif
+                    </td>
                     <td class="admin-table-cell-primary">{{ $a->title }}</td>
                     <td class="admin-table-cell text-zinc-500 text-xs max-w-[200px] truncate">{{ $a->url }}</td>
                     <td class="admin-table-cell text-zinc-500 text-xs">{{ $a->action_label }}</td>
