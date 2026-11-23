@@ -325,7 +325,10 @@ class WebsiteController extends Controller
             ->map(fn (int $month) => Carbon::create($calYear, $month, 1))
             ->push(Carbon::create($calYear + 1, 1, 1))
             ->all();
-        $calendarMonth = max(0, min((int) $request->query('calendarMonth', 0), count($calendarMonthsArr) - 1));
+        $todayMonthIndex = collect($calendarMonthsArr)
+            ->search(fn (Carbon $month) => $month->isSameMonth(now()));
+        $defaultCalendarMonth = $todayMonthIndex === false ? 0 : $todayMonthIndex;
+        $calendarMonth = max(0, min((int) $request->query('calendarMonth', $defaultCalendarMonth), count($calendarMonthsArr) - 1));
         $currentMonthCarbon = $calendarMonthsArr[$calendarMonth];
 
         $allCalendarEntries = $activeCalendarId
