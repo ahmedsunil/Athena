@@ -11,7 +11,16 @@
     <div class="relative h-[340px] overflow-hidden rounded-sm bg-slate-200 sm:h-[380px] lg:h-[420px]">
         <iframe
             title="{{ __('home_contact_address') }}"
-            src="https://maps.google.com/maps?q={{ urlencode($mapQuery) }}&z=17&t=m&output=embed&iwloc=near"
+            data-src="https://maps.google.com/maps?q={{ urlencode($mapQuery) }}&z=17&t=m&output=embed&iwloc=near"
+            x-data
+            x-init="
+                const observe = () => new IntersectionObserver((entries, observer) => {
+                    if (entries[0].isIntersecting) { $el.src = $el.dataset.src; observer.disconnect(); }
+                }, { rootMargin: '200px' }).observe($el);
+                const afterLoad = () => (window.requestIdleCallback || setTimeout)(observe, { timeout: 1500 });
+                const start = () => document.readyState === 'complete' ? afterLoad() : window.addEventListener('load', afterLoad, { once: true });
+                document.prerendering ? document.addEventListener('prerenderingchange', start, { once: true }) : start();
+            "
             class="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>

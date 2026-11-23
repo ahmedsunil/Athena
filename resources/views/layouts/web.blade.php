@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('school_name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script type="speculationrules">
+        {
+            "prefetch": [{"where": {"href_matches": ["/", "/about", "/academics", "/admissions", "/apps", "/digital-services", "/announcements{/*}?", "/events{/*}?", "/student-life{/*}?"]}, "eagerness": "immediate"}],
+            "prerender": [{"where": {"href_matches": ["/", "/about", "/academics", "/admissions", "/apps", "/digital-services", "/announcements{/*}?", "/events{/*}?", "/student-life{/*}?"]}, "eagerness": "eager"}]
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         html,

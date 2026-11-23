@@ -203,19 +203,22 @@ Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('aut
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
 // Public website
-Route::get('/', [WebsiteController::class, 'home'])->name('home');
-Route::get('/site-search', [WebsiteController::class, 'search'])->name('website.search');
-Route::get('/announcements', [WebsiteController::class, 'announcements'])->name('announcements.index');
-Route::get('/announcements/{slug}', [WebsiteController::class, 'announcementShow'])->name('announcements.show');
-Route::get('/about', [WebsiteController::class, 'about'])->name('about');
-Route::get('/events', [WebsiteController::class, 'events'])->name('events.index');
-Route::get('/events/{slug}', [WebsiteController::class, 'eventShow'])->name('events.show');
-Route::get('/academics', [WebsiteController::class, 'academics'])->name('academics.index');
-Route::get('/student-life', [WebsiteController::class, 'studentLife'])->name('student-life.index');
-Route::get('/student-life/{type}/{id}', [WebsiteController::class, 'studentLifeShow'])
-    ->whereIn('type', ['clubs', 'houses', 'prefects', 'uniform-bodies'])
-    ->whereNumber('id')
-    ->name('student-life.show');
-Route::get('/digital-services', [WebsiteController::class, 'digitalServices'])->name('digital-services.index');
-Route::get('/apps', [WebsiteController::class, 'apps'])->name('apps.index');
-Route::get('/admissions', fn () => 'Admissions')->name('admissions');
+// Short private browser cache lets hover-prefetched pages open instantly.
+Route::middleware('cache.headers:private;max_age=30')->group(function () {
+    Route::get('/', [WebsiteController::class, 'home'])->name('home');
+    Route::get('/site-search', [WebsiteController::class, 'search'])->name('website.search');
+    Route::get('/announcements', [WebsiteController::class, 'announcements'])->name('announcements.index');
+    Route::get('/announcements/{slug}', [WebsiteController::class, 'announcementShow'])->name('announcements.show');
+    Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+    Route::get('/events', [WebsiteController::class, 'events'])->name('events.index');
+    Route::get('/events/{slug}', [WebsiteController::class, 'eventShow'])->name('events.show');
+    Route::get('/academics', [WebsiteController::class, 'academics'])->name('academics.index');
+    Route::get('/student-life', [WebsiteController::class, 'studentLife'])->name('student-life.index');
+    Route::get('/student-life/{type}/{id}', [WebsiteController::class, 'studentLifeShow'])
+        ->whereIn('type', ['clubs', 'houses', 'prefects', 'uniform-bodies'])
+        ->whereNumber('id')
+        ->name('student-life.show');
+    Route::get('/digital-services', [WebsiteController::class, 'digitalServices'])->name('digital-services.index');
+    Route::get('/apps', [WebsiteController::class, 'apps'])->name('apps.index');
+    Route::get('/admissions', fn () => 'Admissions')->name('admissions');
+});
