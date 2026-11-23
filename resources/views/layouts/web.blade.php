@@ -90,6 +90,16 @@
             transform: translate3d(0, 0, 0) scale(1);
             filter: blur(0);
         }
+        [data-reveal].reveal-instant {
+            transition: none;
+        }
+        @view-transition {
+            navigation: auto;
+        }
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 150ms;
+        }
         @media (prefers-reduced-motion: reduce) {
             [data-reveal] {
                 opacity: 1;
@@ -148,7 +158,15 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', setupReveal);
+        // Content already on screen at page load shows immediately; only
+        // content below the fold animates in as the user scrolls.
+        Array.prototype.forEach.call(document.querySelectorAll('[data-reveal]:not(.is-visible)'), function (item) {
+            if (item.getBoundingClientRect().top < window.innerHeight) {
+                item.classList.add('reveal-instant', 'is-visible');
+            }
+        });
+
+        setupReveal();
         new MutationObserver(function () {
             requestAnimationFrame(setupReveal);
         }).observe(document.body, { childList: true, subtree: true });
