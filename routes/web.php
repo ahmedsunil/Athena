@@ -117,7 +117,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cms/apps/{appId}/edit', WebAppForm::class)->whereNumber('appId')->name('cms.apps.edit');
 
         // CMS — content modules
-        Route::get('/cms/school-profile', SchoolProfileEdit::class)->name('cms.school-profile');
+        Route::get('/cms/home/slides', HomeSlidesIndex::class)->name('cms.home.slides');
         Route::get('/cms/home/slides/create', HomeSlideForm::class)->name('cms.home.slides.create');
         Route::get('/cms/home/slides/{itemId}/edit', HomeSlideForm::class)->whereNumber('itemId')->name('cms.home.slides.edit');
         Route::get('/cms/home/stats', HomeStatsIndex::class)->name('cms.home.stats');
