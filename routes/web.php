@@ -204,7 +204,7 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
 
 // Public website
 // Short private browser cache lets hover-prefetched pages open instantly.
-Route::middleware('cache.headers:private;max_age=30')->group(function () {
+Route::middleware(['cache.headers:private;max_age=30', \App\Http\Middleware\CachePublicPage::class])->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name('home');
     Route::get('/site-search', [WebsiteController::class, 'search'])->name('website.search');
     Route::get('/announcements', [WebsiteController::class, 'announcements'])->name('announcements.index');
